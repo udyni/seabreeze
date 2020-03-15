@@ -9,3 +9,25 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+
+# Ignore binaries
+lib/
+oceanfx_speed_test/oceanfx_speed_test
+sample-code/c/demo-averaging
+sample-code/c/demo-named-spectrometer
+sample-code/c/demo-pthreads
+sample-code/c/demo-qepro-api
+sample-code/c/demo-raw-usb
+sample-code/c/demo-raw-usb-seabreezeapi
+sample-code/c/demo-stability-scan
+sample-code/c/demo-streaming-xml
+sample-code/c/demo-strobe
+sample-code/c/demo-strobe-sts
+sample-code/c/demo-sts-api
+sample-code/c/demo-sts-eeprom
+sample-code/c/demo-timeout
+sample-code/c/demo-timing
+sample-code/c/demo-unformatted-spectrum
+sample-code/c/seabreeze-util
+sample-code/cpp/data-collection
+test/api_test
