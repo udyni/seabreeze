@@ -83,10 +83,10 @@ string &Device::getName() {
 
 unsigned char Device::getEndpoint(int *errorCode, usbEndpointType endpointType)
 {
-    unsigned char endpoint;
-    
+    unsigned char endpoint = 0;
+
     SET_ERROR_CODE(ERROR_SUCCESS);
-    
+
     switch (endpointType)
     {
         case kEndpointTypePrimaryOut:
