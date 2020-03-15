@@ -59,387 +59,387 @@ GPIOFeature::~GPIOFeature()
 
 unsigned char GPIOFeature::getGPIO_NumberOfPins(const Protocol &protocol, const Bus &bus) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
-	unsigned char numberOfPins;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
+    unsigned char numberOfPins;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		numberOfPins = GPIO_PI->getGPIO_NumberOfPins(bus);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        numberOfPins = GPIO_PI->getGPIO_NumberOfPins(bus);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return numberOfPins;
+    return numberOfPins;
 }
 
 
 unsigned int GPIOFeature::getGPIO_OutputEnableVector(const Protocol &protocol, const Bus &bus) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
-	unsigned int outputEnableVector;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
+    unsigned int outputEnableVector;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		outputEnableVector = GPIO_PI->getGPIO_OutputEnableVector(bus);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        outputEnableVector = GPIO_PI->getGPIO_OutputEnableVector(bus);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return outputEnableVector;
+    return outputEnableVector;
 }
 
 void GPIOFeature::setGPIO_OutputEnableVector(const Protocol &protocol, const Bus &bus, unsigned int outputEnableVector, unsigned int bitMask) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to write data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to write data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		GPIO_PI->setGPIO_OutputEnableVector(bus, outputEnableVector, bitMask);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        GPIO_PI->setGPIO_OutputEnableVector(bus, outputEnableVector, bitMask);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
 }
 
 unsigned int GPIOFeature::getGPIO_ValueVector(const Protocol &protocol, const Bus &bus) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
-	unsigned int valueVector;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
+    unsigned int valueVector;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		valueVector = GPIO_PI->getGPIO_ValueVector(bus);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        valueVector = GPIO_PI->getGPIO_ValueVector(bus);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return valueVector;
+    return valueVector;
 }
 
 void GPIOFeature::setGPIO_ValueVector(const Protocol &protocol, const Bus &bus, unsigned int valueVector, unsigned int bitMask) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to write data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to write data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		GPIO_PI->setGPIO_ValueVector(bus, valueVector, bitMask);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        GPIO_PI->setGPIO_ValueVector(bus, valueVector, bitMask);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
 }
 
 unsigned char GPIOFeature::getEGPIO_NumberOfPins(const Protocol &protocol, const Bus &bus) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
-	unsigned char numberOfPins;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
+    unsigned char numberOfPins;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		numberOfPins = GPIO_PI->getEGPIO_NumberOfPins(bus);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        numberOfPins = GPIO_PI->getEGPIO_NumberOfPins(bus);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return numberOfPins;
+    return numberOfPins;
 }
 
 vector<unsigned char> GPIOFeature::getEGPIO_AvailableModes(const Protocol &protocol, const Bus &bus, unsigned char pinNumber) throw (FeatureException)
 {
 
-	vector<unsigned char> data;
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
+    vector<unsigned char> data;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
 
-	try
-	{
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e)
-	{
-		string error(
-			"Could not find matching protocol implementation to data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try
+    {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e)
+    {
+        string error(
+            "Could not find matching protocol implementation to data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try
-	{
-		data = GPIO_PI->getEGPIO_AvailableModes(bus, pinNumber);
-	}
-	catch (ProtocolException &pe)
-	{
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try
+    {
+        data = GPIO_PI->getEGPIO_AvailableModes(bus, pinNumber);
+    }
+    catch (ProtocolException &pe)
+    {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return data;
+    return data;
 }
 
 unsigned char GPIOFeature::getEGPIO_CurrentMode(const Protocol &protocol, const Bus &bus, unsigned char pinNumber) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
-	unsigned char mode;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
+    unsigned char mode;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		mode = GPIO_PI->getEGPIO_CurrentMode(bus, pinNumber);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        mode = GPIO_PI->getEGPIO_CurrentMode(bus, pinNumber);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return mode;
+    return mode;
 }
 
 void GPIOFeature::setEGPIO_Mode(const Protocol &protocol, const Bus &bus, unsigned char pinNumber, unsigned char mode, float value) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to write data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to write data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		GPIO_PI->setEGPIO_Mode(bus, pinNumber, mode, value);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        GPIO_PI->setEGPIO_Mode(bus, pinNumber, mode, value);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
 }
 
 unsigned int GPIOFeature::getEGPIO_OutputVector(const Protocol &protocol, const Bus &bus) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
-	unsigned int outputEnableVector;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
+    unsigned int outputEnableVector;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		outputEnableVector = GPIO_PI->getEGPIO_OutputVector(bus);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        outputEnableVector = GPIO_PI->getEGPIO_OutputVector(bus);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return outputEnableVector;
+    return outputEnableVector;
 }
 
 void GPIOFeature::setEGPIO_OutputVector(const Protocol &protocol, const Bus &bus, unsigned int outputVector, unsigned int bitMask) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to write data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to write data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		GPIO_PI->setEGPIO_OutputVector(bus, outputVector, bitMask);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        GPIO_PI->setEGPIO_OutputVector(bus, outputVector, bitMask);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 }
 
 
 float GPIOFeature::getEGPIO_Value(const Protocol &protocol, const Bus &bus, unsigned char pinNumber) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
-	float value;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
+    float value;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		value = GPIO_PI->getEGPIO_Value(bus, pinNumber);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        value = GPIO_PI->getEGPIO_Value(bus, pinNumber);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return value;
+    return value;
 }
 
 void GPIOFeature::setEGPIO_Value(const Protocol &protocol, const Bus &bus, unsigned char pinNumber, float value) throw (FeatureException)
 {
-	GPIOProtocolInterface *GPIO_PI = NULL;
-	ProtocolHelper *proto;
+    GPIOProtocolInterface *GPIO_PI = NULL;
+    ProtocolHelper *proto;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to write data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        GPIO_PI = static_cast<GPIOProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to write data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		GPIO_PI->setEGPIO_Value(bus, pinNumber, value);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        GPIO_PI->setEGPIO_Value(bus, pinNumber, value);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 }
 
 
@@ -447,5 +447,5 @@ void GPIOFeature::setEGPIO_Value(const Protocol &protocol, const Bus &bus, unsig
 FeatureFamily GPIOFeature::getFeatureFamily() {
     FeatureFamilies families;
 
-	return families.GENERAL_PURPOSE_INPUT_OUTPUT;
+    return families.GENERAL_PURPOSE_INPUT_OUTPUT;
 }

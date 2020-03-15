@@ -62,16 +62,16 @@ vector<unsigned char> MulticastFeature::getGroupAddress(const Protocol &protocol
 {
 
     vector<unsigned char> data;
-	MulticastProtocolInterface *multicastPI = NULL;
+    MulticastProtocolInterface *multicastPI = NULL;
     ProtocolHelper *proto;
 
     try 
     {
         proto = lookupProtocolImpl(protocol);
-		multicastPI = static_cast<MulticastProtocolInterface *>(proto);
+        multicastPI = static_cast<MulticastProtocolInterface *>(proto);
     } 
-	catch (FeatureProtocolNotFoundException &e) 
-	{
+    catch (FeatureProtocolNotFoundException &e) 
+    {
         string error(
         "Could not find matching protocol implementation to get group address.");
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -79,11 +79,11 @@ vector<unsigned char> MulticastFeature::getGroupAddress(const Protocol &protocol
     }
 
     try 
-	{
+    {
         data = multicastPI->getGroupAddress(bus, interfaceIndex);
     } 
-	catch (ProtocolException &pe) 
-	{
+    catch (ProtocolException &pe) 
+    {
         string error("Caught protocol exception: ");
         error += pe.what();
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -110,7 +110,7 @@ void MulticastFeature::setGroupAddress(const Protocol &protocol, const Bus &bus,
     }
 
     try {
-		multicastPI->set_MAC_Address(bus, interfaceIndex, macAddress);
+        multicastPI->set_MAC_Address(bus, interfaceIndex, macAddress);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();
@@ -122,13 +122,13 @@ void MulticastFeature::setGroupAddress(const Protocol &protocol, const Bus &bus,
 
 unsigned char MulticastFeature::getEnableState(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException) 
 {
-	MulticastProtocolInterface *multicastPI = NULL;
-	ProtocolHelper *proto;
-	byte enableStatus;
+    MulticastProtocolInterface *multicastPI = NULL;
+    ProtocolHelper *proto;
+    byte enableStatus;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		multicastPI = static_cast<MulticastProtocolInterface *>(proto);
+        multicastPI = static_cast<MulticastProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to read collection area.");
@@ -150,12 +150,12 @@ unsigned char MulticastFeature::getEnableState(const Protocol &protocol, const B
 
 void MulticastFeature::setEnableState(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, unsigned char enableState) throw (FeatureException) 
 {
-	MulticastProtocolInterface *multicastPI = NULL;
-	ProtocolHelper *proto;
+    MulticastProtocolInterface *multicastPI = NULL;
+    ProtocolHelper *proto;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		multicastPI = static_cast<MulticastProtocolInterface *>(proto);
+        multicastPI = static_cast<MulticastProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to write enable state");
@@ -164,7 +164,7 @@ void MulticastFeature::setEnableState(const Protocol &protocol, const Bus &bus, 
     }
 
     try {
-		multicastPI->setEnableState(bus, interfaceIndex, enableState);
+        multicastPI->setEnableState(bus, interfaceIndex, enableState);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();

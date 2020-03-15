@@ -47,7 +47,7 @@ const long Maya2000SpectrometerFeature::INTEGRATION_TIME_BASE = 1;
 Maya2000SpectrometerFeature::Maya2000SpectrometerFeature() {
 
     this->numberOfPixels = 2080;
-	this->numberOfBytesPerPixel = sizeof(unsigned short);
+    this->numberOfBytesPerPixel = sizeof(unsigned short);
     this->maxIntensity = 65535;
     int readoutLength = 2304 * 2 + 1;
 
@@ -66,16 +66,16 @@ Maya2000SpectrometerFeature::Maya2000SpectrometerFeature() {
     IntegrationTimeExchange *intTime = new IntegrationTimeExchange(Maya2000SpectrometerFeature::INTEGRATION_TIME_BASE);
 
     Transfer *requestFormattedSpectrum = new RequestSpectrumExchange();
-	Transfer *readFormattedSpectrum = new FPGASpectrumExchange(readoutLength, this->numberOfPixels);
-	Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
-	Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
-	Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
-	Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
+    Transfer *readFormattedSpectrum = new FPGASpectrumExchange(readoutLength, this->numberOfPixels);
+    Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
+    Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
+    Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
+    Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
 
     TriggerModeExchange *triggerMode = new TriggerModeExchange();
 
     OOISpectrometerProtocol *ooiProtocol = new OOISpectrometerProtocol(intTime, requestFormattedSpectrum, readFormattedSpectrum, 
-		requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
+        requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
     this->protocols.push_back(ooiProtocol);
 
     this->triggerModes.push_back(

@@ -53,10 +53,10 @@ OBPSetNetworkInterfaceEnableStateExchange::~OBPSetNetworkInterfaceEnableStateExc
 
 void OBPSetNetworkInterfaceEnableStateExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetNetworkInterfaceEnableStateExchange::setEnableState(unsigned char enableState) 
 {
-	this->payload[1] = enableState;
+    this->payload[1] = enableState;
 }

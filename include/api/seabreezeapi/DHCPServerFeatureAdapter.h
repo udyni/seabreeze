@@ -43,15 +43,15 @@ namespace seabreeze
 
         class DHCPServerFeatureAdapter
                 : public FeatureAdapterTemplate<DHCPServerFeatureInterface> 
-		{
-        	public:
-            	DHCPServerFeatureAdapter(DHCPServerFeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
-            	virtual ~DHCPServerFeatureAdapter();
+        {
+            public:
+                DHCPServerFeatureAdapter(DHCPServerFeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
+                virtual ~DHCPServerFeatureAdapter();
 
-            	void getServerAddress(int *errorCode, unsigned char interfaceIndex, unsigned char (*serverAddress)[4], unsigned char *netMask);
-				void setServerAddress(int *errorCode, unsigned char interfaceIndex, const unsigned char serverAddress[4], unsigned char netMask);
-            	unsigned char getServerEnableState(int *errorCode, unsigned char interfaceIndex);
-            	void setServerEnableState(int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
+                void getServerAddress(int *errorCode, unsigned char interfaceIndex, unsigned char (*serverAddress)[4], unsigned char *netMask);
+                void setServerAddress(int *errorCode, unsigned char interfaceIndex, const unsigned char serverAddress[4], unsigned char netMask);
+                unsigned char getServerEnableState(int *errorCode, unsigned char interfaceIndex);
+                void setServerEnableState(int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
         };
 
     }

@@ -42,7 +42,7 @@
 #define GRAPH_HEIGHT   20    // rows
 
 #ifndef MAXFLOAT
-#define MAXFLOAT	   3.40282347e+38F
+#define MAXFLOAT       3.40282347e+38F
 #endif
 
 pthread_mutex_t logger_mut;

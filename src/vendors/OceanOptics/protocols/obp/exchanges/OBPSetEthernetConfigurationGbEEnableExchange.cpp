@@ -53,10 +53,10 @@ OBPSetEthernetConfigurationGbEEnableExchange::~OBPSetEthernetConfigurationGbEEna
 
 void OBPSetEthernetConfigurationGbEEnableExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetEthernetConfigurationGbEEnableExchange::setGbE_Enable(unsigned char enableStatus) 
 {
-	this->payload[1] = enableStatus;
+    this->payload[1] = enableStatus;
 }

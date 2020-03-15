@@ -47,7 +47,7 @@ OBPSetDefaultPixelBinningExchange::~OBPSetDefaultPixelBinningExchange() {
 }
 
 void OBPSetDefaultPixelBinningExchange::setDefaultPixelBinningFactor(const unsigned char binning) {
-	this->payload[0] = binning;
+    this->payload[0] = binning;
 }
 
 void OBPSetDefaultPixelBinningExchange::setDefaultPixelBinningFactor() {

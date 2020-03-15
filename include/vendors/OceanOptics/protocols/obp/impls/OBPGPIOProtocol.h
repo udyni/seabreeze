@@ -38,37 +38,37 @@ namespace seabreeze {
   namespace oceanBinaryProtocol {
     class OBPGPIOProtocol : public GPIOProtocolInterface {
     public:
-		OBPGPIOProtocol();
+        OBPGPIOProtocol();
 
         virtual ~OBPGPIOProtocol();
 
         /* Inherited from OBPGPIOProtocolInterface */
-		virtual unsigned char getGPIO_NumberOfPins(const Bus &bus)
-			throw (ProtocolException);
-		virtual unsigned int getGPIO_OutputEnableVector(const Bus &bus)
-			throw (ProtocolException);
-		virtual void setGPIO_OutputEnableVector(const Bus &bus, unsigned int outputEnableVector, unsigned int bitMask)
-			throw (ProtocolException);
-		virtual unsigned int getGPIO_ValueVector(const Bus &bus)
-			throw (ProtocolException);
-		virtual void setGPIO_ValueVector(const Bus &bus, unsigned int valueVector, unsigned int bitMask)
-			throw (ProtocolException);
-		virtual unsigned char getEGPIO_NumberOfPins(const Bus &bus)
-			throw (ProtocolException);
-		virtual std::vector<unsigned char> getEGPIO_AvailableModes(const Bus &bus, unsigned char pinNumber)
-			throw (ProtocolException);
-		virtual unsigned char getEGPIO_CurrentMode(const Bus &bus, unsigned char pinNumber)
-			throw (ProtocolException);
-		virtual void setEGPIO_Mode(const Bus &bus, unsigned char pinNumber, unsigned char mode, float value)
-			throw (ProtocolException);
-		virtual unsigned int getEGPIO_OutputVector(const Bus &bus)
-			throw (ProtocolException);
-		virtual void setEGPIO_OutputVector(const Bus &bus, unsigned int outputVector, unsigned int bitMask)
-			throw (ProtocolException);
-		virtual float getEGPIO_Value(const Bus &bus, unsigned char pinNumber)
-			throw (ProtocolException);
-		virtual void setEGPIO_Value(const Bus &bus, unsigned char pinNumber, float value)
-			throw (ProtocolException);
+        virtual unsigned char getGPIO_NumberOfPins(const Bus &bus)
+            throw (ProtocolException);
+        virtual unsigned int getGPIO_OutputEnableVector(const Bus &bus)
+            throw (ProtocolException);
+        virtual void setGPIO_OutputEnableVector(const Bus &bus, unsigned int outputEnableVector, unsigned int bitMask)
+            throw (ProtocolException);
+        virtual unsigned int getGPIO_ValueVector(const Bus &bus)
+            throw (ProtocolException);
+        virtual void setGPIO_ValueVector(const Bus &bus, unsigned int valueVector, unsigned int bitMask)
+            throw (ProtocolException);
+        virtual unsigned char getEGPIO_NumberOfPins(const Bus &bus)
+            throw (ProtocolException);
+        virtual std::vector<unsigned char> getEGPIO_AvailableModes(const Bus &bus, unsigned char pinNumber)
+            throw (ProtocolException);
+        virtual unsigned char getEGPIO_CurrentMode(const Bus &bus, unsigned char pinNumber)
+            throw (ProtocolException);
+        virtual void setEGPIO_Mode(const Bus &bus, unsigned char pinNumber, unsigned char mode, float value)
+            throw (ProtocolException);
+        virtual unsigned int getEGPIO_OutputVector(const Bus &bus)
+            throw (ProtocolException);
+        virtual void setEGPIO_OutputVector(const Bus &bus, unsigned int outputVector, unsigned int bitMask)
+            throw (ProtocolException);
+        virtual float getEGPIO_Value(const Bus &bus, unsigned char pinNumber)
+            throw (ProtocolException);
+        virtual void setEGPIO_Value(const Bus &bus, unsigned char pinNumber, float value)
+            throw (ProtocolException);
     };
   }
 }

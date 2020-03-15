@@ -60,9 +60,9 @@ IPv4FeatureAdapter::~IPv4FeatureAdapter()
 
 unsigned char IPv4FeatureAdapter::get_IPv4_DHCP_Enable_State(int *errorCode, unsigned char interfaceIndex) 
 {
-	unsigned char enableStatus;
+    unsigned char enableStatus;
     try {
-		enableStatus = this->feature->get_IPv4_DHCP_Enable_State(*this->protocol, *this->bus, interfaceIndex);
+        enableStatus = this->feature->get_IPv4_DHCP_Enable_State(*this->protocol, *this->bus, interfaceIndex);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
@@ -73,27 +73,27 @@ unsigned char IPv4FeatureAdapter::get_IPv4_DHCP_Enable_State(int *errorCode, uns
 void IPv4FeatureAdapter::set_IPv4_DHCP_Enable_State(int *errorCode, unsigned char interfaceIndex, unsigned char enableStatus)
 {
     try 
-	{
+    {
         this->feature->set_IPv4_DHCP_Enable_State(*this->protocol, *this->bus, interfaceIndex, enableStatus);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe)
-	{
+    catch (FeatureException &fe)
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }
 
 unsigned char IPv4FeatureAdapter::get_Number_Of_IPv4_Addresses(int *errorCode, unsigned char interfaceIndex)
 {
-	unsigned char numberOfAddresses;
-	try {
-		numberOfAddresses = this->feature->get_Number_Of_IPv4_Addresses(*this->protocol, *this->bus, interfaceIndex);
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe) {
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-	}
-	return numberOfAddresses;
+    unsigned char numberOfAddresses;
+    try {
+        numberOfAddresses = this->feature->get_Number_Of_IPv4_Addresses(*this->protocol, *this->bus, interfaceIndex);
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe) {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+    }
+    return numberOfAddresses;
 }
 
 void IPv4FeatureAdapter::get_IPv4_Address(int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex, unsigned char (*IPv4_Address)[4], unsigned char *netMask)
@@ -102,15 +102,15 @@ void IPv4FeatureAdapter::get_IPv4_Address(int *errorCode, unsigned char interfac
     vector<byte> ipv4AddressVector;
 
     try 
-	{
-		this->feature->get_IPv4_Address(*this->protocol, *this->bus, interfaceIndex, addressIndex, &ipv4AddressVector, netMask);
+    {
+        this->feature->get_IPv4_Address(*this->protocol, *this->bus, interfaceIndex, addressIndex, &ipv4AddressVector, netMask);
 
         memcpy((*IPv4_Address), &(ipv4AddressVector[0]), 4);
 
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe) 
-	{
+    catch (FeatureException &fe) 
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }
@@ -118,20 +118,20 @@ void IPv4FeatureAdapter::get_IPv4_Address(int *errorCode, unsigned char interfac
 void IPv4FeatureAdapter::get_IPv4_Default_Gateway(int *errorCode, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4])
 {
 
-	vector<byte> defaultGatewayAddressVector;
+    vector<byte> defaultGatewayAddressVector;
 
-	try
-	{
-		defaultGatewayAddressVector = this->feature->get_IPv4_Default_Gateway(*this->protocol, *this->bus, interfaceIndex);
+    try
+    {
+        defaultGatewayAddressVector = this->feature->get_IPv4_Default_Gateway(*this->protocol, *this->bus, interfaceIndex);
 
-		memcpy(defaultGatewayAddress, &(defaultGatewayAddressVector[0]), 4);
+        memcpy(defaultGatewayAddress, &(defaultGatewayAddressVector[0]), 4);
 
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe)
-	{
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-	}
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe)
+    {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+    }
 }
 
 void IPv4FeatureAdapter::set_IPv4_Default_Gateway(int *errorCode, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4])
@@ -155,30 +155,30 @@ void IPv4FeatureAdapter::set_IPv4_Default_Gateway(int *errorCode, unsigned char 
 void IPv4FeatureAdapter::add_IPv4_Address(int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask)
 {
 
-	vector<byte> *ipv4AddressVector = new vector<byte>(4);
-	memcpy(&((*ipv4AddressVector)[0]), IPv4_Address, 4);
+    vector<byte> *ipv4AddressVector = new vector<byte>(4);
+    memcpy(&((*ipv4AddressVector)[0]), IPv4_Address, 4);
 
-	try {
-		this->feature->add_IPv4_Address(*this->protocol, *this->bus, interfaceIndex, *ipv4AddressVector, netMask);
-		delete ipv4AddressVector;
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe) {
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-		delete ipv4AddressVector;
+    try {
+        this->feature->add_IPv4_Address(*this->protocol, *this->bus, interfaceIndex, *ipv4AddressVector, netMask);
+        delete ipv4AddressVector;
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe) {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+        delete ipv4AddressVector;
 
-	}
+    }
 }
 
 void IPv4FeatureAdapter::delete_IPv4_Address(int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex)
 {
-	try
-	{
-		this->feature->delete_IPv4_Address(*this->protocol, *this->bus, interfaceIndex, addressIndex);
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe)
-	{
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-	}
+    try
+    {
+        this->feature->delete_IPv4_Address(*this->protocol, *this->bus, interfaceIndex, addressIndex);
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe)
+    {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+    }
 }

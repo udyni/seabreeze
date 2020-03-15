@@ -41,16 +41,16 @@ OBPRunNetworkInterfaceSelfTestExchange::OBPRunNetworkInterfaceSelfTestExchange()
 
     this->hints->push_back(new OBPControlHint());
 
-	this->payload.resize(sizeof(unsigned int));
+    this->payload.resize(sizeof(unsigned int));
 }
 
 void OBPRunNetworkInterfaceSelfTestExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	// the interface index of this command, unlike the others in this group is an unsigned int
-	this->payload[3] = 0; // obp is little endian
-	this->payload[2] = 0;
-	this->payload[1] = 0;
-	this->payload[0] = interfaceIndex;
+    // the interface index of this command, unlike the others in this group is an unsigned int
+    this->payload[3] = 0; // obp is little endian
+    this->payload[2] = 0;
+    this->payload[1] = 0;
+    this->payload[0] = interfaceIndex;
 }
 
 OBPRunNetworkInterfaceSelfTestExchange::~OBPRunNetworkInterfaceSelfTestExchange() 

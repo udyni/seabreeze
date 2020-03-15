@@ -117,11 +117,11 @@ namespace seabreeze {
             virtual ~TemperatureFeatureFamily();
         };
 
-		class IntrospectionFeatureFamily : public FeatureFamily {
-		public:
-			IntrospectionFeatureFamily();
-			virtual ~IntrospectionFeatureFamily();
-		};
+        class IntrospectionFeatureFamily : public FeatureFamily {
+        public:
+            IntrospectionFeatureFamily();
+            virtual ~IntrospectionFeatureFamily();
+        };
 
         class RevisionFeatureFamily : public FeatureFamily {
         public:
@@ -159,11 +159,11 @@ namespace seabreeze {
             virtual ~DataBufferFeatureFamily();
         };
 
-		class FastBufferFeatureFamily : public FeatureFamily {
-		public:
-			FastBufferFeatureFamily();
-			virtual ~FastBufferFeatureFamily();
-		};
+        class FastBufferFeatureFamily : public FeatureFamily {
+        public:
+            FastBufferFeatureFamily();
+            virtual ~FastBufferFeatureFamily();
+        };
 
         class AcquisitionDelayFeatureFamily : public FeatureFamily {
         public:
@@ -178,55 +178,55 @@ namespace seabreeze {
         };
 
 
-		class EthernetConfigurationFeatureFamily : public FeatureFamily {
-		public:
-			EthernetConfigurationFeatureFamily();
-			virtual ~EthernetConfigurationFeatureFamily();
-		};
-		
-		class MulticastFeatureFamily : public FeatureFamily {
-		public:
-			MulticastFeatureFamily();
-			virtual ~MulticastFeatureFamily();
-		};
+        class EthernetConfigurationFeatureFamily : public FeatureFamily {
+        public:
+            EthernetConfigurationFeatureFamily();
+            virtual ~EthernetConfigurationFeatureFamily();
+        };
+        
+        class MulticastFeatureFamily : public FeatureFamily {
+        public:
+            MulticastFeatureFamily();
+            virtual ~MulticastFeatureFamily();
+        };
 
-		class IPv4FeatureFamily : public FeatureFamily {
-		public:
-			IPv4FeatureFamily();
-			virtual ~IPv4FeatureFamily();
-		};
-		
-		class WifiConfigurationFeatureFamily : public FeatureFamily {
-		public:
-			WifiConfigurationFeatureFamily();
-			virtual ~WifiConfigurationFeatureFamily();
-		};
+        class IPv4FeatureFamily : public FeatureFamily {
+        public:
+            IPv4FeatureFamily();
+            virtual ~IPv4FeatureFamily();
+        };
+        
+        class WifiConfigurationFeatureFamily : public FeatureFamily {
+        public:
+            WifiConfigurationFeatureFamily();
+            virtual ~WifiConfigurationFeatureFamily();
+        };
 
-		class DHCPServerFeatureFamily : public FeatureFamily {
-		public:
-			DHCPServerFeatureFamily();
-			virtual ~DHCPServerFeatureFamily();
-		};
+        class DHCPServerFeatureFamily : public FeatureFamily {
+        public:
+            DHCPServerFeatureFamily();
+            virtual ~DHCPServerFeatureFamily();
+        };
 
-		class NetworkConfigurationFeatureFamily : public FeatureFamily {
-		public:
-			NetworkConfigurationFeatureFamily();
-			virtual ~NetworkConfigurationFeatureFamily();
-		};
+        class NetworkConfigurationFeatureFamily : public FeatureFamily {
+        public:
+            NetworkConfigurationFeatureFamily();
+            virtual ~NetworkConfigurationFeatureFamily();
+        };
 
-		class GPIOFeatureFamily : public FeatureFamily {
-		public:
-			GPIOFeatureFamily();
-			virtual ~GPIOFeatureFamily();
-		};
+        class GPIOFeatureFamily : public FeatureFamily {
+        public:
+            GPIOFeatureFamily();
+            virtual ~GPIOFeatureFamily();
+        };
 
-		class I2CMasterFeatureFamily : public FeatureFamily {
-		public:
-			I2CMasterFeatureFamily();
-			virtual ~I2CMasterFeatureFamily();
-		};
+        class I2CMasterFeatureFamily : public FeatureFamily {
+        public:
+            I2CMasterFeatureFamily();
+            virtual ~I2CMasterFeatureFamily();
+        };
 
-		
+        
         class FeatureFamilies {
         public:
             const UndefinedFeatureFamily UNDEFINED;
@@ -242,30 +242,30 @@ namespace seabreeze {
             const WaveCalFeatureFamily WAVELENGTH_CAL;
             const NonlinearityCoeffsFeatureFamily NONLINEARITY_COEFFS;
             const TemperatureFeatureFamily TEMPERATURE;
-			const IntrospectionFeatureFamily INTROSPECTION;
+            const IntrospectionFeatureFamily INTROSPECTION;
             const RevisionFeatureFamily REVISION;
             const OpticalBenchFeatureFamily OPTICAL_BENCH;
             const SpectrumProcessingFeatureFamily SPECTRUM_PROCESSING;
             const StrayLightCoeffsFeatureFamily STRAY_LIGHT_COEFFS;
             const RawUSBBusAccessFeatureFamily RAW_USB_BUS_ACCESS;
             const DataBufferFeatureFamily DATA_BUFFER;
-			const FastBufferFeatureFamily FAST_BUFFER;
+            const FastBufferFeatureFamily FAST_BUFFER;
             const AcquisitionDelayFeatureFamily ACQUISITION_DELAY;
             const PixelBinningFeatureFamily PIXEL_BINNING;
-			const EthernetConfigurationFeatureFamily ETHERNET_CONFIGURATION;
-			const NetworkConfigurationFeatureFamily NETWORK_CONFIGURATION;
-			const WifiConfigurationFeatureFamily WIFI_CONFIGURATION;
-			const DHCPServerFeatureFamily DHCP_SERVER;
-			//const BluetoothConfigurationFeatureFamily BLUETOOTH_CONFIGURATION;
-			//const TimeFeatureFamily	TIME_COMMANDS;
-			//const RS232BusFeatureFamily RS232_BUS;
-			const IPv4FeatureFamily IPV4_ADDRESS;
-			const MulticastFeatureFamily IPV4_MULTICAST;
-			//const NetworkServicesFeatureFamily NETWORK_SERVICES;
-			//const	DeviceIdentificationFeatureFamily DEVICE_IDENTIFICATION;
-			//const DeviceTestFeatureFamily DEVICE_TEST;
-			const GPIOFeatureFamily GENERAL_PURPOSE_INPUT_OUTPUT;
-			const I2CMasterFeatureFamily I2C_MASTER;
+            const EthernetConfigurationFeatureFamily ETHERNET_CONFIGURATION;
+            const NetworkConfigurationFeatureFamily NETWORK_CONFIGURATION;
+            const WifiConfigurationFeatureFamily WIFI_CONFIGURATION;
+            const DHCPServerFeatureFamily DHCP_SERVER;
+            //const BluetoothConfigurationFeatureFamily BLUETOOTH_CONFIGURATION;
+            //const TimeFeatureFamily    TIME_COMMANDS;
+            //const RS232BusFeatureFamily RS232_BUS;
+            const IPv4FeatureFamily IPV4_ADDRESS;
+            const MulticastFeatureFamily IPV4_MULTICAST;
+            //const NetworkServicesFeatureFamily NETWORK_SERVICES;
+            //const    DeviceIdentificationFeatureFamily DEVICE_IDENTIFICATION;
+            //const DeviceTestFeatureFamily DEVICE_TEST;
+            const GPIOFeatureFamily GENERAL_PURPOSE_INPUT_OUTPUT;
+            const I2CMasterFeatureFamily I2C_MASTER;
 
 
             FeatureFamilies();

@@ -114,10 +114,10 @@ namespace seabreeze {
             double spectrometerGetMaximumIntensity(long spectrometerFeatureID, int *errorCode);
             int spectrometerGetUnformattedSpectrumLength(long spectrometerFeatureID, int *errorCode);
             int spectrometerGetUnformattedSpectrum(long spectrometerFeatureID,int *errorCode, unsigned char *buffer, int bufferLength);
-			int spectrometerGetFastBufferSpectrum(long spectrometerFeatureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
-			void spectrometerFastBufferSpectrumRequest(long spectrometerFeatureID, int *errorCode, unsigned int numberOfSamplesToRetrieve);
-			int spectrometerFastBufferSpectrumResponse(long spectrometerFeatureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
-			int spectrometerGetFormattedSpectrumLength(long spectrometerFeatureID, int *errorCode);
+            int spectrometerGetFastBufferSpectrum(long spectrometerFeatureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
+            void spectrometerFastBufferSpectrumRequest(long spectrometerFeatureID, int *errorCode, unsigned int numberOfSamplesToRetrieve);
+            int spectrometerFastBufferSpectrumResponse(long spectrometerFeatureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
+            int spectrometerGetFormattedSpectrumLength(long spectrometerFeatureID, int *errorCode);
             int spectrometerGetFormattedSpectrum(long spectrometerFeatureID, int *errorCode,double *buffer, int bufferLength);
             int spectrometerGetWavelengths(long spectrometerFeatureID, int *errorCode,double *wavelengths, int length);
             int spectrometerGetElectricDarkPixelCount(long spectrometerFeatureID, int *errorCode);
@@ -162,73 +162,73 @@ namespace seabreeze {
             unsigned char ethernetConfiguration_Get_GbE_Enable_Status(long featureID, int *errorCode, unsigned char interfaceIndex);
             void ethernetConfiguration_Set_GbE_Enable_Status(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableStatus);
              
-			/* Get one or more multicast features */
-			int getNumberOfMulticastFeatures();
-			int getMulticastFeatures(long *buffer, int maxFeatures);
-			//void getMulticastGroupAddress(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(&groupAddress)[4]);
-			//void setMulticastGroupAddress(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char groupAddress[4]);
-			unsigned char getMulticastEnableState(long featureID, int *errorCode, unsigned char interfaceIndex);
-			void setMulticastEnableState(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
+            /* Get one or more multicast features */
+            int getNumberOfMulticastFeatures();
+            int getMulticastFeatures(long *buffer, int maxFeatures);
+            //void getMulticastGroupAddress(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(&groupAddress)[4]);
+            //void setMulticastGroupAddress(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char groupAddress[4]);
+            unsigned char getMulticastEnableState(long featureID, int *errorCode, unsigned char interfaceIndex);
+            void setMulticastEnableState(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
 
-			// IPv4 features
-			int getNumberOfIPv4Features();
-			int getIPv4Features(long *buffer, int maxLength);
-			unsigned char get_IPv4_DHCP_Enable_State(long featureID, int *errorCode, unsigned char interfaceIndex);
-			void   set_IPv4_DHCP_Enable_State(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char isEnabled);
-			unsigned char get_Number_Of_IPv4_Addresses(long featureID, int *errorCode, unsigned char interfaceIndex);
-			void   get_IPv4_Address(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex, unsigned char(*IPv4_Address)[4], unsigned char *netMask);
-			void   get_IPv4_Default_Gateway(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4]);
-			void   set_IPv4_Default_Gateway(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4]);
-			void   add_IPv4_Address(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask);
-			void   delete_IPv4_Address(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex);
+            // IPv4 features
+            int getNumberOfIPv4Features();
+            int getIPv4Features(long *buffer, int maxLength);
+            unsigned char get_IPv4_DHCP_Enable_State(long featureID, int *errorCode, unsigned char interfaceIndex);
+            void   set_IPv4_DHCP_Enable_State(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char isEnabled);
+            unsigned char get_Number_Of_IPv4_Addresses(long featureID, int *errorCode, unsigned char interfaceIndex);
+            void   get_IPv4_Address(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex, unsigned char(*IPv4_Address)[4], unsigned char *netMask);
+            void   get_IPv4_Default_Gateway(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4]);
+            void   set_IPv4_Default_Gateway(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4]);
+            void   add_IPv4_Address(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask);
+            void   delete_IPv4_Address(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex);
 
-			/* Get one or more wifi configuration features */
-			int getNumberOfWifiConfigurationFeatures();
-			int getWifiConfigurationFeatures(long *buffer, int maxFeatures);
-			unsigned char wifiConfigurationGetMode(long featureID, int *errorCode, unsigned char interfaceIndex);
-			void wifiConfigurationSetMode(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char mode);
-			unsigned char wifiConfigurationGetSecurityType(long featureID, int *errorCode, unsigned char interfaceIndex);
-			void wifiConfigurationSetSecurityType(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char securityType);
-			unsigned char wifiConfigurationGetSSID(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*ssid)[32]);
-			void wifiConfigurationSetSSID(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char ssid[32], unsigned char length);
-			void wifiConfigurationSetPassPhrase(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char *passPhrase, unsigned char passPhraseLength);
-
-
-			/* Get one or more dhcp server features */
-			int getNumberOfDHCPServerFeatures();
-			int getDHCPServerFeatures(long *buffer, int maxFeatures);
-			void dhcpServerGetAddress(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*serverAddress)[4], unsigned char *netMask);
-			void dhcpServerSetAddress(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char serverAddress[4], unsigned char netMask);
-			unsigned char dhcpServerGetEnableState(long featureID, int *errorCode, unsigned char interfaceIndex);
-			void dhcpServerSetEnableState(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
+            /* Get one or more wifi configuration features */
+            int getNumberOfWifiConfigurationFeatures();
+            int getWifiConfigurationFeatures(long *buffer, int maxFeatures);
+            unsigned char wifiConfigurationGetMode(long featureID, int *errorCode, unsigned char interfaceIndex);
+            void wifiConfigurationSetMode(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char mode);
+            unsigned char wifiConfigurationGetSecurityType(long featureID, int *errorCode, unsigned char interfaceIndex);
+            void wifiConfigurationSetSecurityType(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char securityType);
+            unsigned char wifiConfigurationGetSSID(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*ssid)[32]);
+            void wifiConfigurationSetSSID(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char ssid[32], unsigned char length);
+            void wifiConfigurationSetPassPhrase(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char *passPhrase, unsigned char passPhraseLength);
 
 
-			/* Get one or more network configuration features */
-			int getNumberOfNetworkConfigurationFeatures();
-			int getNetworkConfigurationFeatures(long *buffer, int maxFeatures);
-			unsigned char getNumberOfNetworkInterfaces(long featureID, int *errorCode);
-			unsigned char getNetworkInterfaceConnectionType(long featureID, int *errorCode, unsigned char interfaceIndex);
-			unsigned char getNetworkInterfaceEnableState(long featureID, int *errorCode, unsigned char interfaceIndex);
-			void		  setNetworkInterfaceEnableState(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
-			unsigned char runNetworkInterfaceSelfTest(long featureID, int *errorCode, unsigned char interfaceIndex);
-			void		  saveNetworkInterfaceConnectionSettings(long featureID, int *errorCode, unsigned char interfaceIndex);
+            /* Get one or more dhcp server features */
+            int getNumberOfDHCPServerFeatures();
+            int getDHCPServerFeatures(long *buffer, int maxFeatures);
+            void dhcpServerGetAddress(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*serverAddress)[4], unsigned char *netMask);
+            void dhcpServerSetAddress(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char serverAddress[4], unsigned char netMask);
+            unsigned char dhcpServerGetEnableState(long featureID, int *errorCode, unsigned char interfaceIndex);
+            void dhcpServerSetEnableState(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
 
-			/* get on or more gpio features*/
-			int getNumberOfGPIOFeatures();
-			int getGPIOFeatures(long *buffer, int maxFeatures);
-			unsigned char gpioGetNumberOfPins(long featureID, int *errorCode);
-			unsigned int gpioGetOutputEnableVector(long featureID, int *errorCode);
-			void gpioSetOutputEnableVector(long featureID, int *errorCode, unsigned int outputEnableVector, unsigned int bitMask);
-			unsigned int gpioGetValueVector(long featureID, int *errorCode);
-			void gpioSetValueVector(long featureID, int *errorCode, unsigned int valueVector, unsigned int bitMask);
-			unsigned char gpioExtensionGetNumberOfPins(long featureID, int *errorCode);
-			unsigned char gpioExtensionGetAvailableModes(long featureID, int *errorCode, unsigned char pinNumber, unsigned char *availableModes, unsigned char maxModeCount);
-			unsigned char gpioExtensionGetCurrentMode(long featureID, int *errorCode, unsigned char pinNumber);
-			void gpioExtensionSetMode(long featureID, int *errorCode, unsigned char pinNumber, unsigned char mode, float value);
-			unsigned int gpioExtensionGetOutputVector(long featureID, int *errorCode);
-			void gpioExtensionSetOutputVector(long featureID, int *errorCode, unsigned int outputVector, unsigned int bitMask);
-			float gpioExtensionGetValue(long featureID, int *errorCode, unsigned char pinNumber);
-			void gpioExtensionSetValue(long featureID, int *errorCode, unsigned char pinNumber, float value);
+
+            /* Get one or more network configuration features */
+            int getNumberOfNetworkConfigurationFeatures();
+            int getNetworkConfigurationFeatures(long *buffer, int maxFeatures);
+            unsigned char getNumberOfNetworkInterfaces(long featureID, int *errorCode);
+            unsigned char getNetworkInterfaceConnectionType(long featureID, int *errorCode, unsigned char interfaceIndex);
+            unsigned char getNetworkInterfaceEnableState(long featureID, int *errorCode, unsigned char interfaceIndex);
+            void          setNetworkInterfaceEnableState(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
+            unsigned char runNetworkInterfaceSelfTest(long featureID, int *errorCode, unsigned char interfaceIndex);
+            void          saveNetworkInterfaceConnectionSettings(long featureID, int *errorCode, unsigned char interfaceIndex);
+
+            /* get on or more gpio features*/
+            int getNumberOfGPIOFeatures();
+            int getGPIOFeatures(long *buffer, int maxFeatures);
+            unsigned char gpioGetNumberOfPins(long featureID, int *errorCode);
+            unsigned int gpioGetOutputEnableVector(long featureID, int *errorCode);
+            void gpioSetOutputEnableVector(long featureID, int *errorCode, unsigned int outputEnableVector, unsigned int bitMask);
+            unsigned int gpioGetValueVector(long featureID, int *errorCode);
+            void gpioSetValueVector(long featureID, int *errorCode, unsigned int valueVector, unsigned int bitMask);
+            unsigned char gpioExtensionGetNumberOfPins(long featureID, int *errorCode);
+            unsigned char gpioExtensionGetAvailableModes(long featureID, int *errorCode, unsigned char pinNumber, unsigned char *availableModes, unsigned char maxModeCount);
+            unsigned char gpioExtensionGetCurrentMode(long featureID, int *errorCode, unsigned char pinNumber);
+            void gpioExtensionSetMode(long featureID, int *errorCode, unsigned char pinNumber, unsigned char mode, float value);
+            unsigned int gpioExtensionGetOutputVector(long featureID, int *errorCode);
+            void gpioExtensionSetOutputVector(long featureID, int *errorCode, unsigned int outputVector, unsigned int bitMask);
+            float gpioExtensionGetValue(long featureID, int *errorCode, unsigned char pinNumber);
+            void gpioExtensionSetValue(long featureID, int *errorCode, unsigned char pinNumber, float value);
 
 
 
@@ -280,13 +280,13 @@ namespace seabreeze {
             double temperatureGet(long temperatureFeatureID, int *errorCode, int index);
             int temperatureGetAll(long temperatureFeatureID, int *errorCode, double *buffer, int bufferLength);
 
-			/* Get one or more introspection features */
-			int getNumberOfIntrospectionFeatures();
-			int getIntrospectionFeatures(long *buffer, int maxFeatures);
-			unsigned short introspectionNumberOfPixelsGet(long introspectionFeatureID, int *errorCode);
-			int  introspectionActivePixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *pixelIndexPairs, int pixelpairIndexCount );
-			int  introspectionOpticalDarkPixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *pixelIndexPairs, int pixelpairIndexCount);
-			int  introspectionElectricDarkPixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *pixelIndexPairs, int pixelpairIndexCount);
+            /* Get one or more introspection features */
+            int getNumberOfIntrospectionFeatures();
+            int getIntrospectionFeatures(long *buffer, int maxFeatures);
+            unsigned short introspectionNumberOfPixelsGet(long introspectionFeatureID, int *errorCode);
+            int  introspectionActivePixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *pixelIndexPairs, int pixelpairIndexCount );
+            int  introspectionOpticalDarkPixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *pixelIndexPairs, int pixelpairIndexCount);
+            int  introspectionElectricDarkPixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *pixelIndexPairs, int pixelpairIndexCount);
 
             /* Get one or more revision features */
             int getNumberOfRevisionFeatures();
@@ -331,14 +331,14 @@ namespace seabreeze {
             unsigned long dataBufferGetBufferCapacityMinimum(long featureID, int *errorCode);
             void dataBufferSetBufferCapacity(long featureID, int *errorCode, unsigned long capacity);
 
-			/* Get one or more fast buffer features */
-			int getNumberOfFastBufferFeatures();
-			int getFastBufferFeatures(long *buffer, int maxFeatures);
-			unsigned char fastBufferGetBufferingEnable(long featureID, int *errorCode);
-			void fastBufferSetBufferingEnable(long featureID, int *errorCode, unsigned char isEnabled);
-			unsigned int fastBufferGetConsecutiveSampleCount(long featureID, int *errorCode);
-			void fastBufferSetConsecutiveSampleCount(long featureID, int *errorCode, unsigned int consecutiveSampleCount);
-			
+            /* Get one or more fast buffer features */
+            int getNumberOfFastBufferFeatures();
+            int getFastBufferFeatures(long *buffer, int maxFeatures);
+            unsigned char fastBufferGetBufferingEnable(long featureID, int *errorCode);
+            void fastBufferSetBufferingEnable(long featureID, int *errorCode, unsigned char isEnabled);
+            unsigned int fastBufferGetConsecutiveSampleCount(long featureID, int *errorCode);
+            void fastBufferSetConsecutiveSampleCount(long featureID, int *errorCode, unsigned int consecutiveSampleCount);
+            
             /* Get one or more acquisition delay features */
             int getNumberOfAcquisitionDelayFeatures();
             int getAcquisitionDelayFeatures(long *buffer, int maxFeatures);
@@ -349,12 +349,12 @@ namespace seabreeze {
             unsigned long acquisitionDelayGetDelayMaximumMicroseconds(long featureID, int *errorCode);
             unsigned long acquisitionDelayGetDelayMinimumMicroseconds(long featureID, int *errorCode);
 
-			/* Get one or more i2c master features */
-			int getNumberOfI2CMasterFeatures();
-			int getI2CMasterFeatures(long *buffer, int maxFeatures);
-			unsigned char i2cMasterGetNumberOfBuses(long featureID, int *errorCode);
-			unsigned short i2cMasterReadBus(long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes);
-			unsigned short i2cMasterWriteBus(long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes);
+            /* Get one or more i2c master features */
+            int getNumberOfI2CMasterFeatures();
+            int getI2CMasterFeatures(long *buffer, int maxFeatures);
+            unsigned char i2cMasterGetNumberOfBuses(long featureID, int *errorCode);
+            unsigned short i2cMasterReadBus(long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes);
+            unsigned short i2cMasterWriteBus(long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes);
 
 
         protected:
@@ -366,11 +366,11 @@ namespace seabreeze {
             std::vector<ThermoElectricCoolerFeatureAdapter *> tecFeatures;
             std::vector<IrradCalFeatureAdapter *> irradCalFeatures;
             std::vector<EthernetConfigurationFeatureAdapter *> ethernetConfigurationFeatures;
-			std::vector<MulticastFeatureAdapter *> multicastFeatures;
-			std::vector<IPv4FeatureAdapter *> IPv4Features;
-			std::vector<WifiConfigurationFeatureAdapter *> wifiConfigurationFeatures;
-			std::vector<DHCPServerFeatureAdapter *> dhcpServerFeatures;
-			std::vector<NetworkConfigurationFeatureAdapter *> networkConfigurationFeatures;
+            std::vector<MulticastFeatureAdapter *> multicastFeatures;
+            std::vector<IPv4FeatureAdapter *> IPv4Features;
+            std::vector<WifiConfigurationFeatureAdapter *> wifiConfigurationFeatures;
+            std::vector<DHCPServerFeatureAdapter *> dhcpServerFeatures;
+            std::vector<NetworkConfigurationFeatureAdapter *> networkConfigurationFeatures;
             std::vector<EEPROMFeatureAdapter *> eepromFeatures;
             std::vector<LightSourceFeatureAdapter *> lightSourceFeatures;
             std::vector<StrobeLampFeatureAdapter *> strobeLampFeatures;
@@ -378,17 +378,17 @@ namespace seabreeze {
             std::vector<ShutterFeatureAdapter *> shutterFeatures;
             std::vector<NonlinearityCoeffsFeatureAdapter *> nonlinearityFeatures;
             std::vector<TemperatureFeatureAdapter *> temperatureFeatures;
-			std::vector<IntrospectionFeatureAdapter *> introspectionFeatures;
+            std::vector<IntrospectionFeatureAdapter *> introspectionFeatures;
             std::vector<RevisionFeatureAdapter *> revisionFeatures;
             std::vector<OpticalBenchFeatureAdapter *> opticalBenchFeatures;
             std::vector<SpectrumProcessingFeatureAdapter *> spectrumProcessingFeatures;
             std::vector<StrayLightCoeffsFeatureAdapter *> strayLightFeatures;
             std::vector<PixelBinningFeatureAdapter *> pixelBinningFeatures;
             std::vector<DataBufferFeatureAdapter *> dataBufferFeatures;
-			std::vector<FastBufferFeatureAdapter *> fastBufferFeatures;
+            std::vector<FastBufferFeatureAdapter *> fastBufferFeatures;
             std::vector<AcquisitionDelayFeatureAdapter *> acquisitionDelayFeatures;
-			std::vector<gpioFeatureAdapter *> gpioFeatures;
-			std::vector<I2CMasterFeatureAdapter *> i2cMasterFeatures;
+            std::vector<gpioFeatureAdapter *> gpioFeatures;
+            std::vector<I2CMasterFeatureAdapter *> i2cMasterFeatures;
             
             RawUSBBusAccessFeatureAdapter *getRawUSBBusAccessFeatureByID(long featureID);
             SerialNumberFeatureAdapter *getSerialNumberFeatureByID(long featureID);
@@ -396,11 +396,11 @@ namespace seabreeze {
             ThermoElectricCoolerFeatureAdapter *getTECFeatureByID(long featureID);
             IrradCalFeatureAdapter *getIrradCalFeatureByID(long featureID);
             EthernetConfigurationFeatureAdapter *getEthernetConfigurationFeatureByID(long featureID);
-			MulticastFeatureAdapter *getMulticastFeatureByID(long featureID);
-			IPv4FeatureAdapter *getIPv4FeatureByID(long featureID);
-			WifiConfigurationFeatureAdapter *getWifiConfigurationFeatureByID(long featureID);
-			DHCPServerFeatureAdapter *getDHCPServerFeatureByID(long featureID);
-			NetworkConfigurationFeatureAdapter *getNetworkConfigurationFeatureByID(long featureID);
+            MulticastFeatureAdapter *getMulticastFeatureByID(long featureID);
+            IPv4FeatureAdapter *getIPv4FeatureByID(long featureID);
+            WifiConfigurationFeatureAdapter *getWifiConfigurationFeatureByID(long featureID);
+            DHCPServerFeatureAdapter *getDHCPServerFeatureByID(long featureID);
+            NetworkConfigurationFeatureAdapter *getNetworkConfigurationFeatureByID(long featureID);
             EEPROMFeatureAdapter *getEEPROMFeatureByID(long featureID);
             LightSourceFeatureAdapter *getLightSourceFeatureByID(long featureID);
             StrobeLampFeatureAdapter *getStrobeLampFeatureByID(long featureID);
@@ -408,17 +408,17 @@ namespace seabreeze {
             ShutterFeatureAdapter *getShutterFeatureByID(long featureID);
             NonlinearityCoeffsFeatureAdapter *getNonlinearityCoeffsFeatureByID(long featureID);
             TemperatureFeatureAdapter *getTemperatureFeatureByID(long featureID);
-			IntrospectionFeatureAdapter *getIntrospectionFeatureByID(long featureID);
+            IntrospectionFeatureAdapter *getIntrospectionFeatureByID(long featureID);
             RevisionFeatureAdapter *getRevisionFeatureByID(long featureID);
             OpticalBenchFeatureAdapter *getOpticalBenchFeatureByID(long featureID);
             SpectrumProcessingFeatureAdapter *getSpectrumProcessingFeatureByID(long featureID);
             StrayLightCoeffsFeatureAdapter *getStrayLightCoeffsFeatureByID(long featureID);
             PixelBinningFeatureAdapter *getPixelBinningFeatureByID(long featureID);
             DataBufferFeatureAdapter *getDataBufferFeatureByID(long featureID);
-			FastBufferFeatureAdapter *getFastBufferFeatureByID(long featureID);
+            FastBufferFeatureAdapter *getFastBufferFeatureByID(long featureID);
             AcquisitionDelayFeatureAdapter *getAcquisitionDelayFeatureByID(long featureID);
-			gpioFeatureAdapter *getGPIOFeatureByID(long featureID);
-			I2CMasterFeatureAdapter *getI2CMasterFeatureByID(long featureID);
+            gpioFeatureAdapter *getGPIOFeatureByID(long featureID);
+            I2CMasterFeatureAdapter *getI2CMasterFeatureByID(long featureID);
         };
     }
 }

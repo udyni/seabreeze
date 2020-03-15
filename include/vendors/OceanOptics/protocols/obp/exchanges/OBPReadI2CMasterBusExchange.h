@@ -36,12 +36,12 @@ namespace seabreeze {
   namespace oceanBinaryProtocol {
     class OBPReadI2CMasterBusExchange : public OBPQuery {
     public:
-		OBPReadI2CMasterBusExchange();
+        OBPReadI2CMasterBusExchange();
         virtual ~OBPReadI2CMasterBusExchange();
 
         void setBusIndex(unsigned char busIndex);
-		void setSlaveAddress(unsigned char slaveAddress);
-		void setNumberOfBytes(unsigned short numberOfBytes);
+        void setSlaveAddress(unsigned char slaveAddress);
+        void setNumberOfBytes(unsigned short numberOfBytes);
 
     };
   }

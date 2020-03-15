@@ -53,16 +53,16 @@ OBPSetWifiConfigurationPassPhraseExchange::~OBPSetWifiConfigurationPassPhraseExc
 
 void OBPSetWifiConfigurationPassPhraseExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetWifiConfigurationPassPhraseExchange::setPassPhrase(vector<unsigned char> passPhrase)
 {
-	
+    
     this->payload.resize(sizeof(unsigned char) + passPhrase.size()); // initialize to interface Index and 0 bytes for data
-	
-	for (unsigned char i = 0; i < passPhrase.size(); i++)
-	{
-		this->payload[1 + i] = passPhrase[i];
-	}
+    
+    for (unsigned char i = 0; i < passPhrase.size(); i++)
+    {
+        this->payload[1 + i] = passPhrase[i];
+    }
 }

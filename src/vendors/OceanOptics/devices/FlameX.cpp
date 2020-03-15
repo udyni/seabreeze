@@ -104,11 +104,11 @@ FlameX::FlameX() {
     /* Set up the features that comprise this device */
  
 
-	/* Add introspection feature*/
-	vector<ProtocolHelper *> introspectionHelpers;
-	introspectionHelpers.push_back(new OBPIntrospectionProtocol());
-	IntrospectionFeature *introspection = new IntrospectionFeature(introspectionHelpers);
-	this->features.push_back(introspection);
+    /* Add introspection feature*/
+    vector<ProtocolHelper *> introspectionHelpers;
+    introspectionHelpers.push_back(new OBPIntrospectionProtocol());
+    IntrospectionFeature *introspection = new IntrospectionFeature(introspectionHelpers);
+    this->features.push_back(introspection);
 
     /* Add Revision feature (not fully implemented by flame x*/
     vector<ProtocolHelper *> revisionHelpers;
@@ -124,11 +124,11 @@ FlameX::FlameX() {
         new OpticalBenchFeature(opticalBenchHelpers));
 #endif
 
-	/* spectrometer and databuffer features*/
-	FlameXFastBufferFeature *flameXDataBuffer = new FlameXFastBufferFeature();
-	this->features.push_back(flameXDataBuffer);
+    /* spectrometer and databuffer features*/
+    FlameXFastBufferFeature *flameXDataBuffer = new FlameXFastBufferFeature();
+    this->features.push_back(flameXDataBuffer);
     this->features.push_back(new FlameXSpectrometerFeature(introspection, flameXDataBuffer));
-	this->features.push_back(new FlameXDataBufferFeature());
+    this->features.push_back(new FlameXDataBufferFeature());
 
     /* Add serial number feature */
     vector<ProtocolHelper *> serialNumberHelpers;
@@ -156,45 +156,45 @@ FlameX::FlameX() {
     lampHelpers.push_back(new OBPStrobeLampProtocol());
     this->features.push_back(new StrobeLampFeature(lampHelpers));
 
-	/* Add network configuration feature */
-	vector<ProtocolHelper *> networkConfigurationHelpers;
-	networkConfigurationHelpers.push_back(new OBPNetworkConfigurationProtocol());
-	this->features.push_back(new NetworkConfigurationFeature(networkConfigurationHelpers));
+    /* Add network configuration feature */
+    vector<ProtocolHelper *> networkConfigurationHelpers;
+    networkConfigurationHelpers.push_back(new OBPNetworkConfigurationProtocol());
+    this->features.push_back(new NetworkConfigurationFeature(networkConfigurationHelpers));
 
-	/* Add ethernet configuration feature */
-	vector<ProtocolHelper *> ethernetConfigurationHelpers;
-	ethernetConfigurationHelpers.push_back(new OBPEthernetConfigurationProtocol());
-	this->features.push_back(new EthernetConfigurationFeature(ethernetConfigurationHelpers));
+    /* Add ethernet configuration feature */
+    vector<ProtocolHelper *> ethernetConfigurationHelpers;
+    ethernetConfigurationHelpers.push_back(new OBPEthernetConfigurationProtocol());
+    this->features.push_back(new EthernetConfigurationFeature(ethernetConfigurationHelpers));
 
-	/* Add IPv4 Addressing  feature */
-	vector<ProtocolHelper *> multicastHelpers;
-	multicastHelpers.push_back(new OBPMulticastProtocol());
-	this->features.push_back(new MulticastFeature(multicastHelpers));
+    /* Add IPv4 Addressing  feature */
+    vector<ProtocolHelper *> multicastHelpers;
+    multicastHelpers.push_back(new OBPMulticastProtocol());
+    this->features.push_back(new MulticastFeature(multicastHelpers));
 
-	/* Add DHCP Server  feature */
-	vector<ProtocolHelper *> dhcpServerHelpers;
-	dhcpServerHelpers.push_back(new OBPDHCPServerProtocol());
-	this->features.push_back(new DHCPServerFeature(dhcpServerHelpers));
+    /* Add DHCP Server  feature */
+    vector<ProtocolHelper *> dhcpServerHelpers;
+    dhcpServerHelpers.push_back(new OBPDHCPServerProtocol());
+    this->features.push_back(new DHCPServerFeature(dhcpServerHelpers));
 
-	/* Add IPv4 Addressing  feature */
-	vector<ProtocolHelper *> ipv4Helpers;
-	ipv4Helpers.push_back(new OBPIPv4Protocol());
-	this->features.push_back(new IPv4Feature(ipv4Helpers));
+    /* Add IPv4 Addressing  feature */
+    vector<ProtocolHelper *> ipv4Helpers;
+    ipv4Helpers.push_back(new OBPIPv4Protocol());
+    this->features.push_back(new IPv4Feature(ipv4Helpers));
 
-	/* Add wifi configuration feature */
-	vector<ProtocolHelper *> wifiConfigurationHelpers;
-	wifiConfigurationHelpers.push_back(new OBPWifiConfigurationProtocol());
-	this->features.push_back(new WifiConfigurationFeature(wifiConfigurationHelpers));
+    /* Add wifi configuration feature */
+    vector<ProtocolHelper *> wifiConfigurationHelpers;
+    wifiConfigurationHelpers.push_back(new OBPWifiConfigurationProtocol());
+    this->features.push_back(new WifiConfigurationFeature(wifiConfigurationHelpers));
 
-	/* Add gpio feature */
-	vector<ProtocolHelper *> gpioHelpers;
-	gpioHelpers.push_back(new OBPGPIOProtocol());
-	this->features.push_back(new GPIOFeature(gpioHelpers));
+    /* Add gpio feature */
+    vector<ProtocolHelper *> gpioHelpers;
+    gpioHelpers.push_back(new OBPGPIOProtocol());
+    this->features.push_back(new GPIOFeature(gpioHelpers));
 
-	/* Add i2c master feature */
-	vector<ProtocolHelper *> i2cMasterHelpers;
-	i2cMasterHelpers.push_back(new OBPI2CMasterProtocol());
-	this->features.push_back(new i2cMasterFeature(i2cMasterHelpers));
+    /* Add i2c master feature */
+    vector<ProtocolHelper *> i2cMasterHelpers;
+    i2cMasterHelpers.push_back(new OBPI2CMasterProtocol());
+    this->features.push_back(new i2cMasterFeature(i2cMasterHelpers));
     this->features.push_back(new RawUSBBusAccessFeature());
 }
 

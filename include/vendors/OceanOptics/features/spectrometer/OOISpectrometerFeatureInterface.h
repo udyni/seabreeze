@@ -51,8 +51,8 @@ namespace seabreeze {
         virtual std::vector<byte> *getUnformattedSpectrum(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException) = 0;
 
-		virtual std::vector<byte> *getFastBufferSpectrum(const Protocol &protocol,
-			const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) = 0;
+        virtual std::vector<byte> *getFastBufferSpectrum(const Protocol &protocol,
+            const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) = 0;
 
         virtual void fastBufferSpectrumRequest(const Protocol &protocol,
                                                          const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) = 0;
@@ -69,8 +69,8 @@ namespace seabreeze {
         virtual std::vector<byte> *readUnformattedSpectrum(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException) = 0;
 
-		virtual std::vector<byte> *readFastBufferSpectrum(const Protocol &protocol,
-			const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) = 0;
+        virtual std::vector<byte> *readFastBufferSpectrum(const Protocol &protocol,
+            const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) = 0;
 
         /* Set the integration time of the spectrometer */
         virtual void setIntegrationTimeMicros(const Protocol &protocol,
@@ -83,11 +83,11 @@ namespace seabreeze {
         virtual void writeRequestFormattedSpectrum(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException) = 0;
 
-		virtual void writeRequestUnformattedSpectrum(const Protocol &protocol,
-			const Bus &bus) throw (FeatureException) = 0;
+        virtual void writeRequestUnformattedSpectrum(const Protocol &protocol,
+            const Bus &bus) throw (FeatureException) = 0;
 
-		virtual void writeRequestFastBufferSpectrum(const Protocol &protocol,
-			const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) = 0;
+        virtual void writeRequestFastBufferSpectrum(const Protocol &protocol,
+            const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) = 0;
 
         /* Setting the external trigger mode for the spectrometer */
         virtual void setTriggerMode(const Protocol &protocol,
@@ -96,8 +96,8 @@ namespace seabreeze {
         virtual std::vector<SpectrometerTriggerMode *> getTriggerModes() const = 0;
 
         virtual std::vector<unsigned int> getElectricDarkPixelIndices() const = 0;
-		virtual std::vector<unsigned int> getOpticalDarkPixelIndices() const = 0;
-		virtual std::vector<unsigned int> getActivePixelIndices() const = 0;
+        virtual std::vector<unsigned int> getOpticalDarkPixelIndices() const = 0;
+        virtual std::vector<unsigned int> getActivePixelIndices() const = 0;
 
         virtual long getIntegrationTimeMinimum() const = 0;
         virtual long getIntegrationTimeMaximum() const = 0;

@@ -39,13 +39,13 @@ OBPGetWifiConfigurationSecurityExchange::OBPGetWifiConfigurationSecurityExchange
     this->messageType = OBPMessageTypes::OBP_GET_WIFI_SECURITY;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 void OBPGetWifiConfigurationSecurityExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 OBPGetWifiConfigurationSecurityExchange::~OBPGetWifiConfigurationSecurityExchange() {

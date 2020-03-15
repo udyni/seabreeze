@@ -51,7 +51,7 @@ ApexSpectrometerFeature::ApexSpectrometerFeature(
             : GainAdjustedSpectrometerFeature(saturationFeature) {
 
     this->numberOfPixels = 2068;
-	this->numberOfBytesPerPixel = sizeof(unsigned short);
+    this->numberOfBytesPerPixel = sizeof(unsigned short);
     this->maxIntensity = 64000;   // MZ: resolves unit-to-unit issues with S10420 detector
     int readoutLength = 2304 * 2 + 1;
 
@@ -72,19 +72,19 @@ ApexSpectrometerFeature::ApexSpectrometerFeature(
     /* The Apex uses the same protocol as the Maya so this just
      * delegates to the existing exchange.
      */
-	Transfer *requestFormattedSpectrum = new RequestSpectrumExchange();
+    Transfer *requestFormattedSpectrum = new RequestSpectrumExchange();
     Transfer *readFormattedSpectrum = new MayaProSpectrumExchange(readoutLength, this->numberOfPixels, this);
 
     Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
-	Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
+    Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
 
-	Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
-	Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
+    Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
+    Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
 
     TriggerModeExchange *triggerMode = new TriggerModeExchange();
 
     OOISpectrometerProtocol *ooiProtocol = new OOISpectrometerProtocol(intTime, requestFormattedSpectrum, readFormattedSpectrum, 
-		requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
+        requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
     this->protocols.push_back(ooiProtocol);
 
     /* The Apex does not have an external connector so it only supports

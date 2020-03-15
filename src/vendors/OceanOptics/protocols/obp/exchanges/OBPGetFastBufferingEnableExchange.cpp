@@ -40,7 +40,7 @@ using namespace std;
 OBPGetFastBufferingEnableExchange::OBPGetFastBufferingEnableExchange() {
     this->hints->push_back(new OBPControlHint());
     this->messageType = OBPMessageTypes::OBP_GET_BUFFERING_ENABLED;
-	this->payload.resize(0);
+    this->payload.resize(0);
 }
 
 OBPGetFastBufferingEnableExchange::~OBPGetFastBufferingEnableExchange() {
@@ -58,7 +58,7 @@ unsigned char OBPGetFastBufferingEnableExchange::queryBufferingEnable(
         throw ProtocolException("Got a short read when querying buffering data enable.");
     }
 
-	isEnabled = ((*result)[0] & 0x00FF);
+    isEnabled = ((*result)[0] & 0x00FF);
 
     delete result;
 

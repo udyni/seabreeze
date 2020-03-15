@@ -43,24 +43,24 @@ namespace seabreeze
 
         class gpioFeatureAdapter
                 : public FeatureAdapterTemplate<gpioFeatureInterface>
-		{
-        	public:
-            	gpioFeatureAdapter( gpioFeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
-            	virtual ~gpioFeatureAdapter();
+        {
+            public:
+                gpioFeatureAdapter( gpioFeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
+                virtual ~gpioFeatureAdapter();
 
-				unsigned char getGPIO_NumberOfPins(int *errorCode);
-				unsigned int getGPIO_OutputEnableVector(int *errorCode);
-				void setGPIO_OutputEnableVector(int *errorCode, unsigned int outputEnableVector, unsigned int bitMask);
-				unsigned int getGPIO_ValueVector(int *errorCode);
-				void setGPIO_ValueVector(int *errorCode, unsigned int valueVector, unsigned int bitMask);
-				unsigned char getEGPIO_NumberOfPins(int *errorCode);
-				unsigned char getEGPIO_AvailableModes(int *errorCode, unsigned char pinNumber, unsigned char *availableModes, unsigned char maxModeCount);
-				unsigned char getEGPIO_CurrentMode(int *errorCode, unsigned char pinNumber);
-				void setEGPIO_Mode(int *errorCode, unsigned char pinNumber, unsigned char mode, float value);
-				unsigned int getEGPIO_OutputVector(int *errorCode);
-				void setEGPIO_OutputVector(int *errorCode, unsigned int outputVector, unsigned int bitMask);
-				float getEGPIO_Value(int *errorCode, unsigned char pinNumber);
-				void setEGPIO_Value(int *errorCode, unsigned char pinNumber, float value);
+                unsigned char getGPIO_NumberOfPins(int *errorCode);
+                unsigned int getGPIO_OutputEnableVector(int *errorCode);
+                void setGPIO_OutputEnableVector(int *errorCode, unsigned int outputEnableVector, unsigned int bitMask);
+                unsigned int getGPIO_ValueVector(int *errorCode);
+                void setGPIO_ValueVector(int *errorCode, unsigned int valueVector, unsigned int bitMask);
+                unsigned char getEGPIO_NumberOfPins(int *errorCode);
+                unsigned char getEGPIO_AvailableModes(int *errorCode, unsigned char pinNumber, unsigned char *availableModes, unsigned char maxModeCount);
+                unsigned char getEGPIO_CurrentMode(int *errorCode, unsigned char pinNumber);
+                void setEGPIO_Mode(int *errorCode, unsigned char pinNumber, unsigned char mode, float value);
+                unsigned int getEGPIO_OutputVector(int *errorCode);
+                void setEGPIO_OutputVector(int *errorCode, unsigned int outputVector, unsigned int bitMask);
+                float getEGPIO_Value(int *errorCode, unsigned char pinNumber);
+                void setEGPIO_Value(int *errorCode, unsigned char pinNumber, float value);
         };
 
     }

@@ -96,7 +96,7 @@ void Log::setLogFile(void *f)
 void Log::trace(const char *fmt, ...)
 {
 #ifdef OOI_DEBUG
-	va_list args;
+    va_list args;
     if(logLevel < OOI_LOG_LEVEL_TRACE)
         return;
     va_start(args, fmt);
@@ -108,7 +108,7 @@ void Log::trace(const char *fmt, ...)
 void Log::debug(const char *fmt, ...)
 {
 #ifdef OOI_DEBUG
-	va_list args;
+    va_list args;
     if(logLevel < OOI_LOG_LEVEL_DEBUG)
         return;
     va_start(args, fmt);
@@ -163,9 +163,9 @@ void Log::formatAndSend(
     if (logFile == NULL)
         return;
 
-	unsigned indent = (unsigned int) (callstack->size() - 1) * 4;
-	if (OOI_LOG_LEVEL_TRACE == lvl && indent > 2)
-		indent -= 2;
+    unsigned indent = (unsigned int) (callstack->size() - 1) * 4;
+    if (OOI_LOG_LEVEL_TRACE == lvl && indent > 2)
+        indent -= 2;
 
     fprintf(logFile, "seabreeze %-7s%-3s%*s%s: ",
         lvlName,
@@ -179,7 +179,7 @@ void Log::formatAndSend(
     vfprintf(logFile, fmt, args);
     if (fmt[strlen(fmt)] != '\n')
         fprintf(logFile, "\n");
-	fflush(logFile);
+    fflush(logFile);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -203,7 +203,7 @@ void seabreeze_log_debug(const char *fmt, ...)
 {
 #ifdef OOI_DEBUG
     Log logger("");
-	va_list args;
+    va_list args;
     if(logger.logLevel < OOI_LOG_LEVEL_DEBUG)
         return;
     va_start(args, fmt);

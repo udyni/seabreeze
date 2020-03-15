@@ -39,8 +39,8 @@ OBPGetI2CMasterNumberOfBusesExchange::OBPGetI2CMasterNumberOfBusesExchange() {
     this->messageType = OBPMessageTypes::OBP_GET_I2C_MASTER_BUS_COUNT;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 

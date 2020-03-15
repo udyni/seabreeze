@@ -41,11 +41,11 @@ using namespace seabreeze::api;
 using namespace std;
 
 TemperatureFeatureAdapter::TemperatureFeatureAdapter(
-	TemperatureFeatureInterface *intf, 
-	const FeatureFamily &f, 
-	Protocol *p, 
-	Bus *b, 
-	unsigned short instanceIndex) : FeatureAdapterTemplate<TemperatureFeatureInterface>(intf, f, p, b, instanceIndex) {
+    TemperatureFeatureInterface *intf, 
+    const FeatureFamily &f, 
+    Protocol *p, 
+    Bus *b, 
+    unsigned short instanceIndex) : FeatureAdapterTemplate<TemperatureFeatureInterface>(intf, f, p, b, instanceIndex) {
 
     /* Nothing else to do here, the initialization list takes care of it */
 }
@@ -62,32 +62,32 @@ TemperatureFeatureAdapter::~TemperatureFeatureAdapter() {
 //  that data flow is easier to see. The function needs no free()
 
 unsigned char TemperatureFeatureAdapter::readTemperatureCount(int *errorCode) {
-	unsigned char returnValue;
-	
-	// no memory allocated, just pass it through
-	try {
-    	returnValue=this->feature->readTemperatureCount(*this->protocol, *this->bus);
-    	SET_ERROR_CODE(ERROR_SUCCESS);
+    unsigned char returnValue;
+    
+    // no memory allocated, just pass it through
+    try {
+        returnValue=this->feature->readTemperatureCount(*this->protocol, *this->bus);
+        SET_ERROR_CODE(ERROR_SUCCESS);
     }
     catch (FeatureException &fe) {
-    	returnValue=0; 
-    	SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+        returnValue=0; 
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
     return returnValue;
 }
 
 
 double TemperatureFeatureAdapter::readTemperature(int *errorCode, int index) {
-	double returnValue;
-	
-	// no memory allocated, just pass it through
-	try {
-    	returnValue=this->feature->readTemperature(*this->protocol, *this->bus, index);
-    	SET_ERROR_CODE(ERROR_SUCCESS);
+    double returnValue;
+    
+    // no memory allocated, just pass it through
+    try {
+        returnValue=this->feature->readTemperature(*this->protocol, *this->bus, index);
+        SET_ERROR_CODE(ERROR_SUCCESS);
     }
     catch (FeatureException &fe) {
-    	returnValue=-275; // clearly an error in temperature
-    	SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+        returnValue=-275; // clearly an error in temperature
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
     return returnValue;
 }

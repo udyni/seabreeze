@@ -53,10 +53,10 @@ OBPSetWifiConfigurationSecurityExchange::~OBPSetWifiConfigurationSecurityExchang
 
 void OBPSetWifiConfigurationSecurityExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetWifiConfigurationSecurityExchange::setSecurityType(unsigned char securityType) 
 {
-	this->payload[1] = securityType;
+    this->payload[1] = securityType;
 }

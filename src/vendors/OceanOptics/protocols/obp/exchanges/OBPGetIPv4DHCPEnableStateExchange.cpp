@@ -39,13 +39,13 @@ OBPGetIPv4DHCPEnableStateExchange::OBPGetIPv4DHCPEnableStateExchange() {
     this->messageType = OBPMessageTypes::OBP_GET_DHCP_CLIENT_ENABLE_STATE;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 void OBPGetIPv4DHCPEnableStateExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 OBPGetIPv4DHCPEnableStateExchange::~OBPGetIPv4DHCPEnableStateExchange() {

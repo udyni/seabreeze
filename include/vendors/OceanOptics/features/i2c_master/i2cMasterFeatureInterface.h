@@ -40,26 +40,26 @@ namespace seabreeze {
     public:
         virtual ~i2cMasterFeatureInterface() = 0;
 
-		virtual unsigned char i2cMasterGetNumberOfBuses(
-			const Protocol &protocol,
-			const Bus &bus)
-			throw (FeatureException) = 0;
+        virtual unsigned char i2cMasterGetNumberOfBuses(
+            const Protocol &protocol,
+            const Bus &bus)
+            throw (FeatureException) = 0;
 
-		virtual std::vector<unsigned char> i2cMasterReadBus(
-			const Protocol &protocol,
-			const Bus &bus,
-			unsigned char busIndex,
-			unsigned char slaveAddress,
-			unsigned short numberOfBytes)
-			throw (FeatureException) = 0;
-		
-		virtual unsigned short i2cMasterWriteBus(
-			const Protocol &protocol,
-			const Bus &bus,
-			unsigned char busIndex, 
-			unsigned char slaveAddress, 
-			const std::vector<unsigned char> writeData)
-			throw (FeatureException) = 0;	
+        virtual std::vector<unsigned char> i2cMasterReadBus(
+            const Protocol &protocol,
+            const Bus &bus,
+            unsigned char busIndex,
+            unsigned char slaveAddress,
+            unsigned short numberOfBytes)
+            throw (FeatureException) = 0;
+        
+        virtual unsigned short i2cMasterWriteBus(
+            const Protocol &protocol,
+            const Bus &bus,
+            unsigned char busIndex, 
+            unsigned char slaveAddress, 
+            const std::vector<unsigned char> writeData)
+            throw (FeatureException) = 0;    
     };
 
     /* Default implementation for (otherwise) pure virtual destructor */

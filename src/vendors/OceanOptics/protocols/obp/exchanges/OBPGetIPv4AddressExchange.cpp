@@ -39,19 +39,19 @@ OBPGetIPv4AddressExchange::OBPGetIPv4AddressExchange() {
     this->messageType = OBPMessageTypes::OBP_GET_IPV4_ADDRESS_CIDR;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char) + sizeof(unsigned char)); // interfaceIndex + addressIndex
-	this->payload[0] = 0;  /* default state of device on startup */
-	this->payload[1] = 0;
+    this->payload.resize(sizeof(unsigned char) + sizeof(unsigned char)); // interfaceIndex + addressIndex
+    this->payload[0] = 0;  /* default state of device on startup */
+    this->payload[1] = 0;
 }
 
 void OBPGetIPv4AddressExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPGetIPv4AddressExchange::setAddressIndex(unsigned char addressIndex)
 {
-	this->payload[1] = addressIndex;
+    this->payload[1] = addressIndex;
 }
 
 OBPGetIPv4AddressExchange::~OBPGetIPv4AddressExchange() {

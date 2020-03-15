@@ -43,16 +43,16 @@ namespace seabreeze
 
         class MulticastFeatureAdapter
                 : public FeatureAdapterTemplate<MulticastFeatureInterface> 
-		{
-        	public:
-            	MulticastFeatureAdapter( MulticastFeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
-            	virtual ~MulticastFeatureAdapter();
+        {
+            public:
+                MulticastFeatureAdapter( MulticastFeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
+                virtual ~MulticastFeatureAdapter();
 
- //           	void getGroupAddress(int *errorCode, unsigned char interfaceIndex, unsigned char (&groupAddress)[4]);
-//				void setGroupAddress(int *errorCode, unsigned char interfaceIndex, const unsigned char groupAddress[4]);
+ //               void getGroupAddress(int *errorCode, unsigned char interfaceIndex, unsigned char (&groupAddress)[4]);
+//                void setGroupAddress(int *errorCode, unsigned char interfaceIndex, const unsigned char groupAddress[4]);
 
-            	unsigned char getEnableState(int *errorCode, unsigned char interfaceIndex);
-            	void setEnableState(int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
+                unsigned char getEnableState(int *errorCode, unsigned char interfaceIndex);
+                void setEnableState(int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
         };
 
     }

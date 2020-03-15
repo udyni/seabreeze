@@ -42,29 +42,29 @@ namespace seabreeze
     class i2cMasterFeature : public FeatureImpl, public i2cMasterFeatureInterface
     {
     public:
-		i2cMasterFeature(std::vector<ProtocolHelper *> helpers);
+        i2cMasterFeature(std::vector<ProtocolHelper *> helpers);
         virtual ~i2cMasterFeature();
 
-		virtual unsigned char i2cMasterGetNumberOfBuses(
-			const Protocol &protocol,
-			const Bus &bus)
-			throw (FeatureException);
+        virtual unsigned char i2cMasterGetNumberOfBuses(
+            const Protocol &protocol,
+            const Bus &bus)
+            throw (FeatureException);
 
-		virtual std::vector<unsigned char> i2cMasterReadBus(
-			const Protocol &protocol,
-			const Bus &bus,
-			unsigned char busIndex,
-			unsigned char slaveAddress,
-			unsigned short numberOfBytes)
-			throw (FeatureException);
-		
-		virtual unsigned short i2cMasterWriteBus(
-			const Protocol &protocol,
-			const Bus &bus,
-			unsigned char busIndex, 
-			unsigned char slaveAddress, 
-			const std::vector<unsigned char> writeData)
-			throw (FeatureException);	
+        virtual std::vector<unsigned char> i2cMasterReadBus(
+            const Protocol &protocol,
+            const Bus &bus,
+            unsigned char busIndex,
+            unsigned char slaveAddress,
+            unsigned short numberOfBytes)
+            throw (FeatureException);
+        
+        virtual unsigned short i2cMasterWriteBus(
+            const Protocol &protocol,
+            const Bus &bus,
+            unsigned char busIndex, 
+            unsigned char slaveAddress, 
+            const std::vector<unsigned char> writeData)
+            throw (FeatureException);    
 
         /* Overriding from Feature */
         virtual FeatureFamily getFeatureFamily();

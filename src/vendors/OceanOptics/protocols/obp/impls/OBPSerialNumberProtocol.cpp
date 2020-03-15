@@ -98,7 +98,7 @@ unsigned char OBPSerialNumberProtocol::readSerialNumberMaximumLength(const Bus &
     unsigned char length;
     
     OBPGetSerialNumberMaximumLengthExchange xchange;
-	
+    
     TransferHelper *helper = bus.getHelper(xchange.getHints());
     if(NULL == helper) 
     {
@@ -106,17 +106,17 @@ unsigned char OBPSerialNumberProtocol::readSerialNumberMaximumLength(const Bus &
         throw ProtocolBusMismatchException(error);
     }
     
-	result = xchange.queryDevice(helper);
-	if(NULL == result) 
-	{
-		string error("Expected Transfer::transfer to produce a non-null result "
-			"containing temperature.  Without this data, it is not possible to "
-			"continue.");
-		throw ProtocolException(error);
-	}
-		
-	length=(*result)[0]; 
-	delete result;
-	
-	return length;
+    result = xchange.queryDevice(helper);
+    if(NULL == result) 
+    {
+        string error("Expected Transfer::transfer to produce a non-null result "
+            "containing temperature.  Without this data, it is not possible to "
+            "continue.");
+        throw ProtocolException(error);
+    }
+        
+    length=(*result)[0]; 
+    delete result;
+    
+    return length;
 }

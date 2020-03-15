@@ -47,14 +47,14 @@ namespace seabreeze {
         SpectrumProcessingFeature(std::vector<ProtocolHelper *> helpers);
         virtual ~SpectrumProcessingFeature();
         virtual unsigned char readSpectrumProcessingBoxcarWidth(
-        	const Protocol &protocol, const Bus &bus) 
+            const Protocol &protocol, const Bus &bus) 
             throw (FeatureException);
         virtual unsigned short int readSpectrumProcessingScansToAverage(
-        	const Protocol &protocol, const Bus &bus) 
-        	throw (FeatureException);
+            const Protocol &protocol, const Bus &bus) 
+            throw (FeatureException);
         virtual void writeSpectrumProcessingBoxcarWidth(const Protocol &protocol,
-        	const Bus &bus, unsigned char boxcarWidth) 
-        	throw (FeatureException, IllegalArgumentException);
+            const Bus &bus, unsigned char boxcarWidth) 
+            throw (FeatureException, IllegalArgumentException);
         virtual void writeSpectrumProcessingScansToAverage(const Protocol &protocol,
                 const Bus &bus, unsigned short int scansToAverage)
                 throw (FeatureException, IllegalArgumentException);

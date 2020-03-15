@@ -53,5 +53,5 @@ OBPSetThermoElectricSetpointExchange::~OBPSetThermoElectricSetpointExchange() {
 
 void OBPSetThermoElectricSetpointExchange::setThermoElectricSetpointCelsius(float setpoint) {
     
-	memcpy(&(this->payload[0]), &setpoint, sizeof(float));
+    memcpy(&(this->payload[0]), &setpoint, sizeof(float));
 }

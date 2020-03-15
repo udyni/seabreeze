@@ -64,15 +64,15 @@ void DHCPServerFeatureAdapter::getServerAddress(int *errorCode, unsigned char in
     vector<byte> serverAddressVector;
 
     try 
-	{
-		this->feature->getServerAddress(*this->protocol, *this->bus, interfaceIndex, &serverAddressVector, netMask);
+    {
+        this->feature->getServerAddress(*this->protocol, *this->bus, interfaceIndex, &serverAddressVector, netMask);
 
         memcpy(serverAddress, &(serverAddressVector[0]), 4);
 
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe) 
-	{
+    catch (FeatureException &fe) 
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }
@@ -97,9 +97,9 @@ void DHCPServerFeatureAdapter::setServerAddress(int *errorCode, unsigned char in
 
 unsigned char DHCPServerFeatureAdapter::getServerEnableState(int *errorCode, unsigned char interfaceIndex) 
 {
-	unsigned char enableState = 0;
+    unsigned char enableState = 0;
     try {
-		enableState = this->feature->getServerEnableState(*this->protocol, *this->bus, interfaceIndex);
+        enableState = this->feature->getServerEnableState(*this->protocol, *this->bus, interfaceIndex);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
@@ -110,12 +110,12 @@ unsigned char DHCPServerFeatureAdapter::getServerEnableState(int *errorCode, uns
 void DHCPServerFeatureAdapter::setServerEnableState(int *errorCode, unsigned char interfaceIndex, unsigned char enableState) 
 {
     try 
-	{
+    {
         this->feature->setServerEnableState(*this->protocol, *this->bus, interfaceIndex, enableState);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe)
-	{
+    catch (FeatureException &fe)
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }

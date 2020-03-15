@@ -38,20 +38,20 @@
 namespace seabreeze 
 {
     namespace oceanBinaryProtocol 
-	{
+    {
         class OBPIntrospectionProtocol : public IntrospectionProtocolInterface 
-		{
-			public:
-				OBPIntrospectionProtocol();
-				virtual ~OBPIntrospectionProtocol();
+        {
+            public:
+                OBPIntrospectionProtocol();
+                virtual ~OBPIntrospectionProtocol();
 
-				virtual unsigned short getNumberOfPixels(const Bus &bus) throw (ProtocolException);
+                virtual unsigned short getNumberOfPixels(const Bus &bus) throw (ProtocolException);
 
-				virtual std::vector<unsigned int> *getActivePixelRanges(const Bus &bus) throw (ProtocolException);
+                virtual std::vector<unsigned int> *getActivePixelRanges(const Bus &bus) throw (ProtocolException);
 
-				virtual std::vector<unsigned int> *getElectricDarkPixelRanges(const Bus &bus) throw (ProtocolException);
+                virtual std::vector<unsigned int> *getElectricDarkPixelRanges(const Bus &bus) throw (ProtocolException);
 
-				virtual std::vector<unsigned int> *getOpticalDarkPixelRanges(const Bus &bus) throw (ProtocolException);
+                virtual std::vector<unsigned int> *getOpticalDarkPixelRanges(const Bus &bus) throw (ProtocolException);
         };
     } /* end namespace oceanBinaryProtocol */
 } /* end namespace seabreeze */

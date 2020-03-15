@@ -41,9 +41,9 @@ namespace seabreeze {
 
         /* Using OBP wavelength coefficient commands */
         virtual std::vector<double> *getWavelengths(const Protocol &protocol, const Bus &bus) throw (FeatureException);
-		virtual bool initialize(const Protocol &protocol, const Bus &bus) throw (FeatureException);
+        virtual bool initialize(const Protocol &protocol, const Bus &bus) throw (FeatureException);
 
-	private:
+    private:
         static const long INTEGRATION_TIME_MINIMUM;
         static const long INTEGRATION_TIME_MAXIMUM;
         static const long INTEGRATION_TIME_INCREMENT;

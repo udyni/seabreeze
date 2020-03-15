@@ -53,10 +53,10 @@ OBPSetDHCPServerEnableExchange::~OBPSetDHCPServerEnableExchange()
 
 void OBPSetDHCPServerEnableExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetDHCPServerEnableExchange::setEnableState(unsigned char enableState) 
 {
-	this->payload[1] = enableState;
+    this->payload[1] = enableState;
 }

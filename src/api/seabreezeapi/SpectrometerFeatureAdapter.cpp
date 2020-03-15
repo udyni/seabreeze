@@ -85,33 +85,33 @@ int SpectrometerFeatureAdapter::getUnformattedSpectrum(int *errorCode,
 }
 
 int SpectrometerFeatureAdapter::getFastBufferSpectrum(int *errorCode,
-	unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve) {
-	vector<unsigned char> *spectrum;
-	int bytesCopied = 0;
+    unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve) {
+    vector<unsigned char> *spectrum;
+    int bytesCopied = 0;
 
-	if (NULL == buffer) {
-		SET_ERROR_CODE(ERROR_BAD_USER_BUFFER);
-		return 0;
-	}
+    if (NULL == buffer) {
+        SET_ERROR_CODE(ERROR_BAD_USER_BUFFER);
+        return 0;
+    }
 
-	try {
+    try {
 
-		spectrum = this->feature->getFastBufferSpectrum(*this->protocol, *this->bus, numberOfSamplesToRetrieve);
-		int bytes = (int)spectrum->size();
-		bytesCopied = (bytes < bufferLength) ? bytes : bufferLength;
-		if (spectrum->size() > 0)
-		{
-			memcpy(buffer, &((*spectrum)[0]), bytesCopied * sizeof(unsigned char));
-		}
-		delete spectrum;
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe) {
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-		return 0;
-	}
+        spectrum = this->feature->getFastBufferSpectrum(*this->protocol, *this->bus, numberOfSamplesToRetrieve);
+        int bytes = (int)spectrum->size();
+        bytesCopied = (bytes < bufferLength) ? bytes : bufferLength;
+        if (spectrum->size() > 0)
+        {
+            memcpy(buffer, &((*spectrum)[0]), bytesCopied * sizeof(unsigned char));
+        }
+        delete spectrum;
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe) {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+        return 0;
+    }
 
-	return bytesCopied;
+    return bytesCopied;
 }
 
 void SpectrometerFeatureAdapter::fastBufferSpectrumRequest(int *errorCode, unsigned int numberOfSamplesToRetrieve)
@@ -179,8 +179,8 @@ int SpectrometerFeatureAdapter::getFormattedSpectrum(int *errorCode,
         delete spectrum;
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
-		
-		// the get spectrum calls should have an argument for the error string so that fe.what can be used
+        
+        // the get spectrum calls should have an argument for the error string so that fe.what can be used
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
         return 0;
     }
@@ -277,19 +277,19 @@ unsigned short SpectrometerFeatureAdapter::getNumberOfPixels(int *errorCode)
 {
 // this, of course, is the same as getFormattedSpectrumLength(), but has a more descriptive name.
 
-	unsigned short numberOfPixels = 0;
+    unsigned short numberOfPixels = 0;
 
-	try {
-		numberOfPixels = this->feature->getNumberOfPixels();
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe) {
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-		return 0;
-	}
+    try {
+        numberOfPixels = this->feature->getNumberOfPixels();
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe) {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return numberOfPixels;
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return numberOfPixels;
 }
 
 int SpectrometerFeatureAdapter::getElectricDarkPixelCount(int *errorCode) {
@@ -325,67 +325,67 @@ int SpectrometerFeatureAdapter::getElectricDarkPixelIndices(int *errorCode,
 }
 
 int SpectrometerFeatureAdapter::getOpticalDarkPixelCount(int *errorCode) {
-	vector<unsigned int> pixelVector;
+    vector<unsigned int> pixelVector;
 
-	pixelVector = this->feature->getOpticalDarkPixelIndices();
+    pixelVector = this->feature->getOpticalDarkPixelIndices();
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return (int)pixelVector.size();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return (int)pixelVector.size();
 }
 
 int SpectrometerFeatureAdapter::getOpticalDarkPixelIndices(int *errorCode,
-	int *indices, int length) {
-	int valuesCopied = 0;
-	int i;
-	vector<unsigned int> pixelVector;
-	vector<unsigned int>::iterator iter;
+    int *indices, int length) {
+    int valuesCopied = 0;
+    int i;
+    vector<unsigned int> pixelVector;
+    vector<unsigned int>::iterator iter;
 
-	pixelVector = this->feature->getOpticalDarkPixelIndices();
+    pixelVector = this->feature->getOpticalDarkPixelIndices();
 
-	/* It might be possible to do a memcpy() of the underlying vector into
-	* the array, but that isn't the safest thing to do.  As long as this is
-	* called once and the result cached, the inefficiency won't hurt.
-	*/
-	for (iter = pixelVector.begin(), i = 0;
-		iter != pixelVector.end() && i < length; iter++, i++) {
-		indices[i] = *iter;
-		valuesCopied++;
-	}
+    /* It might be possible to do a memcpy() of the underlying vector into
+    * the array, but that isn't the safest thing to do.  As long as this is
+    * called once and the result cached, the inefficiency won't hurt.
+    */
+    for (iter = pixelVector.begin(), i = 0;
+        iter != pixelVector.end() && i < length; iter++, i++) {
+        indices[i] = *iter;
+        valuesCopied++;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return valuesCopied;
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return valuesCopied;
 }
 
 int SpectrometerFeatureAdapter::getActivePixelCount(int *errorCode) {
-	vector<unsigned int> pixelVector;
+    vector<unsigned int> pixelVector;
 
-	pixelVector = this->feature->getActivePixelIndices();
+    pixelVector = this->feature->getActivePixelIndices();
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return (int)pixelVector.size();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return (int)pixelVector.size();
 }
 
 int SpectrometerFeatureAdapter::getActivePixelIndices(int *errorCode,
-	int *indices, int length) {
-	int valuesCopied = 0;
-	int i;
-	vector<unsigned int> pixelVector;
-	vector<unsigned int>::iterator iter;
+    int *indices, int length) {
+    int valuesCopied = 0;
+    int i;
+    vector<unsigned int> pixelVector;
+    vector<unsigned int>::iterator iter;
 
-	pixelVector = this->feature->getActivePixelIndices();
+    pixelVector = this->feature->getActivePixelIndices();
 
-	/* It might be possible to do a memcpy() of the underlying vector into
-	* the array, but that isn't the safest thing to do.  As long as this is
-	* called once and the result cached, the inefficiency won't hurt.
-	*/
-	for (iter = pixelVector.begin(), i = 0;
-		iter != pixelVector.end() && i < length; iter++, i++) {
-		indices[i] = *iter;
-		valuesCopied++;
-	}
+    /* It might be possible to do a memcpy() of the underlying vector into
+    * the array, but that isn't the safest thing to do.  As long as this is
+    * called once and the result cached, the inefficiency won't hurt.
+    */
+    for (iter = pixelVector.begin(), i = 0;
+        iter != pixelVector.end() && i < length; iter++, i++) {
+        indices[i] = *iter;
+        valuesCopied++;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return valuesCopied;
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return valuesCopied;
 }
 
 void SpectrometerFeatureAdapter::setIntegrationTimeMicros(int *errorCode,

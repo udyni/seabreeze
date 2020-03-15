@@ -40,23 +40,23 @@ OBPReadI2CMasterBusExchange::OBPReadI2CMasterBusExchange() {
     this->messageType = OBPMessageTypes::OBP_READ_12C_MASTER_BUS;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[sizeof(unsigned char) + sizeof(unsigned char) + sizeof(unsigned short)];  
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[sizeof(unsigned char) + sizeof(unsigned char) + sizeof(unsigned short)];  
 }
 
 void OBPReadI2CMasterBusExchange::setBusIndex(unsigned char busIndex)
 {
-	this->payload[0] = busIndex;
+    this->payload[0] = busIndex;
 }
 
 void OBPReadI2CMasterBusExchange::setSlaveAddress(unsigned char slaveAddress)
 {
-	this->payload[1] = slaveAddress;
+    this->payload[1] = slaveAddress;
 }
 
 void OBPReadI2CMasterBusExchange::setNumberOfBytes(unsigned short numberOfBytes)
 {
-	memcpy(&(this->payload[2]), &numberOfBytes, sizeof(unsigned short));
+    memcpy(&(this->payload[2]), &numberOfBytes, sizeof(unsigned short));
 }
 
 OBPReadI2CMasterBusExchange::~OBPReadI2CMasterBusExchange() {

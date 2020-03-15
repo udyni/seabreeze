@@ -53,19 +53,19 @@ namespace seabreeze {
         /* Request and read out a spectrum formatted into intensity (A/D counts) */
         virtual std::vector<double> *getFormattedSpectrum(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException);
-		
+        
         /* Request and read out the raw spectrum data stream */
         virtual std::vector<byte> *getUnformattedSpectrum(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException);
 
-		virtual std::vector<byte> *getFastBufferSpectrum(const Protocol &protocol,
-			const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
+        virtual std::vector<byte> *getFastBufferSpectrum(const Protocol &protocol,
+            const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
 
-		virtual void fastBufferSpectrumRequest(const Protocol &protocol,
-														 const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
+        virtual void fastBufferSpectrumRequest(const Protocol &protocol,
+                                                         const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
 
-		virtual std::vector<byte> *fastBufferSpectrumResponse(const Protocol &protocol,
-														 const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
+        virtual std::vector<byte> *fastBufferSpectrumResponse(const Protocol &protocol,
+                                                         const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
 
         /* Request and read out the wavelengths in nanometers as a vector of doubles */
         virtual std::vector<double> *getWavelengths(const Protocol &protocol,
@@ -75,8 +75,8 @@ namespace seabreeze {
         virtual std::vector<byte> *readUnformattedSpectrum(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException);
 
-		virtual std::vector<byte> *readFastBufferSpectrum(const Protocol &protocol,
-			const Bus &bus, unsigned int numberOfSamplesToReceive) throw (FeatureException);
+        virtual std::vector<byte> *readFastBufferSpectrum(const Protocol &protocol,
+            const Bus &bus, unsigned int numberOfSamplesToReceive) throw (FeatureException);
 
         /* Set the integration time of the spectrometer */
         virtual void setIntegrationTimeMicros(const Protocol &protocol,
@@ -89,21 +89,21 @@ namespace seabreeze {
         virtual void writeRequestFormattedSpectrum(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException);
 
-		virtual void writeRequestUnformattedSpectrum(const Protocol &protocol,
-			const Bus &bus) throw (FeatureException);
+        virtual void writeRequestUnformattedSpectrum(const Protocol &protocol,
+            const Bus &bus) throw (FeatureException);
 
-		virtual void writeRequestFastBufferSpectrum(const Protocol &protocol,
-			const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
+        virtual void writeRequestFastBufferSpectrum(const Protocol &protocol,
+            const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
 
         /* Setting the external trigger mode for the spectrometer */
         virtual void setTriggerMode(const Protocol &protocol,
                 const Bus &bus, SpectrometerTriggerMode &mode) throw (FeatureException);
-	
-		virtual std::vector<SpectrometerTriggerMode *> getTriggerModes() const;
+    
+        virtual std::vector<SpectrometerTriggerMode *> getTriggerModes() const;
 
-		virtual std::vector<unsigned int> getActivePixelIndices() const;
+        virtual std::vector<unsigned int> getActivePixelIndices() const;
         virtual std::vector<unsigned int> getElectricDarkPixelIndices() const;
-		virtual std::vector<unsigned int> getOpticalDarkPixelIndices() const;
+        virtual std::vector<unsigned int> getOpticalDarkPixelIndices() const;
 
         virtual long getIntegrationTimeMinimum() const;
         virtual long getIntegrationTimeMaximum() const;
@@ -117,13 +117,13 @@ namespace seabreeze {
 
     protected:
 
-		/* introspection feature */
-		IntrospectionFeature *myIntrospection;
-		FlameXFastBufferFeature *myFastBuffer;
+        /* introspection feature */
+        IntrospectionFeature *myIntrospection;
+        FlameXFastBufferFeature *myFastBuffer;
 
         /* Detector details */
         unsigned short numberOfPixels;
-		unsigned short numberOfBytesPerPixel;
+        unsigned short numberOfBytesPerPixel;
         unsigned int maxIntensity;
 
         /* Integration time parameters (measured in microseconds) */
@@ -134,8 +134,8 @@ namespace seabreeze {
 
         std::vector<SpectrometerTriggerMode *> triggerModes;
         std::vector<unsigned int> electricDarkPixelIndices;
-		std::vector<unsigned int> opticalDarkPixelIndices;
-		std::vector<unsigned int> activePixelIndices;
+        std::vector<unsigned int> opticalDarkPixelIndices;
+        std::vector<unsigned int> activePixelIndices;
     };
 
 }

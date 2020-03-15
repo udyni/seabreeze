@@ -60,13 +60,13 @@ WifiConfigurationFeature::~WifiConfigurationFeature()
 
 unsigned char WifiConfigurationFeature::getMode(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException) 
 {
-	WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
-	ProtocolHelper *proto;
-	byte mode;
+    WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
+    ProtocolHelper *proto;
+    byte mode;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
+        wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to read collection area.");
@@ -88,12 +88,12 @@ unsigned char WifiConfigurationFeature::getMode(const Protocol &protocol, const 
 
 void WifiConfigurationFeature::setMode(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, unsigned char mode) throw (FeatureException) 
 {
-	WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
-	ProtocolHelper *proto;
+    WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
+    ProtocolHelper *proto;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
+        wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to write wifi mode.");
@@ -102,7 +102,7 @@ void WifiConfigurationFeature::setMode(const Protocol &protocol, const Bus &bus,
     }
 
     try {
-		wifiConfigurationPI->setMode(bus, interfaceIndex, mode);
+        wifiConfigurationPI->setMode(bus, interfaceIndex, mode);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();
@@ -114,13 +114,13 @@ void WifiConfigurationFeature::setMode(const Protocol &protocol, const Bus &bus,
 
 unsigned char WifiConfigurationFeature::getSecurityType(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException) 
 {
-	WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
-	ProtocolHelper *proto;
-	byte securityType;
+    WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
+    ProtocolHelper *proto;
+    byte securityType;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
+        wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to read collection area.");
@@ -142,12 +142,12 @@ unsigned char WifiConfigurationFeature::getSecurityType(const Protocol &protocol
 
 void WifiConfigurationFeature::setSecurityType(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, unsigned char securityType) throw (FeatureException) 
 {
-	WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
-	ProtocolHelper *proto;
+    WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
+    ProtocolHelper *proto;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
+        wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to write wifi mode.");
@@ -156,7 +156,7 @@ void WifiConfigurationFeature::setSecurityType(const Protocol &protocol, const B
     }
 
     try {
-		wifiConfigurationPI->setMode(bus, interfaceIndex, securityType);
+        wifiConfigurationPI->setMode(bus, interfaceIndex, securityType);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();
@@ -171,16 +171,16 @@ vector<unsigned char> WifiConfigurationFeature::getSSID(const Protocol &protocol
 {
 
     vector<unsigned char> data;
-	WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
+    WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
     ProtocolHelper *proto;
 
     try 
     {
         proto = lookupProtocolImpl(protocol);
-		wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
+        wifiConfigurationPI = static_cast<WifiConfigurationProtocolInterface *>(proto);
     } 
-	catch (FeatureProtocolNotFoundException &e) 
-	{
+    catch (FeatureProtocolNotFoundException &e) 
+    {
         string error(
         "Could not find matching protocol implementation to get wifi configuration");
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -188,11 +188,11 @@ vector<unsigned char> WifiConfigurationFeature::getSSID(const Protocol &protocol
     }
 
     try 
-	{
+    {
         data = wifiConfigurationPI->getSSID(bus, interfaceIndex);
     } 
-	catch (ProtocolException &pe) 
-	{
+    catch (ProtocolException &pe) 
+    {
         string error("Caught protocol exception: ");
         error += pe.what();
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -205,7 +205,7 @@ vector<unsigned char> WifiConfigurationFeature::getSSID(const Protocol &protocol
 void WifiConfigurationFeature::setSSID(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, const vector<unsigned char> ssid) throw (FeatureException) 
 {
 
-	WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
+    WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
     ProtocolHelper *proto;
 
     try {
@@ -219,7 +219,7 @@ void WifiConfigurationFeature::setSSID(const Protocol &protocol, const Bus &bus,
     }
 
     try {
-		wifiConfigurationPI->setSSID(bus, interfaceIndex, ssid);
+        wifiConfigurationPI->setSSID(bus, interfaceIndex, ssid);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();
@@ -231,7 +231,7 @@ void WifiConfigurationFeature::setSSID(const Protocol &protocol, const Bus &bus,
 void WifiConfigurationFeature::setPassPhrase(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, const vector<unsigned char> passPhrase) throw (FeatureException) 
 {
 
-	WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
+    WifiConfigurationProtocolInterface *wifiConfigurationPI = NULL;
     ProtocolHelper *proto;
 
     try {
@@ -245,7 +245,7 @@ void WifiConfigurationFeature::setPassPhrase(const Protocol &protocol, const Bus
     }
 
     try {
-		wifiConfigurationPI->setSSID(bus, interfaceIndex, passPhrase);
+        wifiConfigurationPI->setSSID(bus, interfaceIndex, passPhrase);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();

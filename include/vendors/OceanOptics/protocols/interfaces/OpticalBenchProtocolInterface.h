@@ -60,7 +60,7 @@ namespace seabreeze {
                 throw (ProtocolException) = 0;
         virtual unsigned short int readOpticalBenchFiberDiameterMicrons(const Bus &bus)
                 throw (ProtocolException) = 0;
-    	virtual std::string *readOpticalBenchGrating(const Bus &bus)
+        virtual std::string *readOpticalBenchGrating(const Bus &bus)
                 throw (ProtocolException) = 0;
         virtual std::string *readOpticalBenchFilter(const Bus &bus)
                 throw (ProtocolException) = 0;

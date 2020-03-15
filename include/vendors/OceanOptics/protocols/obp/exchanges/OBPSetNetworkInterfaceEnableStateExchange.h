@@ -40,7 +40,7 @@ namespace seabreeze {
             virtual ~OBPSetNetworkInterfaceEnableStateExchange();
 
             void setInterfaceIndex(unsigned char interfaceIndex);
-			void setEnableState(unsigned char enableState);
+            void setEnableState(unsigned char enableState);
         };
     }
 }

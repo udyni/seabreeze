@@ -53,10 +53,10 @@ OBPSetGPIOValueVectorExchange::~OBPSetGPIOValueVectorExchange()
 
 void OBPSetGPIOValueVectorExchange::setValueVector(unsigned int value)
 {
-	memcpy(&(this->payload[0]), &value, sizeof(unsigned int));
+    memcpy(&(this->payload[0]), &value, sizeof(unsigned int));
 }
 
 void OBPSetGPIOValueVectorExchange::setBitMask(unsigned int bitMask)
 {
-	memcpy(&(this->payload[4]), &bitMask, sizeof(unsigned int));
+    memcpy(&(this->payload[4]), &bitMask, sizeof(unsigned int));
 }

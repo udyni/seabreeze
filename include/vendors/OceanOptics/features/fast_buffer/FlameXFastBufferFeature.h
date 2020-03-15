@@ -39,7 +39,7 @@
 namespace seabreeze {
 
     class FlameXFastBufferFeature : public FastBufferFeatureBase
-	{
+    {
     public:
         FlameXFastBufferFeature();
         virtual ~FlameXFastBufferFeature();

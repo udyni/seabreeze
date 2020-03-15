@@ -35,12 +35,12 @@
 namespace seabreeze 
 {
     namespace oceanBinaryProtocol 
-	{
+    {
         class OBPGetAllTemperaturesExchange : public OBPQuery 
-		{
-			public:
-				OBPGetAllTemperaturesExchange();
-				virtual ~OBPGetAllTemperaturesExchange();
+        {
+            public:
+                OBPGetAllTemperaturesExchange();
+                virtual ~OBPGetAllTemperaturesExchange();
         };
     }
 }

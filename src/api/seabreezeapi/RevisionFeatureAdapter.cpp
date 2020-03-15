@@ -59,31 +59,31 @@ RevisionFeatureAdapter::~RevisionFeatureAdapter() {
 // this function is here to follow the same class hierarchy as readAllTemperatures so
 //  that data flow is easier to see. This function needs no free()
 unsigned char RevisionFeatureAdapter::readHardwareRevision(int *errorCode) {
-	unsigned char returnValue;
-	
-	// no memory allocated, just pass it through
-	try {
-    	returnValue=this->feature->readHardwareRevision(*this->protocol, *this->bus);
-    	SET_ERROR_CODE(ERROR_SUCCESS);
+    unsigned char returnValue;
+    
+    // no memory allocated, just pass it through
+    try {
+        returnValue=this->feature->readHardwareRevision(*this->protocol, *this->bus);
+        SET_ERROR_CODE(ERROR_SUCCESS);
     }
     catch (FeatureException &fe) {
-    	returnValue=0; 
-    	SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+        returnValue=0; 
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
     return returnValue;
 }
 
 unsigned short int RevisionFeatureAdapter::readFirmwareRevision(int *errorCode) {
-	unsigned short int returnValue;
-	
-	// no memory allocated, just pass it through
-	try {
-    	returnValue=this->feature->readFirmwareRevision(*this->protocol, *this->bus);
-    	SET_ERROR_CODE(ERROR_SUCCESS);
+    unsigned short int returnValue;
+    
+    // no memory allocated, just pass it through
+    try {
+        returnValue=this->feature->readFirmwareRevision(*this->protocol, *this->bus);
+        SET_ERROR_CODE(ERROR_SUCCESS);
     }
     catch (FeatureException &fe) {
-    	returnValue=0; 
-    	SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+        returnValue=0; 
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
     return returnValue;
 }

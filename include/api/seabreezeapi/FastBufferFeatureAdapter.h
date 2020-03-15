@@ -50,8 +50,8 @@ namespace seabreeze {
             /* Data buffer functions */
             unsigned char getBufferingEnable(int *errorCode);
             void setBufferingEnable(int *errorCode, unsigned char isEnabled);
-			unsigned int getConsecutiveSampleCount(int *errorCode);
-			void setConsecutiveSampleCount(int *errorCode, unsigned int consecutiveSampleCount);
+            unsigned int getConsecutiveSampleCount(int *errorCode);
+            void setConsecutiveSampleCount(int *errorCode, unsigned int consecutiveSampleCount);
         };
 
     } /* end namespace api */

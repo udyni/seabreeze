@@ -53,13 +53,13 @@ OBPSetEthernetConfigurationMacAddressExchange::~OBPSetEthernetConfigurationMacAd
 
 void OBPSetEthernetConfigurationMacAddressExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetEthernetConfigurationMacAddressExchange::set_MAC_Address(vector<unsigned char> macAddress) 
 {
-	for (int i = 0; i < 7; i++)
-	{
-		this->payload[1 + i] = macAddress[i];
-	}
+    for (int i = 0; i < 7; i++)
+    {
+        this->payload[1 + i] = macAddress[i];
+    }
 }

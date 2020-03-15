@@ -45,7 +45,7 @@ namespace seabreeze {
     public:
         NetworkConfigurationProtocolInterface(Protocol *protocol);
         virtual ~NetworkConfigurationProtocolInterface();
-	
+    
         /**
          * Get the number of network interfaces available
          */

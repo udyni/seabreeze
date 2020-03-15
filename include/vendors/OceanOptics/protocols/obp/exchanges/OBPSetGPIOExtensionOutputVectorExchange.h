@@ -36,7 +36,7 @@ namespace seabreeze {
     namespace oceanBinaryProtocol {
         class OBPSetGPIOExtensionOutputVectorExchange : public OBPCommand {
         public:
-			OBPSetGPIOExtensionOutputVectorExchange();
+            OBPSetGPIOExtensionOutputVectorExchange();
             virtual ~OBPSetGPIOExtensionOutputVectorExchange();
 
             void setOutputVector(unsigned int OutputVector);

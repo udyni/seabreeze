@@ -53,130 +53,130 @@ OBPIntrospectionProtocol::~ OBPIntrospectionProtocol() {
 unsigned short OBPIntrospectionProtocol::getNumberOfPixels(const Bus &bus)
 throw (ProtocolException)
 {
-	unsigned short  pixelCount = 0;
-	vector<byte> *countResult;
+    unsigned short  pixelCount = 0;
+    vector<byte> *countResult;
 
-	OBPGetNumberOfPixelsExchange NumberOfPixelsExchange;
+    OBPGetNumberOfPixelsExchange NumberOfPixelsExchange;
 
-	TransferHelper *helper = bus.getHelper(NumberOfPixelsExchange.getHints());
-	if (NULL == helper)
-	{
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    TransferHelper *helper = bus.getHelper(NumberOfPixelsExchange.getHints());
+    if (NULL == helper)
+    {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	countResult = NumberOfPixelsExchange.queryDevice(helper);
-	if (countResult != 0)
-	{
-		// FIXME: The ocean binary protocol document states that the return value is an unsigned short,
-		//  however the command returns an unsigned int. 
-		pixelCount = *reinterpret_cast<unsigned short *>(countResult->data());
-		delete countResult;
-	}
+    countResult = NumberOfPixelsExchange.queryDevice(helper);
+    if (countResult != 0)
+    {
+        // FIXME: The ocean binary protocol document states that the return value is an unsigned short,
+        //  however the command returns an unsigned int. 
+        pixelCount = *reinterpret_cast<unsigned short *>(countResult->data());
+        delete countResult;
+    }
 
-	return pixelCount;
+    return pixelCount;
 }
 
 std::vector<unsigned int> *OBPIntrospectionProtocol::getActivePixelRanges(const Bus &bus) throw (ProtocolException) 
 {
-	vector<byte> *queryData = NULL;
-	vector<unsigned int> *retval = new vector<unsigned int>(0);
-	OBPGetActivePixelRangesExchange activePixelRangesExchange;
-	
-	TransferHelper *helper = bus.getHelper(activePixelRangesExchange.getHints());
-	if (NULL == helper) 
-	{
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    vector<byte> *queryData = NULL;
+    vector<unsigned int> *retval = new vector<unsigned int>(0);
+    OBPGetActivePixelRangesExchange activePixelRangesExchange;
+    
+    TransferHelper *helper = bus.getHelper(activePixelRangesExchange.getHints());
+    if (NULL == helper) 
+    {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	queryData = activePixelRangesExchange.queryDevice(helper);
-	if (NULL == queryData) 
-	{
-		string error("Expected Transfer::transfer to produce a non-null result "
-			"containing pixel pairs.  Without this data, it is not possible to "
-			"continue.");
-		throw ProtocolException(error);
-	}
-	else 
-	{
-		// the bytes must be transferred to integers for the return pixel index pairs
-		// data is little endian
-		for (unsigned int i = 0; i < queryData->size(); i=i+sizeof(unsigned int)) 
-		{
-			retval->push_back(*reinterpret_cast<unsigned int *>((queryData->data() + i)));
-		}
-	}
-	delete queryData;
-	return retval;
+    queryData = activePixelRangesExchange.queryDevice(helper);
+    if (NULL == queryData) 
+    {
+        string error("Expected Transfer::transfer to produce a non-null result "
+            "containing pixel pairs.  Without this data, it is not possible to "
+            "continue.");
+        throw ProtocolException(error);
+    }
+    else 
+    {
+        // the bytes must be transferred to integers for the return pixel index pairs
+        // data is little endian
+        for (unsigned int i = 0; i < queryData->size(); i=i+sizeof(unsigned int)) 
+        {
+            retval->push_back(*reinterpret_cast<unsigned int *>((queryData->data() + i)));
+        }
+    }
+    delete queryData;
+    return retval;
 }
 
 std::vector<unsigned int> *OBPIntrospectionProtocol::getElectricDarkPixelRanges(const Bus &bus) throw (ProtocolException)
 {
-	vector<byte> *queryData = NULL;
-	vector<unsigned int> *retval = new vector<unsigned int>(0);
-	OBPGetElectricDarkPixelRangesExchange electricDarkPixelRangesExchange;
+    vector<byte> *queryData = NULL;
+    vector<unsigned int> *retval = new vector<unsigned int>(0);
+    OBPGetElectricDarkPixelRangesExchange electricDarkPixelRangesExchange;
 
-	TransferHelper *helper = bus.getHelper(electricDarkPixelRangesExchange.getHints());
-	if (NULL == helper)
-	{
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    TransferHelper *helper = bus.getHelper(electricDarkPixelRangesExchange.getHints());
+    if (NULL == helper)
+    {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	queryData = electricDarkPixelRangesExchange.queryDevice(helper);
-	if (NULL == queryData)
-	{
-		string error("Expected Transfer::transfer to produce a non-null result "
-			"containing pixel pairs.  Without this data, it is not possible to "
-			"continue.");
-		throw ProtocolException(error);
-	}
-	else
-	{
-		// the bytes must be transferred to integers for the return pixel index pairs
-		// data is little endian
-		for (unsigned int i = 0; i < queryData->size(); i = i + sizeof(unsigned int))
-		{
-			retval->push_back(*reinterpret_cast<unsigned int *>((queryData->data() + i)));
-		}
-	}
-	delete queryData;
-	return retval;
+    queryData = electricDarkPixelRangesExchange.queryDevice(helper);
+    if (NULL == queryData)
+    {
+        string error("Expected Transfer::transfer to produce a non-null result "
+            "containing pixel pairs.  Without this data, it is not possible to "
+            "continue.");
+        throw ProtocolException(error);
+    }
+    else
+    {
+        // the bytes must be transferred to integers for the return pixel index pairs
+        // data is little endian
+        for (unsigned int i = 0; i < queryData->size(); i = i + sizeof(unsigned int))
+        {
+            retval->push_back(*reinterpret_cast<unsigned int *>((queryData->data() + i)));
+        }
+    }
+    delete queryData;
+    return retval;
 }
 
 std::vector<unsigned int> *OBPIntrospectionProtocol::getOpticalDarkPixelRanges(const Bus &bus) throw (ProtocolException)
 {
-	vector<byte> *queryData = NULL;
-	vector<unsigned int> *retval = new vector<unsigned int>(0);
-	OBPGetOpticalDarkPixelRangesExchange opticalDarkPixelRangesExchange;
+    vector<byte> *queryData = NULL;
+    vector<unsigned int> *retval = new vector<unsigned int>(0);
+    OBPGetOpticalDarkPixelRangesExchange opticalDarkPixelRangesExchange;
 
-	TransferHelper *helper = bus.getHelper(opticalDarkPixelRangesExchange.getHints());
-	if (NULL == helper)
-	{
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    TransferHelper *helper = bus.getHelper(opticalDarkPixelRangesExchange.getHints());
+    if (NULL == helper)
+    {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	queryData = opticalDarkPixelRangesExchange.queryDevice(helper);
-	if (NULL == queryData)
-	{
-		string error("Expected Transfer::transfer to produce a non-null result "
-			"containing pixel pairs.  Without this data, it is not possible to "
-			"continue.");
-		throw ProtocolException(error);
-	}
-	else
-	{
-		// the bytes must be transferred to integers for the return pixel index pairs
-		// data is little endian
-		for (unsigned int i = 0; i < queryData->size(); i = i + sizeof(unsigned int))
-		{
-			retval->push_back(*reinterpret_cast<unsigned int *>((queryData->data() + i)));
-		}
-	}
-	delete queryData;
-	return retval;
+    queryData = opticalDarkPixelRangesExchange.queryDevice(helper);
+    if (NULL == queryData)
+    {
+        string error("Expected Transfer::transfer to produce a non-null result "
+            "containing pixel pairs.  Without this data, it is not possible to "
+            "continue.");
+        throw ProtocolException(error);
+    }
+    else
+    {
+        // the bytes must be transferred to integers for the return pixel index pairs
+        // data is little endian
+        for (unsigned int i = 0; i < queryData->size(); i = i + sizeof(unsigned int))
+        {
+            retval->push_back(*reinterpret_cast<unsigned int *>((queryData->data() + i)));
+        }
+    }
+    delete queryData;
+    return retval;
 }
 
 

@@ -53,7 +53,7 @@ namespace seabreeze {
         virtual DataBufferElementCount_t getBufferCapacity(const Protocol &protocol,
                 const Bus &bus, const DataBufferIndex_t bufferIndex)
                 throw (FeatureException) = 0;
-		virtual DataBufferElementCount_t getBufferCapacityMaximum(
+        virtual DataBufferElementCount_t getBufferCapacityMaximum(
                 const Protocol &protocol, const Bus &bus,
                 const DataBufferIndex_t bufferIndex) throw (FeatureException) = 0;
         virtual DataBufferElementCount_t getBufferCapacityMinimum(

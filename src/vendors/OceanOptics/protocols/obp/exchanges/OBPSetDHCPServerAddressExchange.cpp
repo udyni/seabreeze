@@ -53,20 +53,20 @@ OBPSetDHCPServerAddressExchange::~OBPSetDHCPServerAddressExchange()
 
 void OBPSetDHCPServerAddressExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetDHCPServerAddressExchange::setServerAddress(vector<unsigned char> serverAddress) 
 {
 // IPv4 address...
 
-	for (int i = 0; i < 4; i++)
-	{
-		this->payload[1 + i] = serverAddress[i];
-	}
+    for (int i = 0; i < 4; i++)
+    {
+        this->payload[1 + i] = serverAddress[i];
+    }
 }
 
 void OBPSetDHCPServerAddressExchange::setNetMask(unsigned char netMask)
 {
-	this->payload[5] = netMask;
+    this->payload[5] = netMask;
 }

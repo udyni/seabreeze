@@ -129,102 +129,102 @@ void dump_fpga_registers(long deviceID, long featureID, unsigned char sendEndpoi
 
 int main(int argc, char **argv)
 {
-	int result = 0;
-	int number_of_devices;
-	int error = 0;
+    int result = 0;
+    int number_of_devices;
+    int error = 0;
     char nameBuffer[80];
     long *device_ids;
     long featureID;
     int i, flag;
         
-	sbapi_initialize();
+    sbapi_initialize();
 
     printf("Probing for devices...\n");
     sbapi_probe_devices();
-	
-	printf("Getting device count...\n");
+    
+    printf("Getting device count...\n");
     number_of_devices = sbapi_get_number_of_device_ids();
     printf("Device count is %d\n", number_of_devices);
     
     if(number_of_devices>0)
     {
-		printf("Getting device IDs...\n");
-		device_ids = (long *)calloc(number_of_devices, sizeof(long));
-		number_of_devices = sbapi_get_device_ids(device_ids, number_of_devices);
-		printf("Got %d device ID%s.\n", number_of_devices, number_of_devices == 1 ? "" : "s");
-		
-		for(i = 0; i < number_of_devices; i++) 
-		{
-			printf("Device id=0x%02lX:\n", device_ids[i]);
-			printf("\tGetting device type...\n");
-			flag = sbapi_get_device_type(device_ids[i], &error, nameBuffer, 79);
-			printf("\t\tResult is (%d) [%s]\n", flag, sbapi_get_error_string(error));
-			if(flag > 0) 
-			{
-				unsigned char usb_ep_primary_out, usb_ep_primary_in, usb_ep_secondary_out, usb_ep_secondary_in, usb_ep_secondary_in2;
-				
-				printf("\tDevice type: [%s]\n", nameBuffer);
-				
-				// show the available USB endpoints for this device
-				usb_ep_primary_out = sbapi_get_device_usb_endpoint_primary_out(device_ids[i], &error);
-				if(usb_ep_primary_out!=0)
-					printf("\t\t USB Primary Write Endpoint = 0x%02X\n", usb_ep_primary_out);
-					
-				usb_ep_primary_in = sbapi_get_device_usb_endpoint_primary_in(device_ids[i], &error);
-				if(usb_ep_primary_in!=0)
-					printf("\t\t USB Primary Read Endpoint = 0x%02X\n", usb_ep_primary_in);
-					
-				usb_ep_secondary_out = sbapi_get_device_usb_endpoint_secondary_out(device_ids[i], &error);
-				if(usb_ep_secondary_out!=0)
-					printf("\t\t USB Secopndary Write Endpoint = 0x%02X\n", usb_ep_secondary_out);
-					
-				usb_ep_secondary_in = sbapi_get_device_usb_endpoint_secondary_in(device_ids[i], &error);
-				if(usb_ep_secondary_in!=0)
-					printf("\t\t USB Secondary Read Endpoint = 0x%02X\n", usb_ep_secondary_in);
-					
-				usb_ep_secondary_in2 = sbapi_get_device_usb_endpoint_secondary_in2(device_ids[i], &error);
-				if(usb_ep_secondary_in2!=0)
-					printf("\t\t USB Secondary Alternate Read Endpoint = 0x%02X\n", usb_ep_secondary_in2);
-				
-				 /* Open the device */
-        		printf("\tAttempting to open:\n");
-        		flag = sbapi_open_device(device_ids[i], &error);
-        		printf("\t\tResult is (%d) [%s]\n", flag, sbapi_get_error_string(error));
+        printf("Getting device IDs...\n");
+        device_ids = (long *)calloc(number_of_devices, sizeof(long));
+        number_of_devices = sbapi_get_device_ids(device_ids, number_of_devices);
+        printf("Got %d device ID%s.\n", number_of_devices, number_of_devices == 1 ? "" : "s");
         
-        		// if there was a problem, start the next iteration and skip the tests
-        		if(flag != 0) 
-        		{
-            		continue;
-        		}
+        for(i = 0; i < number_of_devices; i++) 
+        {
+            printf("Device id=0x%02lX:\n", device_ids[i]);
+            printf("\tGetting device type...\n");
+            flag = sbapi_get_device_type(device_ids[i], &error, nameBuffer, 79);
+            printf("\t\tResult is (%d) [%s]\n", flag, sbapi_get_error_string(error));
+            if(flag > 0) 
+            {
+                unsigned char usb_ep_primary_out, usb_ep_primary_in, usb_ep_secondary_out, usb_ep_secondary_in, usb_ep_secondary_in2;
+                
+                printf("\tDevice type: [%s]\n", nameBuffer);
+                
+                // show the available USB endpoints for this device
+                usb_ep_primary_out = sbapi_get_device_usb_endpoint_primary_out(device_ids[i], &error);
+                if(usb_ep_primary_out!=0)
+                    printf("\t\t USB Primary Write Endpoint = 0x%02X\n", usb_ep_primary_out);
+                    
+                usb_ep_primary_in = sbapi_get_device_usb_endpoint_primary_in(device_ids[i], &error);
+                if(usb_ep_primary_in!=0)
+                    printf("\t\t USB Primary Read Endpoint = 0x%02X\n", usb_ep_primary_in);
+                    
+                usb_ep_secondary_out = sbapi_get_device_usb_endpoint_secondary_out(device_ids[i], &error);
+                if(usb_ep_secondary_out!=0)
+                    printf("\t\t USB Secopndary Write Endpoint = 0x%02X\n", usb_ep_secondary_out);
+                    
+                usb_ep_secondary_in = sbapi_get_device_usb_endpoint_secondary_in(device_ids[i], &error);
+                if(usb_ep_secondary_in!=0)
+                    printf("\t\t USB Secondary Read Endpoint = 0x%02X\n", usb_ep_secondary_in);
+                    
+                usb_ep_secondary_in2 = sbapi_get_device_usb_endpoint_secondary_in2(device_ids[i], &error);
+                if(usb_ep_secondary_in2!=0)
+                    printf("\t\t USB Secondary Alternate Read Endpoint = 0x%02X\n", usb_ep_secondary_in2);
+                
+                 /* Open the device */
+                printf("\tAttempting to open:\n");
+                flag = sbapi_open_device(device_ids[i], &error);
+                printf("\t\tResult is (%d) [%s]\n", flag, sbapi_get_error_string(error));
+        
+                // if there was a problem, start the next iteration and skip the tests
+                if(flag != 0) 
+                {
+                    continue;
+                }
 
-				// get the raw usb bus access feature (there should be only one)
-				if (sbapi_get_number_of_raw_usb_bus_access_features(device_ids[i], &error) == 1)
-				{
-				    if (! check_error(device_ids[i], &error, "sbapi_get_number_of_raw_usb_bus_access_features"))
-					{
-						if (sbapi_get_raw_usb_bus_access_features(device_ids[i], &error, &featureID, 1) == 1)
-						{
-							if (! check_error(device_ids[i], &error, "sbapi_get_raw_usb_bus_access_features"))
-							{
-								// run some USB tests
-								dump_eeproms(device_ids[i], featureID, usb_ep_primary_out, usb_ep_primary_in);
-				
-								dump_fpga_registers(device_ids[i], featureID, usb_ep_primary_out, usb_ep_primary_in);
-							}
-						}
-					}
-				}
+                // get the raw usb bus access feature (there should be only one)
+                if (sbapi_get_number_of_raw_usb_bus_access_features(device_ids[i], &error) == 1)
+                {
+                    if (! check_error(device_ids[i], &error, "sbapi_get_number_of_raw_usb_bus_access_features"))
+                    {
+                        if (sbapi_get_raw_usb_bus_access_features(device_ids[i], &error, &featureID, 1) == 1)
+                        {
+                            if (! check_error(device_ids[i], &error, "sbapi_get_raw_usb_bus_access_features"))
+                            {
+                                // run some USB tests
+                                dump_eeproms(device_ids[i], featureID, usb_ep_primary_out, usb_ep_primary_in);
+                
+                                dump_fpga_registers(device_ids[i], featureID, usb_ep_primary_out, usb_ep_primary_in);
+                            }
+                        }
+                    }
+                }
 
-				
-				/* Close the device */
-				printf("\tAttempting to close:\n");
-				sbapi_close_device(device_ids[i], &error);
-				printf("\t\tResult is (%d) [%s]\n", flag, sbapi_get_error_string(error));
-        	}
-        	
-        	 
-		}
-		free(device_ids);
+                
+                /* Close the device */
+                printf("\tAttempting to close:\n");
+                sbapi_close_device(device_ids[i], &error);
+                printf("\t\tResult is (%d) [%s]\n", flag, sbapi_get_error_string(error));
+            }
+            
+             
+        }
+        free(device_ids);
     }
-	return result;
+    return result;
 }

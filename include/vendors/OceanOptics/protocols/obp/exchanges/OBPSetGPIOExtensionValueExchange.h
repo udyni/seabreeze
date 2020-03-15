@@ -36,7 +36,7 @@ namespace seabreeze {
     namespace oceanBinaryProtocol {
         class OBPSetGPIOExtensionValueExchange : public OBPCommand {
         public:
-			OBPSetGPIOExtensionValueExchange();
+            OBPSetGPIOExtensionValueExchange();
             virtual ~OBPSetGPIOExtensionValueExchange();
 
             void setPinNumber(unsigned char pinNumber);

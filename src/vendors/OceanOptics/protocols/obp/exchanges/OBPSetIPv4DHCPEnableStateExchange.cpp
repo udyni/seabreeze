@@ -53,10 +53,10 @@ OBPSetIPv4DHCPEnableStateExchange::~OBPSetIPv4DHCPEnableStateExchange()
 
 void OBPSetIPv4DHCPEnableStateExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetIPv4DHCPEnableStateExchange::setEnable(unsigned char enableState) 
 {
-	this->payload[1] = enableState;
+    this->payload[1] = enableState;
 }

@@ -38,7 +38,7 @@ namespace seabreeze {
   namespace oceanBinaryProtocol {
     class OBPI2CMasterProtocol : public I2CMasterProtocolInterface {
     public:
-		OBPI2CMasterProtocol();
+        OBPI2CMasterProtocol();
 
         virtual ~OBPI2CMasterProtocol();
 
@@ -47,11 +47,11 @@ namespace seabreeze {
         virtual unsigned char i2cMasterGetNumberOfBuses(const Bus &bus)
             throw (ProtocolException);
 
-		virtual std::vector<unsigned char> i2cMasterReadBus(const Bus &bus, unsigned char busIndex, unsigned char slaveAddress, unsigned short numberOfBytes)
-			throw (ProtocolException);
+        virtual std::vector<unsigned char> i2cMasterReadBus(const Bus &bus, unsigned char busIndex, unsigned char slaveAddress, unsigned short numberOfBytes)
+            throw (ProtocolException);
 
-		virtual unsigned short i2cMasterWriteBus(const Bus &bus, unsigned char busIndex, unsigned char slaveAddress, const std::vector<unsigned char> writeData)
-			throw (ProtocolException);
+        virtual unsigned short i2cMasterWriteBus(const Bus &bus, unsigned char busIndex, unsigned char slaveAddress, const std::vector<unsigned char> writeData)
+            throw (ProtocolException);
     };
   }
 }

@@ -51,7 +51,7 @@ Maya2000ProSpectrometerFeature::Maya2000ProSpectrometerFeature(
             : GainAdjustedSpectrometerFeature(saturationFeature) {
 
     this->numberOfPixels = 2068;
-	this->numberOfBytesPerPixel = sizeof(unsigned short);
+    this->numberOfBytesPerPixel = sizeof(unsigned short);
     this->maxIntensity = 64000;   // MZ: resolves unit-to-unit issues with S10420 detector
     int readoutLength = 2304 * 2 + 1;
 
@@ -69,17 +69,17 @@ Maya2000ProSpectrometerFeature::Maya2000ProSpectrometerFeature(
 
     IntegrationTimeExchange *intTime = new IntegrationTimeExchange(Maya2000ProSpectrometerFeature::INTEGRATION_TIME_BASE);
 
-	Transfer *requestFormattedSpectrum = new RequestSpectrumExchange();
+    Transfer *requestFormattedSpectrum = new RequestSpectrumExchange();
     Transfer *readFormattedSpectrum = new MayaProSpectrumExchange(readoutLength, this->numberOfPixels, this);
-	Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
-	Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
-	Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
-	Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
+    Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
+    Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
+    Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
+    Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
 
     TriggerModeExchange *triggerMode = new TriggerModeExchange();
 
     OOISpectrometerProtocol *ooiProtocol = new OOISpectrometerProtocol(intTime, requestFormattedSpectrum, readFormattedSpectrum, 
-		requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
+        requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
     this->protocols.push_back(ooiProtocol);
 
     this->triggerModes.push_back(new SpectrometerTriggerMode(SPECTROMETER_TRIGGER_MODE_NORMAL));

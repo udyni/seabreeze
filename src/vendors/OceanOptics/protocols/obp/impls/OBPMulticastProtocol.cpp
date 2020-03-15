@@ -65,7 +65,7 @@ vector<unsigned char> OBPMulticastProtocol::getGroupAddress(const Bus &bus, unsi
         throw ProtocolBusMismatchException(error);
     }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
     /* This transfer() may cause a ProtocolException to be thrown. */
     vector<byte> *raw = request.queryDevice(helper);
@@ -87,7 +87,7 @@ vector<unsigned char> OBPMulticastProtocol::getGroupAddress(const Bus &bus, unsi
 void OBPMulticastProtocol::setGroupAddress(const Bus &bus, unsigned char interfaceIndex, const vector<unsigned char> macAddress) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPSetMulticastGroupAddressExchange command;
+    OBPSetMulticastGroupAddressExchange command;
 
     helper = bus.getHelper(command.getHints());
     if (NULL == helper) {
@@ -99,7 +99,7 @@ void OBPMulticastProtocol::setGroupAddress(const Bus &bus, unsigned char interfa
      * so make a copy and truncate it to the maximum size.
      */
 
-	command.setInterfaceIndex(interfaceIndex);
+    command.setInterfaceIndex(interfaceIndex);
     command.set_MAC_Address(macAddress);
 
     /* This may cause a ProtocolException to be thrown. */
@@ -124,7 +124,7 @@ unsigned char OBPMulticastProtocol::getEnableState(const Bus &bus, unsigned char
         throw ProtocolBusMismatchException(error);
     }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
     /* This transfer() may cause a ProtocolException to be thrown. */
     vector<byte> *raw = request.queryDevice(helper);
@@ -140,7 +140,7 @@ unsigned char OBPMulticastProtocol::getEnableState(const Bus &bus, unsigned char
         throw ProtocolException(error);
     }
 
-	int retval = (*raw)[0];
+    int retval = (*raw)[0];
 
     delete raw;
 
@@ -159,8 +159,8 @@ void OBPMulticastProtocol::setEnableState(const Bus &bus, unsigned char interfac
         throw ProtocolBusMismatchException(error);
     }
 
-	command.setInterfaceIndex(interfaceIndex);
-	command.setEnableState(enableState);
+    command.setInterfaceIndex(interfaceIndex);
+    command.setEnableState(enableState);
 
     /* This may cause a ProtocolException to be thrown. */
     command.sendCommandToDevice(helper);

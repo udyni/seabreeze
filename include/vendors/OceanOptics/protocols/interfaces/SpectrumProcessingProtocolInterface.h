@@ -57,9 +57,9 @@ namespace seabreeze {
         virtual unsigned short int readSpectrumProcessingScansToAverage(const Bus &bus)
                 throw (ProtocolException) = 0;
         virtual void writeSpectrumProcessingBoxcarWidth(const Bus &bus, unsigned char boxcarWidth)
-        		throw (ProtocolException) = 0;
+                throw (ProtocolException) = 0;
         virtual void writeSpectrumProcessingScansToAverage(const Bus &bus, unsigned short int scansToAverage)
-        		throw (ProtocolException) = 0;
+                throw (ProtocolException) = 0;
     };
 
 }

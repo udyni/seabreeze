@@ -45,36 +45,36 @@ namespace seabreeze
         NetworkConfigurationFeature(std::vector<ProtocolHelper *> helpers);
         virtual ~NetworkConfigurationFeature();
 
-		virtual unsigned char getNumberOfNetworkInterfaces(
-			const Protocol &protocol,
-			const Bus &bus)
-			throw (FeatureException);
-		virtual unsigned char getNetworkInterfaceConnectionType(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException);
-		virtual unsigned char getNetworkInterfaceEnableState(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException);
-		virtual void setNetworkInterfaceEnableState(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			unsigned char enableState)
-			throw (FeatureException);
-		virtual unsigned char runNetworkInterfaceSelfTest(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException);
-		virtual void saveNetworkInterfaceConnectionSettings(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex)
-			throw (FeatureException);
+        virtual unsigned char getNumberOfNetworkInterfaces(
+            const Protocol &protocol,
+            const Bus &bus)
+            throw (FeatureException);
+        virtual unsigned char getNetworkInterfaceConnectionType(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException);
+        virtual unsigned char getNetworkInterfaceEnableState(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException);
+        virtual void setNetworkInterfaceEnableState(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            unsigned char enableState)
+            throw (FeatureException);
+        virtual unsigned char runNetworkInterfaceSelfTest(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException);
+        virtual void saveNetworkInterfaceConnectionSettings(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex)
+            throw (FeatureException);
 
 
         /* Overriding from Feature */

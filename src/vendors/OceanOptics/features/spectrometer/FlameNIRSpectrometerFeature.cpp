@@ -49,7 +49,7 @@ FlameNIRSpectrometerFeature::FlameNIRSpectrometerFeature(
             : GainAdjustedSpectrometerFeature(saturationFeature) {
 
     numberOfPixels = 128;
-	this->numberOfBytesPerPixel = sizeof(unsigned short);
+    this->numberOfBytesPerPixel = sizeof(unsigned short);
     maxIntensity = 65535;
 
     integrationTimeMinimum   = INTEGRATION_TIME_MINIMUM;
@@ -61,16 +61,16 @@ FlameNIRSpectrometerFeature::FlameNIRSpectrometerFeature(
 
     IntegrationTimeExchange *intTime = new IntegrationTimeExchange(INTEGRATION_TIME_BASE);
     Transfer *requestFormattedSpectrum = new RequestSpectrumExchange(); 
-	Transfer *readFormattedSpectrum = new FlameNIRSpectrumExchange(numberOfPixels * 2, numberOfPixels, this);
-	Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
-	Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(numberOfPixels * 2, numberOfPixels);
-	Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
-	Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(numberOfPixels * 2, numberOfPixels);
+    Transfer *readFormattedSpectrum = new FlameNIRSpectrumExchange(numberOfPixels * 2, numberOfPixels, this);
+    Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
+    Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(numberOfPixels * 2, numberOfPixels);
+    Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
+    Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(numberOfPixels * 2, numberOfPixels);
 
     TriggerModeExchange *triggerMode = new TriggerModeExchange();
 
     OOISpectrometerProtocol *ooiProtocol = new OOISpectrometerProtocol(intTime, requestFormattedSpectrum, readFormattedSpectrum, 
-		requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
+        requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
     protocols.push_back(ooiProtocol);
 
     triggerModes.push_back(new SpectrometerTriggerMode(SPECTROMETER_TRIGGER_MODE_NORMAL));

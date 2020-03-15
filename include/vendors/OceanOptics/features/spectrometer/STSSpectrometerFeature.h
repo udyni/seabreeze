@@ -37,7 +37,7 @@
 
 #define STS_TEMPERATURE_DETECTOR_INDEX 0
 #define STS_TEMPERATURE_RESERVED_INDEX 1
-#define	STS_TEMPERATURE_CPU_INDEX 2
+#define    STS_TEMPERATURE_CPU_INDEX 2
 
 namespace seabreeze {
 
@@ -53,14 +53,14 @@ namespace seabreeze {
 
         void setPixelBinningFactor(unsigned char binningFactor);
 
-		/* Using OBP wavelength coefficient commands */
-		virtual std::vector<double> *getWavelengths(const Protocol &protocol,
+        /* Using OBP wavelength coefficient commands */
+        virtual std::vector<double> *getWavelengths(const Protocol &protocol,
             const Bus &bus) throw (FeatureException);       
 
     private:
         oceanBinaryProtocol::OBPReadRawSpectrumExchange *readUnformattedSpectrum;
         oceanBinaryProtocol::OBPReadSpectrumExchange *readFormattedSpectrum;
-		oceanBinaryProtocol::OBPReadRawSpectrumExchange *readFastBufferSpectrum;
+        oceanBinaryProtocol::OBPReadRawSpectrumExchange *readFastBufferSpectrum;
 
         unsigned char binningFactor;
 

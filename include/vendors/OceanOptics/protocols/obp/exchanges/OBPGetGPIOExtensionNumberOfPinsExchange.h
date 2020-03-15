@@ -39,7 +39,7 @@ namespace seabreeze
         class OBPGetGPIOExtensionNumberOfPinsExchange : public OBPQuery
         {
         public:
-			OBPGetGPIOExtensionNumberOfPinsExchange();
+            OBPGetGPIOExtensionNumberOfPinsExchange();
             virtual ~OBPGetGPIOExtensionNumberOfPinsExchange();
         };
     }

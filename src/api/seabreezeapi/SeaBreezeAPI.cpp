@@ -66,8 +66,8 @@ static const char *error_msgs[] = {
     "Error: Input was out of bounds",
     "Error: Spectrometer was saturated",
     "Error: Value not found",
-	"Error: Value not expected",
-	"Error: Invalid trigger mode"
+    "Error: Value not expected",
+    "Error: Invalid trigger mode"
 };
 
 static int number_error_msgs = sizeof (error_msgs) / sizeof (char *);
@@ -168,28 +168,28 @@ sbapi_close_device(long index, int *error_code) {
 
 const char *
 sbapi_get_error_string(int error_code) {
-	const char *returnMessage;
+    const char *returnMessage;
 
-	if((error_code>-99999) && (error_code<0))
-	{ 
-	// assume these are system errors, show the error code
-		#ifdef _WIN32 // work around Windows not supportings snprintf in c99
-		// supported in C++11
-		_snprintf(__messageBuffer, MESSAGE_BUFFER_SIZE, "System Error: %d", error_code); 
-		#else
-		snprintf(__messageBuffer, MESSAGE_BUFFER_SIZE, "System Error: %d", error_code);
-		#endif
-		
-		returnMessage=__messageBuffer;
-	}
+    if((error_code>-99999) && (error_code<0))
+    { 
+    // assume these are system errors, show the error code
+        #ifdef _WIN32 // work around Windows not supportings snprintf in c99
+        // supported in C++11
+        _snprintf(__messageBuffer, MESSAGE_BUFFER_SIZE, "System Error: %d", error_code); 
+        #else
+        snprintf(__messageBuffer, MESSAGE_BUFFER_SIZE, "System Error: %d", error_code);
+        #endif
+        
+        returnMessage=__messageBuffer;
+    }
     else if(error_code >= number_error_msgs)
     {
-    	// messages outside of seabreeze and system
+        // messages outside of seabreeze and system
         returnMessage=error_msgs[ERROR_INVALID_ERROR];
     }
     else
-    	returnMessage=error_msgs[error_code]; // seabreeze errors
-    	   
+        returnMessage=error_msgs[error_code]; // seabreeze errors
+           
     return(returnMessage);
 }
 
@@ -210,7 +210,7 @@ sbapi_get_device_type(long deviceID, int *error_code,
 unsigned char
 sbapi_get_device_usb_endpoint_primary_out(long deviceID, int *error_code) 
 {
-	usbEndpointType ept=kEndpointTypePrimaryOut;
+    usbEndpointType ept=kEndpointTypePrimaryOut;
     SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
     return wrapper->getDeviceEndpoint(deviceID, error_code, ept);
@@ -219,7 +219,7 @@ sbapi_get_device_usb_endpoint_primary_out(long deviceID, int *error_code)
 unsigned char
 sbapi_get_device_usb_endpoint_primary_in(long deviceID, int *error_code) 
 {
-	usbEndpointType ept=kEndpointTypePrimaryIn;
+    usbEndpointType ept=kEndpointTypePrimaryIn;
     SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
     return wrapper->getDeviceEndpoint(deviceID, error_code, ept);
@@ -228,7 +228,7 @@ sbapi_get_device_usb_endpoint_primary_in(long deviceID, int *error_code)
 unsigned char
 sbapi_get_device_usb_endpoint_secondary_out(long deviceID, int *error_code) 
 {
-	usbEndpointType ept=kEndpointTypeSecondaryOut;
+    usbEndpointType ept=kEndpointTypeSecondaryOut;
     SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
     return wrapper->getDeviceEndpoint(deviceID, error_code, ept);
@@ -237,7 +237,7 @@ sbapi_get_device_usb_endpoint_secondary_out(long deviceID, int *error_code)
 unsigned char
 sbapi_get_device_usb_endpoint_secondary_in(long deviceID, int *error_code) 
 {
-	usbEndpointType ept=kEndpointTypeSecondaryIn;
+    usbEndpointType ept=kEndpointTypeSecondaryIn;
     SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
     return wrapper->getDeviceEndpoint(deviceID, error_code, ept);
@@ -246,7 +246,7 @@ sbapi_get_device_usb_endpoint_secondary_in(long deviceID, int *error_code)
 unsigned char
 sbapi_get_device_usb_endpoint_secondary_in2(long deviceID, int *error_code) 
 {
-	usbEndpointType ept=kEndpointTypeSecondaryIn2;
+    usbEndpointType ept=kEndpointTypeSecondaryIn2;
     SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
     return wrapper->getDeviceEndpoint(deviceID, error_code, ept);
@@ -385,13 +385,13 @@ sbapi_spectrometer_get_maximum_intensity(long deviceID,
 }
 
 int sbapi_spectrometer_get_fast_buffer_spectrum(long deviceID,
-	long spectrometerFeatureID, int *error_code,
-	unsigned char *buffer, int buffer_length, unsigned int numberOfSamplesToRetrieve)
+    long spectrometerFeatureID, int *error_code,
+    unsigned char *buffer, int buffer_length, unsigned int numberOfSamplesToRetrieve)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->spectrometerGetFastBufferSpectrum(deviceID,
-		spectrometerFeatureID, error_code, buffer, buffer_length, numberOfSamplesToRetrieve);
+    return wrapper->spectrometerGetFastBufferSpectrum(deviceID,
+        spectrometerFeatureID, error_code, buffer, buffer_length, numberOfSamplesToRetrieve);
 }
 
 void sbapi_spectrometer_fast_buffer_spectrum_request(long deviceID,
@@ -826,44 +826,44 @@ sbapi_irrad_calibration_write_collection_area(long deviceID, long featureID,
 
 int sbapi_get_number_of_ethernet_configuration_features(long deviceID, int *error_code) 
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfEthernetConfigurationFeatures(deviceID, error_code);
+    return wrapper->getNumberOfEthernetConfigurationFeatures(deviceID, error_code);
 }
 
 int sbapi_get_ethernet_configuration_features(long deviceID, int *error_code, long *features, int max_features) 
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getEthernetConfigurationFeatures(deviceID, error_code, features, max_features);
+    return wrapper->getEthernetConfigurationFeatures(deviceID, error_code, features, max_features);
 }
 
 void sbapi_ethernet_configuration_get_mac_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char (*macAddress)[6])
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->ethernetConfiguration_Get_MAC_Address(deviceID, featureID, error_code, interfaceIndex, macAddress);
+    return wrapper->ethernetConfiguration_Get_MAC_Address(deviceID, featureID, error_code, interfaceIndex, macAddress);
 }
 
 void sbapi_ethernet_configuration_set_mac_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, const unsigned char macAddress[6])
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->ethernetConfiguration_Set_MAC_Address(deviceID, featureID, error_code, interfaceIndex, macAddress);
+    return wrapper->ethernetConfiguration_Set_MAC_Address(deviceID, featureID, error_code, interfaceIndex, macAddress);
 }
 
 unsigned char sbapi_ethernet_configuration_get_gbe_enable_status(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex) 
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->ethernetConfiguration_Get_GbE_Enable_Status(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->ethernetConfiguration_Get_GbE_Enable_Status(deviceID, featureID, error_code, interfaceIndex);
 }
 
 void sbapi_ethernet_configuration_set_gbe_enable_status(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char enableStatus)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->ethernetConfiguration_Set_GbE_Enable_Status(deviceID, featureID, error_code, interfaceIndex, enableStatus);
+    return wrapper->ethernetConfiguration_Set_GbE_Enable_Status(deviceID, featureID, error_code, interfaceIndex, enableStatus);
 }
 
 
@@ -874,64 +874,64 @@ void sbapi_ethernet_configuration_set_gbe_enable_status(long deviceID, long feat
 
 int sbapi_get_number_of_multicast_features(long deviceID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfMulticastFeatures(deviceID, error_code);
+    return wrapper->getNumberOfMulticastFeatures(deviceID, error_code);
 }
 
 int sbapi_get_multicast_features(long deviceID, int *error_code, long *features, int max_features)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getMulticastFeatures(deviceID, error_code, features, max_features);
+    return wrapper->getMulticastFeatures(deviceID, error_code, features, max_features);
 }
 
 #if(false)  // not yet implemented
 void sbapi_multicast_get_group_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char(&groupAddress)[4])
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getMulticastGroupAddress(deviceID, featureID, error_code, interfaceIndex, groupAddress);
+    return wrapper->getMulticastGroupAddress(deviceID, featureID, error_code, interfaceIndex, groupAddress);
 }
 
 void sbapi_multicast_set_group_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, const unsigned char groupAddress[4])
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->setMulticastGroupAddress(deviceID, featureID, error_code, interfaceIndex, groupAddress);
+    wrapper->setMulticastGroupAddress(deviceID, featureID, error_code, interfaceIndex, groupAddress);
 }
 #endif
 unsigned char sbapi_multicast_get_enable_state(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getMulticastEnableState(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->getMulticastEnableState(deviceID, featureID, error_code, interfaceIndex);
 }
 
 void sbapi_multicast_set_enable_state(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char enableState)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->setMulticastEnableState(deviceID, featureID, error_code, interfaceIndex, enableState);
+    wrapper->setMulticastEnableState(deviceID, featureID, error_code, interfaceIndex, enableState);
 }
 
 
 // currently the multicast group address and port are not accessible. However, these functions return a hard coded value for convenience
 unsigned short sbapi_multicast_get_group_port(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	//SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    //SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	//return wrapper->getMulticastGroupPort(deviceID, featureID, error_code, interfaceIndex);
-	return 57357;
+    //return wrapper->getMulticastGroupPort(deviceID, featureID, error_code, interfaceIndex);
+    return 57357;
 }
 
 void sbapi_multicast_get_group_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char(*groupAddress)[4])
 {
-	//SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    //SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	//wrapper->getMulticastGroupAddress(deviceID, featureID, error_code, interfaceIndex, groupAddress);
-	for (int i = 0; i < 4; i++)
-		(*groupAddress)[i] = 239;
+    //wrapper->getMulticastGroupAddress(deviceID, featureID, error_code, interfaceIndex, groupAddress);
+    for (int i = 0; i < 4; i++)
+        (*groupAddress)[i] = 239;
 }
 
 
@@ -941,71 +941,71 @@ void sbapi_multicast_get_group_address(long deviceID, long featureID, int *error
 
 int sbapi_get_number_of_ipv4_features(long deviceID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfIPv4Features(deviceID, error_code);
+    return wrapper->getNumberOfIPv4Features(deviceID, error_code);
 }
 
 int sbapi_get_ipv4_features(long deviceID, int *error_code, long *features, int max_features)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getIPv4Features(deviceID, error_code, features, max_features);
+    return wrapper->getIPv4Features(deviceID, error_code, features, max_features);
 }
 
 unsigned char sbapi_ipv4_get_dhcp_enable_state(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->get_IPv4_DHCP_Enable_State(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->get_IPv4_DHCP_Enable_State(deviceID, featureID, error_code, interfaceIndex);
 }
 
 void sbapi_ipv4_set_dhcp_enable_state(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char enableStatus)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->set_IPv4_DHCP_Enable_State(deviceID, featureID, error_code, interfaceIndex, enableStatus);
+    wrapper->set_IPv4_DHCP_Enable_State(deviceID, featureID, error_code, interfaceIndex, enableStatus);
 }
 
 unsigned char sbapi_ipv4_get_number_of_addresses(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->get_Number_Of_IPv4_Addresses(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->get_Number_Of_IPv4_Addresses(deviceID, featureID, error_code, interfaceIndex);
 }
 
 void sbapi_ipv4_get_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char addressIndex, unsigned char(*IPv4_Address)[4], unsigned char *netMask)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->get_IPv4_Address(deviceID, featureID, error_code, interfaceIndex, addressIndex, IPv4_Address, netMask);
+    wrapper->get_IPv4_Address(deviceID, featureID, error_code, interfaceIndex, addressIndex, IPv4_Address, netMask);
 }
 
 void sbapi_ipv4_get_default_gateway_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4])
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->get_IPv4_Default_Gateway(deviceID, featureID, error_code, interfaceIndex, defaultGatewayAddress);
+    wrapper->get_IPv4_Default_Gateway(deviceID, featureID, error_code, interfaceIndex, defaultGatewayAddress);
 }
 void sbapi_ipv4_set_default_gateway_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4])
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->set_IPv4_Default_Gateway(deviceID, featureID, error_code, interfaceIndex, defaultGatewayAddress);
+    wrapper->set_IPv4_Default_Gateway(deviceID, featureID, error_code, interfaceIndex, defaultGatewayAddress);
 }
 
 void sbapi_ipv4_add_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->add_IPv4_Address(deviceID, featureID, error_code, interfaceIndex, IPv4_Address, netMask);
+    wrapper->add_IPv4_Address(deviceID, featureID, error_code, interfaceIndex, IPv4_Address, netMask);
 }
 
 void sbapi_ipv4_delete_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char addressIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->delete_IPv4_Address(deviceID, featureID, error_code, interfaceIndex, addressIndex);
+    wrapper->delete_IPv4_Address(deviceID, featureID, error_code, interfaceIndex, addressIndex);
 }
 
 
@@ -1015,44 +1015,44 @@ void sbapi_ipv4_delete_address(long deviceID, long featureID, int *error_code, u
 
 int sbapi_get_number_of_dhcp_server_features(long deviceID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfDHCPServerFeatures(deviceID, error_code);
+    return wrapper->getNumberOfDHCPServerFeatures(deviceID, error_code);
 }
 
 int sbapi_get_dhcp_server_features(long deviceID, int *error_code, long *features, int max_features)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getDHCPServerFeatures(deviceID, error_code, features, max_features);
+    return wrapper->getDHCPServerFeatures(deviceID, error_code, features, max_features);
 }
 
 void sbapi_dhcp_server_get_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char(*serverAddress)[4], unsigned char *netMask)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->dhcpServerGetAddress(deviceID, featureID, error_code, interfaceIndex, serverAddress, netMask);
+    return wrapper->dhcpServerGetAddress(deviceID, featureID, error_code, interfaceIndex, serverAddress, netMask);
 }
 
 void sbapi_dhcp_server_set_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, const unsigned char serverAddress[4], unsigned char netMask)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->dhcpServerSetAddress(deviceID, featureID, error_code, interfaceIndex, serverAddress, netMask);
+    return wrapper->dhcpServerSetAddress(deviceID, featureID, error_code, interfaceIndex, serverAddress, netMask);
 }
 
 unsigned char sbapi_dhcp_server_get_enable_state(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->dhcpServerGetEnableState(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->dhcpServerGetEnableState(deviceID, featureID, error_code, interfaceIndex);
 }
 
 void sbapi_dhcp_server_set_enable_state(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char enableStatus)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->dhcpServerSetEnableState(deviceID, featureID, error_code, interfaceIndex, enableStatus);
+    return wrapper->dhcpServerSetEnableState(deviceID, featureID, error_code, interfaceIndex, enableStatus);
 }
 
 
@@ -1062,58 +1062,58 @@ void sbapi_dhcp_server_set_enable_state(long deviceID, long featureID, int *erro
 
 int sbapi_get_number_of_network_configuration_features(long deviceID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfNetworkConfigurationFeatures(deviceID, error_code);
+    return wrapper->getNumberOfNetworkConfigurationFeatures(deviceID, error_code);
 }
 
 int sbapi_get_network_configuration_features(long deviceID, int *error_code, long *features, int max_features)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNetworkConfigurationFeatures(deviceID, error_code, features, max_features);
+    return wrapper->getNetworkConfigurationFeatures(deviceID, error_code, features, max_features);
 }
 
 unsigned char sbapi_network_configuration_get_interface_count(long deviceID, long featureID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfNetworkInterfaces(deviceID, featureID, error_code);
+    return wrapper->getNumberOfNetworkInterfaces(deviceID, featureID, error_code);
 }
 
 unsigned char sbapi_network_configuration_get_interface_connection_type(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNetworkInterfaceConnectionType(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->getNetworkInterfaceConnectionType(deviceID, featureID, error_code, interfaceIndex);
 }
 
 unsigned char sbapi_network_configuration_run_interface_self_test(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->runNetworkInterfaceSelfTest(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->runNetworkInterfaceSelfTest(deviceID, featureID, error_code, interfaceIndex);
 }
 
 unsigned char sbapi_network_configuration_get_interface_enable_status(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNetworkInterfaceEnableState(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->getNetworkInterfaceEnableState(deviceID, featureID, error_code, interfaceIndex);
 }
 
 void sbapi_network_configuration_set_interface_enable_status(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char enableStatus)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setNetworkInterfaceEnableState(deviceID, featureID, error_code, interfaceIndex, enableStatus);
+    return wrapper->setNetworkInterfaceEnableState(deviceID, featureID, error_code, interfaceIndex, enableStatus);
 }
 
 void sbapi_network_configuration_save_interface_settings(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->saveNetworkInterfaceConnectionSettings(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->saveNetworkInterfaceConnectionSettings(deviceID, featureID, error_code, interfaceIndex);
 }
 
 
@@ -1122,65 +1122,65 @@ void sbapi_network_configuration_save_interface_settings(long deviceID, long fea
 /**************************************************************************************/
 int sbapi_get_number_of_wifi_configuration_features(long deviceID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfWifiConfigurationFeatures(deviceID, error_code);
+    return wrapper->getNumberOfWifiConfigurationFeatures(deviceID, error_code);
 }
 
 int sbapi_get_wifi_configuration_features(long deviceID, int *error_code, long *features, int max_features)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getWifiConfigurationFeatures(deviceID, error_code, features, max_features);
+    return wrapper->getWifiConfigurationFeatures(deviceID, error_code, features, max_features);
 }
 
 unsigned char sbapi_wifi_configuration_get_mode(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getWifiConfigurationMode(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->getWifiConfigurationMode(deviceID, featureID, error_code, interfaceIndex);
 }
 
 void sbapi_wifi_configuration_set_mode(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char wifiMode)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setWifiConfigurationMode(deviceID, featureID, error_code, interfaceIndex, wifiMode);
+    return wrapper->setWifiConfigurationMode(deviceID, featureID, error_code, interfaceIndex, wifiMode);
 }
 
 unsigned char sbapi_wifi_configuration_get_security_type(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getWifiConfigurationSecurityType(deviceID, featureID, error_code, interfaceIndex);
+    return wrapper->getWifiConfigurationSecurityType(deviceID, featureID, error_code, interfaceIndex);
 }
 
 void sbapi_wifi_configuration_set_security_type(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char securityType)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setWifiConfigurationSecurityType(deviceID, featureID, error_code, interfaceIndex, securityType);
+    return wrapper->setWifiConfigurationSecurityType(deviceID, featureID, error_code, interfaceIndex, securityType);
 }
 
 unsigned char sbapi_wifi_configuration_get_ssid(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char(*ssid)[32])
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getWifiConfigurationSSID(deviceID, featureID, error_code, interfaceIndex, ssid);
+    return wrapper->getWifiConfigurationSSID(deviceID, featureID, error_code, interfaceIndex, ssid);
 }
 
 void sbapi_wifi_configuration_set_ssid(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, const unsigned char ssid[32], unsigned char length)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setWifiConfigurationSSID(deviceID, featureID, error_code, interfaceIndex, ssid, length);
+    return wrapper->setWifiConfigurationSSID(deviceID, featureID, error_code, interfaceIndex, ssid, length);
 }
 
 void sbapi_wifi_configuration_set_pass_phrase(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, const unsigned char *passPhrase, unsigned char passPhraseLength)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setWifiConfigurationPassPhrase(deviceID, featureID, error_code, interfaceIndex, passPhrase, passPhraseLength);
+    return wrapper->setWifiConfigurationPassPhrase(deviceID, featureID, error_code, interfaceIndex, passPhrase, passPhraseLength);
 }
 
 
@@ -1192,112 +1192,112 @@ void sbapi_wifi_configuration_set_pass_phrase(long deviceID, long featureID, int
 
 int sbapi_get_number_of_gpio_features(long deviceID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfGPIOFeatures(deviceID, error_code);
+    return wrapper->getNumberOfGPIOFeatures(deviceID, error_code);
 }
 
 int sbapi_get_gpio_features(long deviceID, int *error_code, long *features, int max_features)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getGPIOFeatures(deviceID, error_code, features, max_features);
+    return wrapper->getGPIOFeatures(deviceID, error_code, features, max_features);
 }
 
 unsigned char sbapi_gpio_get_number_of_pins(long deviceID, long featureID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getGPIO_NumberOfPins(deviceID, featureID, error_code);
+    return wrapper->getGPIO_NumberOfPins(deviceID, featureID, error_code);
 }
 
 unsigned int sbapi_gpio_get_output_enable_vector(long deviceID, long featureID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getGPIO_OutputEnableVector(deviceID, featureID, error_code);
+    return wrapper->getGPIO_OutputEnableVector(deviceID, featureID, error_code);
 }
 
 
 void sbapi_gpio_set_output_enable_vector(long deviceID, long featureID, int *error_code, unsigned int outputEnableVector, unsigned int bitMask)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setGPIO_OutputEnableVector(deviceID, featureID, error_code, outputEnableVector, bitMask);
+    return wrapper->setGPIO_OutputEnableVector(deviceID, featureID, error_code, outputEnableVector, bitMask);
 }
 
 unsigned int sbapi_gpio_get_value_vector(long deviceID, long featureID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getGPIO_ValueVector(deviceID, featureID, error_code);
+    return wrapper->getGPIO_ValueVector(deviceID, featureID, error_code);
 }
 
 
 void sbapi_gpio_set_value_vector(long deviceID, long featureID, int *error_code, unsigned int valueVector, unsigned int bitMask)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setGPIO_ValueVector(deviceID, featureID, error_code, valueVector, bitMask);
+    return wrapper->setGPIO_ValueVector(deviceID, featureID, error_code, valueVector, bitMask);
 }
 
 unsigned char sbapi_gpio_extension_get_number_of_pins(long deviceID, long featureID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getEGPIO_NumberOfPins(deviceID, featureID, error_code);
+    return wrapper->getEGPIO_NumberOfPins(deviceID, featureID, error_code);
 }
 
 unsigned char sbapi_gpio_extension_get_available_modes(long deviceID, long featureID, int *error_code, unsigned char pinNumber, unsigned char *availableModes, unsigned char maximumModeCount)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getEGPIO_AvailableModes(deviceID, featureID, error_code, pinNumber, availableModes, maximumModeCount);
+    return wrapper->getEGPIO_AvailableModes(deviceID, featureID, error_code, pinNumber, availableModes, maximumModeCount);
 }
 
 unsigned char sbapi_gpio_extension_get_current_mode(long deviceID, long featureID, int *error_code, unsigned char pinNumber)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getEGPIO_CurrentMode(deviceID, featureID, error_code, pinNumber);
+    return wrapper->getEGPIO_CurrentMode(deviceID, featureID, error_code, pinNumber);
 }
 
 
 void sbapi_gpio_extension_set_mode(long deviceID, long featureID, int *error_code, unsigned char pinNumber, unsigned char mode, float value)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setEGPIO_Mode(deviceID, featureID, error_code, pinNumber, mode, value);
+    return wrapper->setEGPIO_Mode(deviceID, featureID, error_code, pinNumber, mode, value);
 }
 
 unsigned int sbapi_gpio_extension_get_output_vector(long deviceID, long featureID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getEGPIO_OutputVector(deviceID, featureID, error_code);
+    return wrapper->getEGPIO_OutputVector(deviceID, featureID, error_code);
 }
 
 
 void sbapi_gpio_extension_set_output_vector(long deviceID, long featureID, int *error_code, unsigned int outputVector, unsigned int bitMask)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setEGPIO_OutputVector(deviceID, featureID, error_code, outputVector, bitMask);
+    return wrapper->setEGPIO_OutputVector(deviceID, featureID, error_code, outputVector, bitMask);
 }
 
 float sbapi_gpio_extension_get_value(long deviceID, long featureID, int *error_code, unsigned char pinNumber)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getEGPIO_Value(deviceID, featureID, error_code, pinNumber);
+    return wrapper->getEGPIO_Value(deviceID, featureID, error_code, pinNumber);
 }
 
 
 void sbapi_gpio_extension_set_value(long deviceID, long featureID, int *error_code, unsigned char pinNumber, float value)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->setEGPIO_Value(deviceID, featureID, error_code, pinNumber, value);
+    return wrapper->setEGPIO_Value(deviceID, featureID, error_code, pinNumber, value);
 }
 
 /**************************************************************************************/
@@ -1427,44 +1427,44 @@ int sbapi_temperature_get_all(long deviceID, long temperatureFeatureID, int *err
 
 int sbapi_get_number_of_introspection_features(long deviceID, int *error_code) 
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfIntrospectionFeatures(deviceID, error_code);
+    return wrapper->getNumberOfIntrospectionFeatures(deviceID, error_code);
 }
 
 int sbapi_get_introspection_features(long deviceID, int *error_code, long *features, unsigned int max_features)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getIntrospectionFeatures(deviceID, error_code, features, max_features);
+    return wrapper->getIntrospectionFeatures(deviceID, error_code, features, max_features);
 }
 
 unsigned short sbapi_introspection_number_of_pixels_get(long deviceID, long introspectionFeatureID, int *error_code) 
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->introspectionNumberOfPixelsGet(deviceID, introspectionFeatureID, error_code);
+    return wrapper->introspectionNumberOfPixelsGet(deviceID, introspectionFeatureID, error_code);
 }
 
 int sbapi_introspection_active_pixel_ranges_get(long deviceID, long introspectionFeatureID, int *error_code, unsigned int *pixelIndexPairs, int max_length) 
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->introspectionActivePixelRangesGet(deviceID, introspectionFeatureID, error_code, pixelIndexPairs, max_length);
+    return wrapper->introspectionActivePixelRangesGet(deviceID, introspectionFeatureID, error_code, pixelIndexPairs, max_length);
 }
 
 int sbapi_introspection_electric_dark_pixel_ranges_get(long deviceID, long introspectionFeatureID, int *error_code, unsigned int *pixelIndexPairs, int max_length)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->introspectionElectricDarkPixelRangesGet(deviceID, introspectionFeatureID, error_code, pixelIndexPairs, max_length);
+    return wrapper->introspectionElectricDarkPixelRangesGet(deviceID, introspectionFeatureID, error_code, pixelIndexPairs, max_length);
 }
 
 int sbapi_introspection_optical_dark_pixel_ranges_get(long deviceID, long introspectionFeatureID, int *error_code, unsigned int *pixelIndexPairs, int max_length)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->introspectionOpticalDarkPixelRangesGet(deviceID, introspectionFeatureID, error_code, pixelIndexPairs, max_length);
+    return wrapper->introspectionOpticalDarkPixelRangesGet(deviceID, introspectionFeatureID, error_code, pixelIndexPairs, max_length);
 }
 
 /**************************************************************************************/
@@ -1704,45 +1704,45 @@ void sbapi_data_buffer_set_buffer_capacity(long deviceID, long featureID, int *e
 /**************************************************************************************/
 
 int sbapi_get_number_of_fast_buffer_features(long deviceID, int *error_code) {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfFastBufferFeatures(deviceID, error_code);
+    return wrapper->getNumberOfFastBufferFeatures(deviceID, error_code);
 }
 
 int sbapi_get_fast_buffer_features(long deviceID, int *error_code,
-	long *features, unsigned int max_features) {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    long *features, unsigned int max_features) {
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getFastBufferFeatures(deviceID, error_code,
-		features, max_features);
+    return wrapper->getFastBufferFeatures(deviceID, error_code,
+        features, max_features);
 }
 
 unsigned char sbapi_fast_buffer_get_buffering_enable(long deviceID, long featureID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->fastBufferGetBufferingEnable(deviceID, featureID, error_code);
+    return wrapper->fastBufferGetBufferingEnable(deviceID, featureID, error_code);
 }
 
 void sbapi_fast_buffer_set_buffering_enable(long deviceID, long featureID, int *error_code, unsigned char isEnabled)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->fastBufferSetBufferingEnable(deviceID, featureID, error_code, isEnabled);
+    wrapper->fastBufferSetBufferingEnable(deviceID, featureID, error_code, isEnabled);
 }
 
 unsigned int sbapi_fast_buffer_get_consecutive_sample_count(long deviceID, long featureID, int *error_code)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->fastBufferGetConsecutiveSampleCount(deviceID, featureID, error_code);
+    return wrapper->fastBufferGetConsecutiveSampleCount(deviceID, featureID, error_code);
 }
 
 void sbapi_fast_buffer_set_consecutive_sample_count(long deviceID, long featureID, int *error_code, unsigned int consecutiveSampleCount)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	wrapper->fastBufferSetConsecutiveSampleCount(deviceID, featureID, error_code, consecutiveSampleCount);
+    wrapper->fastBufferSetConsecutiveSampleCount(deviceID, featureID, error_code, consecutiveSampleCount);
 }
 
 /**************************************************************************************/
@@ -1810,37 +1810,37 @@ unsigned long sbapi_acquisition_delay_get_delay_minimum_microseconds(long device
 
 int sbapi_get_number_of_i2c_master_features(long deviceID, int *error_code) 
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getNumberOfI2CMasterFeatures(deviceID, error_code);
+    return wrapper->getNumberOfI2CMasterFeatures(deviceID, error_code);
 }
 
 int sbapi_get_i2c_master_features(long deviceID, int *error_code, long *features, unsigned int max_features) 
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->getI2CMasterFeatures(deviceID, error_code, features, max_features);
+    return wrapper->getI2CMasterFeatures(deviceID, error_code, features, max_features);
 }
 
 
 unsigned char sbapi_i2c_master_get_number_of_buses(long deviceID, long featureID, int *error_code) 
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->i2cMasterGetNumberOfBuses(deviceID, featureID, error_code);
+    return wrapper->i2cMasterGetNumberOfBuses(deviceID, featureID, error_code);
 }
 
 unsigned short sbapi_i2c_master_read_bus(long deviceID, long featureID, int *error_code, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->i2cMasterReadBus(deviceID, featureID, error_code, busIndex, slaveAddress, readData, numberOfBytes);
+    return wrapper->i2cMasterReadBus(deviceID, featureID, error_code, busIndex, slaveAddress, readData, numberOfBytes);
 }
 
 unsigned short sbapi_i2c_master_write_bus(long deviceID, long featureID, int *error_code, unsigned char busIndex, unsigned char slaveAddress, unsigned char *writeData, unsigned short numberOfBytes)
 {
-	SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();
 
-	return wrapper->i2cMasterWriteBus(deviceID, featureID, error_code, busIndex, slaveAddress, writeData, numberOfBytes);
+    return wrapper->i2cMasterWriteBus(deviceID, featureID, error_code, busIndex, slaveAddress, writeData, numberOfBytes);
 }
 

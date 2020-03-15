@@ -108,11 +108,11 @@ vector<byte> *OOISpectrometerFeature::getUnformattedSpectrum(
 }
 
 vector<byte> *OOISpectrometerFeature::getFastBufferSpectrum(
-	const Protocol &protocol, const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException)
+    const Protocol &protocol, const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException)
 {
-	LOG(__FUNCTION__);
-	writeRequestFastBufferSpectrum(protocol, bus, numberOfSamplesToRetrieve);
-	return readFastBufferSpectrum(protocol, bus, numberOfSamplesToRetrieve);
+    LOG(__FUNCTION__);
+    writeRequestFastBufferSpectrum(protocol, bus, numberOfSamplesToRetrieve);
+    return readFastBufferSpectrum(protocol, bus, numberOfSamplesToRetrieve);
 }
 
 
@@ -166,67 +166,67 @@ void OOISpectrometerFeature::writeRequestFormattedSpectrum(const Protocol &proto
 }
 
 void OOISpectrometerFeature::writeRequestUnformattedSpectrum(const Protocol &protocol,
-	const Bus &bus) throw (FeatureException) {
+    const Bus &bus) throw (FeatureException) {
 
-	LOG(__FUNCTION__);
-	// logger.debug("starting OOISpectrometerFeature::writeRequestFormattedSpectrum");
+    LOG(__FUNCTION__);
+    // logger.debug("starting OOISpectrometerFeature::writeRequestFormattedSpectrum");
 
-	ProtocolHelper *proto;
-	SpectrometerProtocolInterface *spec;
+    ProtocolHelper *proto;
+    SpectrometerProtocolInterface *spec;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		spec = static_cast<SpectrometerProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error("Could not find matching protocol implementation to get an unformatted spectrum.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		logger.error(error.c_str());
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        spec = static_cast<SpectrometerProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error("Could not find matching protocol implementation to get an unformatted spectrum.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        logger.error(error.c_str());
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		spec->requestUnformattedSpectrum(bus);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		logger.error(error.c_str());
-		throw FeatureControlException(error);
-	}
+    try {
+        spec->requestUnformattedSpectrum(bus);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        logger.error(error.c_str());
+        throw FeatureControlException(error);
+    }
 }
 
 void OOISpectrometerFeature::writeRequestFastBufferSpectrum(const Protocol &protocol,
-	const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) {
+    const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) {
 
-	LOG(__FUNCTION__);
-	// logger.debug("starting OOISpectrometerFeature::writeRequestFormattedSpectrum");
+    LOG(__FUNCTION__);
+    // logger.debug("starting OOISpectrometerFeature::writeRequestFormattedSpectrum");
 
-	ProtocolHelper *proto;
-	SpectrometerProtocolInterface *spec;
+    ProtocolHelper *proto;
+    SpectrometerProtocolInterface *spec;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		spec = static_cast<SpectrometerProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error("Could not find matching protocol implementation to get an unformatted spectrum.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		logger.error(error.c_str());
-		throw FeatureProtocolNotFoundException(error);
-	}
-	
-	try {
-		spec->requestFastBufferSpectrum(bus, numberOfSamplesToRetrieve);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		logger.error(error.c_str());
-		throw FeatureControlException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        spec = static_cast<SpectrometerProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error("Could not find matching protocol implementation to get an unformatted spectrum.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        logger.error(error.c_str());
+        throw FeatureProtocolNotFoundException(error);
+    }
+    
+    try {
+        spec->requestFastBufferSpectrum(bus, numberOfSamplesToRetrieve);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        logger.error(error.c_str());
+        throw FeatureControlException(error);
+    }
 }
 
 vector<byte> *OOISpectrometerFeature::readUnformattedSpectrum(const Protocol &protocol,
@@ -263,38 +263,38 @@ vector<byte> *OOISpectrometerFeature::readUnformattedSpectrum(const Protocol &pr
 }
 
 vector<byte> *OOISpectrometerFeature::readFastBufferSpectrum(const Protocol &protocol,
-	const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) {
-	LOG(__FUNCTION__);
-	// logger.debug("starting OOISpectrometerFeature::readUnformattedSpectrum");
+    const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException) {
+    LOG(__FUNCTION__);
+    // logger.debug("starting OOISpectrometerFeature::readUnformattedSpectrum");
 
-	ProtocolHelper *proto;
-	SpectrometerProtocolInterface *spec;
+    ProtocolHelper *proto;
+    SpectrometerProtocolInterface *spec;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		spec = static_cast<SpectrometerProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error("Could not find matching protocol implementation to get fast buffered spectra.");
-		logger.error(error.c_str());
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        spec = static_cast<SpectrometerProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error("Could not find matching protocol implementation to get fast buffered spectra.");
+        logger.error(error.c_str());
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	vector<byte> *retval;
+    vector<byte> *retval;
 
-	try {
-		retval = spec->readFastBufferSpectrum(bus, numberOfSamplesToRetrieve);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		logger.error(error.c_str());
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        retval = spec->readFastBufferSpectrum(bus, numberOfSamplesToRetrieve);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        logger.error(error.c_str());
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return retval;
+    return retval;
 }
 
 vector<double> *OOISpectrometerFeature::getWavelengths(const Protocol &protocol,
@@ -395,11 +395,11 @@ vector<unsigned int> OOISpectrometerFeature::getElectricDarkPixelIndices() const
 }
 
 vector<unsigned int> OOISpectrometerFeature::getOpticalDarkPixelIndices() const {
-	return this->opticalDarkPixelIndices;
+    return this->opticalDarkPixelIndices;
 }
 
 vector<unsigned int> OOISpectrometerFeature::getActivePixelIndices() const {
-	return this->activePixelIndices;
+    return this->activePixelIndices;
 }
 
 long OOISpectrometerFeature::getIntegrationTimeMinimum() const {

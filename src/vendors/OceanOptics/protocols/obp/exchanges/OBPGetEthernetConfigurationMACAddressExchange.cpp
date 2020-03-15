@@ -36,16 +36,16 @@ using namespace seabreeze;
 using namespace seabreeze::oceanBinaryProtocol;
 
 OBPGetEthernetConfigurationMACAddressExchange::OBPGetEthernetConfigurationMACAddressExchange() {
-	this->messageType = OBPMessageTypes::OBP_GET_MAC_ADDRESS;
+    this->messageType = OBPMessageTypes::OBP_GET_MAC_ADDRESS;
 
-	this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->hints->push_back(new OBPControlHint());
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 void OBPGetEthernetConfigurationMACAddressExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 OBPGetEthernetConfigurationMACAddressExchange::~OBPGetEthernetConfigurationMACAddressExchange() {

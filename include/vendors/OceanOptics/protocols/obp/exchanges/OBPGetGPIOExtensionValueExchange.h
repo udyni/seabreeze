@@ -39,10 +39,10 @@ namespace seabreeze
         class OBPGetGPIOExtensionValueExchange : public OBPQuery
         {
         public:
-			OBPGetGPIOExtensionValueExchange();
+            OBPGetGPIOExtensionValueExchange();
             virtual ~OBPGetGPIOExtensionValueExchange();
 
-			void setPinNumber(unsigned char pinNumber);
+            void setPinNumber(unsigned char pinNumber);
 
         };
     }

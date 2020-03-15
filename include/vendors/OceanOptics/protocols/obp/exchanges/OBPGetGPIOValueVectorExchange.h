@@ -39,7 +39,7 @@ namespace seabreeze
         class OBPGetGPIOValueVectorExchange : public OBPQuery
         {
         public:
-			OBPGetGPIOValueVectorExchange();
+            OBPGetGPIOValueVectorExchange();
             virtual ~OBPGetGPIOValueVectorExchange();
         };
     }

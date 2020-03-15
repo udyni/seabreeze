@@ -44,7 +44,7 @@ OBPSetGPIOExtensionValueExchange::OBPSetGPIOExtensionValueExchange()
     this->messageType = OBPMessageTypes::OBP_SET_EGPIO_VALUE;
 
     this->payload.resize(sizeof(unsigned char)+ sizeof(float)); // four bytes in immediate data
-	this->payload[0] = 0;
+    this->payload[0] = 0;
 }
 
 OBPSetGPIOExtensionValueExchange::~OBPSetGPIOExtensionValueExchange()
@@ -54,10 +54,10 @@ OBPSetGPIOExtensionValueExchange::~OBPSetGPIOExtensionValueExchange()
 
 void OBPSetGPIOExtensionValueExchange::setPinNumber(unsigned char pinNumber)
 {
-	this->payload[0] = pinNumber;
+    this->payload[0] = pinNumber;
 }
 
 void OBPSetGPIOExtensionValueExchange::setValue(float value)
 {
-	memcpy(&(this->payload[1]), &value, sizeof(float));
+    memcpy(&(this->payload[1]), &value, sizeof(float));
 }

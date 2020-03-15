@@ -66,7 +66,7 @@ OBPNetworkConfigurationProtocol::~OBPNetworkConfigurationProtocol()
 unsigned char OBPNetworkConfigurationProtocol::getNumberOfNetworkInterfaces(const Bus &bus) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPGetNumberOfNetworkInterfacesExchange request;
+    OBPGetNumberOfNetworkInterfacesExchange request;
 
     helper = bus.getHelper(request.getHints());
     if (NULL == helper) {
@@ -91,64 +91,64 @@ unsigned char OBPNetworkConfigurationProtocol::getNumberOfNetworkInterfaces(cons
 
 unsigned char OBPNetworkConfigurationProtocol::runNetworkInterfaceSelfTest(const Bus &bus, unsigned char interfaceIndex) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPRunNetworkInterfaceSelfTestExchange request;
+    TransferHelper *helper;
+    OBPRunNetworkInterfaceSelfTestExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result "
-			"containing network selftest data.  Without this data, it is not possible to proceed.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result "
+            "containing network selftest data.  Without this data, it is not possible to proceed.");
+        throw ProtocolException(error);
+    }
 
-	unsigned char result = (*raw)[0];
+    unsigned char result = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return result;
+    return result;
 }
 
 unsigned char OBPNetworkConfigurationProtocol::getNetworkInterfaceConnectionType(const Bus &bus, unsigned char interfaceIndex) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPGetNetworkInterfaceConnectionTypeExchange request;
+    TransferHelper *helper;
+    OBPGetNetworkInterfaceConnectionTypeExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result "
-			"containing network selftest data.  Without this data, it is not possible to proceed.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result "
+            "containing network selftest data.  Without this data, it is not possible to proceed.");
+        throw ProtocolException(error);
+    }
 
-	unsigned char result = (*raw)[0];
+    unsigned char result = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return result;
+    return result;
 }
 
 void OBPNetworkConfigurationProtocol::setNetworkInterfaceEnableState(const Bus &bus, unsigned char interfaceIndex, unsigned char enableState) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPSetNetworkInterfaceEnableStateExchange command;
+    OBPSetNetworkInterfaceEnableStateExchange command;
 
     helper = bus.getHelper(command.getHints());
     if (NULL == helper) {
@@ -161,7 +161,7 @@ void OBPNetworkConfigurationProtocol::setNetworkInterfaceEnableState(const Bus &
      */
 
     command.setInterfaceIndex(interfaceIndex);
-	command.setEnableState(enableState);
+    command.setEnableState(enableState);
 
     /* This may cause a ProtocolException to be thrown. */
     command.sendCommandToDevice(helper);
@@ -171,7 +171,7 @@ void OBPNetworkConfigurationProtocol::setNetworkInterfaceEnableState(const Bus &
 unsigned char OBPNetworkConfigurationProtocol::getNetworkInterfaceEnableState(const Bus &bus, unsigned char interfaceIndex) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPGetNetworkInterfaceEnableStateExchange request;
+    OBPGetNetworkInterfaceEnableStateExchange request;
 
     helper = bus.getHelper(request.getHints());
     if (NULL == helper) {
@@ -179,7 +179,7 @@ unsigned char OBPNetworkConfigurationProtocol::getNetworkInterfaceEnableState(co
         throw ProtocolBusMismatchException(error);
     }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
     /* This transfer() may cause a ProtocolException to be thrown. */
     vector<byte> *raw = request.queryDevice(helper);
@@ -196,7 +196,7 @@ unsigned char OBPNetworkConfigurationProtocol::getNetworkInterfaceEnableState(co
         throw ProtocolException(error);
     }
 
-	int retval = (*raw)[0];
+    int retval = (*raw)[0];
 
     delete raw;
 
@@ -207,7 +207,7 @@ unsigned char OBPNetworkConfigurationProtocol::getNetworkInterfaceEnableState(co
 void OBPNetworkConfigurationProtocol::saveNetworkInterfaceConnectionSettings(const Bus &bus, unsigned char interfaceIndex) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPSaveNetworkInterfaceConnectionSettingsExchange command;
+    OBPSaveNetworkInterfaceConnectionSettingsExchange command;
 
     helper = bus.getHelper(command.getHints());
     if (NULL == helper) {
@@ -215,7 +215,7 @@ void OBPNetworkConfigurationProtocol::saveNetworkInterfaceConnectionSettings(con
         throw ProtocolBusMismatchException(error);
     }
 
-	command.setInterfaceIndex(interfaceIndex);
+    command.setInterfaceIndex(interfaceIndex);
 
     /* This may cause a ProtocolException to be thrown. */
     command.sendCommandToDevice(helper);

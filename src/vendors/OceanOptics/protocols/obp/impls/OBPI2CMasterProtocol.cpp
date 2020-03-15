@@ -79,14 +79,14 @@ unsigned char OBPI2CMasterProtocol::i2cMasterGetNumberOfBuses(const Bus &bus) th
         throw ProtocolException(error);
     }
 
-	if (raw->size() < sizeof(unsigned char)) {
-		string error("Failed to get back expected number of bytes that should"
-			" have held collection area.");
-		delete raw;
-		throw ProtocolException(error);
-	}
+    if (raw->size() < sizeof(unsigned char)) {
+        string error("Failed to get back expected number of bytes that should"
+            " have held collection area.");
+        delete raw;
+        throw ProtocolException(error);
+    }
 
-	unsigned char result = (*raw)[0];
+    unsigned char result = (*raw)[0];
 
     delete raw;
 
@@ -96,67 +96,67 @@ unsigned char OBPI2CMasterProtocol::i2cMasterGetNumberOfBuses(const Bus &bus) th
 
 std::vector<unsigned char> OBPI2CMasterProtocol::i2cMasterReadBus(const Bus &bus, unsigned char busIndex, unsigned char slaveAddress, unsigned short numberOfBytes) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPReadI2CMasterBusExchange request;
+    TransferHelper *helper;
+    OBPReadI2CMasterBusExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	request.setBusIndex(busIndex);
-	request.setSlaveAddress(slaveAddress);
-	request.setNumberOfBytes(numberOfBytes);
+    request.setBusIndex(busIndex);
+    request.setSlaveAddress(slaveAddress);
+    request.setNumberOfBytes(numberOfBytes);
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result "
-			"containing calibration data.  Without this data, it is not possible to continue.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result "
+            "containing calibration data.  Without this data, it is not possible to continue.");
+        throw ProtocolException(error);
+    }
 
-	vector<byte> result = *raw;
+    vector<byte> result = *raw;
 
-	delete raw;
+    delete raw;
 
-	return result;
+    return result;
 }
 
 unsigned short OBPI2CMasterProtocol::i2cMasterWriteBus(const Bus &bus, unsigned char busIndex, unsigned char slaveAddress, const std::vector<unsigned char> writeData) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPWriteI2CMasterBusExchange request;
+    TransferHelper *helper;
+    OBPWriteI2CMasterBusExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	request.setBusIndex(busIndex);
-	request.setSlaveAddress(slaveAddress);
-	request.dataToWrite(writeData);
+    request.setBusIndex(busIndex);
+    request.setSlaveAddress(slaveAddress);
+    request.dataToWrite(writeData);
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected to produce a non-null result "
-			"containing the number of i2c buses.  Without this data, it is not possible to continue.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected to produce a non-null result "
+            "containing the number of i2c buses.  Without this data, it is not possible to continue.");
+        throw ProtocolException(error);
+    }
 
-	if (raw->size() < sizeof(unsigned char)) {
-		string error("Failed to get back expected number of bytes that should"
-			" have held collection area.");
-		delete raw;
-		throw ProtocolException(error);
-	}
+    if (raw->size() < sizeof(unsigned char)) {
+        string error("Failed to get back expected number of bytes that should"
+            " have held collection area.");
+        delete raw;
+        throw ProtocolException(error);
+    }
 
-	unsigned short result = (*raw)[0];
+    unsigned short result = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return result;
+    return result;
 }

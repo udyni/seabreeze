@@ -65,15 +65,15 @@ void MulticastFeatureAdapter::getGroupAddress(int *errorCode, unsigned char inte
     vector<byte> groupAddressVector;
 
     try 
-	{
+    {
         groupAddressVector = this->feature->getGroupAddress(*this->protocol, *this->bus, interfaceIndex);
 
         memcpy(groupAddress, &(groupAddressVector[0]), 4);
 
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe) 
-	{
+    catch (FeatureException &fe) 
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }
@@ -98,9 +98,9 @@ void MulticastFeatureAdapter::setGroupAddress(int *errorCode, unsigned char inte
 
 unsigned char MulticastFeatureAdapter::getEnableState(int *errorCode, unsigned char interfaceIndex) 
 {
-	unsigned char enableState;
+    unsigned char enableState;
     try {
-		enableState = this->feature->getEnableState(*this->protocol, *this->bus, interfaceIndex);
+        enableState = this->feature->getEnableState(*this->protocol, *this->bus, interfaceIndex);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
@@ -111,12 +111,12 @@ unsigned char MulticastFeatureAdapter::getEnableState(int *errorCode, unsigned c
 void MulticastFeatureAdapter::setEnableState(int *errorCode, unsigned char interfaceIndex, unsigned char enableState) 
 {
     try 
-	{
+    {
         this->feature->setEnableState(*this->protocol, *this->bus, interfaceIndex, enableState);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe)
-	{
+    catch (FeatureException &fe)
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }

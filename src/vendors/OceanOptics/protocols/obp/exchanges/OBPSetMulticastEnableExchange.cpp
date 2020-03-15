@@ -53,10 +53,10 @@ OBPSetMulticastEnableExchange::~OBPSetMulticastEnableExchange()
 
 void OBPSetMulticastEnableExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetMulticastEnableExchange::setEnableState(unsigned char multicastEnabled)
 {
-	this->payload[1] = multicastEnabled;
+    this->payload[1] = multicastEnabled;
 }

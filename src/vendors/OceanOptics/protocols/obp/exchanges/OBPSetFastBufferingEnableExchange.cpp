@@ -41,7 +41,7 @@ OBPSetFastBufferingEnableExchange::OBPSetFastBufferingEnableExchange()
 {
     this->hints->push_back(new OBPControlHint());
 
-	this->messageType = OBPMessageTypes::OBP_SET_BUFFERING_ENABLED;
+    this->messageType = OBPMessageTypes::OBP_SET_BUFFERING_ENABLED;
 
     this->payload.resize(sizeof(char));
 }

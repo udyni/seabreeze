@@ -42,7 +42,7 @@ OBPSetAcquisitionDelayExchange::OBPSetAcquisitionDelayExchange() {
 
     this->messageType = OBPMessageTypes::OBP_SET_TRIG_DELAY_USEC;
 
-	this->payload.resize(sizeof(unsigned int));
+    this->payload.resize(sizeof(unsigned int));
 }
 
 OBPSetAcquisitionDelayExchange::~OBPSetAcquisitionDelayExchange() {

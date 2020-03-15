@@ -102,53 +102,53 @@ void OBPFastBufferProtocol::setBufferingEnable(const Bus &bus,
 }
 
 unsigned int OBPFastBufferProtocol::getConsecutiveSampleCount(const Bus &bus,
-	unsigned char bufferIndex) throw (ProtocolException) {
+    unsigned char bufferIndex) throw (ProtocolException) {
 
-	unsigned int consecutiveSampleCount;
-	OBPGetConsecutiveSampleCountExchange exchange;
+    unsigned int consecutiveSampleCount;
+    OBPGetConsecutiveSampleCountExchange exchange;
 
-	if (0 != bufferIndex) {
-		/* At present, this protocol only knows how to deal with one buffer
-		* in the device.  Just do a sanity check to make sure it is zero.
-		*/
-		string error("This protocol only supports a single buffer.  The buffer index should be zero.");
-		throw ProtocolException(error);
-	}
+    if (0 != bufferIndex) {
+        /* At present, this protocol only knows how to deal with one buffer
+        * in the device.  Just do a sanity check to make sure it is zero.
+        */
+        string error("This protocol only supports a single buffer.  The buffer index should be zero.");
+        throw ProtocolException(error);
+    }
 
-	TransferHelper *helper = bus.getHelper(exchange.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    TransferHelper *helper = bus.getHelper(exchange.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	consecutiveSampleCount = exchange.queryConsecutiveSampleCount(helper);
+    consecutiveSampleCount = exchange.queryConsecutiveSampleCount(helper);
 
-	return consecutiveSampleCount;
+    return consecutiveSampleCount;
 }
 
 void OBPFastBufferProtocol::setConsecutiveSampleCount(const Bus &bus,
-	unsigned char bufferIndex, const unsigned int consecutiveSampleCount)
-	throw (ProtocolException) {
+    unsigned char bufferIndex, const unsigned int consecutiveSampleCount)
+    throw (ProtocolException) {
 
-	if (0 != bufferIndex) {
-		/* At present, this protocol only knows how to deal with one buffer
-		* in the device.  Just do a sanity check to make sure it is zero.
-		*/
-		string error("This protocol only supports a single buffer.  The buffer index should be zero.");
-		throw ProtocolException(error);
-	}
+    if (0 != bufferIndex) {
+        /* At present, this protocol only knows how to deal with one buffer
+        * in the device.  Just do a sanity check to make sure it is zero.
+        */
+        string error("This protocol only supports a single buffer.  The buffer index should be zero.");
+        throw ProtocolException(error);
+    }
 
-	TransferHelper *helper;
-	OBPSetConsecutiveSampleCountExchange exchange;
+    TransferHelper *helper;
+    OBPSetConsecutiveSampleCountExchange exchange;
 
-	helper = bus.getHelper(exchange.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(exchange.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	exchange.setConsecutiveSampleCount(consecutiveSampleCount);
-	exchange.sendCommandToDevice(helper);
+    exchange.setConsecutiveSampleCount(consecutiveSampleCount);
+    exchange.sendCommandToDevice(helper);
 }
 
 

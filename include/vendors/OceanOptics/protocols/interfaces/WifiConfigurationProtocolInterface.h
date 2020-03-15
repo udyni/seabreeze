@@ -45,9 +45,9 @@ namespace seabreeze {
     public:
         WifiConfigurationProtocolInterface(Protocol *protocol);
         virtual ~WifiConfigurationProtocolInterface();
-	
-	
-	    /**
+    
+    
+        /**
          * Get the Wifi mode (0: client, 1: access point, from the device.
          */
         virtual unsigned char getMode(const Bus &bus, unsigned char interfaceIndex)

@@ -122,10 +122,10 @@ QEPro::QEPro() {
     lampHelpers.push_back(new OBPStrobeLampProtocol());
     this->features.push_back(new StrobeLampFeature(lampHelpers));
 
-	/* Add i2c master feature */
-	vector<ProtocolHelper *> i2cMasterHelpers;
-	i2cMasterHelpers.push_back(new OBPI2CMasterProtocol());
-	this->features.push_back(new i2cMasterFeature(i2cMasterHelpers));
+    /* Add i2c master feature */
+    vector<ProtocolHelper *> i2cMasterHelpers;
+    i2cMasterHelpers.push_back(new OBPI2CMasterProtocol());
+    this->features.push_back(new i2cMasterFeature(i2cMasterHelpers));
 
     this->features.push_back(new RawUSBBusAccessFeature());
 }

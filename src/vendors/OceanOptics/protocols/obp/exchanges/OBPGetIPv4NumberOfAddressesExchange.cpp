@@ -39,13 +39,13 @@ OBPGetIPv4NumberOfAddressesExchange::OBPGetIPv4NumberOfAddressesExchange() {
     this->messageType = OBPMessageTypes::OBP_GET_IPV4_ADDRESS_COUNT;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 void OBPGetIPv4NumberOfAddressesExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 OBPGetIPv4NumberOfAddressesExchange::~OBPGetIPv4NumberOfAddressesExchange() {

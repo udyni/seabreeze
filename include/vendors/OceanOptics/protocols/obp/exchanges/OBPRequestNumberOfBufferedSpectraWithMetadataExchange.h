@@ -35,12 +35,12 @@
 namespace seabreeze {
     namespace oceanBinaryProtocol {
         class OBPRequestNumberOfBufferedSpectraWithMetadataExchange : public Transfer 
-		{
+        {
         public:
             OBPRequestNumberOfBufferedSpectraWithMetadataExchange();
             virtual ~OBPRequestNumberOfBufferedSpectraWithMetadataExchange();
 
-			static void setNumberOfSamplesToRequest(void *myExchange, unsigned int numberOfSamples);
+            static void setNumberOfSamplesToRequest(void *myExchange, unsigned int numberOfSamples);
         };
     }
 }

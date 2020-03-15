@@ -36,16 +36,16 @@ using namespace seabreeze;
 using namespace seabreeze::oceanBinaryProtocol;
 
 OBPGetGPIOExtensionCurrentModeExchange::OBPGetGPIOExtensionCurrentModeExchange() {
-	this->messageType = OBPMessageTypes::OBP_GET_EGPIO_CURRENT_MODE;
+    this->messageType = OBPMessageTypes::OBP_GET_EGPIO_CURRENT_MODE;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 void OBPGetGPIOExtensionCurrentModeExchange::setPinNumber(unsigned char pinNumber)
 {
-	this->payload[0] = pinNumber;
+    this->payload[0] = pinNumber;
 }
 
 OBPGetGPIOExtensionCurrentModeExchange::~OBPGetGPIOExtensionCurrentModeExchange() {

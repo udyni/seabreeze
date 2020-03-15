@@ -40,31 +40,31 @@ namespace seabreeze {
     public:
         virtual ~DHCPServerFeatureInterface() = 0;
 
-		virtual unsigned char getServerEnableState(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException) = 0;
-		virtual void setServerEnableState(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			unsigned char enableState)
-			throw (FeatureException) = 0;
-		virtual void getServerAddress(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex,
-			std::vector<unsigned char> *serverAddress,
-			unsigned char *netMask)
-			throw (FeatureException) = 0;
-		virtual void setServerAddress(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			const std::vector<unsigned char> serverAddress,
-			unsigned char netMask)
-			throw (FeatureException) = 0;			
+        virtual unsigned char getServerEnableState(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException) = 0;
+        virtual void setServerEnableState(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            unsigned char enableState)
+            throw (FeatureException) = 0;
+        virtual void getServerAddress(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex,
+            std::vector<unsigned char> *serverAddress,
+            unsigned char *netMask)
+            throw (FeatureException) = 0;
+        virtual void setServerAddress(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            const std::vector<unsigned char> serverAddress,
+            unsigned char netMask)
+            throw (FeatureException) = 0;            
     };
 
     /* Default implementation for (otherwise) pure virtual destructor */

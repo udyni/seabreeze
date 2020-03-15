@@ -41,9 +41,9 @@ using namespace seabreeze::api;
 using namespace std;
 
 NetworkConfigurationFeatureAdapter::NetworkConfigurationFeatureAdapter(
-	NetworkConfigurationFeatureInterface *intf, const FeatureFamily &f,
+    NetworkConfigurationFeatureInterface *intf, const FeatureFamily &f,
                     Protocol *p, Bus *b, unsigned short instanceIndex) 
-	: FeatureAdapterTemplate<NetworkConfigurationFeatureInterface>(intf, f, p, b, instanceIndex) 
+    : FeatureAdapterTemplate<NetworkConfigurationFeatureInterface>(intf, f, p, b, instanceIndex) 
 {
 
     /* Nothing else to do here, the initialization list takes care of it */
@@ -60,35 +60,35 @@ NetworkConfigurationFeatureAdapter::~NetworkConfigurationFeatureAdapter()
 
 unsigned char NetworkConfigurationFeatureAdapter::getNumberOfNetworkInterfaces(int *errorCode)
 {
-	unsigned char enableStatus = 0;
-	try {
-		enableStatus = this->feature->getNumberOfNetworkInterfaces(*this->protocol, *this->bus);
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe) {
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-	}
-	return enableStatus;
+    unsigned char enableStatus = 0;
+    try {
+        enableStatus = this->feature->getNumberOfNetworkInterfaces(*this->protocol, *this->bus);
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe) {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+    }
+    return enableStatus;
 }
 
 unsigned char NetworkConfigurationFeatureAdapter::getNetworkInterfaceConnectionType(int *errorCode, unsigned char interfaceIndex)
 {
-	unsigned char interfaceType = 0;
-	try {
-		interfaceType = this->feature->getNetworkInterfaceConnectionType(*this->protocol, *this->bus, interfaceIndex);
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe) {
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-	}
-	return interfaceType;
+    unsigned char interfaceType = 0;
+    try {
+        interfaceType = this->feature->getNetworkInterfaceConnectionType(*this->protocol, *this->bus, interfaceIndex);
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe) {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+    }
+    return interfaceType;
 }
 
 unsigned char NetworkConfigurationFeatureAdapter::getNetworkInterfaceEnableState(int *errorCode, unsigned char interfaceIndex) 
 {
-	unsigned char enableStatus = 0;
+    unsigned char enableStatus = 0;
     try {
-		enableStatus = this->feature->getNetworkInterfaceEnableState(*this->protocol, *this->bus, interfaceIndex);
+        enableStatus = this->feature->getNetworkInterfaceEnableState(*this->protocol, *this->bus, interfaceIndex);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
@@ -99,38 +99,38 @@ unsigned char NetworkConfigurationFeatureAdapter::getNetworkInterfaceEnableState
 void NetworkConfigurationFeatureAdapter::setNetworkInterfaceEnableState(int *errorCode, unsigned char interfaceIndex, unsigned char enableStatus) 
 {
     try 
-	{
+    {
         this->feature->setNetworkInterfaceEnableState(*this->protocol, *this->bus, interfaceIndex, enableStatus);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe)
-	{
+    catch (FeatureException &fe)
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }
 
 unsigned char NetworkConfigurationFeatureAdapter::runNetworkInterfaceSelfTest(int *errorCode, unsigned char interfaceIndex)
 {
-	unsigned char result = 0;
-	try {
-		result = this->feature->runNetworkInterfaceSelfTest(*this->protocol, *this->bus, interfaceIndex);
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe) {
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-	}
-	return result;
+    unsigned char result = 0;
+    try {
+        result = this->feature->runNetworkInterfaceSelfTest(*this->protocol, *this->bus, interfaceIndex);
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe) {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+    }
+    return result;
 }
 
 void NetworkConfigurationFeatureAdapter::saveNetworkInterfaceConnectionSettings(int *errorCode, unsigned char interfaceIndex)
 {
-	try
-	{
-		this->feature->saveNetworkInterfaceConnectionSettings(*this->protocol, *this->bus, interfaceIndex);
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe)
-	{
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-	}
+    try
+    {
+        this->feature->saveNetworkInterfaceConnectionSettings(*this->protocol, *this->bus, interfaceIndex);
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe)
+    {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+    }
 }

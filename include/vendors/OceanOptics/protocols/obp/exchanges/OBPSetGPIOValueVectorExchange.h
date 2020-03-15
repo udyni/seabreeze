@@ -36,7 +36,7 @@ namespace seabreeze {
     namespace oceanBinaryProtocol {
         class OBPSetGPIOValueVectorExchange : public OBPCommand {
         public:
-			OBPSetGPIOValueVectorExchange();
+            OBPSetGPIOValueVectorExchange();
             virtual ~OBPSetGPIOValueVectorExchange();
 
             void setValueVector(unsigned int valueVector);

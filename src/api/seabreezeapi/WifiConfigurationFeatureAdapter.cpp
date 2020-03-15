@@ -60,9 +60,9 @@ WifiConfigurationFeatureAdapter::~WifiConfigurationFeatureAdapter()
 
 unsigned char WifiConfigurationFeatureAdapter::getMode(int *errorCode, unsigned char interfaceIndex) 
 {
-	unsigned char mode;
+    unsigned char mode;
     try {
-		mode = this->feature->getMode(*this->protocol, *this->bus, interfaceIndex);
+        mode = this->feature->getMode(*this->protocol, *this->bus, interfaceIndex);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
@@ -73,21 +73,21 @@ unsigned char WifiConfigurationFeatureAdapter::getMode(int *errorCode, unsigned 
 void WifiConfigurationFeatureAdapter::setMode(int *errorCode, unsigned char interfaceIndex, unsigned char mode) 
 {
     try 
-	{
+    {
         this->feature->setMode(*this->protocol, *this->bus, interfaceIndex, mode);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe)
-	{
+    catch (FeatureException &fe)
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }
 
 unsigned char WifiConfigurationFeatureAdapter::getSecurityType(int *errorCode, unsigned char interfaceIndex) 
 {
-	unsigned char securityType;
+    unsigned char securityType;
     try {
-		securityType = this->feature->getSecurityType(*this->protocol, *this->bus, interfaceIndex);
+        securityType = this->feature->getSecurityType(*this->protocol, *this->bus, interfaceIndex);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
@@ -98,12 +98,12 @@ unsigned char WifiConfigurationFeatureAdapter::getSecurityType(int *errorCode, u
 void WifiConfigurationFeatureAdapter::setSecurityType(int *errorCode, unsigned char interfaceIndex, unsigned char securityType) 
 {
     try 
-	{
+    {
         this->feature->setSecurityType(*this->protocol, *this->bus, interfaceIndex, securityType);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe)
-	{
+    catch (FeatureException &fe)
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }
@@ -114,33 +114,33 @@ unsigned char WifiConfigurationFeatureAdapter::getSSID(int *errorCode, unsigned 
     vector<unsigned char> ssidVector;
 
     try 
-	{
+    {
 
-		ssidVector = this->feature->getSSID(*this->protocol, *this->bus, interfaceIndex);
-		// remove the null termination
-		//ssidVector.resize(std::find(ssidVector.begin(), ssidVector.end(), 0) - ssidVector.begin());
+        ssidVector = this->feature->getSSID(*this->protocol, *this->bus, interfaceIndex);
+        // remove the null termination
+        //ssidVector.resize(std::find(ssidVector.begin(), ssidVector.end(), 0) - ssidVector.begin());
         
         // can't use c++11 yet
         unsigned char index;
         for(index = 0; index<ssidVector.size(); index++)
         {
-        	if(ssidVector[index] == 0)
-        	{
-        	    break;
-        	}
+            if(ssidVector[index] == 0)
+            {
+                break;
+            }
         }
         ssidVector.resize(index);
         
         memcpy(ssid, ssidVector.data(), ssidVector.size());
 
         SET_ERROR_CODE(ERROR_SUCCESS);
-		return ssidVector.size() & 0xFF;
+        return ssidVector.size() & 0xFF;
 
     } 
-	catch (FeatureException &fe) 
-	{
+    catch (FeatureException &fe) 
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-		return 0;
+        return 0;
     }
 }
 

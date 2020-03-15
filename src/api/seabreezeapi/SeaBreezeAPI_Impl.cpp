@@ -541,15 +541,15 @@ double SeaBreezeAPI_Impl::spectrometerGetMaximumIntensity(
 }
 
 int SeaBreezeAPI_Impl::spectrometerGetFastBufferSpectrum(long deviceID,
-	long featureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve) {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    long featureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve) {
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->spectrometerGetFastBufferSpectrum(featureID, errorCode,
-		buffer, bufferLength, numberOfSamplesToRetrieve);
+    return adapter->spectrometerGetFastBufferSpectrum(featureID, errorCode,
+        buffer, bufferLength, numberOfSamplesToRetrieve);
 }
 
 void SeaBreezeAPI_Impl::spectrometerFastBufferSpectrumRequest(long deviceID,
@@ -892,78 +892,78 @@ void SeaBreezeAPI_Impl::irradCalibrationWriteCollectionArea(long deviceID, long 
 
 int SeaBreezeAPI_Impl::getNumberOfEthernetConfigurationFeatures(long deviceID, int *errorCode) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) 
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) 
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfEthernetConfigurationFeatures();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfEthernetConfigurationFeatures();
 }
 
 int SeaBreezeAPI_Impl::getEthernetConfigurationFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) 
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) 
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getEthernetConfigurationFeatures(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getEthernetConfigurationFeatures(buffer, maxLength);
 }
 
 void SeaBreezeAPI_Impl::ethernetConfiguration_Get_MAC_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char (*macAddress)[6]) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->ethernetConfiguration_Get_MAC_Address(featureID, errorCode, interfaceIndex, macAddress);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->ethernetConfiguration_Get_MAC_Address(featureID, errorCode, interfaceIndex, macAddress);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 
 }
 
 void SeaBreezeAPI_Impl::ethernetConfiguration_Set_MAC_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char macAddress[6]) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->ethernetConfiguration_Set_MAC_Address(featureID, errorCode, interfaceIndex, macAddress);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->ethernetConfiguration_Set_MAC_Address(featureID, errorCode, interfaceIndex, macAddress);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 }
 
 unsigned char SeaBreezeAPI_Impl::ethernetConfiguration_Get_GbE_Enable_Status(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->ethernetConfiguration_Get_GbE_Enable_Status(featureID, errorCode, interfaceIndex);
+    return adapter->ethernetConfiguration_Get_GbE_Enable_Status(featureID, errorCode, interfaceIndex);
 }
 
 void SeaBreezeAPI_Impl::ethernetConfiguration_Set_GbE_Enable_Status(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) 
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) 
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->ethernetConfiguration_Set_GbE_Enable_Status(featureID, errorCode, interfaceIndex, enableState);
+    adapter->ethernetConfiguration_Set_GbE_Enable_Status(featureID, errorCode, interfaceIndex, enableState);
 }
 
 
@@ -978,187 +978,187 @@ void SeaBreezeAPI_Impl::ethernetConfiguration_Set_GbE_Enable_Status(long deviceI
 
 int SeaBreezeAPI_Impl::getNumberOfGPIOFeatures(long deviceID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfGPIOFeatures();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfGPIOFeatures();
 }
 
 int SeaBreezeAPI_Impl::getGPIOFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getGPIOFeatures(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getGPIOFeatures(buffer, maxLength);
 }
 
 
 unsigned char SeaBreezeAPI_Impl::getGPIO_NumberOfPins(long deviceID, long featureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->gpioGetNumberOfPins(featureID, errorCode);
+    return adapter->gpioGetNumberOfPins(featureID, errorCode);
 }
 
 unsigned int SeaBreezeAPI_Impl::getGPIO_OutputEnableVector(long deviceID, long featureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->gpioGetOutputEnableVector(featureID, errorCode);
+    return adapter->gpioGetOutputEnableVector(featureID, errorCode);
 }
 
 
 void SeaBreezeAPI_Impl::setGPIO_OutputEnableVector(long deviceID, long featureID, int *errorCode, unsigned int outputEnableVector, unsigned int bitMask)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->gpioSetOutputEnableVector(featureID, errorCode, outputEnableVector, bitMask);
+    adapter->gpioSetOutputEnableVector(featureID, errorCode, outputEnableVector, bitMask);
 }
 
 unsigned int SeaBreezeAPI_Impl::getGPIO_ValueVector(long deviceID, long featureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->gpioGetValueVector(featureID, errorCode);
+    return adapter->gpioGetValueVector(featureID, errorCode);
 }
 
 
 void SeaBreezeAPI_Impl::setGPIO_ValueVector(long deviceID, long featureID, int *errorCode, unsigned int valueVector, unsigned int bitMask)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->gpioSetValueVector(featureID, errorCode, valueVector, bitMask);
+    adapter->gpioSetValueVector(featureID, errorCode, valueVector, bitMask);
 }
 
 
 unsigned char SeaBreezeAPI_Impl::getEGPIO_NumberOfPins(long deviceID, long featureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->gpioExtensionGetNumberOfPins(featureID, errorCode);
+    return adapter->gpioExtensionGetNumberOfPins(featureID, errorCode);
 }
 
 
 unsigned char SeaBreezeAPI_Impl::getEGPIO_AvailableModes(long deviceID, long featureID, int *errorCode, unsigned char pinNumber, unsigned char *availableModes, unsigned char maximumModeCount)
 {
-	unsigned char arraySize = 0;
+    unsigned char arraySize = 0;
 
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		arraySize = adapter->gpioExtensionGetAvailableModes(featureID, errorCode, pinNumber, availableModes, maximumModeCount);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
-	return arraySize;
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        arraySize = adapter->gpioExtensionGetAvailableModes(featureID, errorCode, pinNumber, availableModes, maximumModeCount);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
+    return arraySize;
 }
 
 
 unsigned char SeaBreezeAPI_Impl::getEGPIO_CurrentMode(long deviceID, long featureID, int *errorCode, unsigned char pinNumber)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->gpioExtensionGetCurrentMode(featureID, errorCode, pinNumber);
+    return adapter->gpioExtensionGetCurrentMode(featureID, errorCode, pinNumber);
 }
 
 void SeaBreezeAPI_Impl::setEGPIO_Mode(long deviceID, long featureID, int *errorCode, unsigned char pinNumber, unsigned char mode, float value)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->gpioExtensionSetMode(featureID, errorCode, pinNumber, mode, value);
+    adapter->gpioExtensionSetMode(featureID, errorCode, pinNumber, mode, value);
 }
 
 unsigned int SeaBreezeAPI_Impl::getEGPIO_OutputVector(long deviceID, long featureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->gpioExtensionGetOutputVector(featureID, errorCode);
+    return adapter->gpioExtensionGetOutputVector(featureID, errorCode);
 }
 
 void SeaBreezeAPI_Impl::setEGPIO_OutputVector(long deviceID, long featureID, int *errorCode, unsigned int outputVector, unsigned int bitMask)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->gpioExtensionSetOutputVector(featureID, errorCode, outputVector, bitMask);
+    adapter->gpioExtensionSetOutputVector(featureID, errorCode, outputVector, bitMask);
 }
 
 float SeaBreezeAPI_Impl::getEGPIO_Value(long deviceID, long featureID, int *errorCode, unsigned char pinNumber)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->gpioExtensionGetValue(featureID, errorCode, pinNumber);
+    return adapter->gpioExtensionGetValue(featureID, errorCode, pinNumber);
 }
 
 void SeaBreezeAPI_Impl::setEGPIO_Value(long deviceID, long featureID, int *errorCode, unsigned char pinNumber, float value)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->gpioExtensionSetValue(featureID, errorCode, pinNumber, value);
+    adapter->gpioExtensionSetValue(featureID, errorCode, pinNumber, value);
 }
 
 
@@ -1178,80 +1178,80 @@ void SeaBreezeAPI_Impl::setEGPIO_Value(long deviceID, long featureID, int *error
 
 int SeaBreezeAPI_Impl::getNumberOfMulticastFeatures(long deviceID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfMulticastFeatures();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfMulticastFeatures();
 }
 
 int SeaBreezeAPI_Impl::getMulticastFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getMulticastFeatures(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getMulticastFeatures(buffer, maxLength);
 }
 
 #if(false) // not yet implemented
 void SeaBreezeAPI_Impl::getMulticastGroupAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(&groupAddress)[4])
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->getMulticastGroupAddress(featureID, errorCode, interfaceIndex, groupAddress);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->getMulticastGroupAddress(featureID, errorCode, interfaceIndex, groupAddress);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 
 }
 
 void SeaBreezeAPI_Impl::setMulticastGroupAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char groupAddress[4])
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->setMulticastGroupAddress(featureID, errorCode, interfaceIndex, groupAddress);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->setMulticastGroupAddress(featureID, errorCode, interfaceIndex, groupAddress);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 }
 #endif
 
 unsigned char SeaBreezeAPI_Impl::getMulticastEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->getMulticastEnableState(featureID, errorCode, interfaceIndex);
+    return adapter->getMulticastEnableState(featureID, errorCode, interfaceIndex);
 }
 
 void SeaBreezeAPI_Impl::setMulticastEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->setMulticastEnableState(featureID, errorCode, interfaceIndex, enableState);
+    adapter->setMulticastEnableState(featureID, errorCode, interfaceIndex, enableState);
 }
 
 
@@ -1265,129 +1265,129 @@ void SeaBreezeAPI_Impl::setMulticastEnableState(long deviceID, long featureID, i
 
 int SeaBreezeAPI_Impl::getNumberOfIPv4Features(long deviceID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfIPv4Features();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfIPv4Features();
 }
 
 int SeaBreezeAPI_Impl::getIPv4Features(long deviceID, int *errorCode, long *buffer,  int maxLength)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getIPv4Features(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getIPv4Features(buffer, maxLength);
 }
 
 unsigned char SeaBreezeAPI_Impl::get_IPv4_DHCP_Enable_State(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->get_IPv4_DHCP_Enable_State(featureID, errorCode, interfaceIndex);
+    return adapter->get_IPv4_DHCP_Enable_State(featureID, errorCode, interfaceIndex);
 }
 
 void SeaBreezeAPI_Impl::set_IPv4_DHCP_Enable_State(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->set_IPv4_DHCP_Enable_State(featureID, errorCode, interfaceIndex, enableState);
+    adapter->set_IPv4_DHCP_Enable_State(featureID, errorCode, interfaceIndex, enableState);
 }
 
 unsigned char SeaBreezeAPI_Impl::get_Number_Of_IPv4_Addresses(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->get_Number_Of_IPv4_Addresses(featureID, errorCode, interfaceIndex);
+    return adapter->get_Number_Of_IPv4_Addresses(featureID, errorCode, interfaceIndex);
 }
 
 void SeaBreezeAPI_Impl::get_IPv4_Default_Gateway(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4])
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->get_IPv4_Default_Gateway(featureID, errorCode, interfaceIndex, defaultGatewayAddress);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->get_IPv4_Default_Gateway(featureID, errorCode, interfaceIndex, defaultGatewayAddress);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 
 }
 
 void SeaBreezeAPI_Impl::set_IPv4_Default_Gateway(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4])
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->set_IPv4_Default_Gateway(featureID, errorCode, interfaceIndex, defaultGatewayAddress);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->set_IPv4_Default_Gateway(featureID, errorCode, interfaceIndex, defaultGatewayAddress);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 }
 
 void SeaBreezeAPI_Impl::get_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex, unsigned char(*IPv4_Address)[4], unsigned char *netMask)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->get_IPv4_Address(featureID, errorCode, interfaceIndex, addressIndex, IPv4_Address, netMask);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->get_IPv4_Address(featureID, errorCode, interfaceIndex, addressIndex, IPv4_Address, netMask);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 
 }
 
 void SeaBreezeAPI_Impl::add_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->add_IPv4_Address(featureID, errorCode, interfaceIndex, IPv4_Address, netMask);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->add_IPv4_Address(featureID, errorCode, interfaceIndex, IPv4_Address, netMask);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 }
 
 void SeaBreezeAPI_Impl::delete_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->delete_IPv4_Address(featureID, errorCode, interfaceIndex, addressIndex);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->delete_IPv4_Address(featureID, errorCode, interfaceIndex, addressIndex);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 }
 
 
@@ -1398,116 +1398,116 @@ void SeaBreezeAPI_Impl::delete_IPv4_Address(long deviceID, long featureID, int *
 
 int SeaBreezeAPI_Impl::getNumberOfWifiConfigurationFeatures(long deviceID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfWifiConfigurationFeatures();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfWifiConfigurationFeatures();
 }
 
 int SeaBreezeAPI_Impl::getWifiConfigurationFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getWifiConfigurationFeatures(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getWifiConfigurationFeatures(buffer, maxLength);
 }
 
 unsigned char SeaBreezeAPI_Impl::getWifiConfigurationMode(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->wifiConfigurationGetMode(featureID, errorCode, interfaceIndex);
+    return adapter->wifiConfigurationGetMode(featureID, errorCode, interfaceIndex);
 }
 
 void SeaBreezeAPI_Impl::setWifiConfigurationMode(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char mode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->wifiConfigurationSetMode(featureID, errorCode, interfaceIndex, mode);
+    adapter->wifiConfigurationSetMode(featureID, errorCode, interfaceIndex, mode);
 }
 
 unsigned char SeaBreezeAPI_Impl::getWifiConfigurationSecurityType(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->wifiConfigurationGetSecurityType(featureID, errorCode, interfaceIndex);
+    return adapter->wifiConfigurationGetSecurityType(featureID, errorCode, interfaceIndex);
 }
 
 void SeaBreezeAPI_Impl::setWifiConfigurationSecurityType(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char securityType)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->wifiConfigurationSetSecurityType(featureID, errorCode, interfaceIndex, securityType);
+    adapter->wifiConfigurationSetSecurityType(featureID, errorCode, interfaceIndex, securityType);
 }
 
 
 unsigned char SeaBreezeAPI_Impl::getWifiConfigurationSSID(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*ssid)[32])
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		return adapter->wifiConfigurationGetSSID(featureID, errorCode, interfaceIndex, ssid);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        return adapter->wifiConfigurationGetSSID(featureID, errorCode, interfaceIndex, ssid);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
 }
 
 void SeaBreezeAPI_Impl::setWifiConfigurationSSID(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char ssid[32], unsigned char length)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->wifiConfigurationSetSSID(featureID, errorCode, interfaceIndex, ssid, length);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->wifiConfigurationSetSSID(featureID, errorCode, interfaceIndex, ssid, length);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 }
 
 void SeaBreezeAPI_Impl::setWifiConfigurationPassPhrase(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char *passPhrase, unsigned char passPhraseLength)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->wifiConfigurationSetPassPhrase(featureID, errorCode, interfaceIndex, passPhrase, passPhraseLength);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->wifiConfigurationSetPassPhrase(featureID, errorCode, interfaceIndex, passPhrase, passPhraseLength);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 }
 
 
@@ -1517,78 +1517,78 @@ void SeaBreezeAPI_Impl::setWifiConfigurationPassPhrase(long deviceID, long featu
 
 int SeaBreezeAPI_Impl::getNumberOfDHCPServerFeatures(long deviceID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfDHCPServerFeatures();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfDHCPServerFeatures();
 }
 
 int SeaBreezeAPI_Impl::getDHCPServerFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getDHCPServerFeatures(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getDHCPServerFeatures(buffer, maxLength);
 }
 
 void SeaBreezeAPI_Impl::dhcpServerGetAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*serverAddress)[4], unsigned char *netMask)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->dhcpServerGetAddress(featureID, errorCode, interfaceIndex, serverAddress, netMask);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->dhcpServerGetAddress(featureID, errorCode, interfaceIndex, serverAddress, netMask);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 
 }
 
 void SeaBreezeAPI_Impl::dhcpServerSetAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char serverAddress[4], unsigned char netMask)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		adapter->dhcpServerSetAddress(featureID, errorCode, interfaceIndex, serverAddress, netMask);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        adapter->dhcpServerSetAddress(featureID, errorCode, interfaceIndex, serverAddress, netMask);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
 }
 
 unsigned char SeaBreezeAPI_Impl::dhcpServerGetEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->dhcpServerGetEnableState(featureID, errorCode, interfaceIndex);
+    return adapter->dhcpServerGetEnableState(featureID, errorCode, interfaceIndex);
 }
 
 void SeaBreezeAPI_Impl::dhcpServerSetEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->dhcpServerSetEnableState(featureID, errorCode, interfaceIndex, enableState);
+    adapter->dhcpServerSetEnableState(featureID, errorCode, interfaceIndex, enableState);
 }
 
 
@@ -1618,96 +1618,96 @@ void SeaBreezeAPI_Impl::dhcpServerSetEnableState(long deviceID, long featureID, 
 
 int SeaBreezeAPI_Impl::getNumberOfNetworkConfigurationFeatures(long deviceID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfNetworkConfigurationFeatures();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfNetworkConfigurationFeatures();
 }
 
 int SeaBreezeAPI_Impl::getNetworkConfigurationFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNetworkConfigurationFeatures(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNetworkConfigurationFeatures(buffer, maxLength);
 }
 
 unsigned char SeaBreezeAPI_Impl::getNumberOfNetworkInterfaces(long deviceID, long featureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->getNumberOfNetworkInterfaces(featureID, errorCode);
+    return adapter->getNumberOfNetworkInterfaces(featureID, errorCode);
 }
 
 unsigned char SeaBreezeAPI_Impl::getNetworkInterfaceConnectionType(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->getNetworkInterfaceConnectionType(featureID, errorCode, interfaceIndex);
+    return adapter->getNetworkInterfaceConnectionType(featureID, errorCode, interfaceIndex);
 }
 
 unsigned char SeaBreezeAPI_Impl::runNetworkInterfaceSelfTest(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->runNetworkInterfaceSelfTest(featureID, errorCode, interfaceIndex);
+    return adapter->runNetworkInterfaceSelfTest(featureID, errorCode, interfaceIndex);
 }
 
 unsigned char SeaBreezeAPI_Impl::getNetworkInterfaceEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->getNetworkInterfaceEnableState(featureID, errorCode, interfaceIndex);
+    return adapter->getNetworkInterfaceEnableState(featureID, errorCode, interfaceIndex);
 }
 
 void SeaBreezeAPI_Impl::setNetworkInterfaceEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->setNetworkInterfaceEnableState(featureID, errorCode, interfaceIndex, enableState);
+    adapter->setNetworkInterfaceEnableState(featureID, errorCode, interfaceIndex, enableState);
 }
 
 void SeaBreezeAPI_Impl::saveNetworkInterfaceConnectionSettings(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->saveNetworkInterfaceConnectionSettings(featureID, errorCode, interfaceIndex);
+    adapter->saveNetworkInterfaceConnectionSettings(featureID, errorCode, interfaceIndex);
 }
 
 
@@ -2095,72 +2095,72 @@ int SeaBreezeAPI_Impl::temperatureGetAll(long deviceID, long temperatureFeatureI
 
 int SeaBreezeAPI_Impl::getNumberOfIntrospectionFeatures(long deviceID, int *errorCode) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) 
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) 
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfIntrospectionFeatures();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfIntrospectionFeatures();
 }
 
 int SeaBreezeAPI_Impl::getIntrospectionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) 
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) 
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getIntrospectionFeatures(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getIntrospectionFeatures(buffer, maxLength);
 }
 
 unsigned short int SeaBreezeAPI_Impl::introspectionNumberOfPixelsGet(long deviceID, long introspectionFeatureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->introspectionNumberOfPixelsGet(introspectionFeatureID, errorCode);
+    return adapter->introspectionNumberOfPixelsGet(introspectionFeatureID, errorCode);
 }
 
 int SeaBreezeAPI_Impl::introspectionActivePixelRangesGet(long deviceID, long introspectionFeatureID, int *errorCode, unsigned int *buffer, int maxLength) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->introspectionActivePixelRangesGet(introspectionFeatureID, errorCode, buffer, maxLength);
+    return adapter->introspectionActivePixelRangesGet(introspectionFeatureID, errorCode, buffer, maxLength);
 }
 
 int SeaBreezeAPI_Impl::introspectionElectricDarkPixelRangesGet(long deviceID, long introspectionFeatureID, int *errorCode, unsigned int *buffer, int maxLength) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->introspectionElectricDarkPixelRangesGet(introspectionFeatureID, errorCode, buffer, maxLength);
+    return adapter->introspectionElectricDarkPixelRangesGet(introspectionFeatureID, errorCode, buffer, maxLength);
 }
 
 int SeaBreezeAPI_Impl::introspectionOpticalDarkPixelRangesGet(long deviceID, long introspectionFeatureID, int *errorCode, unsigned int *buffer, int maxLength) 
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->introspectionOpticalDarkPixelRangesGet(introspectionFeatureID, errorCode, buffer, maxLength);
+    return adapter->introspectionOpticalDarkPixelRangesGet(introspectionFeatureID, errorCode, buffer, maxLength);
 }
 
 /**************************************************************************************/
@@ -2534,74 +2534,74 @@ void SeaBreezeAPI_Impl::dataBufferSetBufferCapacity(long deviceID, long featureI
 
 
 int SeaBreezeAPI_Impl::getNumberOfFastBufferFeatures(long deviceID, int *errorCode) {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfFastBufferFeatures();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfFastBufferFeatures();
 }
 
 int SeaBreezeAPI_Impl::getFastBufferFeatures(long deviceID, int *errorCode, long *buffer,
-	unsigned int maxLength) {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    unsigned int maxLength) {
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getFastBufferFeatures(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getFastBufferFeatures(buffer, maxLength);
 }
 
 unsigned char SeaBreezeAPI_Impl::fastBufferGetBufferingEnable(long deviceID, long featureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->fastBufferGetBufferingEnable(featureID, errorCode);
+    return adapter->fastBufferGetBufferingEnable(featureID, errorCode);
 }
 
 void SeaBreezeAPI_Impl::fastBufferSetBufferingEnable(long deviceID, long featureID, int *errorCode, unsigned char isEnabled)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->fastBufferSetBufferingEnable(featureID, errorCode, isEnabled);
+    adapter->fastBufferSetBufferingEnable(featureID, errorCode, isEnabled);
 }
 
 unsigned int SeaBreezeAPI_Impl::fastBufferGetConsecutiveSampleCount(long deviceID, long featureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->fastBufferGetConsecutiveSampleCount(featureID, errorCode);
+    return adapter->fastBufferGetConsecutiveSampleCount(featureID, errorCode);
 }
 
 void SeaBreezeAPI_Impl::fastBufferSetConsecutiveSampleCount(long deviceID, long featureID, int *errorCode, unsigned int consecutiveSampleCount)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return;
+    }
 
-	adapter->fastBufferSetConsecutiveSampleCount(featureID, errorCode, consecutiveSampleCount);
+    adapter->fastBufferSetConsecutiveSampleCount(featureID, errorCode, consecutiveSampleCount);
 }
 
 /**************************************************************************************/
@@ -2692,71 +2692,71 @@ unsigned long SeaBreezeAPI_Impl::acquisitionDelayGetDelayMinimumMicroseconds(lon
 
 int SeaBreezeAPI_Impl::getNumberOfI2CMasterFeatures(long deviceID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getNumberOfI2CMasterFeatures();
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfI2CMasterFeatures();
 }
 
 int SeaBreezeAPI_Impl::getI2CMasterFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter)
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter)
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	SET_ERROR_CODE(ERROR_SUCCESS);
-	return adapter->getI2CMasterFeatures(buffer, maxLength);
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getI2CMasterFeatures(buffer, maxLength);
 }
 
 unsigned char SeaBreezeAPI_Impl::i2cMasterGetNumberOfBuses(long deviceID, long featureID, int *errorCode)
 {
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL == adapter) {
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-		return 0;
-	}
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
 
-	return adapter->i2cMasterGetNumberOfBuses(featureID, errorCode);
+    return adapter->i2cMasterGetNumberOfBuses(featureID, errorCode);
 }
 
 unsigned short SeaBreezeAPI_Impl::i2cMasterReadBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes)
 {
-	unsigned short dataLength = 0;
+    unsigned short dataLength = 0;
 
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		dataLength = adapter->i2cMasterReadBus(featureID, errorCode, busIndex, slaveAddress, readData, numberOfBytes);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
-	return dataLength;
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        dataLength = adapter->i2cMasterReadBus(featureID, errorCode, busIndex, slaveAddress, readData, numberOfBytes);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
+    return dataLength;
 }
 
 unsigned short SeaBreezeAPI_Impl::i2cMasterWriteBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes)
 {
-	unsigned short dataLength = 0;
+    unsigned short dataLength = 0;
 
-	DeviceAdapter *adapter = getDeviceByID(deviceID);
-	if (NULL != adapter)
-	{
-		dataLength = adapter->i2cMasterWriteBus(featureID, errorCode, busIndex, slaveAddress, writeData, numberOfBytes);
-	}
-	else
-	{
-		SET_ERROR_CODE(ERROR_NO_DEVICE);
-	}
-	return dataLength;
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if (NULL != adapter)
+    {
+        dataLength = adapter->i2cMasterWriteBus(featureID, errorCode, busIndex, slaveAddress, writeData, numberOfBytes);
+    }
+    else
+    {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
+    return dataLength;
 }
 
 

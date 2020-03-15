@@ -53,15 +53,15 @@ OBPSetGPIOExtensionModeExchange::~OBPSetGPIOExtensionModeExchange()
 
 void OBPSetGPIOExtensionModeExchange::setPinNumber(unsigned char pinNumber)
 {
-	this->payload[0] = pinNumber;
+    this->payload[0] = pinNumber;
 }
 
 void OBPSetGPIOExtensionModeExchange::setMode(unsigned char mode)
 {
-	this->payload[1] = mode;
+    this->payload[1] = mode;
 }
 
 void OBPSetGPIOExtensionModeExchange::setValue(float value)
 {
-	memcpy(&(this->payload[2]), &value, sizeof(float));
+    memcpy(&(this->payload[2]), &value, sizeof(float));
 }

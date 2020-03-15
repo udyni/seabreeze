@@ -41,11 +41,11 @@ using namespace std;
 
 OBPRequestNumberOfBufferedSpectraWithMetadataExchange::OBPRequestNumberOfBufferedSpectraWithMetadataExchange() 
 {
-	this->hints->push_back(new OBPSpectrumHint());
-	this->direction = Transfer::TO_DEVICE;
-	derivedClassPointer = this;
-	setParametersFunction = &(this->setNumberOfSamplesToRequest);
-	this->setNumberOfSamplesToRequest(this, 1);
+    this->hints->push_back(new OBPSpectrumHint());
+    this->direction = Transfer::TO_DEVICE;
+    derivedClassPointer = this;
+    setParametersFunction = &(this->setNumberOfSamplesToRequest);
+    this->setNumberOfSamplesToRequest(this, 1);
 }
 
 OBPRequestNumberOfBufferedSpectraWithMetadataExchange::~OBPRequestNumberOfBufferedSpectraWithMetadataExchange() {
@@ -55,36 +55,36 @@ OBPRequestNumberOfBufferedSpectraWithMetadataExchange::~OBPRequestNumberOfBuffer
 
 void OBPRequestNumberOfBufferedSpectraWithMetadataExchange::setNumberOfSamplesToRequest(void *myClass, unsigned int numberOfSamples)
 {
-	OBPMessage message;
-	vector<byte> *stream;
-	unsigned int i;
-	unsigned int adjustedNumberOfSamples = numberOfSamples;
+    OBPMessage message;
+    vector<byte> *stream;
+    unsigned int i;
+    unsigned int adjustedNumberOfSamples = numberOfSamples;
 
-	OBPRequestNumberOfBufferedSpectraWithMetadataExchange *parentClass = (OBPRequestNumberOfBufferedSpectraWithMetadataExchange *)myClass;
+    OBPRequestNumberOfBufferedSpectraWithMetadataExchange *parentClass = (OBPRequestNumberOfBufferedSpectraWithMetadataExchange *)myClass;
 
-	// make sure there is enough memory for the reply. Currently the OceanFX firmware will try to return one
-	// spectrum, even with a request of 0.
-	if(adjustedNumberOfSamples < 1)
-		adjustedNumberOfSamples = 1;
+    // make sure there is enough memory for the reply. Currently the OceanFX firmware will try to return one
+    // spectrum, even with a request of 0.
+    if(adjustedNumberOfSamples < 1)
+        adjustedNumberOfSamples = 1;
 
-	std::vector<unsigned char> *numberOfSamplesToRetrieve = new vector<unsigned char>(sizeof(unsigned int));
-	// no c++11 yet
-	//memcpy(numberOfSamplesToRetrieve.data(), &numberOfSamples, sizeof(unsigned int)); 
-	memcpy(&((*numberOfSamplesToRetrieve)[0]), &adjustedNumberOfSamples, sizeof(unsigned int));
+    std::vector<unsigned char> *numberOfSamplesToRetrieve = new vector<unsigned char>(sizeof(unsigned int));
+    // no c++11 yet
+    //memcpy(numberOfSamplesToRetrieve.data(), &numberOfSamples, sizeof(unsigned int)); 
+    memcpy(&((*numberOfSamplesToRetrieve)[0]), &adjustedNumberOfSamples, sizeof(unsigned int));
 
 
 
-	message.setMessageType(OBPMessageTypes::OBP_GET_N_BUF_RAW_SPECTRA_META);
-	message.setImmediateData(numberOfSamplesToRetrieve); // sets length automatically ~obpMessage destroys the vector
-	stream = message.toByteStream();
+    message.setMessageType(OBPMessageTypes::OBP_GET_N_BUF_RAW_SPECTRA_META);
+    message.setImmediateData(numberOfSamplesToRetrieve); // sets length automatically ~obpMessage destroys the vector
+    stream = message.toByteStream();
 
-	parentClass->length = (unsigned)stream->size();
-	parentClass->buffer->resize(stream->size());
+    parentClass->length = (unsigned)stream->size();
+    parentClass->buffer->resize(stream->size());
 
-	for (i = 0; i < stream->size(); i++) {
-		(*(parentClass->buffer))[i] = (*stream)[i];
-	}
-	delete stream;
+    for (i = 0; i < stream->size(); i++) {
+        (*(parentClass->buffer))[i] = (*stream)[i];
+    }
+    delete stream;
 
-	parentClass->checkBufferSize();
+    parentClass->checkBufferSize();
 }

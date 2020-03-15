@@ -84,19 +84,19 @@ DeviceAdapter::~DeviceAdapter() {
     __delete_feature_adapters<SpectrometerFeatureAdapter>(spectrometerFeatures);
     __delete_feature_adapters<ThermoElectricCoolerFeatureAdapter>(tecFeatures);
     __delete_feature_adapters<IrradCalFeatureAdapter>(irradCalFeatures);
-	__delete_feature_adapters<EthernetConfigurationFeatureAdapter>(ethernetConfigurationFeatures);
-	__delete_feature_adapters<MulticastFeatureAdapter>(multicastFeatures);
-	__delete_feature_adapters<WifiConfigurationFeatureAdapter>(wifiConfigurationFeatures);
-	__delete_feature_adapters<IPv4FeatureAdapter>(IPv4Features);
-	__delete_feature_adapters<DHCPServerFeatureAdapter>(dhcpServerFeatures);
-	__delete_feature_adapters<NetworkConfigurationFeatureAdapter>(networkConfigurationFeatures);
+    __delete_feature_adapters<EthernetConfigurationFeatureAdapter>(ethernetConfigurationFeatures);
+    __delete_feature_adapters<MulticastFeatureAdapter>(multicastFeatures);
+    __delete_feature_adapters<WifiConfigurationFeatureAdapter>(wifiConfigurationFeatures);
+    __delete_feature_adapters<IPv4FeatureAdapter>(IPv4Features);
+    __delete_feature_adapters<DHCPServerFeatureAdapter>(dhcpServerFeatures);
+    __delete_feature_adapters<NetworkConfigurationFeatureAdapter>(networkConfigurationFeatures);
     __delete_feature_adapters<EEPROMFeatureAdapter>(eepromFeatures);
     __delete_feature_adapters<StrobeLampFeatureAdapter>(strobeLampFeatures);
     __delete_feature_adapters<ContinuousStrobeFeatureAdapter>(continuousStrobeFeatures);
     __delete_feature_adapters<ShutterFeatureAdapter>(shutterFeatures);
     __delete_feature_adapters<NonlinearityCoeffsFeatureAdapter>(nonlinearityFeatures);
     __delete_feature_adapters<TemperatureFeatureAdapter>(temperatureFeatures);
-	__delete_feature_adapters<IntrospectionFeatureAdapter>(introspectionFeatures);
+    __delete_feature_adapters<IntrospectionFeatureAdapter>(introspectionFeatures);
     __delete_feature_adapters<RevisionFeatureAdapter>(revisionFeatures);
     __delete_feature_adapters<OpticalBenchFeatureAdapter>(opticalBenchFeatures);
     __delete_feature_adapters<SpectrumProcessingFeatureAdapter>(spectrumProcessingFeatures);
@@ -104,10 +104,10 @@ DeviceAdapter::~DeviceAdapter() {
     __delete_feature_adapters<LightSourceFeatureAdapter>(lightSourceFeatures);
     __delete_feature_adapters<PixelBinningFeatureAdapter>(pixelBinningFeatures);
     __delete_feature_adapters<DataBufferFeatureAdapter>(dataBufferFeatures);
-	__delete_feature_adapters<FastBufferFeatureAdapter>(fastBufferFeatures);
+    __delete_feature_adapters<FastBufferFeatureAdapter>(fastBufferFeatures);
     __delete_feature_adapters<AcquisitionDelayFeatureAdapter>(acquisitionDelayFeatures);
-	__delete_feature_adapters<gpioFeatureAdapter>(gpioFeatures);
-	__delete_feature_adapters<I2CMasterFeatureAdapter>(i2cMasterFeatures);
+    __delete_feature_adapters<gpioFeatureAdapter>(gpioFeatures);
+    __delete_feature_adapters<I2CMasterFeatureAdapter>(i2cMasterFeatures);
 
     delete this->device;
 }
@@ -167,7 +167,7 @@ int DeviceAdapter::open(int *errorCode) {
     
     /* Create raw usb access feature list */
     __create_feature_adapters<RawUSBBusAccessFeatureInterface,
-    	            RawUSBBusAccessFeatureAdapter>(this->device,
+                    RawUSBBusAccessFeatureAdapter>(this->device,
             rawUSBBusAccessFeatures, bus, featureFamilies.RAW_USB_BUS_ACCESS);
 
     /* Create serial number feature list */
@@ -190,35 +190,35 @@ int DeviceAdapter::open(int *errorCode) {
                     IrradCalFeatureAdapter>(this->device,
             irradCalFeatures, bus, featureFamilies.IRRAD_CAL);
 
-	/* Create ethernet configuration feature list */
-	__create_feature_adapters<EthernetConfigurationFeatureInterface,
-		EthernetConfigurationFeatureAdapter>(this->device,
-			ethernetConfigurationFeatures, bus, featureFamilies.ETHERNET_CONFIGURATION);
+    /* Create ethernet configuration feature list */
+    __create_feature_adapters<EthernetConfigurationFeatureInterface,
+        EthernetConfigurationFeatureAdapter>(this->device,
+            ethernetConfigurationFeatures, bus, featureFamilies.ETHERNET_CONFIGURATION);
 
-	/* Create multicast configuration feature list */
-	__create_feature_adapters<MulticastFeatureInterface,
-		MulticastFeatureAdapter>(this->device,
-			multicastFeatures, bus, featureFamilies.IPV4_MULTICAST);
+    /* Create multicast configuration feature list */
+    __create_feature_adapters<MulticastFeatureInterface,
+        MulticastFeatureAdapter>(this->device,
+            multicastFeatures, bus, featureFamilies.IPV4_MULTICAST);
 
-	/* Create ipv4 feature list */
-	__create_feature_adapters<IPv4FeatureInterface,
-		IPv4FeatureAdapter>(this->device,
-			IPv4Features, bus, featureFamilies.IPV4_ADDRESS);
+    /* Create ipv4 feature list */
+    __create_feature_adapters<IPv4FeatureInterface,
+        IPv4FeatureAdapter>(this->device,
+            IPv4Features, bus, featureFamilies.IPV4_ADDRESS);
 
-	/* Create wifi configuration feature list */
-	__create_feature_adapters<WifiConfigurationFeatureInterface,
-		WifiConfigurationFeatureAdapter>(this->device,
-			wifiConfigurationFeatures, bus, featureFamilies.WIFI_CONFIGURATION);
+    /* Create wifi configuration feature list */
+    __create_feature_adapters<WifiConfigurationFeatureInterface,
+        WifiConfigurationFeatureAdapter>(this->device,
+            wifiConfigurationFeatures, bus, featureFamilies.WIFI_CONFIGURATION);
 
-	/* Create dhcp server feature list */
-	__create_feature_adapters<DHCPServerFeatureInterface,
-		DHCPServerFeatureAdapter>(this->device,
-			dhcpServerFeatures, bus, featureFamilies.DHCP_SERVER);
+    /* Create dhcp server feature list */
+    __create_feature_adapters<DHCPServerFeatureInterface,
+        DHCPServerFeatureAdapter>(this->device,
+            dhcpServerFeatures, bus, featureFamilies.DHCP_SERVER);
 
-	/* Create network configuration feature list */
-	__create_feature_adapters<NetworkConfigurationFeatureInterface,
-		NetworkConfigurationFeatureAdapter>(this->device,
-			networkConfigurationFeatures, bus, featureFamilies.NETWORK_CONFIGURATION);
+    /* Create network configuration feature list */
+    __create_feature_adapters<NetworkConfigurationFeatureInterface,
+        NetworkConfigurationFeatureAdapter>(this->device,
+            networkConfigurationFeatures, bus, featureFamilies.NETWORK_CONFIGURATION);
 
     /* Create EEPROM feature list */
     __create_feature_adapters<EEPROMSlotFeatureInterface,
@@ -255,10 +255,10 @@ int DeviceAdapter::open(int *errorCode) {
                     TemperatureFeatureAdapter>(this->device,
             temperatureFeatures, bus, featureFamilies.TEMPERATURE);
 
-	/* Create introspection feature list */
-	__create_feature_adapters<IntrospectionFeatureInterface,
-		IntrospectionFeatureAdapter>(this->device,
-			introspectionFeatures, bus, featureFamilies.INTROSPECTION);
+    /* Create introspection feature list */
+    __create_feature_adapters<IntrospectionFeatureInterface,
+        IntrospectionFeatureAdapter>(this->device,
+            introspectionFeatures, bus, featureFamilies.INTROSPECTION);
 
     /* Create revision feature list */
     __create_feature_adapters<RevisionFeatureInterface,
@@ -285,30 +285,30 @@ int DeviceAdapter::open(int *errorCode) {
                     PixelBinningFeatureAdapter>(this->device,
             pixelBinningFeatures, bus, featureFamilies.PIXEL_BINNING);
 
-	/* Create data buffer feature list */
+    /* Create data buffer feature list */
     __create_feature_adapters<DataBufferFeatureInterface,
                     DataBufferFeatureAdapter>(this->device,
             dataBufferFeatures, bus, featureFamilies.DATA_BUFFER);
 
-	/* Create fast buffer feature list */
-	__create_feature_adapters<FastBufferFeatureInterface,
-		FastBufferFeatureAdapter>(this->device,
-			fastBufferFeatures, bus, featureFamilies.FAST_BUFFER);
+    /* Create fast buffer feature list */
+    __create_feature_adapters<FastBufferFeatureInterface,
+        FastBufferFeatureAdapter>(this->device,
+            fastBufferFeatures, bus, featureFamilies.FAST_BUFFER);
 
-	/* Create acquisition feature list */
+    /* Create acquisition feature list */
     __create_feature_adapters<AcquisitionDelayFeatureInterface,
                     AcquisitionDelayFeatureAdapter>(this->device,
             acquisitionDelayFeatures, bus, featureFamilies.ACQUISITION_DELAY);
 
-	/* Create gpio feature list */
-	__create_feature_adapters<gpioFeatureInterface,
-		gpioFeatureAdapter>(this->device,
-			gpioFeatures, bus, featureFamilies.GENERAL_PURPOSE_INPUT_OUTPUT);
+    /* Create gpio feature list */
+    __create_feature_adapters<gpioFeatureInterface,
+        gpioFeatureAdapter>(this->device,
+            gpioFeatures, bus, featureFamilies.GENERAL_PURPOSE_INPUT_OUTPUT);
 
-	/* Create i2c master feature list */
-	__create_feature_adapters<i2cMasterFeatureInterface,
-		I2CMasterFeatureAdapter>(this->device,
-			i2cMasterFeatures, bus, featureFamilies.I2C_MASTER);
+    /* Create i2c master feature list */
+    __create_feature_adapters<i2cMasterFeatureInterface,
+        I2CMasterFeatureAdapter>(this->device,
+            i2cMasterFeatures, bus, featureFamilies.I2C_MASTER);
 
 
     SET_ERROR_CODE(ERROR_SUCCESS);
@@ -555,14 +555,14 @@ int DeviceAdapter::spectrometerGetUnformattedSpectrum(long featureID,
 }
 
 int DeviceAdapter::spectrometerGetFastBufferSpectrum(long featureID,
-	int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve) {
-	SpectrometerFeatureAdapter *feature = getSpectrometerFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve) {
+    SpectrometerFeatureAdapter *feature = getSpectrometerFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getFastBufferSpectrum(errorCode, buffer, bufferLength, numberOfSamplesToRetrieve);
+    return feature->getFastBufferSpectrum(errorCode, buffer, bufferLength, numberOfSamplesToRetrieve);
 }
 
 
@@ -659,7 +659,7 @@ void DeviceAdapter::binningSetPixelBinningFactor(long featureID, int *errorCode,
     PixelBinningFeatureAdapter *feature = getPixelBinningFeatureByID(featureID);
     if(NULL == feature) {
         SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
+        return;
     }
 
     feature->setPixelBinningFactor(errorCode, binningFactor);
@@ -669,7 +669,7 @@ unsigned char DeviceAdapter::binningGetPixelBinningFactor(long featureID, int *e
     PixelBinningFeatureAdapter *feature = getPixelBinningFeatureByID(featureID);
     if(NULL == feature) {
         SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
+        return 0;
     }
 
     return feature->getPixelBinningFactor(errorCode);
@@ -679,7 +679,7 @@ void DeviceAdapter::binningSetDefaultPixelBinningFactor(long featureID, int *err
     PixelBinningFeatureAdapter *feature = getPixelBinningFeatureByID(featureID);
     if(NULL == feature) {
         SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
+        return;
     }
 
     feature->setDefaultPixelBinningFactor(errorCode, binningFactor);
@@ -689,7 +689,7 @@ void DeviceAdapter::binningSetDefaultPixelBinningFactor(long featureID, int *err
     PixelBinningFeatureAdapter *feature = getPixelBinningFeatureByID(featureID);
     if(NULL == feature) {
         SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
+        return;
     }
 
     feature->setDefaultPixelBinningFactor(errorCode);
@@ -699,7 +699,7 @@ unsigned char DeviceAdapter::binningGetDefaultPixelBinningFactor(long featureID,
     PixelBinningFeatureAdapter *feature = getPixelBinningFeatureByID(featureID);
     if(NULL == feature) {
         SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
+        return 0;
     }
 
     return feature->getDefaultPixelBinningFactor(errorCode);
@@ -709,7 +709,7 @@ unsigned char DeviceAdapter::binningGetMaxPixelBinningFactor(long featureID, int
     PixelBinningFeatureAdapter *feature = getPixelBinningFeatureByID(featureID);
     if(NULL == feature) {
         SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
+        return 0;
     }
 
     return feature->getMaxPixelBinningFactor(errorCode);
@@ -832,63 +832,63 @@ void DeviceAdapter::irradCalibrationWriteCollectionArea(long featureID,
 /* Ethernet Configuration feature wrappers */
 int DeviceAdapter::getNumberOfEthernetConfigurationFeatures() 
 {
-	return (int) this->ethernetConfigurationFeatures.size();
+    return (int) this->ethernetConfigurationFeatures.size();
 }
 
 int DeviceAdapter::getEthernetConfigurationFeatures(long *buffer, int maxFeatures) 
 {
-	return __getFeatureIDs<EthernetConfigurationFeatureAdapter>(ethernetConfigurationFeatures, buffer, maxFeatures);
+    return __getFeatureIDs<EthernetConfigurationFeatureAdapter>(ethernetConfigurationFeatures, buffer, maxFeatures);
 }
 
 EthernetConfigurationFeatureAdapter *DeviceAdapter::getEthernetConfigurationFeatureByID(long featureID) 
 {
-	return __getFeatureByID<EthernetConfigurationFeatureAdapter>(ethernetConfigurationFeatures, featureID);
+    return __getFeatureByID<EthernetConfigurationFeatureAdapter>(ethernetConfigurationFeatures, featureID);
 }
 
 
 void DeviceAdapter::ethernetConfiguration_Get_MAC_Address(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char (*macAddress)[6]) 
 {
-	EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
-	if (NULL == feature) 
-	{
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
+    if (NULL == feature) 
+    {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->get_MAC_Address(errorCode, interfaceIndex, macAddress);
+    feature->get_MAC_Address(errorCode, interfaceIndex, macAddress);
 }
 
 void DeviceAdapter::ethernetConfiguration_Set_MAC_Address(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char macAddress[6])
 {
-	EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->set_MAC_Address(errorCode, interfaceIndex, macAddress);
+    feature->set_MAC_Address(errorCode, interfaceIndex, macAddress);
 }
 
 unsigned char DeviceAdapter::ethernetConfiguration_Get_GbE_Enable_Status(long featureID, int *errorCode, unsigned char interfaceIndex) 
 {
-	EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->get_GbE_Enable_Status(errorCode, interfaceIndex);
+    return feature->get_GbE_Enable_Status(errorCode, interfaceIndex);
 }
 
 void DeviceAdapter::ethernetConfiguration_Set_GbE_Enable_Status(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState) 
 {
-	EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->set_GbE_Enable_Status(errorCode, interfaceIndex, enableState);
+    feature->set_GbE_Enable_Status(errorCode, interfaceIndex, enableState);
 }
 
 
@@ -898,163 +898,163 @@ void DeviceAdapter::ethernetConfiguration_Set_GbE_Enable_Status(long featureID, 
 /* gpio feature wrappers */
 int DeviceAdapter::getNumberOfGPIOFeatures()
 {
-	return (int) this->gpioFeatures.size();
+    return (int) this->gpioFeatures.size();
 }
 
 int DeviceAdapter::getGPIOFeatures(long *buffer, int maxFeatures)
 {
-	return __getFeatureIDs<gpioFeatureAdapter>(gpioFeatures, buffer, maxFeatures);
+    return __getFeatureIDs<gpioFeatureAdapter>(gpioFeatures, buffer, maxFeatures);
 }
 
 gpioFeatureAdapter *DeviceAdapter::getGPIOFeatureByID(long featureID)
 {
-	return __getFeatureByID<gpioFeatureAdapter>(gpioFeatures, featureID);
+    return __getFeatureByID<gpioFeatureAdapter>(gpioFeatures, featureID);
 }
 
 unsigned char DeviceAdapter::gpioGetNumberOfPins(long featureID, int *errorCode)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getGPIO_NumberOfPins(errorCode);
+    return feature->getGPIO_NumberOfPins(errorCode);
 }
 
 unsigned int DeviceAdapter::gpioGetOutputEnableVector(long featureID, int *errorCode)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getGPIO_OutputEnableVector(errorCode);
+    return feature->getGPIO_OutputEnableVector(errorCode);
 }
 
 void DeviceAdapter::gpioSetOutputEnableVector(long featureID, int *errorCode, unsigned int outputEnableVector, unsigned int bitMask)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setGPIO_OutputEnableVector(errorCode, outputEnableVector, bitMask);
+    feature->setGPIO_OutputEnableVector(errorCode, outputEnableVector, bitMask);
 }
 
 unsigned int DeviceAdapter::gpioGetValueVector(long featureID, int *errorCode)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getGPIO_ValueVector(errorCode);
+    return feature->getGPIO_ValueVector(errorCode);
 }
 
 void DeviceAdapter::gpioSetValueVector(long featureID, int *errorCode, unsigned int valueVector, unsigned int bitMask)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setGPIO_ValueVector(errorCode, valueVector, bitMask);
+    feature->setGPIO_ValueVector(errorCode, valueVector, bitMask);
 }
 
 unsigned char DeviceAdapter::gpioExtensionGetNumberOfPins(long featureID, int *errorCode)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getEGPIO_NumberOfPins(errorCode);
+    return feature->getEGPIO_NumberOfPins(errorCode);
 }
 
 unsigned char DeviceAdapter::gpioExtensionGetAvailableModes(long featureID, int *errorCode, unsigned char pinNumber, unsigned char *availableModes, unsigned char maximumModeCount)
 {
-	unsigned char arraySize = 0;
+    unsigned char arraySize = 0;
 
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature)
-	{
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return arraySize;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature)
+    {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return arraySize;
+    }
 
-	return feature->getEGPIO_AvailableModes(errorCode, pinNumber, availableModes, maximumModeCount);
+    return feature->getEGPIO_AvailableModes(errorCode, pinNumber, availableModes, maximumModeCount);
 }
 
 unsigned char DeviceAdapter::gpioExtensionGetCurrentMode(long featureID, int *errorCode, unsigned char pinNumber)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getEGPIO_CurrentMode(errorCode, pinNumber);
+    return feature->getEGPIO_CurrentMode(errorCode, pinNumber);
 }
 
 void DeviceAdapter::gpioExtensionSetMode(long featureID, int *errorCode, unsigned char pinNumber, unsigned char mode, float defaultValue)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setEGPIO_Mode(errorCode, pinNumber, mode, defaultValue);
+    feature->setEGPIO_Mode(errorCode, pinNumber, mode, defaultValue);
 }
 
 unsigned int DeviceAdapter::gpioExtensionGetOutputVector(long featureID, int *errorCode)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getEGPIO_OutputVector(errorCode);
+    return feature->getEGPIO_OutputVector(errorCode);
 }
 
 void DeviceAdapter::gpioExtensionSetOutputVector(long featureID, int *errorCode, unsigned int outputVector, unsigned int bitMask)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setEGPIO_OutputVector(errorCode, outputVector, bitMask);
+    feature->setEGPIO_OutputVector(errorCode, outputVector, bitMask);
 }
 
 float DeviceAdapter::gpioExtensionGetValue(long featureID, int *errorCode, unsigned char pinNumber)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getEGPIO_Value(errorCode, pinNumber);
+    return feature->getEGPIO_Value(errorCode, pinNumber);
 }
 
 void DeviceAdapter::gpioExtensionSetValue(long featureID, int *errorCode, unsigned char pinNumber, float value)
 {
-	gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    gpioFeatureAdapter *feature = getGPIOFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setEGPIO_Value(errorCode, pinNumber, value);
+    feature->setEGPIO_Value(errorCode, pinNumber, value);
 }
 
 
@@ -1063,62 +1063,62 @@ void DeviceAdapter::gpioExtensionSetValue(long featureID, int *errorCode, unsign
 /* Multicast feature wrappers */
 int DeviceAdapter::getNumberOfMulticastFeatures()
 {
-	return (int) this->multicastFeatures.size();
+    return (int) this->multicastFeatures.size();
 }
 
 int DeviceAdapter::getMulticastFeatures(long *buffer, int maxFeatures)
 {
-	return __getFeatureIDs<MulticastFeatureAdapter>(multicastFeatures, buffer, maxFeatures);
+    return __getFeatureIDs<MulticastFeatureAdapter>(multicastFeatures, buffer, maxFeatures);
 }
 
 MulticastFeatureAdapter *DeviceAdapter::getMulticastFeatureByID(long featureID)
 {
-	return __getFeatureByID<MulticastFeatureAdapter>(multicastFeatures, featureID);
+    return __getFeatureByID<MulticastFeatureAdapter>(multicastFeatures, featureID);
 }
 
 #if(false)  // not implemented yet
 void DeviceAdapter::getMulticastGroupAddress(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(&groupAddress)[4])
 {
-	MulticastFeatureAdapter *feature = getMulticastFeatureByID(featureID);
-	if (NULL == feature)
-	{
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-	}
+    MulticastFeatureAdapter *feature = getMulticastFeatureByID(featureID);
+    if (NULL == feature)
+    {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+    }
 
-	feature->getGroupAddress(errorCode, interfaceIndex, groupAddress);
+    feature->getGroupAddress(errorCode, interfaceIndex, groupAddress);
 }
 
 void DeviceAdapter::setMulticastGroupAddress(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char groupAddress[4])
 {
-	MulticastFeatureAdapter *feature = getMulticastFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    MulticastFeatureAdapter *feature = getMulticastFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setGroupAddress(errorCode, interfaceIndex, groupAddress);
+    feature->setGroupAddress(errorCode, interfaceIndex, groupAddress);
 }
 #endif
 unsigned char DeviceAdapter::getMulticastEnableState(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	MulticastFeatureAdapter *feature = getMulticastFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    MulticastFeatureAdapter *feature = getMulticastFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getEnableState(errorCode, interfaceIndex);
+    return feature->getEnableState(errorCode, interfaceIndex);
 }
 
 void DeviceAdapter::setMulticastEnableState(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState)
 {
-	MulticastFeatureAdapter *feature = getMulticastFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    MulticastFeatureAdapter *feature = getMulticastFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setEnableState(errorCode, interfaceIndex, enableState);
+    feature->setEnableState(errorCode, interfaceIndex, enableState);
 }
 
 
@@ -1132,105 +1132,105 @@ void DeviceAdapter::setMulticastEnableState(long featureID, int *errorCode, unsi
 /* IPv4 feature wrappers */
 int DeviceAdapter::getNumberOfIPv4Features()
 {
-	return (int) this->IPv4Features.size();
+    return (int) this->IPv4Features.size();
 }
 
 int DeviceAdapter::getIPv4Features(long *buffer, int maxFeatures)
 {
-	return __getFeatureIDs<IPv4FeatureAdapter>(IPv4Features, buffer, maxFeatures);
+    return __getFeatureIDs<IPv4FeatureAdapter>(IPv4Features, buffer, maxFeatures);
 }
 
 IPv4FeatureAdapter *DeviceAdapter::getIPv4FeatureByID(long featureID)
 {
-	return __getFeatureByID<IPv4FeatureAdapter>(IPv4Features, featureID);
+    return __getFeatureByID<IPv4FeatureAdapter>(IPv4Features, featureID);
 }
 
 unsigned char DeviceAdapter::get_IPv4_DHCP_Enable_State(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->get_IPv4_DHCP_Enable_State(errorCode, interfaceIndex);
+    return feature->get_IPv4_DHCP_Enable_State(errorCode, interfaceIndex);
 }
 
 void DeviceAdapter::set_IPv4_DHCP_Enable_State(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState)
 {
-	IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->set_IPv4_DHCP_Enable_State(errorCode, interfaceIndex, enableState);
+    feature->set_IPv4_DHCP_Enable_State(errorCode, interfaceIndex, enableState);
 }
 
 unsigned char DeviceAdapter::get_Number_Of_IPv4_Addresses(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->get_Number_Of_IPv4_Addresses(errorCode, interfaceIndex);
+    return feature->get_Number_Of_IPv4_Addresses(errorCode, interfaceIndex);
 }
 
 void DeviceAdapter::get_IPv4_Default_Gateway(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4])
 {
-	IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
-	if (NULL == feature)
-	{
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-	}
+    IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
+    if (NULL == feature)
+    {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+    }
 
-	feature->get_IPv4_Default_Gateway(errorCode, interfaceIndex, defaultGatewayAddress);
+    feature->get_IPv4_Default_Gateway(errorCode, interfaceIndex, defaultGatewayAddress);
 }
 
 void DeviceAdapter::set_IPv4_Default_Gateway(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4])
 {
-	IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->set_IPv4_Default_Gateway(errorCode, interfaceIndex, defaultGatewayAddress);
+    feature->set_IPv4_Default_Gateway(errorCode, interfaceIndex, defaultGatewayAddress);
 }
 
 void DeviceAdapter::get_IPv4_Address(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex,  unsigned char(*IPv4_Address)[4], unsigned char *netMask)
 {
-	IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
-	if (NULL == feature)
-	{
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-	}
+    IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
+    if (NULL == feature)
+    {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+    }
 
-	feature->get_IPv4_Address(errorCode, interfaceIndex, addressIndex, IPv4_Address, netMask);
+    feature->get_IPv4_Address(errorCode, interfaceIndex, addressIndex, IPv4_Address, netMask);
 }
 
 void DeviceAdapter::add_IPv4_Address(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask)
 {
-	IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->add_IPv4_Address(errorCode, interfaceIndex, IPv4_Address, netMask);
+    feature->add_IPv4_Address(errorCode, interfaceIndex, IPv4_Address, netMask);
 }
 
 void DeviceAdapter::delete_IPv4_Address(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex)
 {
-	IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    IPv4FeatureAdapter *feature = getIPv4FeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->delete_IPv4_Address(errorCode, interfaceIndex, addressIndex);
+    feature->delete_IPv4_Address(errorCode, interfaceIndex, addressIndex);
 }
 
 
@@ -1248,156 +1248,156 @@ void DeviceAdapter::delete_IPv4_Address(long featureID, int *errorCode, unsigned
 /* Wifi Configuration feature wrappers */
 int DeviceAdapter::getNumberOfWifiConfigurationFeatures()
 {
-	return (int) this->wifiConfigurationFeatures.size();
+    return (int) this->wifiConfigurationFeatures.size();
 }
 
 int DeviceAdapter::getWifiConfigurationFeatures(long *buffer, int maxFeatures)
 {
-	return __getFeatureIDs<WifiConfigurationFeatureAdapter>(wifiConfigurationFeatures, buffer, maxFeatures);
+    return __getFeatureIDs<WifiConfigurationFeatureAdapter>(wifiConfigurationFeatures, buffer, maxFeatures);
 }
 
 WifiConfigurationFeatureAdapter *DeviceAdapter::getWifiConfigurationFeatureByID(long featureID)
 {
-	return __getFeatureByID<WifiConfigurationFeatureAdapter>(wifiConfigurationFeatures, featureID);
+    return __getFeatureByID<WifiConfigurationFeatureAdapter>(wifiConfigurationFeatures, featureID);
 }
 
 unsigned char DeviceAdapter::wifiConfigurationGetMode(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getMode(errorCode, interfaceIndex);
+    return feature->getMode(errorCode, interfaceIndex);
 }
 
 void DeviceAdapter::wifiConfigurationSetMode(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char mode)
 {
-	WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setMode(errorCode, interfaceIndex, mode);
+    feature->setMode(errorCode, interfaceIndex, mode);
 }
 
 unsigned char DeviceAdapter::wifiConfigurationGetSecurityType(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getSecurityType(errorCode, interfaceIndex);
+    return feature->getSecurityType(errorCode, interfaceIndex);
 }
 
 void DeviceAdapter::wifiConfigurationSetSecurityType(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char securityType)
 {
-	WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setMode(errorCode, interfaceIndex, securityType);
+    feature->setMode(errorCode, interfaceIndex, securityType);
 }
 unsigned char DeviceAdapter::wifiConfigurationGetSSID(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*ssid)[32])
 {
-	WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
-	if (NULL == feature)
-	{
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
+    if (NULL == feature)
+    {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getSSID(errorCode, interfaceIndex, ssid);
+    return feature->getSSID(errorCode, interfaceIndex, ssid);
 }
 
 void DeviceAdapter::wifiConfigurationSetSSID(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char ssid[32], unsigned char length)
 {
-	WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setSSID(errorCode, interfaceIndex, ssid, length);
+    feature->setSSID(errorCode, interfaceIndex, ssid, length);
 }
 
 void DeviceAdapter::wifiConfigurationSetPassPhrase(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char *passPhrase, unsigned char passPhraseLength)
 {
-	WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    WifiConfigurationFeatureAdapter *feature = getWifiConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setPassPhrase(errorCode, interfaceIndex, passPhrase, passPhraseLength);
+    feature->setPassPhrase(errorCode, interfaceIndex, passPhrase, passPhraseLength);
 }
 
 /* DHCP Server feature wrappers */
 int DeviceAdapter::getNumberOfDHCPServerFeatures()
 {
-	return (int) this->dhcpServerFeatures.size();
+    return (int) this->dhcpServerFeatures.size();
 }
 
 int DeviceAdapter::getDHCPServerFeatures(long *buffer, int maxFeatures)
 {
-	return __getFeatureIDs<DHCPServerFeatureAdapter>(dhcpServerFeatures, buffer, maxFeatures);
+    return __getFeatureIDs<DHCPServerFeatureAdapter>(dhcpServerFeatures, buffer, maxFeatures);
 }
 
 DHCPServerFeatureAdapter *DeviceAdapter::getDHCPServerFeatureByID(long featureID)
 {
-	return __getFeatureByID<DHCPServerFeatureAdapter>(dhcpServerFeatures, featureID);
+    return __getFeatureByID<DHCPServerFeatureAdapter>(dhcpServerFeatures, featureID);
 }
 
 
 void DeviceAdapter::dhcpServerGetAddress(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*serverAddress)[4], unsigned char *netMask)
 {
-	DHCPServerFeatureAdapter *feature = getDHCPServerFeatureByID(featureID);
-	if (NULL == feature)
-	{
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    DHCPServerFeatureAdapter *feature = getDHCPServerFeatureByID(featureID);
+    if (NULL == feature)
+    {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->getServerAddress(errorCode, interfaceIndex, serverAddress, netMask);
+    feature->getServerAddress(errorCode, interfaceIndex, serverAddress, netMask);
 }
 
 void DeviceAdapter::dhcpServerSetAddress(long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char serverAddress[4], unsigned char netMask)
 {
-	DHCPServerFeatureAdapter *feature = getDHCPServerFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    DHCPServerFeatureAdapter *feature = getDHCPServerFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setServerAddress(errorCode, interfaceIndex, serverAddress, netMask);
+    feature->setServerAddress(errorCode, interfaceIndex, serverAddress, netMask);
 }
 
 unsigned char DeviceAdapter::dhcpServerGetEnableState(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	DHCPServerFeatureAdapter *feature = getDHCPServerFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    DHCPServerFeatureAdapter *feature = getDHCPServerFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getServerEnableState(errorCode, interfaceIndex);
+    return feature->getServerEnableState(errorCode, interfaceIndex);
 }
 
 void DeviceAdapter::dhcpServerSetEnableState(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState)
 {
-	DHCPServerFeatureAdapter *feature = getDHCPServerFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    DHCPServerFeatureAdapter *feature = getDHCPServerFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setServerEnableState(errorCode, interfaceIndex, enableState);
+    feature->setServerEnableState(errorCode, interfaceIndex, enableState);
 }
 
 
@@ -1407,83 +1407,83 @@ void DeviceAdapter::dhcpServerSetEnableState(long featureID, int *errorCode, uns
 /* Network Configuration feature wrappers */
 int DeviceAdapter::getNumberOfNetworkConfigurationFeatures()
 {
-	return (int) this->networkConfigurationFeatures.size();
+    return (int) this->networkConfigurationFeatures.size();
 }
 
 int DeviceAdapter::getNetworkConfigurationFeatures(long *buffer, int maxFeatures)
 {
-	return __getFeatureIDs<NetworkConfigurationFeatureAdapter>(networkConfigurationFeatures, buffer, maxFeatures);
+    return __getFeatureIDs<NetworkConfigurationFeatureAdapter>(networkConfigurationFeatures, buffer, maxFeatures);
 }
 
 NetworkConfigurationFeatureAdapter *DeviceAdapter::getNetworkConfigurationFeatureByID(long featureID)
 {
-	return __getFeatureByID<NetworkConfigurationFeatureAdapter>(networkConfigurationFeatures, featureID);
+    return __getFeatureByID<NetworkConfigurationFeatureAdapter>(networkConfigurationFeatures, featureID);
 }
 
 unsigned char DeviceAdapter::getNumberOfNetworkInterfaces(long featureID, int *errorCode)
 {
-	NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getNumberOfNetworkInterfaces(errorCode);
+    return feature->getNumberOfNetworkInterfaces(errorCode);
 }
 
 unsigned char DeviceAdapter::getNetworkInterfaceConnectionType(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getNetworkInterfaceConnectionType(errorCode, interfaceIndex);
+    return feature->getNetworkInterfaceConnectionType(errorCode, interfaceIndex);
 }
 
 unsigned char DeviceAdapter::getNetworkInterfaceEnableState(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getNetworkInterfaceEnableState(errorCode, interfaceIndex);
+    return feature->getNetworkInterfaceEnableState(errorCode, interfaceIndex);
 }
 
 void DeviceAdapter::setNetworkInterfaceEnableState(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState)
 {
-	NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setNetworkInterfaceEnableState(errorCode, interfaceIndex, enableState);
+    feature->setNetworkInterfaceEnableState(errorCode, interfaceIndex, enableState);
 }
 
 unsigned char DeviceAdapter::runNetworkInterfaceSelfTest(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->runNetworkInterfaceSelfTest(errorCode, interfaceIndex);
+    return feature->runNetworkInterfaceSelfTest(errorCode, interfaceIndex);
 }
 
 void DeviceAdapter::saveNetworkInterfaceConnectionSettings(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
-	NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    NetworkConfigurationFeatureAdapter *feature = getNetworkConfigurationFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->saveNetworkInterfaceConnectionSettings(errorCode, interfaceIndex);
+    feature->saveNetworkInterfaceConnectionSettings(errorCode, interfaceIndex);
 }
 
 
@@ -1775,62 +1775,62 @@ int DeviceAdapter::temperatureGetAll(long temperatureFeatureID, int *errorCode,
 
 /* Introspection feature wrappers */
 int DeviceAdapter::getNumberOfIntrospectionFeatures() {
-	return (int) this->introspectionFeatures.size();
+    return (int) this->introspectionFeatures.size();
 }
 
 int DeviceAdapter::getIntrospectionFeatures(long *buffer, int maxFeatures) {
-	return __getFeatureIDs<IntrospectionFeatureAdapter>(
-		introspectionFeatures, buffer, maxFeatures);
+    return __getFeatureIDs<IntrospectionFeatureAdapter>(
+        introspectionFeatures, buffer, maxFeatures);
 }
 
 IntrospectionFeatureAdapter *DeviceAdapter::getIntrospectionFeatureByID(long featureID) {
-	return __getFeatureByID<IntrospectionFeatureAdapter>(
-		introspectionFeatures, featureID);
+    return __getFeatureByID<IntrospectionFeatureAdapter>(
+        introspectionFeatures, featureID);
 }
 
 unsigned short DeviceAdapter::introspectionNumberOfPixelsGet(long introspectionFeatureID, int *errorCode)
 {
-	IntrospectionFeatureAdapter *feature = getIntrospectionFeatureByID(introspectionFeatureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    IntrospectionFeatureAdapter *feature = getIntrospectionFeatureByID(introspectionFeatureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getNumberOfPixels(errorCode);
+    return feature->getNumberOfPixels(errorCode);
 }
 
 
 int DeviceAdapter::introspectionActivePixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *buffer, int bufferLength)
 {
-	IntrospectionFeatureAdapter *feature = getIntrospectionFeatureByID(introspectionFeatureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    IntrospectionFeatureAdapter *feature = getIntrospectionFeatureByID(introspectionFeatureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getActivePixelRanges(errorCode, buffer, bufferLength);
+    return feature->getActivePixelRanges(errorCode, buffer, bufferLength);
 }
 
 int DeviceAdapter::introspectionElectricDarkPixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *buffer, int bufferLength)
 {
-	IntrospectionFeatureAdapter *feature = getIntrospectionFeatureByID(introspectionFeatureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    IntrospectionFeatureAdapter *feature = getIntrospectionFeatureByID(introspectionFeatureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getElectricDarkPixelRanges(errorCode, buffer, bufferLength);
+    return feature->getElectricDarkPixelRanges(errorCode, buffer, bufferLength);
 }
 
 int DeviceAdapter::introspectionOpticalDarkPixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *buffer, int bufferLength)
 {
-	IntrospectionFeatureAdapter *feature = getIntrospectionFeatureByID(introspectionFeatureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    IntrospectionFeatureAdapter *feature = getIntrospectionFeatureByID(introspectionFeatureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getOpticalDarkPixelRanges(errorCode, buffer, bufferLength);
+    return feature->getOpticalDarkPixelRanges(errorCode, buffer, bufferLength);
 }
 
 
@@ -2139,58 +2139,58 @@ void DeviceAdapter::dataBufferSetBufferCapacity(long featureID, int *errorCode, 
 /* Fast buffer feature wrappers*/
 
 int DeviceAdapter::getNumberOfFastBufferFeatures() {
-	return (int) this->fastBufferFeatures.size();
+    return (int) this->fastBufferFeatures.size();
 }
 
 int DeviceAdapter::getFastBufferFeatures(long *buffer, int maxFeatures) {
-	return __getFeatureIDs<FastBufferFeatureAdapter>(
-		fastBufferFeatures, buffer, maxFeatures);
+    return __getFeatureIDs<FastBufferFeatureAdapter>(
+        fastBufferFeatures, buffer, maxFeatures);
 }
 
 FastBufferFeatureAdapter *DeviceAdapter::getFastBufferFeatureByID(long featureID) {
-	return __getFeatureByID<FastBufferFeatureAdapter>(
-		fastBufferFeatures, featureID);
+    return __getFeatureByID<FastBufferFeatureAdapter>(
+        fastBufferFeatures, featureID);
 }
 
 
 unsigned char DeviceAdapter::fastBufferGetBufferingEnable(long featureID, int *errorCode) {
-	FastBufferFeatureAdapter *feature = getFastBufferFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    FastBufferFeatureAdapter *feature = getFastBufferFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getBufferingEnable(errorCode);
+    return feature->getBufferingEnable(errorCode);
 }
 
 void DeviceAdapter::fastBufferSetBufferingEnable(long featureID, int *errorCode, unsigned char isEnabled) {
-	FastBufferFeatureAdapter *feature = getFastBufferFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    FastBufferFeatureAdapter *feature = getFastBufferFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setBufferingEnable(errorCode, isEnabled);
+    feature->setBufferingEnable(errorCode, isEnabled);
 }
 
 unsigned int DeviceAdapter::fastBufferGetConsecutiveSampleCount(long featureID, int *errorCode) {
-	FastBufferFeatureAdapter *feature = getFastBufferFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    FastBufferFeatureAdapter *feature = getFastBufferFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->getConsecutiveSampleCount(errorCode);
+    return feature->getConsecutiveSampleCount(errorCode);
 }
 
 void DeviceAdapter::fastBufferSetConsecutiveSampleCount(long featureID, int *errorCode, unsigned int consecutiveSampleCount) {
-	FastBufferFeatureAdapter *feature = getFastBufferFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return;
-	}
+    FastBufferFeatureAdapter *feature = getFastBufferFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
 
-	feature->setConsecutiveSampleCount(errorCode, consecutiveSampleCount);
+    feature->setConsecutiveSampleCount(errorCode, consecutiveSampleCount);
 }
 
 /* Acquisition delay feature wrappers */
@@ -2263,51 +2263,51 @@ unsigned long DeviceAdapter::acquisitionDelayGetDelayMinimumMicroseconds(long fe
 /* i2c master feature wrappers */
 int DeviceAdapter::getNumberOfI2CMasterFeatures()
 {
-	return (int) this->i2cMasterFeatures.size();
+    return (int) this->i2cMasterFeatures.size();
 }
 
 int DeviceAdapter::getI2CMasterFeatures(long *buffer, int maxFeatures)
 {
-	return __getFeatureIDs<I2CMasterFeatureAdapter>(i2cMasterFeatures, buffer, maxFeatures);
+    return __getFeatureIDs<I2CMasterFeatureAdapter>(i2cMasterFeatures, buffer, maxFeatures);
 }
 
 I2CMasterFeatureAdapter *DeviceAdapter::getI2CMasterFeatureByID(long featureID)
 {
-	return __getFeatureByID<I2CMasterFeatureAdapter>(i2cMasterFeatures, featureID);
+    return __getFeatureByID<I2CMasterFeatureAdapter>(i2cMasterFeatures, featureID);
 }
 
 unsigned char DeviceAdapter::i2cMasterGetNumberOfBuses(long featureID, int *errorCode)
 {
-	I2CMasterFeatureAdapter *feature = getI2CMasterFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    I2CMasterFeatureAdapter *feature = getI2CMasterFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->i2cMasterGetNumberOfBuses(errorCode);
+    return feature->i2cMasterGetNumberOfBuses(errorCode);
 }
 
 unsigned short DeviceAdapter::i2cMasterReadBus(long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes)
 {
-	I2CMasterFeatureAdapter *feature = getI2CMasterFeatureByID(featureID);
-	if (NULL == feature)
-	{
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    I2CMasterFeatureAdapter *feature = getI2CMasterFeatureByID(featureID);
+    if (NULL == feature)
+    {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->i2cMasterReadBus(errorCode, busIndex, slaveAddress, readData, numberOfBytes);
+    return feature->i2cMasterReadBus(errorCode, busIndex, slaveAddress, readData, numberOfBytes);
 }
 
 unsigned short DeviceAdapter::i2cMasterWriteBus(long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes)
 {
-	I2CMasterFeatureAdapter *feature = getI2CMasterFeatureByID(featureID);
-	if (NULL == feature) {
-		SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-		return 0;
-	}
+    I2CMasterFeatureAdapter *feature = getI2CMasterFeatureByID(featureID);
+    if (NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
 
-	return feature->i2cMasterWriteBus(errorCode, busIndex, slaveAddress, writeData, numberOfBytes);
+    return feature->i2cMasterWriteBus(errorCode, busIndex, slaveAddress, writeData, numberOfBytes);
 }
 
 

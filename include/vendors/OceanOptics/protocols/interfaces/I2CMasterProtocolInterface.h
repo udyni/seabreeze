@@ -43,11 +43,11 @@ namespace seabreeze {
 
     class I2CMasterProtocolInterface : public ProtocolHelper {
     public:
-		I2CMasterProtocolInterface(Protocol *protocol);
+        I2CMasterProtocolInterface(Protocol *protocol);
         virtual ~I2CMasterProtocolInterface();
-	
-	
-	    /**
+    
+    
+        /**
          * Get the number of I2C busses.
          */
         virtual unsigned char i2cMasterGetNumberOfBuses(const Bus &bus)

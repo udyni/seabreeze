@@ -36,7 +36,7 @@ namespace seabreeze {
     namespace oceanBinaryProtocol {
         class OBPSetIPv4DHCPEnableStateExchange : public OBPCommand {
         public:
-			OBPSetIPv4DHCPEnableStateExchange();
+            OBPSetIPv4DHCPEnableStateExchange();
             virtual ~OBPSetIPv4DHCPEnableStateExchange();
 
             void setInterfaceIndex(unsigned char interfaceIndex);

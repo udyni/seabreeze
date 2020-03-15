@@ -58,31 +58,31 @@ OpticalBenchFeatureAdapter::~OpticalBenchFeatureAdapter() {
 
 
 unsigned short int OpticalBenchFeatureAdapter::readOpticalBenchFiberDiameterMicrons(int *errorCode) {
-	unsigned short int returnValue;
-	
-	// no memory allocated, just pass it through
-	try {
-    	returnValue=this->feature->readOpticalBenchFiberDiameterMicrons(*this->protocol, *this->bus);
-    	SET_ERROR_CODE(ERROR_SUCCESS);
+    unsigned short int returnValue;
+    
+    // no memory allocated, just pass it through
+    try {
+        returnValue=this->feature->readOpticalBenchFiberDiameterMicrons(*this->protocol, *this->bus);
+        SET_ERROR_CODE(ERROR_SUCCESS);
     }
     catch (FeatureException &fe) {
-    	returnValue=0; 
-    	SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+        returnValue=0; 
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
     return returnValue;
 }
 
 unsigned short int OpticalBenchFeatureAdapter::readOpticalBenchSlitWidthMicrons(int *errorCode) {
-	unsigned short int returnValue;
-	
-	// no memory allocated, just pass it through
-	try {
-    	returnValue=this->feature->readOpticalBenchSlitWidthMicrons(*this->protocol, *this->bus);
-    	SET_ERROR_CODE(ERROR_SUCCESS);
+    unsigned short int returnValue;
+    
+    // no memory allocated, just pass it through
+    try {
+        returnValue=this->feature->readOpticalBenchSlitWidthMicrons(*this->protocol, *this->bus);
+        SET_ERROR_CODE(ERROR_SUCCESS);
     }
     catch (FeatureException &fe) {
-    	returnValue=0; 
-    	SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+        returnValue=0; 
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
     return returnValue;
 }

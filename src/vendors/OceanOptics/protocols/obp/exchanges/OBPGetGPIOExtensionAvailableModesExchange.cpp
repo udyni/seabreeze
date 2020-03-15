@@ -39,13 +39,13 @@ OBPGetGPIOExtensionAvailableModesExchange::OBPGetGPIOExtensionAvailableModesExch
     this->messageType = OBPMessageTypes::OBP_GET_EGPIO_AVAILABLE_MODES;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 void OBPGetGPIOExtensionAvailableModesExchange::setPinNumber(unsigned char pinNumber)
 {
-	this->payload[0] = pinNumber;
+    this->payload[0] = pinNumber;
 }
 
 OBPGetGPIOExtensionAvailableModesExchange::~OBPGetGPIOExtensionAvailableModesExchange() {

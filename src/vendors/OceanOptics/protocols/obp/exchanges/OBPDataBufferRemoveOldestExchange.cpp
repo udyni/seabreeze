@@ -41,8 +41,8 @@ using namespace std;
 OBPDataBufferRemoveOldestExchange::OBPDataBufferRemoveOldestExchange() {
     this->hints->push_back(new OBPControlHint());
     this->messageType = OBPMessageTypes::OBP_REMOVE_OLDEST_SPECTRA;
-	this->payload.resize(sizeof(unsigned int));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->payload.resize(sizeof(unsigned int));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 OBPDataBufferRemoveOldestExchange::~OBPDataBufferRemoveOldestExchange() {
@@ -51,6 +51,6 @@ OBPDataBufferRemoveOldestExchange::~OBPDataBufferRemoveOldestExchange() {
 
 void OBPDataBufferRemoveOldestExchange::setNumberOfSpectraToRemove(unsigned int numberOfSpectra)
 {
-	memcpy(&(this->payload[0]), &numberOfSpectra, sizeof(unsigned int));
+    memcpy(&(this->payload[0]), &numberOfSpectra, sizeof(unsigned int));
 }
 

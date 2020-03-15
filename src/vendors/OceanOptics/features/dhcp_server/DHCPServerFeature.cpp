@@ -60,16 +60,16 @@ DHCPServerFeature::~DHCPServerFeature()
 void DHCPServerFeature::getServerAddress(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, vector<unsigned char> *serverAddress, unsigned char *netMask) throw (FeatureException) 
 {
 
-	DHCPServerProtocolInterface *DHCPServerPI = NULL;
+    DHCPServerProtocolInterface *DHCPServerPI = NULL;
     ProtocolHelper *proto;
 
     try 
     {
         proto = lookupProtocolImpl(protocol);
-		DHCPServerPI = static_cast<DHCPServerProtocolInterface *>(proto);
+        DHCPServerPI = static_cast<DHCPServerProtocolInterface *>(proto);
     } 
-	catch (FeatureProtocolNotFoundException &e) 
-	{
+    catch (FeatureProtocolNotFoundException &e) 
+    {
         string error(
         "Could not find matching protocol implementation to get calibration.");
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -77,11 +77,11 @@ void DHCPServerFeature::getServerAddress(const Protocol &protocol, const Bus &bu
     }
 
     try 
-	{
+    {
         DHCPServerPI->getServerAddress(bus, interfaceIndex, serverAddress, netMask);
     } 
-	catch (ProtocolException &pe) 
-	{
+    catch (ProtocolException &pe) 
+    {
         string error("Caught protocol exception: ");
         error += pe.what();
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -106,7 +106,7 @@ void DHCPServerFeature::setServerAddress(const Protocol &protocol, const Bus &bu
     }
 
     try {
-		dhcpServerPI->setServerAddress(bus, interfaceIndex, serverAddress, netMask);
+        dhcpServerPI->setServerAddress(bus, interfaceIndex, serverAddress, netMask);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();
@@ -118,13 +118,13 @@ void DHCPServerFeature::setServerAddress(const Protocol &protocol, const Bus &bu
 
 unsigned char DHCPServerFeature::getServerEnableState(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException) 
 {
-	DHCPServerProtocolInterface *dhcpServerPI = NULL;
-	ProtocolHelper *proto;
-	byte enableStatus;
+    DHCPServerProtocolInterface *dhcpServerPI = NULL;
+    ProtocolHelper *proto;
+    byte enableStatus;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		dhcpServerPI = static_cast<DHCPServerProtocolInterface *>(proto);
+        dhcpServerPI = static_cast<DHCPServerProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to read collection area.");
@@ -146,12 +146,12 @@ unsigned char DHCPServerFeature::getServerEnableState(const Protocol &protocol, 
 
 void DHCPServerFeature::setServerEnableState(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, unsigned char enableStatus) throw (FeatureException) 
 {
-	DHCPServerProtocolInterface *dhcpServerPI = NULL;
-	ProtocolHelper *proto;
+    DHCPServerProtocolInterface *dhcpServerPI = NULL;
+    ProtocolHelper *proto;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		dhcpServerPI = static_cast<DHCPServerProtocolInterface *>(proto);
+        dhcpServerPI = static_cast<DHCPServerProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to write collection area.");
@@ -160,7 +160,7 @@ void DHCPServerFeature::setServerEnableState(const Protocol &protocol, const Bus
     }
 
     try {
-		dhcpServerPI->setServerEnableStatus(bus, interfaceIndex, enableStatus);
+        dhcpServerPI->setServerEnableStatus(bus, interfaceIndex, enableStatus);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();

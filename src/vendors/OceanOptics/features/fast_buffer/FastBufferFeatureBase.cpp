@@ -55,126 +55,126 @@ FastBufferFeatureBase::~FastBufferFeatureBase() {
 
 
 FastBufferIndex_t FastBufferFeatureBase::getBufferingEnable(
-	const Protocol &protocol, const Bus &bus,
-	const FastBufferIndex_t bufferIndex) throw (FeatureException) 
+    const Protocol &protocol, const Bus &bus,
+    const FastBufferIndex_t bufferIndex) throw (FeatureException) 
 {
 
-	FastBufferProtocolInterface *buffer = NULL;
-	ProtocolHelper *proto = NULL;
+    FastBufferProtocolInterface *buffer = NULL;
+    ProtocolHelper *proto = NULL;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		buffer = static_cast<FastBufferProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException fpnfe) {
-		string error(
-			"Could not find matching protocol implementation to get data buffer capacity.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        buffer = static_cast<FastBufferProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException fpnfe) {
+        string error(
+            "Could not find matching protocol implementation to get data buffer capacity.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	FastBufferIndex_t retval = 0;
+    FastBufferIndex_t retval = 0;
 
-	try {
-		retval = buffer->getBufferingEnable(bus, bufferIndex);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
-	return retval;
+    try {
+        retval = buffer->getBufferingEnable(bus, bufferIndex);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
+    return retval;
 }
 
 void FastBufferFeatureBase::setBufferingEnable(const Protocol &protocol,
-	const Bus &bus, const FastBufferIndex_t bufferIndex,
-	const FastBufferIndex_t isEnabled) throw (FeatureException) {
+    const Bus &bus, const FastBufferIndex_t bufferIndex,
+    const FastBufferIndex_t isEnabled) throw (FeatureException) {
 
-	FastBufferProtocolInterface *buffer = NULL;
-	ProtocolHelper *proto = NULL;
+    FastBufferProtocolInterface *buffer = NULL;
+    ProtocolHelper *proto = NULL;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		buffer = static_cast<FastBufferProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException fpnfe) {
-		string error(
-			"Could not find matching protocol implementation to set data buffer capacity.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        buffer = static_cast<FastBufferProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException fpnfe) {
+        string error(
+            "Could not find matching protocol implementation to set data buffer capacity.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		buffer->setBufferingEnable(bus, bufferIndex, isEnabled);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        buffer->setBufferingEnable(bus, bufferIndex, isEnabled);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 }
 
 FastBufferSampleCount_t FastBufferFeatureBase::getConsecutiveSampleCount(
-	const Protocol &protocol, const Bus &bus,
-	const FastBufferIndex_t bufferIndex) throw (FeatureException) {
+    const Protocol &protocol, const Bus &bus,
+    const FastBufferIndex_t bufferIndex) throw (FeatureException) {
 
-	FastBufferProtocolInterface *buffer = NULL;
-	ProtocolHelper *proto = NULL;
+    FastBufferProtocolInterface *buffer = NULL;
+    ProtocolHelper *proto = NULL;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		buffer = static_cast<FastBufferProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException fpnfe) {
-		string error(
-			"Could not find matching protocol implementation to get data buffer capacity.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        buffer = static_cast<FastBufferProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException fpnfe) {
+        string error(
+            "Could not find matching protocol implementation to get data buffer capacity.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	FastBufferSampleCount_t retval = 0;
+    FastBufferSampleCount_t retval = 0;
 
-	try {
-		retval = buffer->getConsecutiveSampleCount(bus, bufferIndex);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
-	return retval;
+    try {
+        retval = buffer->getConsecutiveSampleCount(bus, bufferIndex);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
+    return retval;
 }
 
 void FastBufferFeatureBase::setConsecutiveSampleCount(const Protocol &protocol,
-	const Bus &bus, const FastBufferIndex_t bufferIndex,
-	const FastBufferSampleCount_t consecutiveSampleCount) throw (FeatureException) {
+    const Bus &bus, const FastBufferIndex_t bufferIndex,
+    const FastBufferSampleCount_t consecutiveSampleCount) throw (FeatureException) {
 
-	FastBufferProtocolInterface *buffer = NULL;
-	ProtocolHelper *proto = NULL;
+    FastBufferProtocolInterface *buffer = NULL;
+    ProtocolHelper *proto = NULL;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		buffer = static_cast<FastBufferProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException fpnfe) {
-		string error(
-			"Could not find matching protocol implementation to set data buffer capacity.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        buffer = static_cast<FastBufferProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException fpnfe) {
+        string error(
+            "Could not find matching protocol implementation to set data buffer capacity.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		buffer->setConsecutiveSampleCount(bus, bufferIndex, consecutiveSampleCount);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        buffer->setConsecutiveSampleCount(bus, bufferIndex, consecutiveSampleCount);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 }
 
 FeatureFamily FastBufferFeatureBase::getFeatureFamily() {

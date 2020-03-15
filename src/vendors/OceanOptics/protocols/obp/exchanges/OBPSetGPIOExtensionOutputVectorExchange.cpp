@@ -53,10 +53,10 @@ OBPSetGPIOExtensionOutputVectorExchange::~OBPSetGPIOExtensionOutputVectorExchang
 
 void OBPSetGPIOExtensionOutputVectorExchange::setOutputVector(unsigned int outputVector)
 {
-	memcpy(&(this->payload[0]), &outputVector, sizeof(unsigned int));
+    memcpy(&(this->payload[0]), &outputVector, sizeof(unsigned int));
 }
 
 void OBPSetGPIOExtensionOutputVectorExchange::setBitMask(unsigned int bitMask)
 {
-	memcpy(&(this->payload[4]), &bitMask, sizeof(unsigned int));
+    memcpy(&(this->payload[4]), &bitMask, sizeof(unsigned int));
 }

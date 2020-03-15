@@ -43,19 +43,19 @@ namespace seabreeze
 
         class NetworkConfigurationFeatureAdapter
                 : public FeatureAdapterTemplate<NetworkConfigurationFeatureInterface> 
-		{
-        	public:
-            	NetworkConfigurationFeatureAdapter(
-					NetworkConfigurationFeatureInterface *intf, const FeatureFamily &f,
+        {
+            public:
+                NetworkConfigurationFeatureAdapter(
+                    NetworkConfigurationFeatureInterface *intf, const FeatureFamily &f,
                     Protocol *p, Bus *b, unsigned short instanceIndex);
-            	virtual ~NetworkConfigurationFeatureAdapter();
+                virtual ~NetworkConfigurationFeatureAdapter();
 
-				unsigned char getNumberOfNetworkInterfaces(int *errorCode);
-				unsigned char getNetworkInterfaceConnectionType(int *errorCode, unsigned char interfaceIndex);
-				unsigned char getNetworkInterfaceEnableState(int *errorCode, unsigned char interfaceIndex);
-				void		  setNetworkInterfaceEnableState(int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
-				unsigned char runNetworkInterfaceSelfTest(int *errorCode, unsigned char interfaceIndex);
-				void		  saveNetworkInterfaceConnectionSettings(int *errorCode, unsigned char interfaceIndex);
+                unsigned char getNumberOfNetworkInterfaces(int *errorCode);
+                unsigned char getNetworkInterfaceConnectionType(int *errorCode, unsigned char interfaceIndex);
+                unsigned char getNetworkInterfaceEnableState(int *errorCode, unsigned char interfaceIndex);
+                void          setNetworkInterfaceEnableState(int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
+                unsigned char runNetworkInterfaceSelfTest(int *errorCode, unsigned char interfaceIndex);
+                void          saveNetworkInterfaceConnectionSettings(int *errorCode, unsigned char interfaceIndex);
         };
 
     }

@@ -54,7 +54,7 @@ unsigned char OBPRevisionProtocol::readHardwareRevision(const Bus &bus) throw (P
     unsigned char hardwareRevision;
     
     OBPGetHardwareRevisionExchange xchange;
-	
+    
     TransferHelper *helper = bus.getHelper(xchange.getHints());
     if(NULL == helper) 
     {
@@ -62,19 +62,19 @@ unsigned char OBPRevisionProtocol::readHardwareRevision(const Bus &bus) throw (P
         throw ProtocolBusMismatchException(error);
     }
     
-	result = xchange.queryDevice(helper);
-	if(NULL == result) 
-	{
-		string error("Expected Transfer::transfer to produce a non-null result "
-			"containing temperature.  Without this data, it is not possible to "
-			"continue.");
-		throw ProtocolException(error);
-	}
-		
-	hardwareRevision=(*result)[0]; 
-	delete result;
-	
-	return hardwareRevision;
+    result = xchange.queryDevice(helper);
+    if(NULL == result) 
+    {
+        string error("Expected Transfer::transfer to produce a non-null result "
+            "containing temperature.  Without this data, it is not possible to "
+            "continue.");
+        throw ProtocolException(error);
+    }
+        
+    hardwareRevision=(*result)[0]; 
+    delete result;
+    
+    return hardwareRevision;
 }
 
 unsigned short int OBPRevisionProtocol::readFirmwareRevision(const Bus &bus) throw (ProtocolException) 
@@ -84,7 +84,7 @@ unsigned short int OBPRevisionProtocol::readFirmwareRevision(const Bus &bus) thr
     byte *bptr;
     
     OBPGetFirmwareRevisionExchange xchange;
-	
+    
     TransferHelper *helper = bus.getHelper(xchange.getHints());
     if(NULL == helper) 
     {
@@ -92,27 +92,27 @@ unsigned short int OBPRevisionProtocol::readFirmwareRevision(const Bus &bus) thr
         throw ProtocolBusMismatchException(error);
     }
     
-	result = xchange.queryDevice(helper);
-	if(NULL == result) 
-	{
-		string error("Expected Transfer::transfer to produce a non-null result "
-			"containing temperature.  Without this data, it is not possible to "
-			"continue.");
-		throw ProtocolException(error);
-	}
-	
+    result = xchange.queryDevice(helper);
+    if(NULL == result) 
+    {
+        string error("Expected Transfer::transfer to produce a non-null result "
+            "containing temperature.  Without this data, it is not possible to "
+            "continue.");
+        throw ProtocolException(error);
+    }
+    
 
-	// queryDevice returns a byte stream, turn that into an unsigned int... mind our endians.
-	bptr = (byte *)&firmwareRevision;
-	for(unsigned int j = 0; j < sizeof(unsigned short int); j++) 
-	{
-		//printf("byte %d=%x\n", j, (*result)[j]);
-		bptr[j] = (*result)[j];  // little endian 2-byte integer
-	}
+    // queryDevice returns a byte stream, turn that into an unsigned int... mind our endians.
+    bptr = (byte *)&firmwareRevision;
+    for(unsigned int j = 0; j < sizeof(unsigned short int); j++) 
+    {
+        //printf("byte %d=%x\n", j, (*result)[j]);
+        bptr[j] = (*result)[j];  // little endian 2-byte integer
+    }
 
-	delete result;
-	
-	return firmwareRevision;
+    delete result;
+    
+    return firmwareRevision;
 }
 
 

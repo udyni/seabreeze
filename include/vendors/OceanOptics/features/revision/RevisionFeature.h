@@ -47,7 +47,7 @@ namespace seabreeze {
         virtual ~RevisionFeature();
         virtual unsigned char readHardwareRevision(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException);
-		virtual unsigned short int readFirmwareRevision(const Protocol &protocol,
+        virtual unsigned short int readFirmwareRevision(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException);
                 
         /* Overriding from Feature */

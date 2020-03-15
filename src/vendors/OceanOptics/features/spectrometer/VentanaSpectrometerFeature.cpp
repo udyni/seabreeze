@@ -50,7 +50,7 @@ const long VentanaSpectrometerFeature::INTEGRATION_TIME_BASE = 1;
 VentanaSpectrometerFeature::VentanaSpectrometerFeature() {
 
     this->numberOfPixels = 1024;
-	this->numberOfBytesPerPixel = sizeof(unsigned short);
+    this->numberOfBytesPerPixel = sizeof(unsigned short);
     this->maxIntensity = 65535;
 
     this->integrationTimeMinimum = VentanaSpectrometerFeature::INTEGRATION_TIME_MINIMUM;
@@ -61,16 +61,16 @@ VentanaSpectrometerFeature::VentanaSpectrometerFeature() {
     OBPIntegrationTimeExchange *intTime = new OBPIntegrationTimeExchange(
             VentanaSpectrometerFeature::INTEGRATION_TIME_BASE);
     Transfer *requestFormattedSpectrum = new OBPRequestSpectrumExchange();
-	Transfer *readFormattedSpectrum = new OBPReadSpectrumExchange((this->numberOfPixels * 2) + 64, this->numberOfPixels);
-	Transfer *requestUnformattedSpectrum = new OBPRequestSpectrumExchange();
-	Transfer *readUnformattedSpectrum = new OBPReadRawSpectrumExchange((this->numberOfPixels * 2) + 64, this->numberOfPixels);
-	Transfer *requestFastBufferSpectrum = new OBPRequestSpectrumExchange();
-	Transfer *readFastBufferSpectrum = new OBPReadRawSpectrumExchange((this->numberOfPixels * 2) + 64, this->numberOfPixels);
+    Transfer *readFormattedSpectrum = new OBPReadSpectrumExchange((this->numberOfPixels * 2) + 64, this->numberOfPixels);
+    Transfer *requestUnformattedSpectrum = new OBPRequestSpectrumExchange();
+    Transfer *readUnformattedSpectrum = new OBPReadRawSpectrumExchange((this->numberOfPixels * 2) + 64, this->numberOfPixels);
+    Transfer *requestFastBufferSpectrum = new OBPRequestSpectrumExchange();
+    Transfer *readFastBufferSpectrum = new OBPReadRawSpectrumExchange((this->numberOfPixels * 2) + 64, this->numberOfPixels);
 
     OBPTriggerModeExchange *triggerMode = new OBPTriggerModeExchange();
 
     OBPSpectrometerProtocol *obpProtocol = new OBPSpectrometerProtocol(intTime, requestFormattedSpectrum, readFormattedSpectrum, 
-		requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
+        requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
     this->protocols.push_back(obpProtocol);
 
     /* The Ventana does not have an external connector so it only supports

@@ -44,16 +44,16 @@ namespace seabreeze {
         public:
             IntrospectionFeatureAdapter(IntrospectionFeatureInterface *intf,
                 const FeatureFamily &f, 
-				Protocol *p, 
-				Bus *b,
+                Protocol *p, 
+                Bus *b,
                 unsigned short instanceIndex);
 
             virtual ~IntrospectionFeatureAdapter();
 
-			unsigned short getNumberOfPixels(int *errorCode);
-			int getActivePixelRanges(int *errorCode, unsigned int *buffer, int bufferLength);
-			int getElectricDarkPixelRanges(int *errorCode, unsigned int *buffer, int bufferLength);
-			int getOpticalDarkPixelRanges(int *errorCode, unsigned int *buffer, int bufferLength);
+            unsigned short getNumberOfPixels(int *errorCode);
+            int getActivePixelRanges(int *errorCode, unsigned int *buffer, int bufferLength);
+            int getElectricDarkPixelRanges(int *errorCode, unsigned int *buffer, int bufferLength);
+            int getOpticalDarkPixelRanges(int *errorCode, unsigned int *buffer, int bufferLength);
 
         };
 

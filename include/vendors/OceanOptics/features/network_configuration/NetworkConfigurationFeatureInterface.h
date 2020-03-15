@@ -41,35 +41,35 @@ namespace seabreeze {
         virtual ~NetworkConfigurationFeatureInterface() = 0;
 
 virtual unsigned char getNumberOfNetworkInterfaces(
-			const Protocol &protocol,
-			const Bus &bus)
-			throw (FeatureException) = 0;
-		virtual unsigned char getNetworkInterfaceConnectionType(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException) = 0;
-		virtual unsigned char getNetworkInterfaceEnableState(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException) = 0;
-		virtual void setNetworkInterfaceEnableState(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			unsigned char enableState)
-			throw (FeatureException) = 0;
-		virtual unsigned char runNetworkInterfaceSelfTest(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException) = 0;
-		virtual void saveNetworkInterfaceConnectionSettings(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex)
-			throw (FeatureException) = 0;
+            const Protocol &protocol,
+            const Bus &bus)
+            throw (FeatureException) = 0;
+        virtual unsigned char getNetworkInterfaceConnectionType(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException) = 0;
+        virtual unsigned char getNetworkInterfaceEnableState(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException) = 0;
+        virtual void setNetworkInterfaceEnableState(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            unsigned char enableState)
+            throw (FeatureException) = 0;
+        virtual unsigned char runNetworkInterfaceSelfTest(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException) = 0;
+        virtual void saveNetworkInterfaceConnectionSettings(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex)
+            throw (FeatureException) = 0;
 
     };
 

@@ -75,7 +75,7 @@ vector<unsigned char> OBPWifiConfigurationProtocol::getSSID(const Bus &bus, unsi
         throw ProtocolBusMismatchException(error);
     }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
     /* This transfer() may cause a ProtocolException to be thrown. */
     vector<byte> *raw = request.queryDevice(helper);
@@ -96,7 +96,7 @@ vector<unsigned char> OBPWifiConfigurationProtocol::getSSID(const Bus &bus, unsi
 void OBPWifiConfigurationProtocol::setSSID(const Bus &bus, unsigned char interfaceIndex, const vector<unsigned char> ssid) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPSetWifiConfigurationSSIDExchange command;
+    OBPSetWifiConfigurationSSIDExchange command;
 
     helper = bus.getHelper(command.getHints());
     if (NULL == helper) {
@@ -108,7 +108,7 @@ void OBPWifiConfigurationProtocol::setSSID(const Bus &bus, unsigned char interfa
      * so make a copy and truncate it to the maximum size.
      */
 
-	command.setInterfaceIndex(interfaceIndex);
+    command.setInterfaceIndex(interfaceIndex);
     command.setSSID(ssid);
 
     /* This may cause a ProtocolException to be thrown. */
@@ -118,24 +118,24 @@ void OBPWifiConfigurationProtocol::setSSID(const Bus &bus, unsigned char interfa
 
 void OBPWifiConfigurationProtocol::setPassPhrase(const Bus &bus, unsigned char interfaceIndex, const vector<unsigned char> passPhrase) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPSetWifiConfigurationPassPhraseExchange command;
+    TransferHelper *helper;
+    OBPSetWifiConfigurationPassPhraseExchange command;
 
-	helper = bus.getHelper(command.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(command.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	/* factors is probably a reference to what was passed in by the caller,
-	* so make a copy and truncate it to the maximum size.
-	*/
+    /* factors is probably a reference to what was passed in by the caller,
+    * so make a copy and truncate it to the maximum size.
+    */
 
-	command.setInterfaceIndex(interfaceIndex);
-	command.setPassPhrase(passPhrase);
+    command.setInterfaceIndex(interfaceIndex);
+    command.setPassPhrase(passPhrase);
 
-	/* This may cause a ProtocolException to be thrown. */
-	command.sendCommandToDevice(helper);
+    /* This may cause a ProtocolException to be thrown. */
+    command.sendCommandToDevice(helper);
 
 }
 
@@ -151,7 +151,7 @@ unsigned char OBPWifiConfigurationProtocol::getMode(const Bus &bus, unsigned cha
         throw ProtocolBusMismatchException(error);
     }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
     /* This transfer() may cause a ProtocolException to be thrown. */
     vector<byte> *raw = request.queryDevice(helper);
@@ -168,7 +168,7 @@ unsigned char OBPWifiConfigurationProtocol::getMode(const Bus &bus, unsigned cha
         throw ProtocolException(error);
     }
 
-	int retval = (*raw)[0];
+    int retval = (*raw)[0];
 
     delete raw;
 
@@ -187,8 +187,8 @@ void OBPWifiConfigurationProtocol::setMode(const Bus &bus, unsigned char interfa
         throw ProtocolBusMismatchException(error);
     }
 
-	command.setInterfaceIndex(interfaceIndex);
-	command.setMode(mode);
+    command.setInterfaceIndex(interfaceIndex);
+    command.setMode(mode);
 
     /* This may cause a ProtocolException to be thrown. */
     command.sendCommandToDevice(helper);
@@ -199,55 +199,55 @@ void OBPWifiConfigurationProtocol::setMode(const Bus &bus, unsigned char interfa
 
 unsigned char OBPWifiConfigurationProtocol::getSecurityType(const Bus &bus, unsigned char interfaceIndex) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPGetWifiConfigurationSecurityExchange request;
+    TransferHelper *helper;
+    OBPGetWifiConfigurationSecurityExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result "
-			"containing calibration data.  Without this data, it is not possible to continue.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result "
+            "containing calibration data.  Without this data, it is not possible to continue.");
+        throw ProtocolException(error);
+    }
 
-	if (raw->size() < sizeof(byte)) {
-		string error("Failed to get back expected number of bytes that should"
-			" have held collection area.");
-		delete raw;
-		throw ProtocolException(error);
-	}
+    if (raw->size() < sizeof(byte)) {
+        string error("Failed to get back expected number of bytes that should"
+            " have held collection area.");
+        delete raw;
+        throw ProtocolException(error);
+    }
 
-	int retval = (*raw)[0];
+    int retval = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return retval;
+    return retval;
 }
 
 
 void OBPWifiConfigurationProtocol::setSecurityType(const Bus &bus, unsigned char interfaceIndex, unsigned char securityType) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPSetWifiConfigurationSecurityExchange command;
+    TransferHelper *helper;
+    OBPSetWifiConfigurationSecurityExchange command;
 
-	helper = bus.getHelper(command.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
-	command.setInterfaceIndex(interfaceIndex);
-	command.setSecurityType(securityType);
+    helper = bus.getHelper(command.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
+    command.setInterfaceIndex(interfaceIndex);
+    command.setSecurityType(securityType);
 
-	/* This may cause a ProtocolException to be thrown. */
-	command.sendCommandToDevice(helper);
+    /* This may cause a ProtocolException to be thrown. */
+    command.sendCommandToDevice(helper);
 
-	/* FIXME: this could check the return value and react if it did not succeed */
+    /* FIXME: this could check the return value and react if it did not succeed */
 }

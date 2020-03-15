@@ -66,7 +66,7 @@ void OBPDHCPServerProtocol::getServerAddress(const Bus &bus, unsigned char inter
         throw ProtocolBusMismatchException(error);
     }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
     /* This transfer() may cause a ProtocolException to be thrown. */
     vector<byte> *raw = request.queryDevice(helper);
@@ -75,12 +75,12 @@ void OBPDHCPServerProtocol::getServerAddress(const Bus &bus, unsigned char inter
             "containing a DHCP server address and netmask.  Without this data, it is not possible to continue.");
         throw ProtocolException(error);
     }
-	
-	// can't use c++11 yet
-	// serverAddress.assign(raw->cbegin(), prev(raw->cend()));
-	serverAddress->assign(raw->begin(), raw->end()-1);
+    
+    // can't use c++11 yet
+    // serverAddress.assign(raw->cbegin(), prev(raw->cend()));
+    serverAddress->assign(raw->begin(), raw->end()-1);
 
-	(*netMask) = serverAddress->back();
+    (*netMask) = serverAddress->back();
 
     delete raw;
 }
@@ -89,7 +89,7 @@ void OBPDHCPServerProtocol::getServerAddress(const Bus &bus, unsigned char inter
 void OBPDHCPServerProtocol::setServerAddress(const Bus &bus, unsigned char interfaceIndex, const vector<unsigned char> serverAddress, unsigned char netMask) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPSetDHCPServerAddressExchange command;
+    OBPSetDHCPServerAddressExchange command;
 
     helper = bus.getHelper(command.getHints());
     if (NULL == helper) {
@@ -101,9 +101,9 @@ void OBPDHCPServerProtocol::setServerAddress(const Bus &bus, unsigned char inter
      * so make a copy and truncate it to the maximum size.
      */
 
-	command.setInterfaceIndex(interfaceIndex);
+    command.setInterfaceIndex(interfaceIndex);
     command.setServerAddress(serverAddress);
-	command.setNetMask(netMask);
+    command.setNetMask(netMask);
 
 
     /* This may cause a ProtocolException to be thrown. */
@@ -119,7 +119,7 @@ void OBPDHCPServerProtocol::setServerAddress(const Bus &bus, unsigned char inter
 unsigned char OBPDHCPServerProtocol::getServerEnableStatus(const Bus &bus, unsigned char interfaceIndex) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPGetDHCPServerEnableExchange request;
+    OBPGetDHCPServerEnableExchange request;
 
     helper = bus.getHelper(request.getHints());
     if (NULL == helper) {
@@ -127,7 +127,7 @@ unsigned char OBPDHCPServerProtocol::getServerEnableStatus(const Bus &bus, unsig
         throw ProtocolBusMismatchException(error);
     }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
     /* This transfer() may cause a ProtocolException to be thrown. */
     vector<byte> *raw = request.queryDevice(helper);
@@ -145,7 +145,7 @@ unsigned char OBPDHCPServerProtocol::getServerEnableStatus(const Bus &bus, unsig
         throw ProtocolException(error);
     }
 
-	int retval = (*raw)[0];
+    int retval = (*raw)[0];
 
     delete raw;
 
@@ -164,8 +164,8 @@ void OBPDHCPServerProtocol::setServerEnableStatus(const Bus &bus, unsigned char 
         throw ProtocolBusMismatchException(error);
     }
 
-	command.setInterfaceIndex(interfaceIndex);
-	command.setEnableState(enableState);
+    command.setInterfaceIndex(interfaceIndex);
+    command.setEnableState(enableState);
 
     /* This may cause a ProtocolException to be thrown. */
     command.sendCommandToDevice(helper);

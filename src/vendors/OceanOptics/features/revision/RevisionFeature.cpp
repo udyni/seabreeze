@@ -60,7 +60,7 @@ RevisionFeature::~RevisionFeature() {
 unsigned char RevisionFeature::readHardwareRevision(const Protocol &protocol, const Bus &bus) throw (FeatureException) {
 
     RevisionProtocolInterface *revisionPI = NULL;
-	unsigned char hardwareRevision;
+    unsigned char hardwareRevision;
     ProtocolHelper *proto = NULL;
 
     try {
@@ -88,7 +88,7 @@ unsigned char RevisionFeature::readHardwareRevision(const Protocol &protocol, co
 unsigned short int RevisionFeature::readFirmwareRevision(const Protocol &protocol, const Bus &bus) throw (FeatureException) {
 
     RevisionProtocolInterface *revisionPI = NULL;
-	unsigned short int firmwareRevision;
+    unsigned short int firmwareRevision;
     ProtocolHelper *proto = NULL;
 
     try {

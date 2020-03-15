@@ -66,7 +66,7 @@ vector<unsigned char> OBPEthernetConfigurationProtocol::get_MAC_Address(const Bu
         throw ProtocolBusMismatchException(error);
     }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
     /* This transfer() may cause a ProtocolException to be thrown. */
     vector<byte> *raw = request.queryDevice(helper);
@@ -88,7 +88,7 @@ vector<unsigned char> OBPEthernetConfigurationProtocol::get_MAC_Address(const Bu
 void OBPEthernetConfigurationProtocol::set_MAC_Address(const Bus &bus, unsigned char interfaceIndex, const vector<unsigned char> macAddress) throw (ProtocolException) 
 {
     TransferHelper *helper;
-	OBPSetEthernetConfigurationMacAddressExchange command;
+    OBPSetEthernetConfigurationMacAddressExchange command;
 
     helper = bus.getHelper(command.getHints());
     if (NULL == helper) {
@@ -100,7 +100,7 @@ void OBPEthernetConfigurationProtocol::set_MAC_Address(const Bus &bus, unsigned 
      * so make a copy and truncate it to the maximum size.
      */
 
-	command.setInterfaceIndex(interfaceIndex);
+    command.setInterfaceIndex(interfaceIndex);
     command.set_MAC_Address(macAddress);
 
     /* This may cause a ProtocolException to be thrown. */
@@ -124,7 +124,7 @@ unsigned char OBPEthernetConfigurationProtocol::get_GbE_Enable_Status(const Bus 
         throw ProtocolBusMismatchException(error);
     }
 
-	request.setInterfaceIndex(interfaceIndex);
+    request.setInterfaceIndex(interfaceIndex);
 
     /* This transfer() may cause a ProtocolException to be thrown. */
     vector<byte> *raw = request.queryDevice(helper);
@@ -142,7 +142,7 @@ unsigned char OBPEthernetConfigurationProtocol::get_GbE_Enable_Status(const Bus 
         throw ProtocolException(error);
     }
 
-	int retval = (*raw)[0];
+    int retval = (*raw)[0];
 
     delete raw;
 
@@ -161,8 +161,8 @@ void OBPEthernetConfigurationProtocol::set_GbE_Enable_Status(const Bus &bus, uns
         throw ProtocolBusMismatchException(error);
     }
 
-	command.setInterfaceIndex(interfaceIndex);
-	command.setGbE_Enable(enableStatus);
+    command.setInterfaceIndex(interfaceIndex);
+    command.setGbE_Enable(enableStatus);
 
     /* This may cause a ProtocolException to be thrown. */
     command.sendCommandToDevice(helper);

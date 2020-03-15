@@ -43,9 +43,9 @@ namespace seabreeze {
 
     class MulticastProtocolInterface : public ProtocolHelper {
     public:
-		MulticastProtocolInterface(Protocol *protocol);
+        MulticastProtocolInterface(Protocol *protocol);
         virtual ~MulticastProtocolInterface();
-	
+    
         /**
          * Get the multicast enable state from the device.
          */
@@ -59,16 +59,16 @@ namespace seabreeze {
             throw (ProtocolException) = 0;
 
 #if(false)
-		/**
-		*  Get the  group address.
-		*/
-		virtual std::vector<byte> getGroupAddress(const Bus &bus, unsigned char interfaceIndex)
-			throw (ProtocolException) = 0;
-		/**
-		*  Set the  group address.
-		*/
-		virtual void setGroupAddress(const Bus &bus, unsigned char interfaceIndex, const std::vector<byte> groupAddress)
-			throw (ProtocolException) = 0;
+        /**
+        *  Get the  group address.
+        */
+        virtual std::vector<byte> getGroupAddress(const Bus &bus, unsigned char interfaceIndex)
+            throw (ProtocolException) = 0;
+        /**
+        *  Set the  group address.
+        */
+        virtual void setGroupAddress(const Bus &bus, unsigned char interfaceIndex, const std::vector<byte> groupAddress)
+            throw (ProtocolException) = 0;
 #endif
     };
 

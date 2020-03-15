@@ -50,16 +50,16 @@ using std::vector;
 OBPReadNumberOfRawSpectraWithMetadataExchange::OBPReadNumberOfRawSpectraWithMetadataExchange(unsigned int pixels, unsigned int numberOfBytesPerPixel) 
 {
 
-	derivedClassPointer = this;
-	setParametersFunction = &(this->setNumberOfSamplesToRequest);
+    derivedClassPointer = this;
+    setParametersFunction = &(this->setNumberOfSamplesToRequest);
 
     this->hints->push_back(new OBPSpectrumHint());
     this->direction = Transfer::FROM_DEVICE;
 
     this->metadataLength = METADATA_LENGTH;
-	this->checkSumLength = sizeof(unsigned int);
+    this->checkSumLength = sizeof(unsigned int);
     setNumberOfPixels(pixels);
-	setNumberOfBytesPerPixel(numberOfBytesPerPixel);
+    setNumberOfBytesPerPixel(numberOfBytesPerPixel);
 
 }
 
@@ -75,13 +75,13 @@ void OBPReadNumberOfRawSpectraWithMetadataExchange::setNumberOfPixels(int pixels
 
 void OBPReadNumberOfRawSpectraWithMetadataExchange::setNumberOfBytesPerPixel(int numberOfBytes)
 {
-	this->numberOfBytesPerPixel = numberOfBytes;
+    this->numberOfBytesPerPixel = numberOfBytes;
 }
 
 unsigned int OBPReadNumberOfRawSpectraWithMetadataExchange::isLegalMessageType(unsigned int t) 
 {
     if(OBPMessageTypes::OBP_GET_N_BUF_RAW_SPECTRA_META == t) 
-	{
+    {
         return 1;
     }
 
@@ -128,7 +128,7 @@ Data *OBPReadNumberOfRawSpectraWithMetadataExchange::transfer(TransferHelper *he
      */
     xfer = Transfer::transfer(helper);
     if(NULL == xfer) 
-	{
+    {
         string error("Expected Transfer::transfer to produce a non-null result "
                         "containing raw spectral data.  Without this data, it is not "
                         "possible to generate a valid formatted spectrum.");
@@ -142,7 +142,7 @@ Data *OBPReadNumberOfRawSpectraWithMetadataExchange::transfer(TransferHelper *he
      * if the message is badly formed.
      */
     try 
-	{
+    {
 
         // the current buffer does not include the header. For the parse to work, those
         //  44 bytes must be inserted at the front of this->buffer
@@ -150,14 +150,14 @@ Data *OBPReadNumberOfRawSpectraWithMetadataExchange::transfer(TransferHelper *he
 
         message = OBPMessage::parseByteStream(this->buffer);
     } 
-	catch (IllegalArgumentException &iae) 
-	{
+    catch (IllegalArgumentException &iae) 
+    {
         string error("Failed to parse message transferred from device");
         throw ProtocolException(error);
     }
 
     if(0 == isLegalMessageType(message->getMessageType())) 
-	{
+    {
         string error("Did not get expected message type, got ");
         error += (char)(message->getMessageType());
         throw ProtocolException(error);
@@ -165,7 +165,7 @@ Data *OBPReadNumberOfRawSpectraWithMetadataExchange::transfer(TransferHelper *he
 
     bytes = message->getData();
     if((bytes->size() % ((numberOfPixels * numberOfBytesPerPixel)+metadataLength+checkSumLength)) != 0) // the number of bytes should be an integral of the spectrum size
-	{
+    {
         string error("Spectrum response does not have enough data.");
         delete message;
         throw ProtocolException(error);
@@ -180,19 +180,19 @@ Data *OBPReadNumberOfRawSpectraWithMetadataExchange::transfer(TransferHelper *he
 
 void OBPReadNumberOfRawSpectraWithMetadataExchange::setNumberOfSamplesToRequest(void *myClass, unsigned int numberOfSamples)
 {
-	unsigned int readoutLength;
+    unsigned int readoutLength;
     unsigned int sampleSize = 1;
 
     // the spectrometer currently 20170822 will return one spectrum, if available, even if 0 were requested. Make sure there is space for the rouge transmission.
     if(numberOfSamples != 0)
         sampleSize = numberOfSamples;
 
-	OBPReadNumberOfRawSpectraWithMetadataExchange *parentClass = (OBPReadNumberOfRawSpectraWithMetadataExchange *)myClass;
+    OBPReadNumberOfRawSpectraWithMetadataExchange *parentClass = (OBPReadNumberOfRawSpectraWithMetadataExchange *)myClass;
 
-	parentClass->numberOfSamplesToRetrieve = numberOfSamples;
-	readoutLength = (((parentClass->numberOfPixels * parentClass->numberOfBytesPerPixel) + parentClass->metadataLength + parentClass->checkSumLength) * sampleSize) + OBP_MESSAGE_OVERHEAD;
-	
-	parentClass->buffer->resize(readoutLength);
-	parentClass->length = readoutLength;
-	parentClass->checkBufferSize();
+    parentClass->numberOfSamplesToRetrieve = numberOfSamples;
+    readoutLength = (((parentClass->numberOfPixels * parentClass->numberOfBytesPerPixel) + parentClass->metadataLength + parentClass->checkSumLength) * sampleSize) + OBP_MESSAGE_OVERHEAD;
+    
+    parentClass->buffer->resize(readoutLength);
+    parentClass->length = readoutLength;
+    parentClass->checkBufferSize();
 }

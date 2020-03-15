@@ -39,29 +39,29 @@ OBPWriteI2CMasterBusExchange::OBPWriteI2CMasterBusExchange() {
     this->messageType = OBPMessageTypes::OBP_WRITE_I2C_MASTER_BUS;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 void OBPWriteI2CMasterBusExchange::setBusIndex(unsigned char busIndex)
 {
-	this->payload[0] = busIndex;
+    this->payload[0] = busIndex;
 }
 
 void OBPWriteI2CMasterBusExchange::setSlaveAddress(unsigned char slaveAddress)
 {
-	this->payload[1] = slaveAddress;
+    this->payload[1] = slaveAddress;
 }
 
 void OBPWriteI2CMasterBusExchange::dataToWrite(std::vector<unsigned char> writeData)
 {
-	int dataByteCount = sizeof(unsigned char) + sizeof(unsigned char);
-	this->payload.resize(dataByteCount + writeData.size());
+    int dataByteCount = sizeof(unsigned char) + sizeof(unsigned char);
+    this->payload.resize(dataByteCount + writeData.size());
 
-	for (unsigned char i = 0; i < writeData.size(); i++)
-	{
-		this->payload[dataByteCount + i] = writeData[i];
-	}
+    for (unsigned char i = 0; i < writeData.size(); i++)
+    {
+        this->payload[dataByteCount + i] = writeData[i];
+    }
 }
 
 

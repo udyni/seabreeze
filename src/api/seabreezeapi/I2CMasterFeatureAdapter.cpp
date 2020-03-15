@@ -60,42 +60,42 @@ I2CMasterFeatureAdapter::~I2CMasterFeatureAdapter()
 
 unsigned char I2CMasterFeatureAdapter::i2cMasterGetNumberOfBuses(int *errorCode)
 {
-	unsigned char numberOfBuses;
-	try {
-		numberOfBuses = this->feature->i2cMasterGetNumberOfBuses(*this->protocol, *this->bus);
-		SET_ERROR_CODE(ERROR_SUCCESS);
-	}
-	catch (FeatureException &fe) {
-		SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
-	}
-	return numberOfBuses;
+    unsigned char numberOfBuses;
+    try {
+        numberOfBuses = this->feature->i2cMasterGetNumberOfBuses(*this->protocol, *this->bus);
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    }
+    catch (FeatureException &fe) {
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
+    }
+    return numberOfBuses;
 }
 
 unsigned short  I2CMasterFeatureAdapter::i2cMasterReadBus(int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes)
 {
 
     vector<unsigned char> i2cReadData;
-	unsigned short readDataLength = 0;
+    unsigned short readDataLength = 0;
 
     try 
-	{
+    {
         i2cReadData = this->feature->i2cMasterReadBus(*this->protocol, *this->bus, busIndex,slaveAddress, numberOfBytes);
-		readDataLength = (unsigned short)i2cReadData.size();
+        readDataLength = (unsigned short)i2cReadData.size();
 
         memcpy(i2cReadData.data(), readData, readDataLength);
 
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe) 
-	{
+    catch (FeatureException &fe) 
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
-	return readDataLength;
+    return readDataLength;
 }
 
 unsigned short I2CMasterFeatureAdapter::i2cMasterWriteBus(int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes)
 {
-	unsigned short i2cWriteLength = 0;
+    unsigned short i2cWriteLength = 0;
     vector<unsigned char> *i2cWriteData = new vector<byte>(numberOfBytes);
     memcpy(&((*i2cWriteData)[0]), writeData, numberOfBytes);
 
@@ -107,7 +107,7 @@ unsigned short I2CMasterFeatureAdapter::i2cMasterWriteBus(int *errorCode, unsign
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
         delete i2cWriteData;
     }
-	return i2cWriteLength;
+    return i2cWriteLength;
 }
 
 

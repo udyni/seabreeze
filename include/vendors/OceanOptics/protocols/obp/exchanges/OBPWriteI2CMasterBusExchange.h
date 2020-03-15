@@ -36,12 +36,12 @@ namespace seabreeze {
     namespace oceanBinaryProtocol {
         class OBPWriteI2CMasterBusExchange : public OBPQuery {
         public:
-			OBPWriteI2CMasterBusExchange();
+            OBPWriteI2CMasterBusExchange();
             virtual ~OBPWriteI2CMasterBusExchange();
 
             void setBusIndex(unsigned char busIndex);
             void setSlaveAddress(unsigned char slaveDeviceAddress);
-			void dataToWrite(std::vector<unsigned char> writeData);
+            void dataToWrite(std::vector<unsigned char> writeData);
         };
     }
 }

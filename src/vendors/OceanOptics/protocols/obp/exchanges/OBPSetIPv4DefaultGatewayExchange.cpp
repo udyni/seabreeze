@@ -53,13 +53,13 @@ OBPSetIPv4DefaultGatewayExchange::~OBPSetIPv4DefaultGatewayExchange()
 
 void OBPSetIPv4DefaultGatewayExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetIPv4DefaultGatewayExchange::setDefaultGatewayAddress(std::vector<unsigned char> IPv4_Address)
 {
-	for (int i = 0; i < 4; i++)
-	{
-		this->payload[1 + i] = IPv4_Address[i];
-	}
+    for (int i = 0; i < 4; i++)
+    {
+        this->payload[1 + i] = IPv4_Address[i];
+    }
 }

@@ -38,7 +38,7 @@ namespace seabreeze {
   namespace oceanBinaryProtocol {
     class OBPMulticastProtocol : public MulticastProtocolInterface {
     public:
-		OBPMulticastProtocol();
+        OBPMulticastProtocol();
 
         virtual ~OBPMulticastProtocol();
 

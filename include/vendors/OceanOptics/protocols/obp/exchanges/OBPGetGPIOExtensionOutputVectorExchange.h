@@ -39,7 +39,7 @@ namespace seabreeze
         class OBPGetGPIOExtensionOutputVectorExchange : public OBPQuery
         {
         public:
-			OBPGetGPIOExtensionOutputVectorExchange();
+            OBPGetGPIOExtensionOutputVectorExchange();
             virtual ~OBPGetGPIOExtensionOutputVectorExchange();
         };
     }

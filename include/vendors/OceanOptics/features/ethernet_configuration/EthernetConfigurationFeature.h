@@ -45,28 +45,28 @@ namespace seabreeze
         EthernetConfigurationFeature(std::vector<ProtocolHelper *> helpers);
         virtual ~EthernetConfigurationFeature();
 
-		virtual unsigned char get_GbE_Enable_Status(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException);
-		virtual void set_GbE_Enable_Status(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			unsigned char enableState)
-			throw (FeatureException);
-		virtual std::vector<byte> get_MAC_Address(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException);
-		virtual void set_MAC_Address(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			const std::vector<byte> macAddress)
-			throw (FeatureException);
+        virtual unsigned char get_GbE_Enable_Status(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException);
+        virtual void set_GbE_Enable_Status(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            unsigned char enableState)
+            throw (FeatureException);
+        virtual std::vector<byte> get_MAC_Address(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException);
+        virtual void set_MAC_Address(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            const std::vector<byte> macAddress)
+            throw (FeatureException);
 
         /* Overriding from Feature */
         virtual FeatureFamily getFeatureFamily();

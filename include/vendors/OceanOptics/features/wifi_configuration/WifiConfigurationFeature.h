@@ -45,45 +45,45 @@ namespace seabreeze
         WifiConfigurationFeature(std::vector<ProtocolHelper *> helpers);
         virtual ~WifiConfigurationFeature();
 
-		virtual unsigned char getMode(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException);
-		virtual void setMode(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			unsigned char mode)
-			throw (FeatureException);
-		virtual unsigned char getSecurityType(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException);
-		virtual void setSecurityType(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			unsigned char securityType)
-			throw (FeatureException);
-		virtual std::vector<unsigned char> getSSID(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException);
-		virtual void setSSID(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			const std::vector<unsigned char> ssid)
-			throw (FeatureException);
-		virtual void setPassPhrase(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			const std::vector<unsigned char> passPhrase)
-			throw (FeatureException);
+        virtual unsigned char getMode(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException);
+        virtual void setMode(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            unsigned char mode)
+            throw (FeatureException);
+        virtual unsigned char getSecurityType(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException);
+        virtual void setSecurityType(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            unsigned char securityType)
+            throw (FeatureException);
+        virtual std::vector<unsigned char> getSSID(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException);
+        virtual void setSSID(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            const std::vector<unsigned char> ssid)
+            throw (FeatureException);
+        virtual void setPassPhrase(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            const std::vector<unsigned char> passPhrase)
+            throw (FeatureException);
 
 
         /* Overriding from Feature */

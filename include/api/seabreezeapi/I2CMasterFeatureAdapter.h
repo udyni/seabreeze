@@ -43,14 +43,14 @@ namespace seabreeze
 
         class I2CMasterFeatureAdapter
                 : public FeatureAdapterTemplate<i2cMasterFeatureInterface>
-		{
-        	public:
-				I2CMasterFeatureAdapter(i2cMasterFeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
-            	virtual ~I2CMasterFeatureAdapter();
+        {
+            public:
+                I2CMasterFeatureAdapter(i2cMasterFeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
+                virtual ~I2CMasterFeatureAdapter();
 
-				unsigned char i2cMasterGetNumberOfBuses(int *errorCode);
-				unsigned short i2cMasterReadBus(int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes);
-				unsigned short i2cMasterWriteBus(int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes);
+                unsigned char i2cMasterGetNumberOfBuses(int *errorCode);
+                unsigned short i2cMasterReadBus(int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes);
+                unsigned short i2cMasterWriteBus(int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes);
         };
 
     }

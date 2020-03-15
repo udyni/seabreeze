@@ -88,9 +88,9 @@ void NativeSocketWindows::connect(const string hostname, int port)
     host_info = gethostbyname(hostname.c_str());
     if(0 == host_info) {
         string error("Failed to resolve hostname [");
-		error += hostname;
-		error += "]: ";
-		error += (char)WSAGetLastError();
+        error += hostname;
+        error += "]: ";
+        error += (char)WSAGetLastError();
         throw BusConnectException(error);
     }
     

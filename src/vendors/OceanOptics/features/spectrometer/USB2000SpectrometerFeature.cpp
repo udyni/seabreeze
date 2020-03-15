@@ -47,7 +47,7 @@ const long USB2000SpectrometerFeature::INTEGRATION_TIME_BASE = 1000;
 USB2000SpectrometerFeature::USB2000SpectrometerFeature() {
 
     this->numberOfPixels = 2048;
-	this->numberOfBytesPerPixel = sizeof(unsigned short);
+    this->numberOfBytesPerPixel = sizeof(unsigned short);
     this->maxIntensity = 4095;
 
     this->integrationTimeMinimum = USB2000SpectrometerFeature::INTEGRATION_TIME_MINIMUM;
@@ -62,16 +62,16 @@ USB2000SpectrometerFeature::USB2000SpectrometerFeature() {
     IntegrationTimeExchange *intTime = new IntegrationTimeExchange(USB2000SpectrometerFeature::INTEGRATION_TIME_BASE);
 
     Transfer *requestFormattedSpectrum = new RequestSpectrumExchange();
-	Transfer *readFormattedSpectrum = new OOI2KSpectrumExchange(this->numberOfPixels * 2 + 1, this->numberOfPixels);
-	Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
-	Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(this->numberOfPixels * 2 + 1, this->numberOfPixels);
-	Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
-	Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(this->numberOfPixels * 2 + 1, this->numberOfPixels);
+    Transfer *readFormattedSpectrum = new OOI2KSpectrumExchange(this->numberOfPixels * 2 + 1, this->numberOfPixels);
+    Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
+    Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(this->numberOfPixels * 2 + 1, this->numberOfPixels);
+    Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
+    Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(this->numberOfPixels * 2 + 1, this->numberOfPixels);
 
     TriggerModeExchange *triggerMode = new TriggerModeExchange();
 
-	OOISpectrometerProtocol *ooiProtocol = new OOISpectrometerProtocol(intTime, requestFormattedSpectrum, readFormattedSpectrum, 
-		requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
+    OOISpectrometerProtocol *ooiProtocol = new OOISpectrometerProtocol(intTime, requestFormattedSpectrum, readFormattedSpectrum, 
+        requestUnformattedSpectrum, readUnformattedSpectrum, requestFastBufferSpectrum, readFastBufferSpectrum, triggerMode);
     this->protocols.push_back(ooiProtocol);
 
     this->triggerModes.push_back(

@@ -42,27 +42,27 @@ namespace seabreeze {
         FastBufferFeatureBase();
         virtual ~FastBufferFeatureBase();
 
-		virtual FastBufferIndex_t getBufferingEnable(
-			const Protocol &protocol,
-			const Bus &bus, const FastBufferIndex_t bufferIndex)
-			throw (FeatureException);
-		virtual void setBufferingEnable(
-			const Protocol &protocol, 
-			const Bus &bus,
-			const FastBufferIndex_t bufferIndex,
-			const FastBufferIndex_t bufferSize)
-			throw (FeatureException);
-		virtual FastBufferSampleCount_t getConsecutiveSampleCount(
-			const Protocol &protocol,
-			const Bus &bus, 
-			const FastBufferIndex_t bufferIndex)
-			throw (FeatureException);
-		virtual void setConsecutiveSampleCount(
-			const Protocol &protocol, 
-			const Bus &bus,
-			const FastBufferIndex_t bufferIndex,
-			const FastBufferSampleCount_t consecutiveSampleCount)
-			throw (FeatureException);
+        virtual FastBufferIndex_t getBufferingEnable(
+            const Protocol &protocol,
+            const Bus &bus, const FastBufferIndex_t bufferIndex)
+            throw (FeatureException);
+        virtual void setBufferingEnable(
+            const Protocol &protocol, 
+            const Bus &bus,
+            const FastBufferIndex_t bufferIndex,
+            const FastBufferIndex_t bufferSize)
+            throw (FeatureException);
+        virtual FastBufferSampleCount_t getConsecutiveSampleCount(
+            const Protocol &protocol,
+            const Bus &bus, 
+            const FastBufferIndex_t bufferIndex)
+            throw (FeatureException);
+        virtual void setConsecutiveSampleCount(
+            const Protocol &protocol, 
+            const Bus &bus,
+            const FastBufferIndex_t bufferIndex,
+            const FastBufferSampleCount_t consecutiveSampleCount)
+            throw (FeatureException);
 
         /* Overriding from Feature */
         virtual FeatureFamily getFeatureFamily();

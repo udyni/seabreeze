@@ -2165,13 +2165,13 @@ void test_networking_features(long deviceID, int *unsupportedFeatureCount, int *
 #ifdef RUN_SELF_TEST
 
                     // run self test
-					printf("\t\t\tAttempting to run a network interface selftest. This can take up to two minutes to execute. Be patient.\n");
-					unsigned char myResult = sbapi_network_configuration_run_interface_self_test(deviceID, network_configuration_ids[i], &error, networkInterfaceIndex);
-					std::string selftestResult = "Failed";
-					if (myResult == 1)
-						selftestResult = "Passed";
-					printf("\t\t\tSelf test result: %s [%s]\n", selftestResult.data(), sbapi_get_error_string(error));
-					tallyErrors(error, testFailureCount);
+                    printf("\t\t\tAttempting to run a network interface selftest. This can take up to two minutes to execute. Be patient.\n");
+                    unsigned char myResult = sbapi_network_configuration_run_interface_self_test(deviceID, network_configuration_ids[i], &error, networkInterfaceIndex);
+                    std::string selftestResult = "Failed";
+                    if (myResult == 1)
+                        selftestResult = "Passed";
+                    printf("\t\t\tSelf test result: %s [%s]\n", selftestResult.data(), sbapi_get_error_string(error));
+                    tallyErrors(error, testFailureCount);
 #endif
 
                 }

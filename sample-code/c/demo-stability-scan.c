@@ -40,7 +40,7 @@
 #define MS_TO_USEC 1000
 
 #ifndef MAXFLOAT
-#define MAXFLOAT	3.40282347e+38F
+#define MAXFLOAT    3.40282347e+38F
 #endif
 
 // if two successive scans vary in average height by more than this relative

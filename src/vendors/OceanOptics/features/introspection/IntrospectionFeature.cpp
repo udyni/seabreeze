@@ -61,127 +61,127 @@ IntrospectionFeature::~IntrospectionFeature() {
 
 unsigned short IntrospectionFeature::getNumberOfPixels(const Protocol &protocol, const Bus &bus) throw (FeatureException)
 {
-	
-	IntrospectionProtocolInterface *introspection_protocolInterface = NULL;
-	ProtocolHelper *proto = NULL;
+    
+    IntrospectionProtocolInterface *introspection_protocolInterface = NULL;
+    ProtocolHelper *proto = NULL;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		introspection_protocolInterface = static_cast<IntrospectionProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get temperature.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        introspection_protocolInterface = static_cast<IntrospectionProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get temperature.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		return introspection_protocolInterface->getNumberOfPixels(bus);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        return introspection_protocolInterface->getNumberOfPixels(bus);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 }
 
 
 vector<unsigned int> *IntrospectionFeature::getActivePixelRanges(const Protocol &protocol, const Bus &bus) throw (FeatureException) {
 
-	IntrospectionProtocolInterface *introspection_protocolInterface = NULL;
-	vector<unsigned int> *pixelIndexPairs = NULL;
-	ProtocolHelper *proto = NULL;
+    IntrospectionProtocolInterface *introspection_protocolInterface = NULL;
+    vector<unsigned int> *pixelIndexPairs = NULL;
+    ProtocolHelper *proto = NULL;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		introspection_protocolInterface = static_cast<IntrospectionProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get temperature.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        introspection_protocolInterface = static_cast<IntrospectionProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get temperature.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		pixelIndexPairs = introspection_protocolInterface->getActivePixelRanges(bus);
-		return pixelIndexPairs;
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        pixelIndexPairs = introspection_protocolInterface->getActivePixelRanges(bus);
+        return pixelIndexPairs;
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	/* Unreachable */
-	return NULL;
+    /* Unreachable */
+    return NULL;
 }
 
 vector<unsigned int> *IntrospectionFeature::getElectricDarkPixelRanges(const Protocol &protocol, const Bus &bus) throw (FeatureException) {
 
-	IntrospectionProtocolInterface *introspection_protocolInterface = NULL;
-	vector<unsigned int> *pixelIndexPairs = NULL;
-	ProtocolHelper *proto = NULL;
+    IntrospectionProtocolInterface *introspection_protocolInterface = NULL;
+    vector<unsigned int> *pixelIndexPairs = NULL;
+    ProtocolHelper *proto = NULL;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		introspection_protocolInterface = static_cast<IntrospectionProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get temperature.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        introspection_protocolInterface = static_cast<IntrospectionProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get temperature.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		pixelIndexPairs = introspection_protocolInterface->getElectricDarkPixelRanges(bus);
-		return pixelIndexPairs;
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        pixelIndexPairs = introspection_protocolInterface->getElectricDarkPixelRanges(bus);
+        return pixelIndexPairs;
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	/* Unreachable */
-	return NULL;
+    /* Unreachable */
+    return NULL;
 }
 
 vector<unsigned int> *IntrospectionFeature::getOpticalDarkPixelRanges(const Protocol &protocol, const Bus &bus) throw (FeatureException) {
 
-	IntrospectionProtocolInterface *introspection_protocolInterface = NULL;
-	vector<unsigned int> *pixelIndexPairs = NULL;
-	ProtocolHelper *proto = NULL;
+    IntrospectionProtocolInterface *introspection_protocolInterface = NULL;
+    vector<unsigned int> *pixelIndexPairs = NULL;
+    ProtocolHelper *proto = NULL;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		introspection_protocolInterface = static_cast<IntrospectionProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get temperature.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        introspection_protocolInterface = static_cast<IntrospectionProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get temperature.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		pixelIndexPairs = introspection_protocolInterface->getOpticalDarkPixelRanges(bus);
-		return pixelIndexPairs;
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        pixelIndexPairs = introspection_protocolInterface->getOpticalDarkPixelRanges(bus);
+        return pixelIndexPairs;
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	/* Unreachable */
-	return NULL;
+    /* Unreachable */
+    return NULL;
 }
 
 FeatureFamily IntrospectionFeature::getFeatureFamily() {

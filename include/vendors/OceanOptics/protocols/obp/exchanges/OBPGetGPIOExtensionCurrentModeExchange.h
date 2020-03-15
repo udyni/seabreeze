@@ -39,10 +39,10 @@ namespace seabreeze
         class OBPGetGPIOExtensionCurrentModeExchange : public OBPQuery
         {
         public:
-			OBPGetGPIOExtensionCurrentModeExchange();
+            OBPGetGPIOExtensionCurrentModeExchange();
             virtual ~OBPGetGPIOExtensionCurrentModeExchange();
 
-			void setPinNumber(unsigned char eGPIO_Pin_Number);
+            void setPinNumber(unsigned char eGPIO_Pin_Number);
 
         };
     }

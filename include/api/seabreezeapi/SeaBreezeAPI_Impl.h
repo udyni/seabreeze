@@ -81,10 +81,10 @@ public:
     virtual double spectrometerGetMaximumIntensity(long deviceID, long spectrometerFeatureID, int *errorCode);
     virtual int spectrometerGetUnformattedSpectrumLength(long deviceID, long spectrometerFeatureID, int *errorCode);
     virtual int spectrometerGetUnformattedSpectrum(long deviceID, long spectrometerFeatureID, int *errorCode, unsigned char *buffer, int bufferLength);
-	virtual int spectrometerGetFastBufferSpectrum(long deviceID, long spectrometerFeatureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
-	virtual void spectrometerFastBufferSpectrumRequest(long deviceID, long spectrometerFeatureID, int *errorCode, unsigned int numberOfSamplesToRetrieve);
-	virtual int spectrometerFastBufferSpectrumResponse(long deviceID, long spectrometerFeatureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
-	virtual int spectrometerGetFormattedSpectrumLength(long deviceID, long spectrometerFeatureID, int *errorCode);
+    virtual int spectrometerGetFastBufferSpectrum(long deviceID, long spectrometerFeatureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
+    virtual void spectrometerFastBufferSpectrumRequest(long deviceID, long spectrometerFeatureID, int *errorCode, unsigned int numberOfSamplesToRetrieve);
+    virtual int spectrometerFastBufferSpectrumResponse(long deviceID, long spectrometerFeatureID, int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
+    virtual int spectrometerGetFormattedSpectrumLength(long deviceID, long spectrometerFeatureID, int *errorCode);
     virtual int spectrometerGetFormattedSpectrum(long deviceID, long spectrometerFeatureID, int *errorCode, double *buffer, int bufferLength);
     virtual int spectrometerGetWavelengths(long deviceID, long spectrometerFeatureID, int *errorCode, double *wavelengths, int length);
     virtual int spectrometerGetElectricDarkPixelCount(long deviceID, long spectrometerFeatureID, int *errorCode);
@@ -116,82 +116,82 @@ public:
     virtual float irradCalibrationReadCollectionArea(long deviceID, long featureID, int *errorCode);
     virtual void irradCalibrationWriteCollectionArea(long deviceID, long featureID, int *errorCode, float area);
 
-	/* Ethernet Configuration features */
-	virtual int getNumberOfEthernetConfigurationFeatures(long deviceID, int *errorCode);
-	virtual int getEthernetConfigurationFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-	virtual void ethernetConfiguration_Get_MAC_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char (*macAddress)[6]);
-	virtual void ethernetConfiguration_Set_MAC_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char macAddress[6]);
-	virtual unsigned char ethernetConfiguration_Get_GbE_Enable_Status(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual void ethernetConfiguration_Set_GbE_Enable_Status(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
+    /* Ethernet Configuration features */
+    virtual int getNumberOfEthernetConfigurationFeatures(long deviceID, int *errorCode);
+    virtual int getEthernetConfigurationFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual void ethernetConfiguration_Get_MAC_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char (*macAddress)[6]);
+    virtual void ethernetConfiguration_Set_MAC_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char macAddress[6]);
+    virtual unsigned char ethernetConfiguration_Get_GbE_Enable_Status(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual void ethernetConfiguration_Set_GbE_Enable_Status(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
 
-	/* Multicast features */
-	virtual int getNumberOfMulticastFeatures(long deviceID, int *errorCode);
-	virtual int getMulticastFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-	//virtual void getMulticastGroupAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(&groupAddress)[4]);
-	//virtual void setMulitcastGroupAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char groupAddress[4]);
-	virtual unsigned char getMulticastEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual void setMulticastEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
-
-
-	// IPv4 features
-	virtual int getNumberOfIPv4Features(long deviceID, int *errorCode);
-	virtual int getIPv4Features(long deviceID, int *errorCode, long *buffer, int maxLength);
-	virtual unsigned char get_IPv4_DHCP_Enable_State(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual void   set_IPv4_DHCP_Enable_State(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char isEnabled);
-	virtual unsigned char get_Number_Of_IPv4_Addresses(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual void   get_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex, unsigned char(*IPv4_Address)[4], unsigned char *netMask);
-	virtual void   get_IPv4_Default_Gateway(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4]);
-	virtual void   set_IPv4_Default_Gateway(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4]);
-	virtual void   add_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask);
-	virtual void   delete_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex);
-
-	/* Wifi Configuration features */
-	virtual int getNumberOfWifiConfigurationFeatures(long deviceID, int *errorCode);
-	virtual int getWifiConfigurationFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-	virtual unsigned char getWifiConfigurationMode(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual void setWifiConfigurationMode(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char mode);
-	virtual unsigned char getWifiConfigurationSecurityType(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual void setWifiConfigurationSecurityType(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char securityType);
-	virtual unsigned char getWifiConfigurationSSID(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*ssid)[32]);
-	virtual void setWifiConfigurationSSID(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char ssid[32], unsigned char length);
-	virtual void setWifiConfigurationPassPhrase(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char *passPhrase, unsigned char passPhraseLength);
-
-	/* DHCP Server features */
-	virtual int getNumberOfDHCPServerFeatures(long deviceID, int *errorCode);
-	virtual int getDHCPServerFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-	virtual void dhcpServerGetAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*serverAddress)[4], unsigned char *netMask);
-	virtual void dhcpServerSetAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char serverAddress[4], unsigned char netMask);
-	virtual unsigned char dhcpServerGetEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual void dhcpServerSetEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
+    /* Multicast features */
+    virtual int getNumberOfMulticastFeatures(long deviceID, int *errorCode);
+    virtual int getMulticastFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    //virtual void getMulticastGroupAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(&groupAddress)[4]);
+    //virtual void setMulitcastGroupAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char groupAddress[4]);
+    virtual unsigned char getMulticastEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual void setMulticastEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
 
 
-	/* Network Configuration features */
-	virtual int getNumberOfNetworkConfigurationFeatures(long deviceID, int *errorCode);
-	virtual int getNetworkConfigurationFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-	virtual unsigned char getNumberOfNetworkInterfaces(long deviceID, long featureID, int *errorCode);
-	virtual unsigned char getNetworkInterfaceConnectionType(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual unsigned char runNetworkInterfaceSelfTest(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual unsigned char getNetworkInterfaceEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-	virtual void setNetworkInterfaceEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
-	virtual void saveNetworkInterfaceConnectionSettings(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    // IPv4 features
+    virtual int getNumberOfIPv4Features(long deviceID, int *errorCode);
+    virtual int getIPv4Features(long deviceID, int *errorCode, long *buffer, int maxLength);
+    virtual unsigned char get_IPv4_DHCP_Enable_State(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual void   set_IPv4_DHCP_Enable_State(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char isEnabled);
+    virtual unsigned char get_Number_Of_IPv4_Addresses(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual void   get_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex, unsigned char(*IPv4_Address)[4], unsigned char *netMask);
+    virtual void   get_IPv4_Default_Gateway(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4]);
+    virtual void   set_IPv4_Default_Gateway(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4]);
+    virtual void   add_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask);
+    virtual void   delete_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex);
+
+    /* Wifi Configuration features */
+    virtual int getNumberOfWifiConfigurationFeatures(long deviceID, int *errorCode);
+    virtual int getWifiConfigurationFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual unsigned char getWifiConfigurationMode(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual void setWifiConfigurationMode(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char mode);
+    virtual unsigned char getWifiConfigurationSecurityType(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual void setWifiConfigurationSecurityType(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char securityType);
+    virtual unsigned char getWifiConfigurationSSID(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*ssid)[32]);
+    virtual void setWifiConfigurationSSID(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char ssid[32], unsigned char length);
+    virtual void setWifiConfigurationPassPhrase(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char *passPhrase, unsigned char passPhraseLength);
+
+    /* DHCP Server features */
+    virtual int getNumberOfDHCPServerFeatures(long deviceID, int *errorCode);
+    virtual int getDHCPServerFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual void dhcpServerGetAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*serverAddress)[4], unsigned char *netMask);
+    virtual void dhcpServerSetAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char serverAddress[4], unsigned char netMask);
+    virtual unsigned char dhcpServerGetEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual void dhcpServerSetEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
 
 
-	// gpio features
-	virtual int getNumberOfGPIOFeatures(long deviceID, int *errorCode);
-	virtual int getGPIOFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-	virtual unsigned char getGPIO_NumberOfPins(long deviceID, long featureID, int *errorCode);
-	virtual unsigned int getGPIO_OutputEnableVector(long deviceID, long featureID, int *errorCode);
-	virtual void setGPIO_OutputEnableVector(long deviceID, long featureID, int *errorCode, unsigned int outputEnableVector, unsigned int bitMask);
-	virtual unsigned int getGPIO_ValueVector(long deviceID, long featureID, int *errorCode);
-	virtual void setGPIO_ValueVector(long deviceID, long featureID, int *errorCode, unsigned int valueVector, unsigned int bitMask);
-	virtual unsigned char getEGPIO_NumberOfPins(long deviceID, long featureID, int *errorCode);
-	virtual unsigned char getEGPIO_AvailableModes(long deviceID, long featureID, int *errorCode, unsigned char pinNumber, unsigned char *availableModes, unsigned char maxModeCount);
-	virtual unsigned char getEGPIO_CurrentMode(long deviceID, long featureID, int *errorCode, unsigned char pinNumber);
-	virtual void setEGPIO_Mode(long deviceID, long featureID, int *errorCode, unsigned char pinNumber, unsigned char mode, float value);
-	virtual unsigned int getEGPIO_OutputVector(long deviceID, long featureID, int *errorCode);
-	virtual void setEGPIO_OutputVector(long deviceID, long featureID, int *errorCode, unsigned int outputVector, unsigned int bitMask);
-	virtual float getEGPIO_Value(long deviceID, long featureID, int *errorCode, unsigned char pinNumber);
-	virtual void setEGPIO_Value(long deviceID, long featureID, int *errorCode, unsigned char pinNumber, float value);
+    /* Network Configuration features */
+    virtual int getNumberOfNetworkConfigurationFeatures(long deviceID, int *errorCode);
+    virtual int getNetworkConfigurationFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual unsigned char getNumberOfNetworkInterfaces(long deviceID, long featureID, int *errorCode);
+    virtual unsigned char getNetworkInterfaceConnectionType(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual unsigned char runNetworkInterfaceSelfTest(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual unsigned char getNetworkInterfaceEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+    virtual void setNetworkInterfaceEnableState(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState);
+    virtual void saveNetworkInterfaceConnectionSettings(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
+
+
+    // gpio features
+    virtual int getNumberOfGPIOFeatures(long deviceID, int *errorCode);
+    virtual int getGPIOFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual unsigned char getGPIO_NumberOfPins(long deviceID, long featureID, int *errorCode);
+    virtual unsigned int getGPIO_OutputEnableVector(long deviceID, long featureID, int *errorCode);
+    virtual void setGPIO_OutputEnableVector(long deviceID, long featureID, int *errorCode, unsigned int outputEnableVector, unsigned int bitMask);
+    virtual unsigned int getGPIO_ValueVector(long deviceID, long featureID, int *errorCode);
+    virtual void setGPIO_ValueVector(long deviceID, long featureID, int *errorCode, unsigned int valueVector, unsigned int bitMask);
+    virtual unsigned char getEGPIO_NumberOfPins(long deviceID, long featureID, int *errorCode);
+    virtual unsigned char getEGPIO_AvailableModes(long deviceID, long featureID, int *errorCode, unsigned char pinNumber, unsigned char *availableModes, unsigned char maxModeCount);
+    virtual unsigned char getEGPIO_CurrentMode(long deviceID, long featureID, int *errorCode, unsigned char pinNumber);
+    virtual void setEGPIO_Mode(long deviceID, long featureID, int *errorCode, unsigned char pinNumber, unsigned char mode, float value);
+    virtual unsigned int getEGPIO_OutputVector(long deviceID, long featureID, int *errorCode);
+    virtual void setEGPIO_OutputVector(long deviceID, long featureID, int *errorCode, unsigned int outputVector, unsigned int bitMask);
+    virtual float getEGPIO_Value(long deviceID, long featureID, int *errorCode, unsigned char pinNumber);
+    virtual void setEGPIO_Value(long deviceID, long featureID, int *errorCode, unsigned char pinNumber, float value);
 
 
     /* EEPROM capabilities */
@@ -247,13 +247,13 @@ public:
     virtual int temperatureGetAll(long deviceID, long featureID, int *errorCode,
         double *buffer, int maxLength);
 
-	/* Introspection capabilities */
-	virtual int getNumberOfIntrospectionFeatures(long deviceID, int *errorCode);
-	virtual int getIntrospectionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-	virtual unsigned short int introspectionNumberOfPixelsGet(long deviceID, long featureID, int *errorCode);
-	virtual int introspectionActivePixelRangesGet(long deviceID, long featureID, int *errorCode, unsigned int *pixelRangePairs, int maxLength);
-	virtual int introspectionElectricDarkPixelRangesGet(long deviceID, long featureID, int *errorCode, unsigned int *pixelRangePairs, int maxLength);
-	virtual int introspectionOpticalDarkPixelRangesGet(long deviceID, long featureID, int *errorCode, unsigned int *pixelRangePairs, int maxLength);
+    /* Introspection capabilities */
+    virtual int getNumberOfIntrospectionFeatures(long deviceID, int *errorCode);
+    virtual int getIntrospectionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual unsigned short int introspectionNumberOfPixelsGet(long deviceID, long featureID, int *errorCode);
+    virtual int introspectionActivePixelRangesGet(long deviceID, long featureID, int *errorCode, unsigned int *pixelRangePairs, int maxLength);
+    virtual int introspectionElectricDarkPixelRangesGet(long deviceID, long featureID, int *errorCode, unsigned int *pixelRangePairs, int maxLength);
+    virtual int introspectionOpticalDarkPixelRangesGet(long deviceID, long featureID, int *errorCode, unsigned int *pixelRangePairs, int maxLength);
 
     /* Spectrum processing capabilities */
     virtual int getNumberOfSpectrumProcessingFeatures(long deviceID, int *errorCode);
@@ -301,13 +301,13 @@ public:
     virtual unsigned long dataBufferGetBufferCapacityMinimum(long deviceID, long featureID, int *errorCode);
     virtual void dataBufferSetBufferCapacity(long deviceID, long featureID, int *errorCode, unsigned long capacity);
 
-	/* Fast Buffer capabilities*/
-	virtual int getNumberOfFastBufferFeatures(long deviceID, int *errorCode);
-	virtual int getFastBufferFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-	virtual unsigned char fastBufferGetBufferingEnable(long deviceID, long featureID, int *errorCode);
-	virtual void fastBufferSetBufferingEnable(long deviceID, long featureID, int *errorCode, unsigned char isEnabled);
-	virtual unsigned int fastBufferGetConsecutiveSampleCount(long deviceID, long featureID, int *errorCode);
-	virtual void fastBufferSetConsecutiveSampleCount(long deviceID, long featureID, int *errorCode, unsigned int consecutiveSampleCount);
+    /* Fast Buffer capabilities*/
+    virtual int getNumberOfFastBufferFeatures(long deviceID, int *errorCode);
+    virtual int getFastBufferFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual unsigned char fastBufferGetBufferingEnable(long deviceID, long featureID, int *errorCode);
+    virtual void fastBufferSetBufferingEnable(long deviceID, long featureID, int *errorCode, unsigned char isEnabled);
+    virtual unsigned int fastBufferGetConsecutiveSampleCount(long deviceID, long featureID, int *errorCode);
+    virtual void fastBufferSetConsecutiveSampleCount(long deviceID, long featureID, int *errorCode, unsigned int consecutiveSampleCount);
 
     /* Acquisition delay capabilities */
     virtual int getNumberOfAcquisitionDelayFeatures(long deviceID, int *errorCode);
@@ -323,12 +323,12 @@ public:
     virtual unsigned long acquisitionDelayGetDelayMinimumMicroseconds(long deviceID,
             long featureID, int *errorCode);
 
-	/* I2C Master features */
-	virtual int getNumberOfI2CMasterFeatures(long deviceID, int *errorCode);
-	virtual int getI2CMasterFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-	virtual unsigned char i2cMasterGetNumberOfBuses(long deviceID, long featureID, int *errorCode);
-	virtual unsigned short i2cMasterReadBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes);
-	virtual unsigned short i2cMasterWriteBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes);
+    /* I2C Master features */
+    virtual int getNumberOfI2CMasterFeatures(long deviceID, int *errorCode);
+    virtual int getI2CMasterFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual unsigned char i2cMasterGetNumberOfBuses(long deviceID, long featureID, int *errorCode);
+    virtual unsigned short i2cMasterReadBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes);
+    virtual unsigned short i2cMasterWriteBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes);
 
 private:
     SeaBreezeAPI_Impl();

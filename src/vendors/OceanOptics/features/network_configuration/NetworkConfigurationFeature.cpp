@@ -61,16 +61,16 @@ unsigned char NetworkConfigurationFeature::getNumberOfNetworkInterfaces(const Pr
 {
 
     unsigned char data;
-	NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
+    NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
     ProtocolHelper *proto;
 
     try 
     {
         proto = lookupProtocolImpl(protocol);
-		networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
+        networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
     } 
-	catch (FeatureProtocolNotFoundException &e) 
-	{
+    catch (FeatureProtocolNotFoundException &e) 
+    {
         string error(
         "Could not find matching protocol implementation to get calibration.");
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -78,11 +78,11 @@ unsigned char NetworkConfigurationFeature::getNumberOfNetworkInterfaces(const Pr
     }
 
     try 
-	{
+    {
         data = networkConfigurationPI->getNumberOfNetworkInterfaces(bus);
     } 
-	catch (ProtocolException &pe) 
-	{
+    catch (ProtocolException &pe) 
+    {
         string error("Caught protocol exception: ");
         error += pe.what();
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -94,102 +94,102 @@ unsigned char NetworkConfigurationFeature::getNumberOfNetworkInterfaces(const Pr
 
 unsigned char NetworkConfigurationFeature::runNetworkInterfaceSelfTest(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException)
 {
-	NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
-	ProtocolHelper *proto;
-	byte selftestStatus;
+    NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
+    ProtocolHelper *proto;
+    byte selftestStatus;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to read collection area.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to read collection area.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		selftestStatus = networkConfigurationPI->runNetworkInterfaceSelfTest(bus, interfaceIndex);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        selftestStatus = networkConfigurationPI->runNetworkInterfaceSelfTest(bus, interfaceIndex);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return selftestStatus;
+    return selftestStatus;
 }
 unsigned char NetworkConfigurationFeature::getNetworkInterfaceConnectionType(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException)
 {
-	NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
-	ProtocolHelper *proto;
-	byte networkType;
+    NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
+    ProtocolHelper *proto;
+    byte networkType;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to read collection area.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to read collection area.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		networkType = networkConfigurationPI->getNetworkInterfaceConnectionType(bus, interfaceIndex);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        networkType = networkConfigurationPI->getNetworkInterfaceConnectionType(bus, interfaceIndex);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return networkType;
+    return networkType;
 }
 
 unsigned char NetworkConfigurationFeature::getNetworkInterfaceEnableState(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException)
 {
-	NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
-	ProtocolHelper *proto;
-	byte enableStatus;
+    NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
+    ProtocolHelper *proto;
+    byte enableStatus;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to read collection area.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to read collection area.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		enableStatus = networkConfigurationPI->getNetworkInterfaceConnectionType(bus, interfaceIndex);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        enableStatus = networkConfigurationPI->getNetworkInterfaceConnectionType(bus, interfaceIndex);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return enableStatus;
+    return enableStatus;
 }
 
 
 void NetworkConfigurationFeature::setNetworkInterfaceEnableState(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, unsigned char enableStatus) throw (FeatureException) 
 {
-	NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
-	ProtocolHelper *proto;
+    NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
+    ProtocolHelper *proto;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
+        networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to write collection area.");
@@ -198,7 +198,7 @@ void NetworkConfigurationFeature::setNetworkInterfaceEnableState(const Protocol 
     }
 
     try {
-		networkConfigurationPI->setNetworkInterfaceEnableState(bus, interfaceIndex, enableStatus);
+        networkConfigurationPI->setNetworkInterfaceEnableState(bus, interfaceIndex, enableStatus);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();
@@ -210,29 +210,29 @@ void NetworkConfigurationFeature::setNetworkInterfaceEnableState(const Protocol 
 
 void NetworkConfigurationFeature::saveNetworkInterfaceConnectionSettings(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException)
 {
-	NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
-	ProtocolHelper *proto;
+    NetworkConfigurationProtocolInterface *networkConfigurationPI = NULL;
+    ProtocolHelper *proto;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to write collection area.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        networkConfigurationPI = static_cast<NetworkConfigurationProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to write collection area.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		networkConfigurationPI->saveNetworkInterfaceConnectionSettings(bus, interfaceIndex);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        networkConfigurationPI->saveNetworkInterfaceConnectionSettings(bus, interfaceIndex);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
 }
 

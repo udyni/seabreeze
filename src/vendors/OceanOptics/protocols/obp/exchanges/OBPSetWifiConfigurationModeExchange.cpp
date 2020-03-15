@@ -53,10 +53,10 @@ OBPSetWifiConfigurationModeExchange::~OBPSetWifiConfigurationModeExchange()
 
 void OBPSetWifiConfigurationModeExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPSetWifiConfigurationModeExchange::setMode(unsigned char mode) 
 {
-	this->payload[1] = mode;
+    this->payload[1] = mode;
 }

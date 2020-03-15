@@ -43,19 +43,19 @@ namespace seabreeze
 
         class IPv4FeatureAdapter
                 : public FeatureAdapterTemplate<IPv4FeatureInterface> 
-		{
-        	public:
-            	IPv4FeatureAdapter(IPv4FeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
-            	virtual ~IPv4FeatureAdapter();
+        {
+            public:
+                IPv4FeatureAdapter(IPv4FeatureInterface *intf, const FeatureFamily &f, Protocol *p, Bus *b, unsigned short instanceIndex);
+                virtual ~IPv4FeatureAdapter();
 
-            	unsigned char get_IPv4_DHCP_Enable_State(int *errorCode, unsigned char interfaceIndex);
-				void   set_IPv4_DHCP_Enable_State(int *errorCode, unsigned char interfaceIndex, unsigned char isEnabled);
-				unsigned char get_Number_Of_IPv4_Addresses(int *errorCode, unsigned char interfaceIndex);
-				void   get_IPv4_Address(int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex, unsigned char(*IPv4_Address)[4], unsigned char *netMask);
-				void   get_IPv4_Default_Gateway(int *errorCode, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4]);
-				void   set_IPv4_Default_Gateway(int *errorCode, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4]);
-				void   add_IPv4_Address(int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask);
-				void   delete_IPv4_Address(int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex);
+                unsigned char get_IPv4_DHCP_Enable_State(int *errorCode, unsigned char interfaceIndex);
+                void   set_IPv4_DHCP_Enable_State(int *errorCode, unsigned char interfaceIndex, unsigned char isEnabled);
+                unsigned char get_Number_Of_IPv4_Addresses(int *errorCode, unsigned char interfaceIndex);
+                void   get_IPv4_Address(int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex, unsigned char(*IPv4_Address)[4], unsigned char *netMask);
+                void   get_IPv4_Default_Gateway(int *errorCode, unsigned char interfaceIndex, unsigned char(*defaultGatewayAddress)[4]);
+                void   set_IPv4_Default_Gateway(int *errorCode, unsigned char interfaceIndex, const unsigned char defaultGatewayAddress[4]);
+                void   add_IPv4_Address(int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask);
+                void   delete_IPv4_Address(int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex);
         };
     }
 }

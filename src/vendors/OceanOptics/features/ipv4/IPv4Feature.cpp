@@ -59,106 +59,106 @@ IPv4Feature::~IPv4Feature()
 
 unsigned char IPv4Feature::get_IPv4_DHCP_Enable_State(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException)
 {
-	IPv4ProtocolInterface *IPv4PI = NULL;
-	ProtocolHelper *proto;
-	byte enableStatus;
+    IPv4ProtocolInterface *IPv4PI = NULL;
+    ProtocolHelper *proto;
+    byte enableStatus;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		enableStatus = IPv4PI->get_IPv4_DHCP_Enable_State(bus, interfaceIndex);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        enableStatus = IPv4PI->get_IPv4_DHCP_Enable_State(bus, interfaceIndex);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return enableStatus;
+    return enableStatus;
 }
 
 void IPv4Feature::set_IPv4_DHCP_Enable_State(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, unsigned char enableStatus) throw (FeatureException)
 {
-	IPv4ProtocolInterface *IPv4PI = NULL;
-	ProtocolHelper *proto;
+    IPv4ProtocolInterface *IPv4PI = NULL;
+    ProtocolHelper *proto;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to write data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to write data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		IPv4PI->set_IPv4_DHCP_Enable_State(bus, interfaceIndex, enableStatus);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        IPv4PI->set_IPv4_DHCP_Enable_State(bus, interfaceIndex, enableStatus);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
 }
 
 unsigned char IPv4Feature::get_Number_Of_IPv4_Addresses(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException)
 {
-	IPv4ProtocolInterface *IPv4PI = NULL;
-	ProtocolHelper *proto;
-	byte numberOfAddresses;
+    IPv4ProtocolInterface *IPv4PI = NULL;
+    ProtocolHelper *proto;
+    byte numberOfAddresses;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		numberOfAddresses = IPv4PI->get_Number_Of_IPv4_Addresses(bus, interfaceIndex);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        numberOfAddresses = IPv4PI->get_Number_Of_IPv4_Addresses(bus, interfaceIndex);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return numberOfAddresses;
+    return numberOfAddresses;
 }
 
 void IPv4Feature::get_IPv4_Address(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, unsigned char addressIndex,  vector<unsigned char> *IPv4_Address,  unsigned char *netMask) throw (FeatureException)
 {
 
     vector<unsigned char> data;
-	IPv4ProtocolInterface *IPv4PI = NULL;
+    IPv4ProtocolInterface *IPv4PI = NULL;
     ProtocolHelper *proto;
 
     try 
     {
         proto = lookupProtocolImpl(protocol);
-		IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
+        IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
     } 
-	catch (FeatureProtocolNotFoundException &e) 
-	{
+    catch (FeatureProtocolNotFoundException &e) 
+    {
         string error(
         "Could not find matching protocol implementation to data.");
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -166,11 +166,11 @@ void IPv4Feature::get_IPv4_Address(const Protocol &protocol, const Bus &bus, uns
     }
 
     try 
-	{
+    {
         IPv4PI->get_IPv4_Address(bus, interfaceIndex, addressIndex, IPv4_Address, netMask);
     } 
-	catch (ProtocolException &pe) 
-	{
+    catch (ProtocolException &pe) 
+    {
         string error("Caught protocol exception: ");
         error += pe.what();
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -181,47 +181,47 @@ void IPv4Feature::get_IPv4_Address(const Protocol &protocol, const Bus &bus, uns
 vector<byte> IPv4Feature::get_IPv4_Default_Gateway(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException)
 {
 
-	vector<unsigned char> data;
-	IPv4ProtocolInterface *IPv4PI = NULL;
-	ProtocolHelper *proto;
+    vector<unsigned char> data;
+    IPv4ProtocolInterface *IPv4PI = NULL;
+    ProtocolHelper *proto;
 
-	try
-	{
-		proto = lookupProtocolImpl(protocol);
-		IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e)
-	{
-		string error(
-			"Could not find matching protocol implementation to data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try
+    {
+        proto = lookupProtocolImpl(protocol);
+        IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e)
+    {
+        string error(
+            "Could not find matching protocol implementation to data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try
-	{
-		data = IPv4PI->get_IPv4_Default_Gateway(bus, interfaceIndex);
-	}
-	catch (ProtocolException &pe)
-	{
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try
+    {
+        data = IPv4PI->get_IPv4_Default_Gateway(bus, interfaceIndex);
+    }
+    catch (ProtocolException &pe)
+    {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 
-	return data;
+    return data;
 }
 
 void IPv4Feature::set_IPv4_Default_Gateway(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, const vector<unsigned char> gatewayAddress) throw (FeatureException)
 {
 
-	IPv4ProtocolInterface *IPv4PI = NULL;
-	ProtocolHelper *proto;
+    IPv4ProtocolInterface *IPv4PI = NULL;
+    ProtocolHelper *proto;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
+        IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to get data.");
@@ -230,7 +230,7 @@ void IPv4Feature::set_IPv4_Default_Gateway(const Protocol &protocol, const Bus &
     }
 
     try {
-		IPv4PI->set_IPv4_Default_Gateway(bus, interfaceIndex, gatewayAddress);
+        IPv4PI->set_IPv4_Default_Gateway(bus, interfaceIndex, gatewayAddress);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();
@@ -242,60 +242,60 @@ void IPv4Feature::set_IPv4_Default_Gateway(const Protocol &protocol, const Bus &
 void IPv4Feature::add_IPv4_Address(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, const vector<unsigned char> IPv4_Address, unsigned char netMask) throw (FeatureException)
 {
 
-	IPv4ProtocolInterface *IPv4PI = NULL;
-	ProtocolHelper *proto;
+    IPv4ProtocolInterface *IPv4PI = NULL;
+    ProtocolHelper *proto;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		IPv4PI->add_IPv4_Address(bus, interfaceIndex, IPv4_Address, netMask);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        IPv4PI->add_IPv4_Address(bus, interfaceIndex, IPv4_Address, netMask);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 }
 void IPv4Feature::delete_IPv4_Address(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, unsigned char addressIndex) throw (FeatureException)
 {
 
-	IPv4ProtocolInterface *IPv4PI = NULL;
-	ProtocolHelper *proto;
+    IPv4ProtocolInterface *IPv4PI = NULL;
+    ProtocolHelper *proto;
 
-	try {
-		proto = lookupProtocolImpl(protocol);
-		IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
-	}
-	catch (FeatureProtocolNotFoundException &e) {
-		string error(
-			"Could not find matching protocol implementation to get data.");
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureProtocolNotFoundException(error);
-	}
+    try {
+        proto = lookupProtocolImpl(protocol);
+        IPv4PI = static_cast<IPv4ProtocolInterface *>(proto);
+    }
+    catch (FeatureProtocolNotFoundException &e) {
+        string error(
+            "Could not find matching protocol implementation to get data.");
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureProtocolNotFoundException(error);
+    }
 
-	try {
-		IPv4PI->delete_IPv4_Address(bus, interfaceIndex, addressIndex);
-	}
-	catch (ProtocolException &pe) {
-		string error("Caught protocol exception: ");
-		error += pe.what();
-		/* FIXME: previous exception should probably be bundled up into the new exception */
-		throw FeatureControlException(error);
-	}
+    try {
+        IPv4PI->delete_IPv4_Address(bus, interfaceIndex, addressIndex);
+    }
+    catch (ProtocolException &pe) {
+        string error("Caught protocol exception: ");
+        error += pe.what();
+        /* FIXME: previous exception should probably be bundled up into the new exception */
+        throw FeatureControlException(error);
+    }
 }
 
 FeatureFamily IPv4Feature::getFeatureFamily() {
     FeatureFamilies families;
 
-	return families.IPV4_ADDRESS;
+    return families.IPV4_ADDRESS;
 }

@@ -45,9 +45,9 @@ namespace seabreeze {
     public:
         IPv4ProtocolInterface(Protocol *protocol);
         virtual ~IPv4ProtocolInterface();
-	
-	
-	    /**
+    
+    
+        /**
          * Is the DHCP client enabled for IPv4? 1: enabled, 0: disabled
          */
         virtual unsigned char get_IPv4_DHCP_Enable_State(const Bus &bus, unsigned char interfaceIndex)
@@ -59,7 +59,7 @@ namespace seabreeze {
         virtual void set_IPv4_DHCP_Enable_State(const Bus &bus, unsigned char interfaceIndex, unsigned char enableState)
             throw (ProtocolException) = 0;
 
-	    /**
+        /**
          * Get the number of IPv4 addresses that can be indexed.
          */
         virtual unsigned char get_Number_Of_IPv4_Addresses(const Bus &bus, unsigned char interfaceIndex)

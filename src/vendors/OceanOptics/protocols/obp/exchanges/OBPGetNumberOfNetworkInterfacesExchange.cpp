@@ -40,7 +40,7 @@ OBPGetNumberOfNetworkInterfacesExchange::OBPGetNumberOfNetworkInterfacesExchange
     this->messageType = OBPMessageTypes::OBP_GET_NETWORK_INTERFACE_COUNT;
 
     this->hints->push_back(new OBPControlHint());
-	this->payload.resize(0);
+    this->payload.resize(0);
 }
 
 OBPGetNumberOfNetworkInterfacesExchange::~OBPGetNumberOfNetworkInterfacesExchange() 

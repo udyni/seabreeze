@@ -5,7 +5,7 @@
 #
 
 
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 98)
 #set(CMAKE_BUILD_TYPE DEBUG)
 
@@ -1066,7 +1066,7 @@ elseif(UNIX)
 
     message("Building for Unix-like platforms")
     #add_compile_options(-std=c++0x)
-    set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ggdb -Wall -Wunused -Wmissing-include-dirs -Werror -O0 -fpic -fno-stack-protector" )
+    set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ggdb -Wall -Wunused -Wmissing-include-dirs -Werror -O2 -fpic -fno-stack-protector" )
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -gdb -pthread -lpthread")
 
     set(PLATFORM_SOURCE_FILES

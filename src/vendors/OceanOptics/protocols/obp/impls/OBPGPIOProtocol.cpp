@@ -70,7 +70,7 @@ OBPGPIOProtocol::~OBPGPIOProtocol()
 unsigned char OBPGPIOProtocol::getGPIO_NumberOfPins(const Bus &bus) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPGetGPIONumberOfPinsExchange request;
+    OBPGetGPIONumberOfPinsExchange request;
 
     helper = bus.getHelper(request.getHints());
     if (NULL == helper) {
@@ -92,7 +92,7 @@ unsigned char OBPGPIOProtocol::getGPIO_NumberOfPins(const Bus &bus) throw (Proto
         throw ProtocolException(error);
     }
 
-	unsigned char retval = (*raw)[0];
+    unsigned char retval = (*raw)[0];
 
     delete raw;
 
@@ -101,40 +101,40 @@ unsigned char OBPGPIOProtocol::getGPIO_NumberOfPins(const Bus &bus) throw (Proto
 
 unsigned int OBPGPIOProtocol::getGPIO_OutputEnableVector(const Bus &bus) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPGetGPIOOutputEnableVectorExchange request;
+    TransferHelper *helper;
+    OBPGetGPIOOutputEnableVectorExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
+        throw ProtocolException(error);
+    }
 
-	if (raw->size() < sizeof(byte)) {
-		string error("Failed to get back expected number of bytes that should"
-			" have held collection area.");
-		delete raw;
-		throw ProtocolException(error);
-	}
+    if (raw->size() < sizeof(byte)) {
+        string error("Failed to get back expected number of bytes that should"
+            " have held collection area.");
+        delete raw;
+        throw ProtocolException(error);
+    }
 
-	unsigned int retval = (*raw)[0];
+    unsigned int retval = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return retval;
+    return retval;
 }
 
 void OBPGPIOProtocol::setGPIO_OutputEnableVector(const Bus &bus, unsigned int outputEnableVector, unsigned int bitMask) throw (ProtocolException)
 {
     TransferHelper *helper;
-	OBPSetGPIOOutputEnableVectorExchange command;
+    OBPSetGPIOOutputEnableVectorExchange command;
 
     helper = bus.getHelper(command.getHints());
     if (NULL == helper) {
@@ -142,8 +142,8 @@ void OBPGPIOProtocol::setGPIO_OutputEnableVector(const Bus &bus, unsigned int ou
         throw ProtocolBusMismatchException(error);
     }
 
-	command.setOutputEnableVector(outputEnableVector);
-	command.setOutputEnableMask(bitMask);
+    command.setOutputEnableVector(outputEnableVector);
+    command.setOutputEnableMask(bitMask);
 
     /* This may cause a ProtocolException to be thrown. */
     command.sendCommandToDevice(helper);
@@ -153,274 +153,274 @@ void OBPGPIOProtocol::setGPIO_OutputEnableVector(const Bus &bus, unsigned int ou
 
 unsigned int OBPGPIOProtocol::getGPIO_ValueVector(const Bus &bus) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPGetGPIOValueVectorExchange request;
+    TransferHelper *helper;
+    OBPGetGPIOValueVectorExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
+        throw ProtocolException(error);
+    }
 
-	if (raw->size() < sizeof(byte)) {
-		string error("Failed to get back expected number of bytes that should"
-			" have held collection area.");
-		delete raw;
-		throw ProtocolException(error);
-	}
+    if (raw->size() < sizeof(byte)) {
+        string error("Failed to get back expected number of bytes that should"
+            " have held collection area.");
+        delete raw;
+        throw ProtocolException(error);
+    }
 
-	unsigned int retval = (*raw)[0];
+    unsigned int retval = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return retval;
+    return retval;
 }
 
 void OBPGPIOProtocol::setGPIO_ValueVector(const Bus &bus, unsigned int valueVector, unsigned int bitMask) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPSetGPIOValueVectorExchange command;
+    TransferHelper *helper;
+    OBPSetGPIOValueVectorExchange command;
 
-	helper = bus.getHelper(command.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(command.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	command.setValueVector(valueVector);
-	command.setBitMask(bitMask);
+    command.setValueVector(valueVector);
+    command.setBitMask(bitMask);
 
-	/* This may cause a ProtocolException to be thrown. */
-	command.sendCommandToDevice(helper);
+    /* This may cause a ProtocolException to be thrown. */
+    command.sendCommandToDevice(helper);
 
-	/* FIXME: this could check the return value and react if it did not succeed */
+    /* FIXME: this could check the return value and react if it did not succeed */
 }
 
 unsigned char OBPGPIOProtocol::getEGPIO_NumberOfPins(const Bus &bus) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPGetGPIOExtensionNumberOfPinsExchange request;
+    TransferHelper *helper;
+    OBPGetGPIOExtensionNumberOfPinsExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
+        throw ProtocolException(error);
+    }
 
-	if (raw->size() < sizeof(byte)) {
-		string error("Failed to get back expected number of bytes that should"
-			" have held collection area.");
-		delete raw;
-		throw ProtocolException(error);
-	}
+    if (raw->size() < sizeof(byte)) {
+        string error("Failed to get back expected number of bytes that should"
+            " have held collection area.");
+        delete raw;
+        throw ProtocolException(error);
+    }
 
-	unsigned char retval = (*raw)[0];
+    unsigned char retval = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return retval;
+    return retval;
 }
 
 std::vector<unsigned char> OBPGPIOProtocol::getEGPIO_AvailableModes(const Bus &bus, unsigned char pinNumber) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPGetGPIOExtensionAvailableModesExchange request;
+    TransferHelper *helper;
+    OBPGetGPIOExtensionAvailableModesExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	request.setPinNumber(pinNumber);
+    request.setPinNumber(pinNumber);
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result "
-			"containing calibration data.  Without this data, it is not possible to "
-			"generate a calibration array.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result "
+            "containing calibration data.  Without this data, it is not possible to "
+            "generate a calibration array.");
+        throw ProtocolException(error);
+    }
 
-	vector<unsigned char> result = *raw;
+    vector<unsigned char> result = *raw;
 
-	delete raw;
+    delete raw;
 
-	return result;
+    return result;
 }
 
 unsigned char OBPGPIOProtocol::getEGPIO_CurrentMode(const Bus &bus, unsigned char pinNumber ) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPGetGPIOExtensionCurrentModeExchange request;
+    TransferHelper *helper;
+    OBPGetGPIOExtensionCurrentModeExchange request;
 
-	request.setPinNumber(pinNumber);
+    request.setPinNumber(pinNumber);
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
+        throw ProtocolException(error);
+    }
 
-	if (raw->size() < sizeof(byte)) {
-		string error("Failed to get back expected number of bytes that should"
-			" have held collection area.");
-		delete raw;
-		throw ProtocolException(error);
-	}
+    if (raw->size() < sizeof(byte)) {
+        string error("Failed to get back expected number of bytes that should"
+            " have held collection area.");
+        delete raw;
+        throw ProtocolException(error);
+    }
 
-	unsigned char retval = (*raw)[0];
+    unsigned char retval = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return retval;
+    return retval;
 }
 
 void OBPGPIOProtocol::setEGPIO_Mode(const Bus &bus, unsigned char pinNumber, unsigned char mode, float value) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPSetGPIOExtensionModeExchange command;
+    TransferHelper *helper;
+    OBPSetGPIOExtensionModeExchange command;
 
-	helper = bus.getHelper(command.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
-	command.setPinNumber(pinNumber);
-	command.setMode(mode);
-	command.setValue(value);
+    helper = bus.getHelper(command.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
+    command.setPinNumber(pinNumber);
+    command.setMode(mode);
+    command.setValue(value);
 
-	/* This may cause a ProtocolException to be thrown. */
-	command.sendCommandToDevice(helper);
+    /* This may cause a ProtocolException to be thrown. */
+    command.sendCommandToDevice(helper);
 
-	/* FIXME: this could check the return value and react if it did not succeed */
+    /* FIXME: this could check the return value and react if it did not succeed */
 }
 
 unsigned int OBPGPIOProtocol::getEGPIO_OutputVector(const Bus &bus) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPGetGPIOExtensionOutputVectorExchange request;
+    TransferHelper *helper;
+    OBPGetGPIOExtensionOutputVectorExchange request;
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
+        throw ProtocolException(error);
+    }
 
-	if (raw->size() < sizeof(byte)) {
-		string error("Failed to get back expected number of bytes that should"
-			" have held collection area.");
-		delete raw;
-		throw ProtocolException(error);
-	}
+    if (raw->size() < sizeof(byte)) {
+        string error("Failed to get back expected number of bytes that should"
+            " have held collection area.");
+        delete raw;
+        throw ProtocolException(error);
+    }
 
-	unsigned int retval = (*raw)[0];
+    unsigned int retval = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return retval;
+    return retval;
 }
 
 void OBPGPIOProtocol::setEGPIO_OutputVector(const Bus &bus, unsigned int outputVector, unsigned int bitMask) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPSetGPIOExtensionOutputVectorExchange command;
+    TransferHelper *helper;
+    OBPSetGPIOExtensionOutputVectorExchange command;
 
-	helper = bus.getHelper(command.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(command.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	command.setOutputVector(outputVector);
-	command.setBitMask(bitMask);
+    command.setOutputVector(outputVector);
+    command.setBitMask(bitMask);
 
-	/* This may cause a ProtocolException to be thrown. */
-	command.sendCommandToDevice(helper);
+    /* This may cause a ProtocolException to be thrown. */
+    command.sendCommandToDevice(helper);
 
-	/* FIXME: this could check the return value and react if it did not succeed */
+    /* FIXME: this could check the return value and react if it did not succeed */
 }
 
 
 float OBPGPIOProtocol::getEGPIO_Value(const Bus &bus, unsigned char pinNumber) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPGetGPIOExtensionValueExchange request;
+    TransferHelper *helper;
+    OBPGetGPIOExtensionValueExchange request;
 
-	request.setPinNumber(pinNumber);
+    request.setPinNumber(pinNumber);
 
-	helper = bus.getHelper(request.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(request.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	/* This transfer() may cause a ProtocolException to be thrown. */
-	vector<byte> *raw = request.queryDevice(helper);
-	if (NULL == raw) {
-		string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
-		throw ProtocolException(error);
-	}
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    vector<byte> *raw = request.queryDevice(helper);
+    if (NULL == raw) {
+        string error("Expected queryDevice to produce a non-null result.  Without this data, it is not possible to continue.");
+        throw ProtocolException(error);
+    }
 
-	if (raw->size() < sizeof(byte)) {
-		string error("Failed to get back expected number of bytes that should"
-			" have held collection area.");
-		delete raw;
-		throw ProtocolException(error);
-	}
+    if (raw->size() < sizeof(byte)) {
+        string error("Failed to get back expected number of bytes that should"
+            " have held collection area.");
+        delete raw;
+        throw ProtocolException(error);
+    }
 
-	float retval = (*raw)[0];
+    float retval = (*raw)[0];
 
-	delete raw;
+    delete raw;
 
-	return retval;
+    return retval;
 }
 
 void OBPGPIOProtocol::setEGPIO_Value(const Bus &bus, unsigned char pinNumber, float value) throw (ProtocolException)
 {
-	TransferHelper *helper;
-	OBPSetGPIOExtensionValueExchange command;
+    TransferHelper *helper;
+    OBPSetGPIOExtensionValueExchange command;
 
-	helper = bus.getHelper(command.getHints());
-	if (NULL == helper) {
-		string error("Failed to find a helper to bridge given protocol and bus.");
-		throw ProtocolBusMismatchException(error);
-	}
+    helper = bus.getHelper(command.getHints());
+    if (NULL == helper) {
+        string error("Failed to find a helper to bridge given protocol and bus.");
+        throw ProtocolBusMismatchException(error);
+    }
 
-	command.setPinNumber(pinNumber);
-	command.setValue(value);
+    command.setPinNumber(pinNumber);
+    command.setValue(value);
 
-	/* This may cause a ProtocolException to be thrown. */
-	command.sendCommandToDevice(helper);
+    /* This may cause a ProtocolException to be thrown. */
+    command.sendCommandToDevice(helper);
 
-	/* FIXME: this could check the return value and react if it did not succeed */
+    /* FIXME: this could check the return value and react if it did not succeed */
 }

@@ -64,15 +64,15 @@ void EthernetConfigurationFeatureAdapter::get_MAC_Address(int *errorCode, unsign
     vector<byte> macAddressVector;
 
     try 
-	{
+    {
         macAddressVector = this->feature->get_MAC_Address(*this->protocol, *this->bus, interfaceIndex);
 
         memcpy(macAddress, &(macAddressVector[0]), 6);
 
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe) 
-	{
+    catch (FeatureException &fe) 
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }
@@ -97,9 +97,9 @@ void EthernetConfigurationFeatureAdapter::set_MAC_Address(int *errorCode, unsign
 
 unsigned char EthernetConfigurationFeatureAdapter::get_GbE_Enable_Status(int *errorCode, unsigned char interfaceIndex) 
 {
-	unsigned char enableStatus;
+    unsigned char enableStatus;
     try {
-		enableStatus = this->feature->get_GbE_Enable_Status(*this->protocol, *this->bus, interfaceIndex);
+        enableStatus = this->feature->get_GbE_Enable_Status(*this->protocol, *this->bus, interfaceIndex);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
@@ -110,12 +110,12 @@ unsigned char EthernetConfigurationFeatureAdapter::get_GbE_Enable_Status(int *er
 void EthernetConfigurationFeatureAdapter::set_GbE_Enable_Status(int *errorCode, unsigned char interfaceIndex, unsigned char enableStatus) 
 {
     try 
-	{
+    {
         this->feature->set_GbE_Enable_Status(*this->protocol, *this->bus, interfaceIndex, enableStatus);
         SET_ERROR_CODE(ERROR_SUCCESS);
     } 
-	catch (FeatureException &fe)
-	{
+    catch (FeatureException &fe)
+    {
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
     }
 }

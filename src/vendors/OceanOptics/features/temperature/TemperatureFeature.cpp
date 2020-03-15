@@ -61,7 +61,7 @@ unsigned char TemperatureFeature::readTemperatureCount(const Protocol &protocol,
 {
 
     TemperatureProtocolInterface *temperaturePI = NULL;
-	unsigned char temperatureCount;
+    unsigned char temperatureCount;
     ProtocolHelper *proto = NULL;
 
     try {
@@ -88,7 +88,7 @@ unsigned char TemperatureFeature::readTemperatureCount(const Protocol &protocol,
 double TemperatureFeature::readTemperature(const Protocol &protocol, const Bus &bus, int index) throw (FeatureException) {
 
     TemperatureProtocolInterface *temperaturePI = NULL;
-	double temperature;
+    double temperature;
     ProtocolHelper *proto = NULL;
 
     try {

@@ -40,32 +40,32 @@ namespace seabreeze {
     public:
         virtual ~MulticastFeatureInterface() = 0;
 
-		virtual unsigned char getEnableState(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException) = 0;
-		virtual void setEnableState(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			unsigned char enableState)
-			throw (FeatureException) = 0;
+        virtual unsigned char getEnableState(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException) = 0;
+        virtual void setEnableState(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            unsigned char enableState)
+            throw (FeatureException) = 0;
 #if(false) // not implemented yet
-		virtual std::vector<unsigned char> getGroupAddress(
-			const Protocol &protocol,
-			const Bus &bus, 
-			unsigned char interfaceIndex)
-			throw (FeatureException) = 0;
-		virtual void setGroupAddress(
-			const Protocol &protocol, 
-			const Bus &bus,
-			unsigned char interfaceIndex,
-			const std::vector<unsigned char> groupAddress)
-			throw (FeatureException) = 0;			
+        virtual std::vector<unsigned char> getGroupAddress(
+            const Protocol &protocol,
+            const Bus &bus, 
+            unsigned char interfaceIndex)
+            throw (FeatureException) = 0;
+        virtual void setGroupAddress(
+            const Protocol &protocol, 
+            const Bus &bus,
+            unsigned char interfaceIndex,
+            const std::vector<unsigned char> groupAddress)
+            throw (FeatureException) = 0;            
 
 #endif
-	};
+    };
     /* Default implementation for (otherwise) pure virtual destructor */
     inline MulticastFeatureInterface::~MulticastFeatureInterface() {}
 }

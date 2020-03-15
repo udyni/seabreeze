@@ -46,7 +46,7 @@ namespace seabreeze {
         FastBufferProtocolInterface(Protocol *protocol);
         virtual ~FastBufferProtocolInterface();
                 
-		virtual unsigned char getBufferingEnable(const Bus &bus,
+        virtual unsigned char getBufferingEnable(const Bus &bus,
                 unsigned char bufferIndex)
                 throw (ProtocolException) = 0;
                 
@@ -55,14 +55,14 @@ namespace seabreeze {
                 const unsigned char isEnabled)
                 throw (ProtocolException) = 0;
 
-		virtual unsigned int getConsecutiveSampleCount(const Bus &bus,
-			unsigned char bufferIndex)
-			throw (ProtocolException) = 0;
+        virtual unsigned int getConsecutiveSampleCount(const Bus &bus,
+            unsigned char bufferIndex)
+            throw (ProtocolException) = 0;
 
-		virtual void setConsecutiveSampleCount(const Bus &bus,
-			unsigned char bufferIndex,
-			const unsigned int consecutiveSampleCount)
-			throw (ProtocolException) = 0;
+        virtual void setConsecutiveSampleCount(const Bus &bus,
+            unsigned char bufferIndex,
+            const unsigned int consecutiveSampleCount)
+            throw (ProtocolException) = 0;
     };
 
 } /* end namespace */

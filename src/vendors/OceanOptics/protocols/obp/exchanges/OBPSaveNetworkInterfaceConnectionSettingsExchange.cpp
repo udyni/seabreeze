@@ -43,8 +43,8 @@ OBPSaveNetworkInterfaceConnectionSettingsExchange::OBPSaveNetworkInterfaceConnec
 
     this->messageType = OBPMessageTypes::OBP_SAVE_INTERFACE_CONNECTION_INFO;
 
-	this->payload.resize(sizeof(unsigned char));
-	this->payload[0] = 0;  /* default state of device on startup */
+    this->payload.resize(sizeof(unsigned char));
+    this->payload[0] = 0;  /* default state of device on startup */
 }
 
 OBPSaveNetworkInterfaceConnectionSettingsExchange::~OBPSaveNetworkInterfaceConnectionSettingsExchange() 
@@ -54,6 +54,6 @@ OBPSaveNetworkInterfaceConnectionSettingsExchange::~OBPSaveNetworkInterfaceConne
 
 void OBPSaveNetworkInterfaceConnectionSettingsExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 

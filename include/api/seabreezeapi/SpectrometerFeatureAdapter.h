@@ -51,21 +51,21 @@ namespace seabreeze {
 
             /* Spectrometer commands */
             int getUnformattedSpectrum(int *errorCode,unsigned char *buffer, int bufferLength);
-			int getFastBufferSpectrum(int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
-			void fastBufferSpectrumRequest(int *errorCode, unsigned int numberOfSamplesToRetrieve);
-			int fastBufferSpectrumResponse(int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
-			int getFormattedSpectrum(int *errorCode,double* buffer, int bufferLength);
+            int getFastBufferSpectrum(int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
+            void fastBufferSpectrumRequest(int *errorCode, unsigned int numberOfSamplesToRetrieve);
+            int fastBufferSpectrumResponse(int *errorCode, unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve);
+            int getFormattedSpectrum(int *errorCode,double* buffer, int bufferLength);
             int getUnformattedSpectrumLength(int *errorCode);
             int getFormattedSpectrumLength(int *errorCode);
             void setTriggerMode(int *errorCode, int mode);
             int getWavelengths(int *errorCode, double *wavelengths, int length);
             int getElectricDarkPixelCount(int *errorCode);
             int getElectricDarkPixelIndices(int *errorCode, int *indices, int length);
-			int getOpticalDarkPixelCount(int *errorCode);
-			int getOpticalDarkPixelIndices(int *errorCode, int *indices, int length);
-			int getActivePixelCount(int *errorCode);
-			int getActivePixelIndices(int *errorCode, int *indices, int length);
-			unsigned short getNumberOfPixels(int *errorCode);
+            int getOpticalDarkPixelCount(int *errorCode);
+            int getOpticalDarkPixelIndices(int *errorCode, int *indices, int length);
+            int getActivePixelCount(int *errorCode);
+            int getActivePixelIndices(int *errorCode, int *indices, int length);
+            unsigned short getNumberOfPixels(int *errorCode);
             void setIntegrationTimeMicros(int *errorCode,
             unsigned long integrationTimeMicros);
             long getMinimumIntegrationTimeMicros(int *errorCode);

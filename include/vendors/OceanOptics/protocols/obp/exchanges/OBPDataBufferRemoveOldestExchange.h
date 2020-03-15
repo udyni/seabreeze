@@ -38,7 +38,7 @@ namespace seabreeze {
         public:
             OBPDataBufferRemoveOldestExchange();
             virtual ~OBPDataBufferRemoveOldestExchange();
-			void setNumberOfSpectraToRemove(unsigned int numberOfSpectra);
+            void setNumberOfSpectraToRemove(unsigned int numberOfSpectra);
         };
     } /* end namespace oceanBinaryProtocol */
 } /* end namespace seabreeze */

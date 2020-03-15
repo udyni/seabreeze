@@ -53,19 +53,19 @@ OBPAddIPv4AddressExchange::~OBPAddIPv4AddressExchange()
 
 void OBPAddIPv4AddressExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPAddIPv4AddressExchange::setAddress(std::vector<unsigned char> IPv4_Address) 
 {
 
-	for (int i = 0; i < 4; i++)
-	{
-		this->payload[1 + i] = IPv4_Address[i];
-	}
+    for (int i = 0; i < 4; i++)
+    {
+        this->payload[1 + i] = IPv4_Address[i];
+    }
 }
 
 void OBPAddIPv4AddressExchange::setNetMask(unsigned char netMask)
 {
-	this->payload[5] = netMask;
+    this->payload[5] = netMask;
 }

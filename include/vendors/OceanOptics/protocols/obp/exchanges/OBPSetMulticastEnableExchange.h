@@ -36,7 +36,7 @@ namespace seabreeze {
     namespace oceanBinaryProtocol {
         class OBPSetMulticastEnableExchange : public OBPCommand {
         public:
-			OBPSetMulticastEnableExchange();
+            OBPSetMulticastEnableExchange();
             virtual ~OBPSetMulticastEnableExchange();
 
             void setInterfaceIndex(unsigned char interfaceIndex);

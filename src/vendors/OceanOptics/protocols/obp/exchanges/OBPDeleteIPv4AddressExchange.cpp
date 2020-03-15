@@ -53,10 +53,10 @@ OBPDeleteIPv4AddressExchange::~OBPDeleteIPv4AddressExchange()
 
 void OBPDeleteIPv4AddressExchange::setInterfaceIndex(unsigned char interfaceIndex)
 {
-	this->payload[0] = interfaceIndex;
+    this->payload[0] = interfaceIndex;
 }
 
 void OBPDeleteIPv4AddressExchange::setAddressIndex(unsigned char addressIndex)
 {
-	this->payload[1] = addressIndex;
+    this->payload[1] = addressIndex;
 }

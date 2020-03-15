@@ -53,10 +53,10 @@ OBPSetGPIOOutputEnableVectorExchange::~OBPSetGPIOOutputEnableVectorExchange()
 
 void OBPSetGPIOOutputEnableVectorExchange::setOutputEnableVector(unsigned int outputEnableVector)
 {
-	memcpy(&(this->payload[0]), &outputEnableVector, sizeof(unsigned int));
+    memcpy(&(this->payload[0]), &outputEnableVector, sizeof(unsigned int));
 }
 
 void OBPSetGPIOOutputEnableVectorExchange::setOutputEnableMask(unsigned int outputEnableMask)
 {
-	memcpy(&(this->payload[4]), &outputEnableMask, sizeof(unsigned int));
+    memcpy(&(this->payload[4]), &outputEnableMask, sizeof(unsigned int));
 }

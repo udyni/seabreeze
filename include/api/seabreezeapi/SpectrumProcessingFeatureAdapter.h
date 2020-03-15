@@ -47,7 +47,7 @@ namespace seabreeze {
                     Protocol *p, Bus *b, unsigned short instanceIndex);
             virtual ~SpectrumProcessingFeatureAdapter();
 
-			unsigned char readSpectrumProcessingBoxcarWidth(int *errorCode);
+            unsigned char readSpectrumProcessingBoxcarWidth(int *errorCode);
             unsigned short int readSpectrumProcessingScansToAverage(int *errorCode);
             void writeSpectrumProcessingBoxcarWidth(int *errorCode, unsigned char boxcarWidth);
             void writeSpectrumProcessingScansToAverage(int *errorCode, unsigned short int scansToAverage);

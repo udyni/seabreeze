@@ -65,9 +65,9 @@ int RawUSBBusAccessFeatureAdapter::readUSB(int *errorCode, unsigned char *buffer
 
     try 
     {
-    	// FIXME: This is probably not any nastier than OOIUSBInterface *__seabreeze_getUSB
-    	//        in SeaBreezeWrapper, but still, it takes the first bus and assumes
-    	//        it is USB. This should do a search by family on the bus and then cast it.
+        // FIXME: This is probably not any nastier than OOIUSBInterface *__seabreeze_getUSB
+        //        in SeaBreezeWrapper, but still, it takes the first bus and assumes
+        //        it is USB. This should do a search by family on the bus and then cast it.
         data = this->feature->readUSB(dynamic_cast<USBInterface *>(this->bus), endpoint, bufferLength);
         unsigned int characters = (unsigned int) data.size();
         charactersCopied = (characters < bufferLength) ? characters : bufferLength;
@@ -94,8 +94,8 @@ int RawUSBBusAccessFeatureAdapter::writeUSB(int *errorCode, unsigned char *buffe
     try 
     {
         // FIXME: This is probably not any nastier than OOIUSBInterface *__seabreeze_getUSB
-    	//        in SeaBreezeWrapper, but still, it takes the first bus and assumes
-    	//        it is USB. This should do a search by family on the bus and then cast it.
+        //        in SeaBreezeWrapper, but still, it takes the first bus and assumes
+        //        it is USB. This should do a search by family on the bus and then cast it.
         charactersCopied = this->feature->writeUSB(dynamic_cast<USBInterface *>(this->bus), endpoint, *charVector);
         delete charVector;
         SET_ERROR_CODE(ERROR_SUCCESS);

@@ -37,7 +37,7 @@
 
 #define SPARK_TEMPERATURE_DETECTOR_INDEX 0
 #define SPARK_TEMPERATURE_RESERVED_INDEX 1
-#define	SPARK_TEMPERATURE_CPU_INDEX 2
+#define    SPARK_TEMPERATURE_CPU_INDEX 2
 
 namespace seabreeze {
 
@@ -46,8 +46,8 @@ namespace seabreeze {
         SparkSpectrometerFeature();
         virtual ~SparkSpectrometerFeature();
 
-		/* Using OBP wavelength coefficient commands */
-		virtual std::vector<double> *getWavelengths(const Protocol &protocol,
+        /* Using OBP wavelength coefficient commands */
+        virtual std::vector<double> *getWavelengths(const Protocol &protocol,
             const Bus &bus) throw (FeatureException);       
 
     private:

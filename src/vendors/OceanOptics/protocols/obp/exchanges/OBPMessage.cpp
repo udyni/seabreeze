@@ -80,7 +80,7 @@ void OBPMessage::setupMessage()
     this->checksumType = 0;
     this->checksum = new vector<byte>(16);
     for(unsigned int i = 0; i < checksum->size(); i++) 
-	{
+    {
         (*(this->checksum))[i] = 0;
     }
 
@@ -96,23 +96,23 @@ OBPMessage::OBPMessage()
 OBPMessage::~OBPMessage() 
 {
     if(NULL != this->header) 
-	{
+    {
         delete this->header;
     }
     if(NULL != this->footer) 
-	{
+    {
         delete this->footer;
     }
     if(NULL != this->checksum) 
-	{
+    {
         delete this->checksum;
     }
     if(NULL != this->payload) 
-	{
+    {
         delete this->payload;
     }
     if(NULL != this->immediateData) 
-	{
+    {
         delete this->immediateData;
     }
 }
@@ -124,7 +124,7 @@ OBPMessage *OBPMessage::parseHeaderFromByteStream(vector<byte> *message)
     OBPMessage *retval = new OBPMessage();
 
     if((*retval->header)[0] != (*message)[0] || (*retval->header)[1] != (*message)[1]) 
-	{
+    {
         string errorMessage("Could not find message header");
         throw IllegalArgumentException(errorMessage);
     }
@@ -146,10 +146,10 @@ OBPMessage *OBPMessage::parseHeaderFromByteStream(vector<byte> *message)
     retval->checksumType = (*message)[22];
     retval->immediateDataLength = (*message)[23];
     if(retval->immediateDataLength > 0) 
-	{
+    {
         retval->immediateData = new vector<byte>(retval->immediateDataLength);
         for(i = 0; i < retval->immediateDataLength; i++) 
-		{
+        {
             (*(retval->immediateData))[i] = (*message)[i + 24];
         }
     }
@@ -159,7 +159,7 @@ OBPMessage *OBPMessage::parseHeaderFromByteStream(vector<byte> *message)
                           | (((*message)[43] & 0x00FF) << 24);
     if(retval->bytesRemaining <
             retval->checksum->size() + retval->footer->size()) 
-	{
+    {
         string errorMessage("Invalid bytes remaining field");
         throw IllegalArgumentException(errorMessage);
     }
@@ -180,28 +180,28 @@ OBPMessage *OBPMessage::parseByteStream(vector<byte> *message)
     temp = retval->bytesRemaining - (unsigned) retval->checksum->size() - (unsigned) retval->footer->size();
     offset = 44;
     if(temp > 0) 
-	{
+    {
         retval->payload = new vector<byte>(temp);
         for(i = 0; i < (unsigned)temp; i++) 
-		{
-			if((*message).size() >= i)
-				(*(retval->payload))[i] = (*message)[offset++];
-			else
-			{
-				string errorMessage("OBP Message Error: Could not parse message. Bytes remaining did not match message size.");
-				throw IllegalArgumentException(errorMessage);
-			}
+        {
+            if((*message).size() >= i)
+                (*(retval->payload))[i] = (*message)[offset++];
+            else
+            {
+                string errorMessage("OBP Message Error: Could not parse message. Bytes remaining did not match message size.");
+                throw IllegalArgumentException(errorMessage);
+            }
         }
         /* FIXME: should this delete immediateData too? */
     }
     for(i = 0; i < retval->checksum->size(); i++) 
-	{
+    {
         (*(retval->checksum))[i] = (*message)[offset++];
     }
     for(i = 0; i < retval->footer->size(); i++) 
-	{
+    {
         if((*(retval->footer))[i] != (*message)[offset++]) 
-		{
+        {
             string errorMessage("Could not find message footer");
             throw IllegalArgumentException(errorMessage);
         }
@@ -218,13 +218,13 @@ vector<byte> *OBPMessage::toByteStream()
     int immediateCopied = 0;
 
     if(0 != this->payload) 
-	{
+    {
         length += (unsigned) this->payload->size();
     }
 
     retval->resize(length);
     for(i = 0; i < header->size(); i++) 
-	{
+    {
         (*retval)[offset++] = (*this->header)[i];
     }
 
@@ -248,16 +248,16 @@ vector<byte> *OBPMessage::toByteStream()
     (*retval)[offset++] = (this->regarding >> 24) & 0x00FF;
 
     for(i = 0; i < 6; i++) 
-	{
+    {
         (*retval)[offset++] = 0;  /* Reserved bytes */
     }
 
     (*retval)[offset++] = checksumType;
     (*retval)[offset++] = immediateDataLength;
     if(NULL != this->immediateData) 
-	{
+    {
         for(i = 0; i < 16 && i < this->immediateData->size(); i++) 
-		{
+        {
             (*retval)[offset++] = (*(this->immediateData))[i];
             immediateCopied++;
         }
@@ -268,7 +268,7 @@ vector<byte> *OBPMessage::toByteStream()
      * or immediateData was null.
      */
     for(i = immediateCopied; i < 16; i++) 
-	{
+    {
         (*retval)[offset++] = 0;
     }
 
@@ -278,9 +278,9 @@ vector<byte> *OBPMessage::toByteStream()
     (*retval)[offset++] = (this->bytesRemaining >> 24) & 0x00FF;
 
     if(NULL != this->payload) 
-	{
+    {
         for(i = 0; i < this->payload->size(); i++) 
-		{
+        {
             (*retval)[offset++] = (*this->payload)[i];
         }
     }
@@ -288,7 +288,7 @@ vector<byte> *OBPMessage::toByteStream()
         (*retval)[offset++] = 0;   /* Checksum (zero for now) */
     }
     for(i = 0; i < this->footer->size(); i++) 
-	{
+    {
         (*retval)[offset++] = (*this->footer)[i];
     }
     return retval;
@@ -297,15 +297,15 @@ vector<byte> *OBPMessage::toByteStream()
 vector<byte> *OBPMessage::getData() 
 {
     if(0 != this->immediateData && 0 != this->immediateDataLength) 
-	{
+    {
         return this->immediateData;
     } else if(0 != this->payload && (checksum->size() + footer->size())
             < bytesRemaining) 
-	{
+    {
         return this->payload;
     } 
-	else 
-	{
+    else 
+    {
         return new vector<byte>();
     }
 }
@@ -401,12 +401,12 @@ void OBPMessage::setChecksumType(byte t)
 void OBPMessage::setData(vector<byte> *data) 
 {
     if(NULL == data || data->size() <= 16) 
-	{
+    {
         setImmediateData(data);
         setPayload(NULL);  /* Just in case data == NULL */
     } 
-	else 
-	{
+    else 
+    {
         setPayload(data);
     }
 }
@@ -426,25 +426,25 @@ void OBPMessage::setFlags(unsigned short f)
 void OBPMessage::setImmediateData(vector<byte> *data) 
 {
     if(0 != this->immediateData) 
-	{
+    {
         delete this->immediateData;
     }
     this->immediateData = data;
     if(0 != this->immediateData) 
-	{
+    {
         if(this->immediateData->size() <= 16)
-		{
+        {
             this->immediateDataLength = (byte)this->immediateData->size();
         } 
-		else 
-		{
+        else 
+        {
             this->immediateDataLength = 16;
         }
         /* Payload and immediate data are mutually exclusive */
         setPayload(NULL);
     } 
-	else 
-	{
+    else 
+    {
         this->immediateDataLength = 0;
     }
 }
@@ -465,22 +465,22 @@ void OBPMessage::setMessageType(unsigned int t)
 void OBPMessage::setPayload(vector<byte> *data) 
 {
     if(NULL != this->payload) 
-	{
+    {
         delete this->payload;
     }
     this->payload = data;
     if(NULL != this->payload) 
-	{
+    {
         this->bytesRemaining = (unsigned) (this->payload->size() + this->checksum->size()
             + this->footer->size());
         if(payload->size() > 0) 
-		{
+        {
             /* Payload and immediate data are mutually exclusive */
             setImmediateData(NULL);
         }
     } 
-	else 
-	{
+    else 
+    {
         this->bytesRemaining = (unsigned) (this->checksum->size() + this->footer->size());
     }
 }

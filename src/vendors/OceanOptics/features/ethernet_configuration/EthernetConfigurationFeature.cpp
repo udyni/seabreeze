@@ -61,16 +61,16 @@ vector<unsigned char> EthernetConfigurationFeature::get_MAC_Address(const Protoc
 {
 
     vector<unsigned char> data;
-	EthernetConfigurationProtocolInterface *ethernetConfigurationPI = NULL;
+    EthernetConfigurationProtocolInterface *ethernetConfigurationPI = NULL;
     ProtocolHelper *proto;
 
     try 
     {
         proto = lookupProtocolImpl(protocol);
-		ethernetConfigurationPI = static_cast<EthernetConfigurationProtocolInterface *>(proto);
+        ethernetConfigurationPI = static_cast<EthernetConfigurationProtocolInterface *>(proto);
     } 
-	catch (FeatureProtocolNotFoundException &e) 
-	{
+    catch (FeatureProtocolNotFoundException &e) 
+    {
         string error(
         "Could not find matching protocol implementation to get ethernet configuration.");
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -78,11 +78,11 @@ vector<unsigned char> EthernetConfigurationFeature::get_MAC_Address(const Protoc
     }
 
     try 
-	{
+    {
         data = ethernetConfigurationPI->get_MAC_Address(bus, interfaceIndex);
     } 
-	catch (ProtocolException &pe) 
-	{
+    catch (ProtocolException &pe) 
+    {
         string error("Caught protocol exception: ");
         error += pe.what();
         /* FIXME: previous exception should probably be bundled up into the new exception */
@@ -109,7 +109,7 @@ void EthernetConfigurationFeature::set_MAC_Address(const Protocol &protocol, con
     }
 
     try {
-		ethernetConfigurationPI->set_MAC_Address(bus, interfaceIndex, macAddress);
+        ethernetConfigurationPI->set_MAC_Address(bus, interfaceIndex, macAddress);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();
@@ -121,13 +121,13 @@ void EthernetConfigurationFeature::set_MAC_Address(const Protocol &protocol, con
 
 unsigned char EthernetConfigurationFeature::get_GbE_Enable_Status(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex) throw (FeatureException) 
 {
-	EthernetConfigurationProtocolInterface *ethernetConfigurationPI = NULL;
-	ProtocolHelper *proto;
-	byte enableStatus;
+    EthernetConfigurationProtocolInterface *ethernetConfigurationPI = NULL;
+    ProtocolHelper *proto;
+    byte enableStatus;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		ethernetConfigurationPI = static_cast<EthernetConfigurationProtocolInterface *>(proto);
+        ethernetConfigurationPI = static_cast<EthernetConfigurationProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to read collection area.");
@@ -149,12 +149,12 @@ unsigned char EthernetConfigurationFeature::get_GbE_Enable_Status(const Protocol
 
 void EthernetConfigurationFeature::set_GbE_Enable_Status(const Protocol &protocol, const Bus &bus, unsigned char interfaceIndex, unsigned char enableStatus) throw (FeatureException) 
 {
-	EthernetConfigurationProtocolInterface *ethernetConfigurationPI = NULL;
-	ProtocolHelper *proto;
+    EthernetConfigurationProtocolInterface *ethernetConfigurationPI = NULL;
+    ProtocolHelper *proto;
 
     try {
         proto = lookupProtocolImpl(protocol);
-		ethernetConfigurationPI = static_cast<EthernetConfigurationProtocolInterface *>(proto);
+        ethernetConfigurationPI = static_cast<EthernetConfigurationProtocolInterface *>(proto);
     } catch (FeatureProtocolNotFoundException &e) {
         string error(
         "Could not find matching protocol implementation to write collection area.");
@@ -163,7 +163,7 @@ void EthernetConfigurationFeature::set_GbE_Enable_Status(const Protocol &protoco
     }
 
     try {
-		ethernetConfigurationPI->set_GbE_Enable_Status(bus, interfaceIndex, enableStatus);
+        ethernetConfigurationPI->set_GbE_Enable_Status(bus, interfaceIndex, enableStatus);
     } catch (ProtocolException &pe) {
         string error("Caught protocol exception: ");
         error += pe.what();

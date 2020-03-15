@@ -43,11 +43,11 @@ namespace seabreeze
 {
 
     class GPIOProtocolInterface : public ProtocolHelper 
-	{
+    {
     public:
-		GPIOProtocolInterface(Protocol *protocol);
+        GPIOProtocolInterface(Protocol *protocol);
         virtual ~GPIOProtocolInterface();
-	
+    
         /**
          * Get the Number of GPIO pins
          */
@@ -57,8 +57,8 @@ namespace seabreeze
         /**
          *  Get the output enable vector
          */
-		virtual unsigned int getGPIO_OutputEnableVector(const Bus &bus)
-			throw (ProtocolException) = 0;
+        virtual unsigned int getGPIO_OutputEnableVector(const Bus &bus)
+            throw (ProtocolException) = 0;
 
         /**
          * Set the output enable vector
@@ -66,68 +66,68 @@ namespace seabreeze
         virtual void setGPIO_OutputEnableVector(const Bus &bus, unsigned int outputEnableVector, unsigned int bitMask)
             throw (ProtocolException) = 0;
 
-		/**
-		*  Get the value vector
-		*/
-		virtual unsigned int getGPIO_ValueVector(const Bus &bus)
-			throw (ProtocolException) = 0;
+        /**
+        *  Get the value vector
+        */
+        virtual unsigned int getGPIO_ValueVector(const Bus &bus)
+            throw (ProtocolException) = 0;
 
-		/**
-		* Set the value vector
-		*/
-		virtual void setGPIO_ValueVector(const Bus &bus, unsigned int valueVector, unsigned int bitMask)
-			throw (ProtocolException) = 0;
-
-
-
-		/**
-		* Get the Number of eGPIO pins
-		*/
-		virtual unsigned char getEGPIO_NumberOfPins(const Bus &bus)
-			throw (ProtocolException) = 0;
-
-		/**
-		* Get the available eGPIO modes for the given pin
-		*/
-		virtual std::vector<unsigned char> getEGPIO_AvailableModes(const Bus &bus, unsigned char pinNumber)
-			throw (ProtocolException) = 0;
-
-		/**
-		*  Get the current mode for a given pin
-		*/
-		virtual unsigned char getEGPIO_CurrentMode(const Bus &bus, unsigned char pinNumber)
-			throw (ProtocolException) = 0;
-
-		/**
-		* Set the current mode for a given pin, value is 0.0 to 1.0
-		*/
-		virtual void setEGPIO_Mode(const Bus &bus, unsigned char pinNumber, unsigned char mode, float value)
-			throw (ProtocolException) = 0;
-
-		/**
-		*  Get the egpio output vector
-		*/
-		virtual unsigned int getEGPIO_OutputVector(const Bus &bus)
-			throw (ProtocolException) = 0;
-
-		/**
-		* Set the egpio output vector
-		*/
-		virtual void setEGPIO_OutputVector(const Bus &bus, unsigned int outputVector, unsigned int bitMask)
-			throw (ProtocolException) = 0;
+        /**
+        * Set the value vector
+        */
+        virtual void setGPIO_ValueVector(const Bus &bus, unsigned int valueVector, unsigned int bitMask)
+            throw (ProtocolException) = 0;
 
 
-		/**
-		*  Get the egpio Value, normalized 0.0 to 1.0
-		*/
-		virtual float getEGPIO_Value(const Bus &bus, unsigned char pinNumber)
-			throw (ProtocolException) = 0;
 
-		/**
-		* Set the egpio value
-		*/
-		virtual void setEGPIO_Value(const Bus &bus, unsigned char pinNumber, float value)
-			throw (ProtocolException) = 0;
+        /**
+        * Get the Number of eGPIO pins
+        */
+        virtual unsigned char getEGPIO_NumberOfPins(const Bus &bus)
+            throw (ProtocolException) = 0;
+
+        /**
+        * Get the available eGPIO modes for the given pin
+        */
+        virtual std::vector<unsigned char> getEGPIO_AvailableModes(const Bus &bus, unsigned char pinNumber)
+            throw (ProtocolException) = 0;
+
+        /**
+        *  Get the current mode for a given pin
+        */
+        virtual unsigned char getEGPIO_CurrentMode(const Bus &bus, unsigned char pinNumber)
+            throw (ProtocolException) = 0;
+
+        /**
+        * Set the current mode for a given pin, value is 0.0 to 1.0
+        */
+        virtual void setEGPIO_Mode(const Bus &bus, unsigned char pinNumber, unsigned char mode, float value)
+            throw (ProtocolException) = 0;
+
+        /**
+        *  Get the egpio output vector
+        */
+        virtual unsigned int getEGPIO_OutputVector(const Bus &bus)
+            throw (ProtocolException) = 0;
+
+        /**
+        * Set the egpio output vector
+        */
+        virtual void setEGPIO_OutputVector(const Bus &bus, unsigned int outputVector, unsigned int bitMask)
+            throw (ProtocolException) = 0;
+
+
+        /**
+        *  Get the egpio Value, normalized 0.0 to 1.0
+        */
+        virtual float getEGPIO_Value(const Bus &bus, unsigned char pinNumber)
+            throw (ProtocolException) = 0;
+
+        /**
+        * Set the egpio value
+        */
+        virtual void setEGPIO_Value(const Bus &bus, unsigned char pinNumber, float value)
+            throw (ProtocolException) = 0;
     };
 
 }

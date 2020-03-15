@@ -60,7 +60,7 @@ OpticalBenchFeature::~OpticalBenchFeature() {
 unsigned short int OpticalBenchFeature::readOpticalBenchFiberDiameterMicrons(const Protocol &protocol, const Bus &bus) throw (FeatureException) {
 
     OpticalBenchProtocolInterface *opticalBenchPI = NULL;
-	unsigned short int fiberDiameter;
+    unsigned short int fiberDiameter;
     ProtocolHelper *proto = NULL;
 
     try {
@@ -87,7 +87,7 @@ unsigned short int OpticalBenchFeature::readOpticalBenchFiberDiameterMicrons(con
 unsigned short int OpticalBenchFeature::readOpticalBenchSlitWidthMicrons(const Protocol &protocol, const Bus &bus) throw (FeatureException) {
 
     OpticalBenchProtocolInterface *opticalBenchPI = NULL;
-	unsigned short int slitWidth;
+    unsigned short int slitWidth;
     ProtocolHelper *proto = NULL;
 
     try {

@@ -172,18 +172,18 @@ typedef struct OBP_Metadata_s
 typedef struct OBP_Spectra_s
 {                                       // byte offset
     //-- spectrum --
-    unsigned int		dummyStart[4];
-    unsigned int		darkStart[6];
-    unsigned int		spectrum[1024];
-    unsigned int		darkEnd[6];
-    unsigned int		dummyEnd[4];
+    unsigned int        dummyStart[4];
+    unsigned int        darkStart[6];
+    unsigned int        spectrum[1024];
+    unsigned int        darkEnd[6];
+    unsigned int        dummyEnd[4];
 } OBP_Spectra; // XXX bytes total
 
 // Based on pages 11 & 12 in the QEPro Data Sheet
 typedef struct OBP_SpectraWithMetadata_s
 {                                       // byte offset
-    OBP_Metadata		metadata;
-    OBP_Spectra			spectra;
+    OBP_Metadata        metadata;
+    OBP_Spectra            spectra;
 } OBP_SpectraWithMetadata; // XXX bytes total
 
 
