@@ -485,6 +485,7 @@ set(COMMON_SOURCE_FILES
         include/vendors/OceanOptics/protocols/ooi/exchanges/OOIIrradCalExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/OOIReadIrradCalExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/OOIWriteIrradCalExchange.h
+        include/vendors/OceanOptics/protocols/ooi/exchanges/PCBTemperatureExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/QESpectrumExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/ReadEEPROMSlotExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/ReadSpectrumExchange.h
@@ -504,6 +505,7 @@ set(COMMON_SOURCE_FILES
         include/vendors/OceanOptics/protocols/ooi/impls/FPGARegisterProtocol.h
         include/vendors/OceanOptics/protocols/ooi/impls/OOIEEPROMProtocol.h
         include/vendors/OceanOptics/protocols/ooi/impls/OOIIrradCalProtocol.h
+        include/vendors/OceanOptics/protocols/ooi/impls/OOIPCBTemperatureProtocol.h
         include/vendors/OceanOptics/protocols/ooi/impls/OOIProtocol.h
         include/vendors/OceanOptics/protocols/ooi/impls/OOISpectrometerProtocol.h
         include/vendors/OceanOptics/protocols/ooi/impls/OOIStrobeLampProtocol.h
@@ -933,6 +935,7 @@ set(COMMON_SOURCE_FILES
         src/vendors/OceanOptics/protocols/ooi/exchanges/OOIIrradCalExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/OOIReadIrradCalExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/OOIWriteIrradCalExchange.cpp
+        src/vendors/OceanOptics/protocols/ooi/exchanges/PCBTemperatureExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/QESpectrumExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/ReadEEPROMSlotExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/ReadSpectrumExchange.cpp
@@ -952,6 +955,7 @@ set(COMMON_SOURCE_FILES
         src/vendors/OceanOptics/protocols/ooi/impls/FPGARegisterProtocol.cpp
         src/vendors/OceanOptics/protocols/ooi/impls/OOIEEPROMProtocol.cpp
         src/vendors/OceanOptics/protocols/ooi/impls/OOIIrradCalProtocol.cpp
+        src/vendors/OceanOptics/protocols/ooi/impls/OOIPCBTemperatureProtocol.cpp
         src/vendors/OceanOptics/protocols/ooi/impls/OOIProtocol.cpp
         src/vendors/OceanOptics/protocols/ooi/impls/OOISpectrometerProtocol.cpp
         src/vendors/OceanOptics/protocols/ooi/impls/OOIStrobeLampProtocol.cpp

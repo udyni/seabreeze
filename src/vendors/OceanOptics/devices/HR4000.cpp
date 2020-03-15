@@ -34,6 +34,7 @@
 #include "vendors/OceanOptics/protocols/ooi/impls/OOIProtocol.h"
 #include "vendors/OceanOptics/protocols/ooi/impls/OOIIrradCalProtocol.h"
 #include "vendors/OceanOptics/protocols/ooi/impls/OOIStrobeLampProtocol.h"
+#include "vendors/OceanOptics/protocols/ooi/impls/OOIPCBTemperatureProtocol.h"
 #include "vendors/OceanOptics/buses/usb/HR4000USB.h"
 #include "vendors/OceanOptics/features/eeprom_slots/EEPROMSlotFeature.h"
 #include "vendors/OceanOptics/features/eeprom_slots/WavelengthEEPROMSlotFeature.h"
@@ -45,6 +46,7 @@
 #include "vendors/OceanOptics/features/continuous_strobe/ContinuousStrobeFeature_FPGA.h"
 #include "vendors/OceanOptics/features/irradcal/IrradCalFeature.h"
 #include "vendors/OceanOptics/features/raw_bus_access/RawUSBBusAccessFeature.h"
+#include "vendors/OceanOptics/features/temperature/TemperatureFeature.h"
 
 using namespace seabreeze;
 using namespace seabreeze::ooiProtocol;
@@ -54,7 +56,7 @@ using namespace std;
 HR4000::HR4000() {
 
     this->name = "HR4000";
-        
+
     // 0 is the control address, since it is not valid in this context, means not used
     this->usbEndpoint_primary_out = 0x01;
     this->usbEndpoint_primary_in = 0x81;
@@ -87,9 +89,16 @@ HR4000::HR4000() {
     this->features.push_back(new NonlinearityEEPROMSlotFeature());
     this->features.push_back(new StrayLightEEPROMSlotFeature());
     this->features.push_back(new RawUSBBusAccessFeature());
+
+    // Add PCB temperature feature
+    vector<ProtocolHelper *> temperatureHelpers;
+    temperatureHelpers.push_back(new OOIPCBTemperatureProtocol());
+    this->features.push_back(
+        new TemperatureFeature(temperatureHelpers));
 }
 
 HR4000::~HR4000() {
+
 }
 
 ProtocolFamily HR4000::getSupportedProtocol(FeatureFamily family, BusFamily bus) {

@@ -55,6 +55,15 @@ namespace seabreeze {
         /* Set the trigger mode */
         static const byte OP_SETTRIGMODE;
 
+        /* NIR TEC: enable */
+        static const byte OP_NIR_TEC_ENABLE;
+
+        /* NIR TEC: write setpoint */
+        static const byte OP_NIR_TEC_WRITE;
+
+        /* NIR TEC: read setpoint and temperature */
+        static const byte OP_NIR_TEC_READ;
+
         /* Set the thermoelectric cooling enable on the QE */
         static const byte OP_TECENABLE_QE;
 
@@ -70,11 +79,17 @@ namespace seabreeze {
         /* Read a field from the FPGA status register */
         static const byte OP_READ_REGISTER;
 
+        /* Query PCB temperature */
+        static const byte OP_READ_PCB_TEMP;
+
         /* Read the irradiance calibration from EEPROM (if available) */
         static const byte OP_READ_IRRAD_CAL;
 
         /* Write the irradiance calibration to EEPROM (if available) */
         static const byte OP_WRITE_IRRAD_CAL;
+
+        /* Query device status */
+        static const byte OP_QUERY_STATUS;
 
     };
   }
