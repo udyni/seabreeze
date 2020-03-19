@@ -44,7 +44,7 @@ namespace seabreeze {
         /* Inherited from Transfer */
         Data *transfer(TransferHelper *helper) throw (ProtocolException);
 
-    private:
+    protected:
         unsigned long integrationTimeBase_usec;
         unsigned long integrationTime_usec;
     };

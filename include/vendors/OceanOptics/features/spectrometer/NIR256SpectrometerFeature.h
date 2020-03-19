@@ -1,11 +1,11 @@
 /***************************************************//**
- * @file    OOIUSBProductID.h
- * @date    February 2009
- * @author  Ocean Optics, Inc.
+ * @file    NIR256SpectrometerFeature.h
+ * @date    March 2020
+ * @author  Michele Devetta
  *
  * LICENSE:
  *
- * SeaBreeze Copyright (C) 2014, Ocean Optics Inc
+ * SeaBreeze Copyright (C) 2020, Michele Devetta
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -27,32 +27,25 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *******************************************************/
 
-#ifndef OOIUSBPRODUCTID_H
-#define OOIUSBPRODUCTID_H
+#ifndef NIR256SPECTROMETERFEATURE_H
+#define NIR256SPECTROMETERFEATURE_H
 
-#define USB2000_USB_PID         0x1002
-#define HR2000_USB_PID          0x100A
-#define HR4000_USB_PID          0x1012
-#define HR2000PLUS_USB_PID      0x1016
-#define QE65000_USB_PID         0x1018
-#define USB2000PLUS_USB_PID     0x101E
-#define USB4000_USB_PID         0x1022
-#define NIR256_USB_PID          0x1010
-#define NIR512_USB_PID          0x100C
-#define NIRQUEST512_USB_PID     0x1026
-#define NIRQUEST256_USB_PID     0x1028
-#define MAYA2000PRO_USB_PID     0x102A
-#define MAYA2000_USB_PID        0x102C
-#define MAYALSL_USB_PID         0x1046
-#define TORUS_USB_PID           0x1040
-#define APEX_USB_PID            0x1044
-#define FLAMENIR_USB_PID        0x104B
-#define JAZ_USB_PID             0x2000
-#define FLAMEX_USB_PID          0x2001
-#define STS_USB_PID             0x4000
-#define QEPRO_USB_PID           0x4004
-#define SPARK_USB_PID           0x4200
-#define VENTANA_USB_PID         0x5000
-#define GENERIC_SMARTPHONE_MODULE_PID 0x7002
+#include "vendors/OceanOptics/features/spectrometer/OOISpectrometerFeature.h"
 
-#endif /* OOIUSBPRODUCTID_H */
+namespace seabreeze {
+
+    class NIR256SpectrometerFeature : public OOISpectrometerFeature {
+    public:
+        NIR256SpectrometerFeature();
+        virtual ~NIR256SpectrometerFeature();
+
+    protected:
+        static const long INTEGRATION_TIME_MINIMUM;
+        static const long INTEGRATION_TIME_MAXIMUM;
+        static const long INTEGRATION_TIME_INCREMENT;
+        static const long INTEGRATION_TIME_BASE;
+    };
+
+}
+
+#endif /* NIR256SPECTROMETERFEATURE_H */

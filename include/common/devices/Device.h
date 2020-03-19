@@ -108,7 +108,6 @@ namespace seabreeze {
         unsigned char usbEndpoint_secondary_out;
         unsigned char usbEndpoint_secondary_in;
         unsigned char usbEndpoint_secondary_in2; 
-        
 
         DeviceLocatorInterface *location;
         Bus *openedBus;

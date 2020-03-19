@@ -1,11 +1,11 @@
 /***************************************************//**
- * @file    OpCodes.cpp
- * @date    February 2009
- * @author  Ocean Optics, Inc.
+ * @file    TECNIREnableExchange.cpp
+ * @date    March 2020
+ * @author  Michele Devetta
  *
  * LICENSE:
  *
- * SeaBreeze Copyright (C) 2014, Ocean Optics Inc
+ * SeaBreeze Copyright (C) 2020, Michele Devetta
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,26 +28,43 @@
  *******************************************************/
 
 #include "common/globals.h"
+#include "vendors/OceanOptics/protocols/ooi/exchanges/TECNIREnableExchange.h"
+#include "vendors/OceanOptics/protocols/ooi/hints/ControlHint.h"
 #include "vendors/OceanOptics/protocols/ooi/constants/OpCodes.h"
 
 using namespace seabreeze;
 using namespace seabreeze::ooiProtocol;
 
-const byte OpCodes::OP_ITIME            = 0x02;
-const byte OpCodes::OP_STROBE           = 0x03;
-const byte OpCodes::OP_GETINFO          = 0x05;
-const byte OpCodes::OP_SETINFO          = 0x06;
-const byte OpCodes::OP_REQUESTSPEC      = 0x09;
-const byte OpCodes::OP_SETTRIGMODE      = 0x0A;
-const byte OpCodes::OP_NIR_TEC_ENABLE   = 0x0B;
-const byte OpCodes::OP_NIR_TEC_WRITE    = 0x3E;
-const byte OpCodes::OP_NIR_TEC_READ     = 0x3F;
-const byte OpCodes::OP_WRITE_REGISTER   = 0x6A;
-const byte OpCodes::OP_READ_REGISTER    = 0x6B;
-const byte OpCodes::OP_READ_PCB_TEMP    = 0x6C;
-const byte OpCodes::OP_READ_IRRAD_CAL   = 0x6D;
-const byte OpCodes::OP_WRITE_IRRAD_CAL  = 0x6E;
-const byte OpCodes::OP_TECENABLE_QE     = 0x71;
-const byte OpCodes::OP_READTEC_QE       = 0x72;
-const byte OpCodes::OP_TECSETTEMP_QE    = 0x73;
-const byte OpCodes::OP_QUERY_STATUS     = 0xFE;
+TECNIREnableExchange::TECNIREnableExchange() {
+
+    this->hints->push_back(new ControlHint());
+    this->buffer->resize(3);
+    this->length = 3;
+    this->direction = Transfer::TO_DEVICE;
+
+    /* Initialize with the protocol command number and otherwise zero */
+    (*(this->buffer))[0] = OpCodes::OP_NIR_TEC_ENABLE;
+    (*(this->buffer))[1] = 0x00;
+    (*(this->buffer))[2] = 0x00;
+
+    /* If this is used without a mode being specified, disable the TEC. */
+    this->tecEnable = false;
+}
+
+TECNIREnableExchange::~TECNIREnableExchange() {
+
+}
+
+void TECNIREnableExchange::setEnable(bool enable) {
+    this->tecEnable = enable;
+}
+
+Data *TECNIREnableExchange::transfer(TransferHelper *helper)
+throw (ProtocolException) {
+
+    (*(this->buffer))[1] = (false == this->tecEnable) ? 0x00 : 0x01;
+
+    /* Now delegate to the superclass to move the buffer. */
+    /* This transfer() may cause a ProtocolException to be thrown. */
+    return Transfer::transfer(helper);
+}

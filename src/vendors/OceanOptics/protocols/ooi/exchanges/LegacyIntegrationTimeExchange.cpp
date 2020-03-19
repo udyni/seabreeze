@@ -1,11 +1,11 @@
 /***************************************************//**
- * @file    OpCodes.cpp
- * @date    February 2009
- * @author  Ocean Optics, Inc.
+ * @file    LegacyIntegrationTimeExchange.cpp
+ * @date    March 2020
+ * @author  Michele Devetta
  *
  * LICENSE:
  *
- * SeaBreeze Copyright (C) 2014, Ocean Optics Inc
+ * SeaBreeze Copyright (C) 2020, Michele Devetta
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,26 +28,39 @@
  *******************************************************/
 
 #include "common/globals.h"
+#include "vendors/OceanOptics/protocols/ooi/exchanges/LegacyIntegrationTimeExchange.h"
+#include "vendors/OceanOptics/protocols/ooi/hints/ControlHint.h"
 #include "vendors/OceanOptics/protocols/ooi/constants/OpCodes.h"
 
 using namespace seabreeze;
 using namespace seabreeze::ooiProtocol;
 
-const byte OpCodes::OP_ITIME            = 0x02;
-const byte OpCodes::OP_STROBE           = 0x03;
-const byte OpCodes::OP_GETINFO          = 0x05;
-const byte OpCodes::OP_SETINFO          = 0x06;
-const byte OpCodes::OP_REQUESTSPEC      = 0x09;
-const byte OpCodes::OP_SETTRIGMODE      = 0x0A;
-const byte OpCodes::OP_NIR_TEC_ENABLE   = 0x0B;
-const byte OpCodes::OP_NIR_TEC_WRITE    = 0x3E;
-const byte OpCodes::OP_NIR_TEC_READ     = 0x3F;
-const byte OpCodes::OP_WRITE_REGISTER   = 0x6A;
-const byte OpCodes::OP_READ_REGISTER    = 0x6B;
-const byte OpCodes::OP_READ_PCB_TEMP    = 0x6C;
-const byte OpCodes::OP_READ_IRRAD_CAL   = 0x6D;
-const byte OpCodes::OP_WRITE_IRRAD_CAL  = 0x6E;
-const byte OpCodes::OP_TECENABLE_QE     = 0x71;
-const byte OpCodes::OP_READTEC_QE       = 0x72;
-const byte OpCodes::OP_TECSETTEMP_QE    = 0x73;
-const byte OpCodes::OP_QUERY_STATUS     = 0xFE;
+LegacyIntegrationTimeExchange::LegacyIntegrationTimeExchange(
+        unsigned long intTimeBase_usec) : IntegrationTimeExchange(intTimeBase_usec) {
+
+    this->buffer->resize(3);
+    this->length = 3;
+    checkBufferSize();
+}
+
+LegacyIntegrationTimeExchange::~LegacyIntegrationTimeExchange() {
+
+}
+
+Data *LegacyIntegrationTimeExchange::transfer(TransferHelper *helper)
+        throw (ProtocolException) {
+    /* Note that it might be cleaner to populate the buffer when the integration
+     * time is first written in, but this guarantees that it only happens once
+     * per transfer.
+     */
+
+    /* Start with the protocol command number */
+    (*(this->buffer))[0] = OpCodes::OP_ITIME;
+
+    /* Then fill in the integration time, 2 bytes, MSB first. */
+    (*(this->buffer))[1] = (byte)((this->integrationTime_usec & 0x000000FF00) >> 8);
+    (*(this->buffer))[2] = (byte)(this->integrationTime_usec & 0x00000000FF);
+
+    /* Now delegate to the superclass to move the buffer. */
+    return Transfer::transfer(helper);
+}

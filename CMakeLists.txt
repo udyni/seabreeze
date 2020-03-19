@@ -132,6 +132,8 @@ set(COMMON_SOURCE_FILES
         include/vendors/OceanOptics/buses/usb/Maya2000ProUSB.h
         include/vendors/OceanOptics/buses/usb/Maya2000USB.h
         include/vendors/OceanOptics/buses/usb/MayaLSLUSB.h
+        include/vendors/OceanOptics/buses/usb/NIR256USB.h
+        include/vendors/OceanOptics/buses/usb/NIR512USB.h
         include/vendors/OceanOptics/buses/usb/NIRQuest256USB.h
         include/vendors/OceanOptics/buses/usb/NIRQuest512USB.h
         include/vendors/OceanOptics/buses/usb/OOIUSB4KSpectrumTransferHelper.h
@@ -160,6 +162,8 @@ set(COMMON_SOURCE_FILES
         include/vendors/OceanOptics/devices/Maya2000.h
         include/vendors/OceanOptics/devices/Maya2000Pro.h
         include/vendors/OceanOptics/devices/MayaLSL.h
+        include/vendors/OceanOptics/devices/NIR256.h
+        include/vendors/OceanOptics/devices/NIR512.h
         include/vendors/OceanOptics/devices/NIRQuest256.h
         include/vendors/OceanOptics/devices/NIRQuest512.h
         include/vendors/OceanOptics/devices/QE65000.h
@@ -248,6 +252,8 @@ set(COMMON_SOURCE_FILES
         include/vendors/OceanOptics/features/spectrometer/Maya2000ProSpectrometerFeature.h
         include/vendors/OceanOptics/features/spectrometer/Maya2000SpectrometerFeature.h
         include/vendors/OceanOptics/features/spectrometer/MayaLSLSpectrometerFeature.h
+        include/vendors/OceanOptics/features/spectrometer/NIR256SpectrometerFeature.h
+        include/vendors/OceanOptics/features/spectrometer/NIR512SpectrometerFeature.h
         include/vendors/OceanOptics/features/spectrometer/NIRQuest256SpectrometerFeature.h
         include/vendors/OceanOptics/features/spectrometer/NIRQuest512SpectrometerFeature.h
         include/vendors/OceanOptics/features/spectrometer/NIRQuestSpectrometerFeature.h
@@ -275,6 +281,7 @@ set(COMMON_SOURCE_FILES
         include/vendors/OceanOptics/features/thermoelectric/QEProThermoElectricFeature.h
         include/vendors/OceanOptics/features/thermoelectric/ThermoElectricFeatureBase.h
         include/vendors/OceanOptics/features/thermoelectric/ThermoElectricFeatureInterface.h
+        include/vendors/OceanOptics/features/thermoelectric/ThermoElectricNIRFeature.h
         include/vendors/OceanOptics/features/thermoelectric/ThermoElectricQEFeature.h
         include/vendors/OceanOptics/features/thermoelectric/VentanaThermoElectricFeature.h
         include/vendors/OceanOptics/features/wavecal/WaveCalFeature.h
@@ -479,6 +486,8 @@ set(COMMON_SOURCE_FILES
         include/vendors/OceanOptics/protocols/ooi/exchanges/HRFPGASpectrumExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/IntegrationTimeExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/JazSpectrumExchange.h
+        include/vendors/OceanOptics/protocols/ooi/exchanges/LegacyIntegrationTimeExchange.h
+        include/vendors/OceanOptics/protocols/ooi/exchanges/LegacyNIRSpectrumExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/MayaProSpectrumExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/NIRQuestSpectrumExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/OOI2KSpectrumExchange.h
@@ -489,15 +498,18 @@ set(COMMON_SOURCE_FILES
         include/vendors/OceanOptics/protocols/ooi/exchanges/QESpectrumExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/ReadEEPROMSlotExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/ReadSpectrumExchange.h
+        include/vendors/OceanOptics/protocols/ooi/exchanges/ReadTECNIRTemperatureExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/ReadTECQETemperatureExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/ReadTECTemperatureExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/RequestSpectrumExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/StrobeEnableExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/TECEnableExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/TECQEEnableExchange.h
+        include/vendors/OceanOptics/protocols/ooi/exchanges/TECNIREnableExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/TriggerModeExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/USBFPGASpectrumExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/WriteEEPROMSlotExchange.h
+        include/vendors/OceanOptics/protocols/ooi/exchanges/WriteTECNIRSetPointExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/WriteTECQESetPointExchange.h
         include/vendors/OceanOptics/protocols/ooi/exchanges/WriteTECSetPointExchange.h
         include/vendors/OceanOptics/protocols/ooi/hints/ControlHint.h
@@ -617,6 +629,8 @@ set(COMMON_SOURCE_FILES
         src/vendors/OceanOptics/buses/usb/Maya2000ProUSB.cpp
         src/vendors/OceanOptics/buses/usb/Maya2000USB.cpp
         src/vendors/OceanOptics/buses/usb/MayaLSLUSB.cpp
+        src/vendors/OceanOptics/buses/usb/NIR256USB.cpp
+        src/vendors/OceanOptics/buses/usb/NIR512USB.cpp
         src/vendors/OceanOptics/buses/usb/NIRQuest256USB.cpp
         src/vendors/OceanOptics/buses/usb/NIRQuest512USB.cpp
         src/vendors/OceanOptics/buses/usb/OOIUSB4KSpectrumTransferHelper.cpp
@@ -644,6 +658,8 @@ set(COMMON_SOURCE_FILES
         src/vendors/OceanOptics/devices/Maya2000.cpp
         src/vendors/OceanOptics/devices/Maya2000Pro.cpp
         src/vendors/OceanOptics/devices/MayaLSL.cpp
+        src/vendors/OceanOptics/devices/NIR256.cpp
+        src/vendors/OceanOptics/devices/NIR512.cpp
         src/vendors/OceanOptics/devices/NIRQuest256.cpp
         src/vendors/OceanOptics/devices/NIRQuest512.cpp
         src/vendors/OceanOptics/devices/QE65000.cpp
@@ -709,6 +725,8 @@ set(COMMON_SOURCE_FILES
         src/vendors/OceanOptics/features/spectrometer/Maya2000ProSpectrometerFeature.cpp
         src/vendors/OceanOptics/features/spectrometer/Maya2000SpectrometerFeature.cpp
         src/vendors/OceanOptics/features/spectrometer/MayaLSLSpectrometerFeature.cpp
+        src/vendors/OceanOptics/features/spectrometer/NIR256SpectrometerFeature.cpp
+        src/vendors/OceanOptics/features/spectrometer/NIR512SpectrometerFeature.cpp
         src/vendors/OceanOptics/features/spectrometer/NIRQuest256SpectrometerFeature.cpp
         src/vendors/OceanOptics/features/spectrometer/NIRQuest512SpectrometerFeature.cpp
         src/vendors/OceanOptics/features/spectrometer/NIRQuestSpectrometerFeature.cpp
@@ -730,6 +748,7 @@ set(COMMON_SOURCE_FILES
         src/vendors/OceanOptics/features/temperature/TemperatureFeature.cpp
         src/vendors/OceanOptics/features/thermoelectric/QEProThermoElectricFeature.cpp
         src/vendors/OceanOptics/features/thermoelectric/ThermoElectricFeatureBase.cpp
+        src/vendors/OceanOptics/features/thermoelectric/ThermoElectricNIRFeature.cpp
         src/vendors/OceanOptics/features/thermoelectric/ThermoElectricQEFeature.cpp
         src/vendors/OceanOptics/features/thermoelectric/VentanaThermoElectricFeature.cpp
         src/vendors/OceanOptics/features/wavecal/WaveCalFeature.cpp
@@ -929,6 +948,8 @@ set(COMMON_SOURCE_FILES
         src/vendors/OceanOptics/protocols/ooi/exchanges/HRFPGASpectrumExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/IntegrationTimeExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/JazSpectrumExchange.cpp
+        src/vendors/OceanOptics/protocols/ooi/exchanges/LegacyIntegrationTimeExchange.cpp
+        src/vendors/OceanOptics/protocols/ooi/exchanges/LegacyNIRSpectrumExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/MayaProSpectrumExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/NIRQuestSpectrumExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/OOI2KSpectrumExchange.cpp
@@ -938,16 +959,19 @@ set(COMMON_SOURCE_FILES
         src/vendors/OceanOptics/protocols/ooi/exchanges/PCBTemperatureExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/QESpectrumExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/ReadEEPROMSlotExchange.cpp
+        src/vendors/OceanOptics/protocols/ooi/exchanges/ReadTECNIRTemperatureExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/ReadSpectrumExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/ReadTECQETemperatureExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/ReadTECTemperatureExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/RequestSpectrumExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/StrobeEnableExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/TECEnableExchange.cpp
+        src/vendors/OceanOptics/protocols/ooi/exchanges/TECNIREnableExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/TECQEEnableExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/TriggerModeExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/USBFPGASpectrumExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/WriteEEPROMSlotExchange.cpp
+        src/vendors/OceanOptics/protocols/ooi/exchanges/WriteTECNIRSetPointExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/WriteTECQESetPointExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/exchanges/WriteTECSetPointExchange.cpp
         src/vendors/OceanOptics/protocols/ooi/hints/ControlHint.cpp
