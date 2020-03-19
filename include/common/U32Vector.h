@@ -70,6 +70,11 @@ namespace seabreeze {
 
     private:
         std::vector<unsigned int> *data;
+        
+    /* March 2020 by MD: added private copy-constructor and assignment operator to prevent copy */
+    private:
+        U32Vector(const U32Vector& obj);
+        U32Vector& operator=(const U32Vector& obj);
     };
 
 }

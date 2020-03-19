@@ -85,17 +85,19 @@ Data *FPGASpectrumExchange::transfer(TransferHelper *helper)
         logger.error(synchError.c_str());
         throw ProtocolFormatException(synchError);
     }
-
-    /* Get a local variable by reference to point to that buffer */
-    vector<unsigned short> formatted(this->numberOfPixels);
-
+    
+    /* Allocate output vector */
+    UShortVector *retval = new UShortVector();
+    /* Get local reference */
+    vector<unsigned short>& formatted = retval->getUShortVector();
+    /* Pre-allocate */
+    formatted.reserve(this->numberOfPixels);
+    /* Store spectrum */
     for(i = 0; i < this->numberOfPixels; i++) {
         lsb = (*(this->buffer))[i * 2];
         msb = ((*(this->buffer))[(i * 2) + 1]);
-        formatted[i] = ((msb << 8) & 0x00FF00) | (lsb & 0x00FF);
+        formatted.push_back(((msb << 8) & 0x00FF00) | (lsb & 0x00FF));
     }
-
-    UShortVector *retval = new UShortVector(formatted);
 
     return retval;
 }

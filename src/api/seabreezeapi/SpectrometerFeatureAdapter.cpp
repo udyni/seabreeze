@@ -60,7 +60,7 @@ SpectrometerFeatureAdapter::~SpectrometerFeatureAdapter() {
 #endif
 int SpectrometerFeatureAdapter::getUnformattedSpectrum(int *errorCode,
                     unsigned char *buffer, int bufferLength) {
-    vector<unsigned char> *spectrum;
+    ByteVector *spectrum;
     int bytesCopied = 0;
 
     if(NULL == buffer) {
@@ -71,9 +71,12 @@ int SpectrometerFeatureAdapter::getUnformattedSpectrum(int *errorCode,
     try {
         spectrum = this->feature->getUnformattedSpectrum(*this->protocol,
             *this->bus);
-        int bytes = (int) spectrum->size();
-        bytesCopied = (bytes < bufferLength) ? bytes : bufferLength;
-        memcpy(buffer, &((*spectrum)[0]), bytesCopied * sizeof (unsigned char));
+        // Get reference
+        vector<byte>& specdata = spectrum->getByteVector();
+        // Copy data
+        bytesCopied = ((int)specdata.size() < bufferLength) ? (int)specdata.size() : bufferLength;
+        // NOTE: this may be dangerous, but it's fast...
+        memcpy(buffer, specdata.data(), bytesCopied * sizeof (unsigned char));
         delete spectrum;
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
@@ -86,7 +89,7 @@ int SpectrometerFeatureAdapter::getUnformattedSpectrum(int *errorCode,
 
 int SpectrometerFeatureAdapter::getFastBufferSpectrum(int *errorCode,
     unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve) {
-    vector<unsigned char> *spectrum;
+    ByteVector *spectrum;
     int bytesCopied = 0;
 
     if (NULL == buffer) {
@@ -95,14 +98,13 @@ int SpectrometerFeatureAdapter::getFastBufferSpectrum(int *errorCode,
     }
 
     try {
-
         spectrum = this->feature->getFastBufferSpectrum(*this->protocol, *this->bus, numberOfSamplesToRetrieve);
-        int bytes = (int)spectrum->size();
-        bytesCopied = (bytes < bufferLength) ? bytes : bufferLength;
-        if (spectrum->size() > 0)
-        {
-            memcpy(buffer, &((*spectrum)[0]), bytesCopied * sizeof(unsigned char));
-        }
+        // Get reference
+        vector<byte>& specdata = spectrum->getByteVector();
+        // Copy data
+        bytesCopied = ((int)specdata.size() < bufferLength) ? (int)specdata.size() : bufferLength;
+        // NOTE: this may be dangerous, but it's fast...
+        memcpy(buffer, specdata.data(), bytesCopied * sizeof(unsigned char));
         delete spectrum;
         SET_ERROR_CODE(ERROR_SUCCESS);
     }
@@ -132,7 +134,7 @@ void SpectrometerFeatureAdapter::fastBufferSpectrumRequest(int *errorCode, unsig
 int SpectrometerFeatureAdapter::fastBufferSpectrumResponse(int *errorCode,
                                                       unsigned char *buffer, int bufferLength, unsigned int numberOfSamplesToRetrieve)
 {
-    vector<unsigned char> *spectrum;
+    ByteVector *spectrum;
     int bytesCopied = 0;
 
     if (NULL == buffer) {
@@ -141,14 +143,13 @@ int SpectrometerFeatureAdapter::fastBufferSpectrumResponse(int *errorCode,
     }
 
     try {
-
         spectrum = this->feature->fastBufferSpectrumResponse(*this->protocol, *this->bus, numberOfSamplesToRetrieve);
-        int bytes = (int)spectrum->size();
-        bytesCopied = (bytes < bufferLength) ? bytes : bufferLength;
-        if (spectrum->size() > 0)
-        {
-            memcpy(buffer, &((*spectrum)[0]), bytesCopied * sizeof(unsigned char));
-        }
+        // Get reference
+        vector<byte>& specdata = spectrum->getByteVector();
+        // Copy data
+        bytesCopied = ((int)specdata.size() < bufferLength) ? (int)specdata.size() : bufferLength;
+        // NOTE: this may be dangerous, but it's fast...
+        memcpy(buffer, specdata.data(), bytesCopied * sizeof(unsigned char));
         delete spectrum;
         SET_ERROR_CODE(ERROR_SUCCESS);
     }
@@ -163,7 +164,7 @@ int SpectrometerFeatureAdapter::fastBufferSpectrumResponse(int *errorCode,
 
 int SpectrometerFeatureAdapter::getFormattedSpectrum(int *errorCode,
                     double* buffer, int bufferLength) {
-    vector<double> *spectrum;
+    DoubleVector *spectrum;
     int doublesCopied = 0;
 
     if(NULL == buffer) {
@@ -173,13 +174,15 @@ int SpectrometerFeatureAdapter::getFormattedSpectrum(int *errorCode,
 
     try {
         spectrum = this->feature->getFormattedSpectrum(*this->protocol, *this->bus);
-        int pixels = (int) spectrum->size();
-        doublesCopied = (pixels < bufferLength) ? pixels : bufferLength;
-        memcpy(buffer, &((*spectrum)[0]), doublesCopied * sizeof (double));
+        // Get reference
+        vector<double>& specdata = spectrum->getDoubleVector();
+        // Copy data
+        doublesCopied = ((int)specdata.size() < bufferLength) ? (int)specdata.size() : bufferLength;
+        // NOTE: this may be dangerous, but it's fast...
+        memcpy(buffer, specdata.data(), doublesCopied * sizeof(double));
         delete spectrum;
         SET_ERROR_CODE(ERROR_SUCCESS);
     } catch (FeatureException &fe) {
-        
         // the get spectrum calls should have an argument for the error string so that fe.what can be used
         SET_ERROR_CODE(ERROR_TRANSFER_ERROR);
         return 0;
@@ -201,12 +204,12 @@ int SpectrometerFeatureAdapter::getUnformattedSpectrumLength(int *errorCode) {
      * possible lengths based on the device type.  I am opting for
      * the former, even though it could have unpleasant side-effects.
      */
-    vector<byte> *spectrum;
+    ByteVector *spectrum;
 
     try {
         spectrum = this->feature->getUnformattedSpectrum(
             *this->protocol, *this->bus);
-        int length = (int) spectrum->size();
+        int length = (int) spectrum->getByteVector().size();
         delete spectrum;
         SET_ERROR_CODE(ERROR_SUCCESS);
         return length;

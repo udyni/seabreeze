@@ -57,6 +57,11 @@ namespace seabreeze {
 
     private:
         std::vector<unsigned short> *data;
+
+    /* March 2020 by MD: added private copy-constructor and assignment operator to prevent copy */
+    private:
+        UShortVector(const UShortVector& obj);
+        UShortVector& operator=(const UShortVector& obj);
     };
 
 }

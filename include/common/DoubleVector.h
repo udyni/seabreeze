@@ -55,6 +55,11 @@ namespace seabreeze {
 
     private:
         std::vector<double> *data;
+
+    /* March 2020 by MD: added private copy-constructor and assignment operator to prevent copy */
+    private:
+        DoubleVector(const DoubleVector& obj);
+        DoubleVector& operator=(const DoubleVector& obj);
     };
 
 }

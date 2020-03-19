@@ -31,6 +31,8 @@
 #define OOISPECTROMETERFEATURE_H
 
 #include <vector>
+#include "common/ByteVector.h"
+#include "common/DoubleVector.h"
 #include "common/features/FeatureImpl.h"
 #include "common/protocols/Protocol.h"
 #include "common/buses/Bus.h"
@@ -51,20 +53,20 @@ namespace seabreeze {
         OOISpectrometerFeature();
         virtual ~OOISpectrometerFeature();
         /* Request and read out a spectrum formatted into intensity (A/D counts) */
-        virtual std::vector<double> *getFormattedSpectrum(const Protocol &protocol,
-                const Bus &bus) throw (FeatureException);
-        
-        /* Request and read out the raw spectrum data stream */
-        virtual std::vector<byte> *getUnformattedSpectrum(const Protocol &protocol,
+        virtual DoubleVector *getFormattedSpectrum(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException);
 
-        virtual std::vector<byte> *getFastBufferSpectrum(const Protocol &protocol,
+        /* Request and read out the raw spectrum data stream */
+        virtual ByteVector *getUnformattedSpectrum(const Protocol &protocol,
+                const Bus &bus) throw (FeatureException);
+
+        virtual ByteVector *getFastBufferSpectrum(const Protocol &protocol,
             const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
 
         virtual void fastBufferSpectrumRequest(const Protocol &protocol,
                                                          const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
 
-        virtual std::vector<byte> *fastBufferSpectrumResponse(const Protocol &protocol,
+        virtual ByteVector *fastBufferSpectrumResponse(const Protocol &protocol,
                                                          const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (FeatureException);
 
         /* Request and read out the wavelengths in nanometers as a vector of doubles */
@@ -72,10 +74,10 @@ namespace seabreeze {
                 const Bus &bus) throw (FeatureException);
 
         /* Read the raw spectrum data stream.  No request is made first. */
-        virtual std::vector<byte> *readUnformattedSpectrum(const Protocol &protocol,
+        virtual ByteVector *readUnformattedSpectrum(const Protocol &protocol,
                 const Bus &bus) throw (FeatureException);
 
-        virtual std::vector<byte> *readFastBufferSpectrum(const Protocol &protocol,
+        virtual ByteVector *readFastBufferSpectrum(const Protocol &protocol,
             const Bus &bus, unsigned int numberOfSamplesToReceive) throw (FeatureException);
 
         /* Set the integration time of the spectrometer */

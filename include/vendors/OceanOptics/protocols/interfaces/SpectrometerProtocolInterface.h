@@ -36,11 +36,12 @@
 #define SPECTROMETERPROTOCOLINTERFACE_H
 
 #include "common/SeaBreeze.h"
+#include "common/ByteVector.h"
+#include "common/DoubleVector.h"
 #include "common/buses/Bus.h"
 #include "common/exceptions/ProtocolException.h"
 #include "common/protocols/ProtocolHelper.h"
 #include "vendors/OceanOptics/features/spectrometer/SpectrometerTriggerMode.h"
-#include <vector>
 
 namespace seabreeze {
 
@@ -49,11 +50,11 @@ namespace seabreeze {
         SpectrometerProtocolInterface(Protocol *protocol);
         virtual ~SpectrometerProtocolInterface();
         virtual void requestFormattedSpectrum(const Bus &bus) throw (ProtocolException) = 0;
-        virtual std::vector<double> *readFormattedSpectrum(const Bus &bus) throw (ProtocolException) = 0;
+        virtual DoubleVector *readFormattedSpectrum(const Bus &bus) throw (ProtocolException) = 0;
         virtual void requestUnformattedSpectrum(const Bus &bus) throw (ProtocolException) = 0;
-        virtual std::vector<byte> *readUnformattedSpectrum(const Bus &bus) throw (ProtocolException) = 0;
+        virtual ByteVector *readUnformattedSpectrum(const Bus &bus) throw (ProtocolException) = 0;
         virtual void requestFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (ProtocolException) = 0;
-        virtual std::vector<byte> *readFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (ProtocolException) = 0;
+        virtual ByteVector *readFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (ProtocolException) = 0;
         virtual void setIntegrationTimeMicros(const Bus &bus, unsigned long time_usec) throw (ProtocolException) = 0;
         virtual void setTriggerMode(const Bus &bus,SpectrometerTriggerMode &mode) throw (ProtocolException) = 0;
     };

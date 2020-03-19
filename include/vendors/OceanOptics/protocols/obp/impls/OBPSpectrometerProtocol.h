@@ -33,10 +33,11 @@
 #include "common/SeaBreeze.h"
 #include "common/protocols/Transfer.h"
 #include "common/buses/Bus.h"
+#include "common/ByteVector.h"
+#include "common/DoubleVector.h"
 #include "vendors/OceanOptics/protocols/obp/exchanges/OBPIntegrationTimeExchange.h"
 #include "vendors/OceanOptics/protocols/obp/exchanges/OBPTriggerModeExchange.h"
 #include "vendors/OceanOptics/protocols/interfaces/SpectrometerProtocolInterface.h"
-#include <vector>
 
 namespace seabreeze {
   namespace oceanBinaryProtocol {
@@ -67,11 +68,11 @@ namespace seabreeze {
          * metadata (units, etc.) can also be attached?
          */
         virtual void requestFormattedSpectrum(const Bus &bus) throw (ProtocolException);
-        virtual std::vector<double> *readFormattedSpectrum(const Bus &bus) throw (ProtocolException);
+        virtual DoubleVector *readFormattedSpectrum(const Bus &bus) throw (ProtocolException);
         virtual void requestUnformattedSpectrum(const Bus &bus) throw (ProtocolException);
-        virtual std::vector<byte> *readUnformattedSpectrum(const Bus &bus) throw (ProtocolException);
+        virtual ByteVector *readUnformattedSpectrum(const Bus &bus) throw (ProtocolException);
         virtual void requestFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (ProtocolException);
-        virtual std::vector<byte> *readFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (ProtocolException);
+        virtual ByteVector *readFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve) throw (ProtocolException);
         virtual void setIntegrationTimeMicros(const Bus &bus, unsigned long time_usec) throw (ProtocolException);
         virtual void setTriggerMode(const Bus &bus, SpectrometerTriggerMode &mode) throw (ProtocolException);
 

@@ -40,6 +40,8 @@
 
 #include "common/globals.h"
 #include "common/Log.h"
+#include "common/ByteVector.h"
+#include "common/DoubleVector.h"
 #include "api/SeaBreezeWrapper.h"
 #include "api/DeviceFactory.h"
 #include "common/buses/rs232/RS232DeviceLocator.h"
@@ -642,7 +644,7 @@ int SeaBreezeWrapper::getMaximumIntensity(int index,
 
 int SeaBreezeWrapper::getFastBufferSpectrum(int index, int *errorCode,
     unsigned char *buffer, int buffer_length, unsigned int numberOfSamplesToRetrieve) {
-    vector<unsigned char> *spectrum;
+    ByteVector *spectrum;
     int bytesCopied = 0;
 
     if (NULL == this->devices[index]) {
@@ -665,10 +667,10 @@ int SeaBreezeWrapper::getFastBufferSpectrum(int index, int *errorCode,
                 *__seabreeze_getProtocol(this->devices[index]),
                 *__seabreeze_getBus(this->devices[index]),
                 numberOfSamplesToRetrieve);
-            int bytes = (int)spectrum->size();
+            vector<byte>& specdata = spectrum->getByteVector();
+            int bytes = (int)specdata.size();
             bytesCopied = (bytes < buffer_length) ? bytes : buffer_length;
-            memcpy(buffer, &((*spectrum)[0]),
-                bytesCopied * sizeof(unsigned char));
+            memcpy(buffer, specdata.data(), bytesCopied * sizeof(unsigned char));
             delete spectrum;
             SET_ERROR_CODE(ERROR_SUCCESS);
         }
@@ -709,7 +711,7 @@ void SeaBreezeWrapper::fastBufferSpectrumRequest(int index, int *errorCode, unsi
 
 int SeaBreezeWrapper::fastBufferSpectrumResponse(int index, int *errorCode,
                                             unsigned char *buffer, int buffer_length, unsigned int numberOfSamplesToRetrieve) {
-    vector<unsigned char> *spectrum;
+    ByteVector *spectrum;
     int bytesCopied = 0;
 
     if (NULL == this->devices[index]) {
@@ -732,10 +734,10 @@ int SeaBreezeWrapper::fastBufferSpectrumResponse(int index, int *errorCode,
                     *__seabreeze_getProtocol(this->devices[index]),
                     *__seabreeze_getBus(this->devices[index]),
                     numberOfSamplesToRetrieve);
-            int bytes = (int)spectrum->size();
+            vector<unsigned char>& specdata = spectrum->getByteVector();
+            int bytes = (int)specdata.size();
             bytesCopied = (bytes < buffer_length) ? bytes : buffer_length;
-            memcpy(buffer, &((*spectrum)[0]),
-                   bytesCopied * sizeof(unsigned char));
+            memcpy(buffer, specdata.data(), bytesCopied * sizeof(unsigned char));
             delete spectrum;
             SET_ERROR_CODE(ERROR_SUCCESS);
         }
@@ -750,7 +752,7 @@ int SeaBreezeWrapper::fastBufferSpectrumResponse(int index, int *errorCode,
 
 int SeaBreezeWrapper::getUnformattedSpectrum(int index, int *errorCode,
     unsigned char *buffer, int buffer_length) {
-    vector<unsigned char> *spectrum;
+    ByteVector *spectrum;
     int bytesCopied = 0;
 
     if (NULL == this->devices[index]) {
@@ -772,10 +774,10 @@ int SeaBreezeWrapper::getUnformattedSpectrum(int index, int *errorCode,
             spectrum = spec->getUnformattedSpectrum(
                 *__seabreeze_getProtocol(this->devices[index]),
                 *__seabreeze_getBus(this->devices[index]));
-            int bytes = (int)spectrum->size();
+            vector<unsigned char>& specdata = spectrum->getByteVector();
+            int bytes = (int)specdata.size();
             bytesCopied = (bytes < buffer_length) ? bytes : buffer_length;
-            memcpy(buffer, &((*spectrum)[0]),
-                bytesCopied * sizeof(unsigned char));
+            memcpy(buffer, specdata.data(), bytesCopied * sizeof(unsigned char));
             delete spectrum;
             SET_ERROR_CODE(ERROR_SUCCESS);
         }
@@ -792,7 +794,7 @@ int SeaBreezeWrapper::getFormattedSpectrum(int index, int *errorCode,
 
     LOG(__FUNCTION__);
 
-    vector<double> *spectrum;
+    DoubleVector *spectrum;
     int doublesCopied = 0;
 
     if (NULL == this->devices[index]) {
@@ -814,9 +816,10 @@ int SeaBreezeWrapper::getFormattedSpectrum(int index, int *errorCode,
             spectrum = spec->getFormattedSpectrum(
                 *__seabreeze_getProtocol(this->devices[index]),
                 *__seabreeze_getBus(this->devices[index]));
-            int pixels = (int)spectrum->size();
+            vector<double>& specdata = spectrum->getDoubleVector();
+            int pixels = (int)specdata.size();
             doublesCopied = (pixels < buffer_length) ? pixels : buffer_length;
-            memcpy(buffer, &((*spectrum)[0]), doublesCopied * sizeof(double));
+            memcpy(buffer, specdata.data(), doublesCopied * sizeof(double));
             delete spectrum;
             SET_ERROR_CODE(ERROR_SUCCESS);
         }
@@ -846,7 +849,7 @@ int SeaBreezeWrapper::getUnformattedSpectrumLength(int index, int *errorCode) {
 
     LOG(__FUNCTION__);
 
-    vector<byte> *spectrum;
+    ByteVector *spectrum;
 
     if (NULL == this->devices[index]) {
         SET_ERROR_CODE(ERROR_NO_DEVICE);
@@ -862,7 +865,7 @@ int SeaBreezeWrapper::getUnformattedSpectrumLength(int index, int *errorCode) {
             spectrum = spec->getUnformattedSpectrum(
                 *__seabreeze_getProtocol(this->devices[index]),
                 *__seabreeze_getBus(this->devices[index]));
-            int length = (int)spectrum->size();
+            int length = (int)spectrum->getByteVector().size();
             delete spectrum;
             SET_ERROR_CODE(ERROR_SUCCESS);
             return length;

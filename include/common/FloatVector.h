@@ -55,6 +55,11 @@ namespace seabreeze {
 
     private:
         std::vector<float> *data;
+
+    /* March 2020 by MD: added private copy-constructor and assignment operator to prevent copy */
+    private:
+        FloatVector(const FloatVector& obj);
+        FloatVector& operator=(const FloatVector& obj);
     };
 
 }

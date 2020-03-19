@@ -74,7 +74,7 @@ OOISpectrometerProtocol::~OOISpectrometerProtocol() {
     delete this->triggerModeExchange;
 }
 
-vector<byte> *OOISpectrometerProtocol::readUnformattedSpectrum(const Bus &bus)
+ByteVector *OOISpectrometerProtocol::readUnformattedSpectrum(const Bus &bus)
         throw (ProtocolException) {
     LOG(__FUNCTION__);
 
@@ -97,22 +97,19 @@ vector<byte> *OOISpectrometerProtocol::readUnformattedSpectrum(const Bus &bus)
         throw ProtocolException(error);
     }
 
-    ByteVector *bv = static_cast<ByteVector *>(result);
-
-    vector<byte> *retval = new vector<byte > (bv->getByteVector());
-
-    delete result;
+    ByteVector *retval = static_cast<ByteVector *>(result);
 
     /* FIXME: this method should probably return (Data *) so that
      * metadata is preserved.  In that case, this should just return
      * the above result without any additional work.  The current
      * implementation has an extra allocate/copy/destroy overhead.
      */
+    /* Update March 2020: updated to return ByteVector */
 
     return retval;
 }
 
-vector<byte> *OOISpectrometerProtocol::readFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve)
+ByteVector *OOISpectrometerProtocol::readFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve)
 throw (ProtocolException) {
     LOG(__FUNCTION__);
 
@@ -135,22 +132,19 @@ throw (ProtocolException) {
         throw ProtocolException(error);
     }
 
-    ByteVector *bv = static_cast<ByteVector *>(result);
-
-    vector<byte> *retval = new vector<byte >(bv->getByteVector());
-
-    delete result;
+    ByteVector *retval = static_cast<ByteVector *>(result);
 
     /* FIXME: this method should probably return (Data *) so that
     * metadata is preserved.  In that case, this should just return
     * the above result without any additional work.  The current
     * implementation has an extra allocate/copy/destroy overhead.
     */
+    /* Update March 2020: updated to return ByteVector */
 
     return retval;
 }
 
-vector<double> *OOISpectrometerProtocol::readFormattedSpectrum(const Bus &bus)
+DoubleVector *OOISpectrometerProtocol::readFormattedSpectrum(const Bus &bus)
         throw (ProtocolException) {
 
     LOG(__FUNCTION__);
@@ -183,28 +177,33 @@ vector<double> *OOISpectrometerProtocol::readFormattedSpectrum(const Bus &bus)
      * of the dynamic_casts even though only one of them will be
      * valid is adding some overhead.  Hopefully it isn't much.
      */
-    vector<double> *retval = NULL;
-    UShortVector *usv = dynamic_cast<UShortVector *>(result);
-    DoubleVector *dv = dynamic_cast<DoubleVector *>(result);
-    if(NULL != usv) {
-        vector<unsigned short> shortVec = usv->getUShortVector();
-
-        retval = new vector<double>(shortVec.size());
-
-        for (i = 0; i < shortVec.size(); i++) {
-            (*retval)[i] = shortVec[i];
+    /*
+     * Update March 2020: do the USV cast only if dv fails. Updated to return DoubleVector and removed a few unneeded copies of vectors
+     */
+    DoubleVector *retval = dynamic_cast<DoubleVector *>(result);
+    if(NULL == retval) {
+        // Cast short vector
+        UShortVector *usv = dynamic_cast<UShortVector *>(result);
+        if(NULL == usv) {
+            string error("Output buffer cannot be casted niether to double or short. This was unexpected.");
+            logger.error(error.c_str());
+            throw ProtocolException(error);
         }
-
-    } else if(NULL != dv) {
-        vector<double> doubleVec= dv->getDoubleVector();
-        retval = new vector<double>(doubleVec.size());
-
-        for (i = 0; i < doubleVec.size(); i++) {
-            (*retval)[i] = doubleVec[i];
+        // Get local reference
+        vector<unsigned short>& spectrum = usv->getUShortVector();
+        // Allocate retval
+        retval = new DoubleVector();
+        // Get local reference
+        vector<double>& out = retval->getDoubleVector();
+        // Pre-allocate buffer
+        out.reserve(spectrum.size());
+        // Convert buffer
+        for (i = 0; i < spectrum.size(); i++) {
+            out.push_back((double)spectrum[i]);
         }
+        // result is not needed anymore as we converted it to a new format
+        delete result;
     }
-    delete result; /* a.k.a. usv or dv */
-
     return retval;
 }
 

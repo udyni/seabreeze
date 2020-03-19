@@ -140,7 +140,7 @@ void OBPSpectrometerProtocol::Initialize(
 
 }
 
-vector<byte> *OBPSpectrometerProtocol::readUnformattedSpectrum(const Bus &bus)
+ByteVector *OBPSpectrometerProtocol::readUnformattedSpectrum(const Bus &bus)
         throw (ProtocolException) 
 {
     Data *result;
@@ -162,21 +162,18 @@ vector<byte> *OBPSpectrometerProtocol::readUnformattedSpectrum(const Bus &bus)
         throw ProtocolException(error);
     }
 
-    ByteVector *bv = static_cast<ByteVector *>(result);
-
-    vector<byte> *retval = new vector<byte > (bv->getByteVector());
-
-    delete result;
+    ByteVector *retval = static_cast<ByteVector *>(result);
 
     /* FIXME: this method should probably return (Data *) so that
      * metadata is preserved.  In that case, this should just return
      * the above result without any additional work.  The current
      * implementation has an extra allocate/copy/destroy overhead.
      */
+    /* Update March 2020: updated to return ByteVector */
     return retval;
 }
 
-vector<byte> *OBPSpectrometerProtocol::readFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve)
+ByteVector *OBPSpectrometerProtocol::readFastBufferSpectrum(const Bus &bus, unsigned int numberOfSamplesToRetrieve)
 throw (ProtocolException) 
 {
     Data *result;
@@ -201,21 +198,18 @@ throw (ProtocolException)
         throw ProtocolException(error);
     }
 
-    ByteVector *bv = static_cast<ByteVector *>(result);
-
-    vector<byte> *retval = new vector<byte >(bv->getByteVector());
-
-    delete result;
+    ByteVector *retval = static_cast<ByteVector *>(result);
 
     /* FIXME: this method should probably return (Data *) so that
     * metadata is preserved.  In that case, this should just return
     * the above result without any additional work.  The current
     * implementation has an extra allocate/copy/destroy overhead.
     */
+    /* Update March 2020: updated to return ByteVector */
     return retval;
 }
 
-vector<double> *OBPSpectrometerProtocol::readFormattedSpectrum(const Bus &bus)
+DoubleVector *OBPSpectrometerProtocol::readFormattedSpectrum(const Bus &bus)
         throw (ProtocolException) {
     TransferHelper *helper;
     Data *result;
@@ -243,34 +237,41 @@ vector<double> *OBPSpectrometerProtocol::readFormattedSpectrum(const Bus &bus)
      * of the dynamic_casts even though only one of them will be
      * valid is adding some overhead.  Hopefully it isn't much.
      */
-    vector<double> *retval = NULL;
-    UShortVector *usv = dynamic_cast<UShortVector *>(result);
-    DoubleVector *dv = dynamic_cast<DoubleVector *>(result);
-    U32Vector *u32v = dynamic_cast<U32Vector *>(result);
-    if(NULL != usv) {
-        vector<unsigned short> shortVec = usv->getUShortVector();
+    /* Update March 2020: updated to return DoubleVector */
 
-        retval = new vector<double>(shortVec.size());
+    DoubleVector *retval = dynamic_cast<DoubleVector *>(result);
+    if(NULL == retval) {
+        retval = new DoubleVector();
+        vector<double>& out = retval->getDoubleVector();
 
-        for (i = 0; i < shortVec.size(); i++) {
-            (*retval)[i] = shortVec[i];
+        UShortVector *usv = dynamic_cast<UShortVector *>(result);
+        if(NULL != usv) {
+            // Short vector
+            vector<unsigned short>& spectrum = usv->getUShortVector();
+            out.reserve(spectrum.size());
+            for (i = 0; i < spectrum.size(); i++) {
+                out.push_back((double)spectrum[i]);
+            }
+
+        } else {
+            U32Vector *u32v = dynamic_cast<U32Vector *>(result);
+            if(NULL == u32v) {
+                delete result;
+                delete retval;
+                string error("Got unexpected vector type.");
+                throw ProtocolException(error);
+            } else {
+                // U32 vector
+                vector<unsigned int>& spectrum = u32v->getU32Vector();
+                out.reserve(spectrum.size());
+                for (i = 0; i < spectrum.size(); i++) {
+                    out.push_back((double)spectrum[i]);
+                }
+            }
         }
-    } else if(NULL != u32v) {
-        vector<unsigned int> u32Vec = u32v->getU32Vector();
-
-        retval = new vector<double>(u32Vec.size());
-        for (i = 0; i < u32Vec.size(); i++) {
-            (*retval)[i] = u32Vec[i];
-        }
-    } else if(NULL != dv) {
-        vector<double> doubleVec= dv->getDoubleVector();
-        retval = new vector<double>(doubleVec.size());
-
-        for (i = 0; i < doubleVec.size(); i++) {
-            (*retval)[i] = doubleVec[i];
-        }
+        delete result;
     }
-    delete result; /* a.k.a. usv or dv */
+
     return retval;
 }
 

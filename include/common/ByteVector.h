@@ -56,8 +56,12 @@ namespace seabreeze {
 
     private:
         std::vector<byte> *data;
-    };
 
+    /* March 2020 by MD: added private copy-constructor and assignment operator to prevent copy */
+    private:
+        ByteVector(const ByteVector& obj);
+        ByteVector& operator=(const ByteVector& obj);
+    };
 }
 
 #endif

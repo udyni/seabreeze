@@ -85,22 +85,20 @@ Data *USBFPGASpectrumExchange::transfer(TransferHelper *helper)
     UShortVector *usv = static_cast<UShortVector *>(xfer);
     vector<unsigned short> shortVec = usv->getUShortVector();
 
-    /* Create a buffer to store the gain-adjusted values.  This is local. */
-    vector<double> adjusted(this->numberOfPixels);
-
+    /* Create output buffer to store the gain-adjusted values. */
+    DoubleVector *retval = new DoubleVector();
+    /* Get local reference */
+    vector<double>& adjusted = retval->getDoubleVector(); 
+    /* Pre-allocate */
+    adjusted.reserve(this->numberOfPixels);
+    /* Store data */
     for(i = 0; i < this->numberOfPixels; i++) {
         double temp = shortVec[i] * maxIntensity / saturationLevel;
         if(temp > maxIntensity) {
             temp = maxIntensity;
         }
-        adjusted[i] = temp;
+        adjusted.push_back(temp);
     }
-
-    /* It might speed things up to dynamically allocate the buffer and
-     * hand it off to retval rather than letting it make a copy.
-     */
-    DoubleVector *retval = new DoubleVector(adjusted);
-
     delete xfer;
 
     return retval;

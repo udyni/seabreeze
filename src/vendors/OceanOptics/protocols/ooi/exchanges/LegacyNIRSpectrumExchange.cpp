@@ -87,7 +87,7 @@ Data *LegacyNIRSpectrumExchange::transfer(TransferHelper *helper)
     }
 
     /* Create output variable */
-    UShortVector *retval = new UShortVector(formatted);
+    UShortVector *retval = new UShortVector();
     /* Get local reference */
     vector<unsigned short>& formatted = retval->getUShortVector();
     /* Pre-allocate */
