@@ -31,6 +31,7 @@
 #include "vendors/OceanOptics/features/spectrometer/NIR512SpectrometerFeature.h"
 #include "vendors/OceanOptics/protocols/ooi/exchanges/LegacyIntegrationTimeExchange.h"
 #include "vendors/OceanOptics/protocols/ooi/exchanges/LegacyNIRSpectrumExchange.h"
+#include "vendors/OceanOptics/protocols/ooi/exchanges/ReadSpectrumExchange.h"
 #include "vendors/OceanOptics/protocols/ooi/exchanges/RequestSpectrumExchange.h"
 #include "vendors/OceanOptics/protocols/ooi/exchanges/TriggerModeExchange.h"
 #include "vendors/OceanOptics/protocols/ooi/impls/OOISpectrometerProtocol.h"
@@ -61,9 +62,9 @@ NIR512SpectrometerFeature::NIR512SpectrometerFeature() {
     Transfer *requestFormattedSpectrum = new RequestSpectrumExchange();
     Transfer *readFormattedSpectrum = new LegacyNIRSpectrumExchange(readoutLength, this->numberOfPixels);
     Transfer *requestUnformattedSpectrum = new RequestSpectrumExchange();
-    Transfer *readUnformattedSpectrum = new LegacyNIRSpectrumExchange(readoutLength, this->numberOfPixels);
+    Transfer *readUnformattedSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
     Transfer *requestFastBufferSpectrum = new RequestSpectrumExchange();
-    Transfer *readFastBufferSpectrum = new LegacyNIRSpectrumExchange(readoutLength, this->numberOfPixels);
+    Transfer *readFastBufferSpectrum = new ReadSpectrumExchange(readoutLength, this->numberOfPixels);
 
     TriggerModeExchange *triggerMode = new TriggerModeExchange();
 

@@ -86,18 +86,20 @@ Data *LegacyNIRSpectrumExchange::transfer(TransferHelper *helper)
         throw ProtocolFormatException(synchError);
     }
 
-    /* Get a local variable by reference to point to that buffer */
-    vector<unsigned short> formatted(this->numberOfPixels);
+    /* Create output variable */
+    UShortVector *retval = new UShortVector(formatted);
+    /* Get local reference */
+    vector<unsigned short>& formatted = retval->getUShortVector();
+    /* Pre-allocate */
+    formatted.reserve(this->numberOfPixels);
 
     /* The legacy NIR spectrometer return 64 bytes packets alternating between LSBs and MSBs... */
     for(i = 0; i < this->numberOfPixels; i++) {
         unsigned int packet = i / 64;
         lsb = (*(this->buffer))[packet * 64 + i];
         msb = (*(this->buffer))[(packet + 1) * 64 + i];
-        formatted[i] = ((msb << 8) & 0x00FF00) | (lsb & 0x00FF);
+        formatted.push_back(((msb << 8) & 0x00FF00) | (lsb & 0x00FF));
     }
-
-    UShortVector *retval = new UShortVector(formatted);
 
     return retval;
 }
