@@ -108,6 +108,7 @@ DeviceAdapter::~DeviceAdapter() {
     __delete_feature_adapters<AcquisitionDelayFeatureAdapter>(acquisitionDelayFeatures);
     __delete_feature_adapters<gpioFeatureAdapter>(gpioFeatures);
     __delete_feature_adapters<I2CMasterFeatureAdapter>(i2cMasterFeatures);
+    __delete_feature_adapters<FirmwareVersionFeatureAdapter>(firmwareVersionFeatures);
 
     delete this->device;
 }
@@ -310,6 +311,10 @@ int DeviceAdapter::open(int *errorCode) {
         I2CMasterFeatureAdapter>(this->device,
             i2cMasterFeatures, bus, featureFamilies.I2C_MASTER);
 
+    /* Create firmware version feature list */
+    __create_feature_adapters<FirmwareVersionFeatureInterface,
+                    FirmwareVersionFeatureAdapter>(this->device,
+            firmwareVersionFeatures, bus, featureFamilies.FIRMWARE_VERSION);
 
     SET_ERROR_CODE(ERROR_SUCCESS);
     return 0;
@@ -461,6 +466,44 @@ unsigned char DeviceAdapter::getSerialNumberMaximumLength(long featureID, int *e
 
     return feature->getSerialNumberMaximumLength(errorCode);
 }
+
+
+/* Firmware version feature wrappers */
+int DeviceAdapter::getNumberOfFirmwareVersionFeatures() {
+    return (int) this->firmwareVersionFeatures.size();
+}
+
+int DeviceAdapter::getFirmwareVersionFeatures(long *buffer, int maxFeatures) {
+    return __getFeatureIDs<FirmwareVersionFeatureAdapter>(
+                firmwareVersionFeatures, buffer, maxFeatures);
+}
+
+FirmwareVersionFeatureAdapter *DeviceAdapter::getFirmwareVersionFeatureByID(long featureID) {
+    return __getFeatureByID<FirmwareVersionFeatureAdapter>(
+                firmwareVersionFeatures, featureID);
+}
+
+int DeviceAdapter::getFirmwareVersion(long featureID, int *errorCode,
+        char *buffer, int bufferLength) {
+    FirmwareVersionFeatureAdapter *feature = getFirmwareVersionFeatureByID(featureID);
+    if(NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
+
+    return feature->getFirmwareVersion(errorCode, buffer, bufferLength);
+}
+
+unsigned char DeviceAdapter::getFirmwareVersionMaximumLength(long featureID, int *errorCode) {
+    FirmwareVersionFeatureAdapter *feature = getFirmwareVersionFeatureByID(featureID);
+    if(NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
+
+    return feature->getFirmwareVersionMaximumLength(errorCode);
+}
+
 
 /* Spectrometer feature wrappers */
 int DeviceAdapter::getNumberOfSpectrometerFeatures() {

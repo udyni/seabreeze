@@ -55,24 +55,25 @@
 #define FEATURE_FAMILY_ID_DATA_BUFFER               18
 #define FEATURE_FAMILY_ID_ACQUISITION_DELAY         19 
 #define FEATURE_FAMILY_ID_PIXEL_BINNING             20 // was 18... that appears to have been a bug
-#define FEATURE_FAMILY_ID_INTROSPECTION                21
-#define FEATURE_FAMILY_ID_FAST_BUFFER                22
-#define FEATURE_FAMILY_ID_AUTO_NULLING_ANALOG        23
-#define    FEATURE_FAMILY_ID_AUTO_NULLING_DIGITAL        24
-#define    FEATURE_FAMILY_ID_ETHERNET_CONFIGURATION    25
-#define    FEATURE_FAMILY_ID_WIFI_CONFIGURATION        26
-#define    FEATURE_FAMILY_ID_NETWORK_CONFIGURATION        27
-#define    FEATURE_FAMILY_ID_DHCP_SERVER                28
-#define    FEATURE_FAMILY_ID_BLUETOOTH_CONFIGURATION    29
-#define FEATURE_FAMILY_ID_TIME_COMMANDS                30
+#define FEATURE_FAMILY_ID_INTROSPECTION             21
+#define FEATURE_FAMILY_ID_FAST_BUFFER               22
+#define FEATURE_FAMILY_ID_AUTO_NULLING_ANALOG       23
+#define FEATURE_FAMILY_ID_AUTO_NULLING_DIGITAL      24
+#define FEATURE_FAMILY_ID_ETHERNET_CONFIGURATION    25
+#define FEATURE_FAMILY_ID_WIFI_CONFIGURATION        26
+#define FEATURE_FAMILY_ID_NETWORK_CONFIGURATION     27
+#define FEATURE_FAMILY_ID_DHCP_SERVER               28
+#define FEATURE_FAMILY_ID_BLUETOOTH_CONFIGURATION   29
+#define FEATURE_FAMILY_ID_TIME_COMMANDS             30
 #define FEATURE_FAMILY_ID_RS232_BUS_COMMANDS        31
-#define FEATURE_FAMILY_ID_IPV4                        32
-#define FEATURE_FAMILY_ID_MULTICAST                    33
-#define FEATURE_FAMILY_ID_NETWORK_SERIVICES            34
-#define FEATURE_FAMILY_ID_DEVICE_IDENTIFICATION        35
-#define FEATURE_FAMILY_ID_TEST_COMMANDS                36
-#define FEATURE_FAMILY_ID_GPIO                        37
+#define FEATURE_FAMILY_ID_IPV4                      32
+#define FEATURE_FAMILY_ID_MULTICAST                 33
+#define FEATURE_FAMILY_ID_NETWORK_SERIVICES         34
+#define FEATURE_FAMILY_ID_DEVICE_IDENTIFICATION     35
+#define FEATURE_FAMILY_ID_TEST_COMMANDS             36
+#define FEATURE_FAMILY_ID_GPIO                      37
 #define FEATURE_FAMILY_ID_I2C_MASTER                38
+#define FEATURE_FAMILY_ID_FIRMWARE_VERSION          39
 
 using namespace seabreeze;
 using namespace seabreeze::api;
@@ -363,10 +364,19 @@ seabreeze::api::I2CMasterFeatureFamily::~I2CMasterFeatureFamily() {
 
 }
 
+seabreeze::api::FirmwareVersionFeatureFamily::FirmwareVersionFeatureFamily()
+    : FeatureFamily("FirmwareVersion", FEATURE_FAMILY_ID_FIRMWARE_VERSION) {
+
+}
+
+seabreeze::api::FirmwareVersionFeatureFamily::~FirmwareVersionFeatureFamily() {
+
+}
+
 
 vector<FeatureFamily *> seabreeze::api::FeatureFamilies::getAllFeatureFamilies() {
     vector<FeatureFamily *> retval;
-    
+
     /* This creates new instances of these so the class-wide fields do not risk
      * having their const flags ignored.
      */
@@ -397,6 +407,7 @@ vector<FeatureFamily *> seabreeze::api::FeatureFamilies::getAllFeatureFamilies()
     retval.push_back(new IntrospectionFeatureFamily());
     retval.push_back(new GPIOFeatureFamily());
     retval.push_back(new I2CMasterFeatureFamily());
+    retval.push_back(new FirmwareVersionFeatureFamily());
 
     return retval;
 }

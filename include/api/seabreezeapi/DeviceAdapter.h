@@ -64,6 +64,7 @@
 #include "api/seabreezeapi/AcquisitionDelayFeatureAdapter.h"
 #include "api/seabreezeapi/gpioFeatureAdapter.h"
 #include "api/seabreezeapi/I2CMasterFeatureAdapter.h"
+#include "api/seabreezeapi/FirmwareVersionFeatureAdapter.h"
 #include <vector>
 
 namespace seabreeze {
@@ -103,6 +104,13 @@ namespace seabreeze {
             int getSerialNumber(long featureID, int *errorCode,
                     char *buffer, int bufferLength);
             unsigned char getSerialNumberMaximumLength(long featureID, int *errorCode);
+            
+            /* Get one or more firmware version features */
+            int getNumberOfFirmwareVersionFeatures();
+            int getFirmwareVersionFeatures(long *buffer, int maxFeatures);
+            int getFirmwareVersion(long featureID, int *errorCode,
+                    char *buffer, int bufferLength);
+            unsigned char getFirmwareVersionMaximumLength(long featureID, int *errorCode);
 
             /* Get one or more spectrometer acquisition features */
             int getNumberOfSpectrometerFeatures();
@@ -389,6 +397,7 @@ namespace seabreeze {
             std::vector<AcquisitionDelayFeatureAdapter *> acquisitionDelayFeatures;
             std::vector<gpioFeatureAdapter *> gpioFeatures;
             std::vector<I2CMasterFeatureAdapter *> i2cMasterFeatures;
+            std::vector<FirmwareVersionFeatureAdapter *> firmwareVersionFeatures;
             
             RawUSBBusAccessFeatureAdapter *getRawUSBBusAccessFeatureByID(long featureID);
             SerialNumberFeatureAdapter *getSerialNumberFeatureByID(long featureID);
@@ -419,6 +428,7 @@ namespace seabreeze {
             AcquisitionDelayFeatureAdapter *getAcquisitionDelayFeatureByID(long featureID);
             gpioFeatureAdapter *getGPIOFeatureByID(long featureID);
             I2CMasterFeatureAdapter *getI2CMasterFeatureByID(long featureID);
+            FirmwareVersionFeatureAdapter *getFirmwareVersionFeatureByID(long featureID);
         };
     }
 }

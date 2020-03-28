@@ -26,6 +26,7 @@ set(COMMON_SOURCE_FILES
         include/api/seabreezeapi/FeatureAdapterInterface.h
         include/api/seabreezeapi/FeatureAdapterTemplate.h
         include/api/seabreezeapi/FeatureFamilies.h
+        include/api/seabreezeapi/FirmwareVersionFeatureAdapter.h
         include/api/seabreezeapi/gpioFeatureAdapter.h
         include/api/seabreezeapi/I2CMasterFeatureAdapter.h
         include/api/seabreezeapi/IntrospectionFeatureAdapter.h
@@ -205,6 +206,8 @@ set(COMMON_SOURCE_FILES
         include/vendors/OceanOptics/features/fast_buffer/FastBufferFeatureBase.h
         include/vendors/OceanOptics/features/fast_buffer/FastBufferFeatureInterface.h
         include/vendors/OceanOptics/features/fast_buffer/FlameXFastBufferFeature.h
+        include/vendors/OceanOptics/features/firmware_version/FirmwareVersionFeatureInterface.h
+        include/vendors/OceanOptics/features/fpga_register/FPGAFirmwareVersionFeature.h
         include/vendors/OceanOptics/features/fpga_register/FPGARegisterFeature.h
         include/vendors/OceanOptics/features/fpga_register/FPGARegisterFeatureInterface.h
         include/vendors/OceanOptics/features/gpio/gpioFeature.h
@@ -532,6 +535,7 @@ set(COMMON_SOURCE_FILES
         src/api/seabreezeapi/EthernetConfigurationFeatureAdapter.cpp
         src/api/seabreezeapi/FastBufferFeatureAdapter.cpp
         src/api/seabreezeapi/FeatureFamilies.cpp
+        src/api/seabreezeapi/FirmwareVersionFeatureAdapter.cpp
         src/api/seabreezeapi/gpioFeatureAdapter.cpp
         src/api/seabreezeapi/I2CMasterFeatureAdapter.cpp
         src/api/seabreezeapi/IntrospectionFeatureAdapter.cpp
@@ -694,6 +698,7 @@ set(COMMON_SOURCE_FILES
         src/vendors/OceanOptics/features/ethernet_configuration/EthernetConfigurationFeature.cpp
         src/vendors/OceanOptics/features/fast_buffer/FastBufferFeatureBase.cpp
         src/vendors/OceanOptics/features/fast_buffer/FlameXFastBufferFeature.cpp
+        src/vendors/OceanOptics/features/fpga_register/FPGAFirmwareVersionFeature.cpp
         src/vendors/OceanOptics/features/fpga_register/FPGARegisterFeature.cpp
         src/vendors/OceanOptics/features/gpio/gpioFeature.cpp
         src/vendors/OceanOptics/features/i2c_master/i2cFeature.cpp

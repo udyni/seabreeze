@@ -133,6 +133,12 @@ public:
     virtual int getSerialNumber(long deviceID, long featureID, int *errorCode, char *buffer, int bufferLength) = 0;
     virtual unsigned char getSerialNumberMaximumLength(long deviceID, long featureID, int *errorCode) = 0;
 
+    /* Firmware version capabilities */
+    virtual int getNumberOfFirmwareVersionFeatures(long deviceID, int *errorCode) = 0;
+    virtual int getFirmwareVersionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
+    virtual int getFirmwareVersion(long deviceID, long featureID, int *errorCode, char *buffer, int bufferLength) = 0;
+    virtual unsigned char getFirmwareVersionMaximumLength(long deviceID, long featureID, int *errorCode) = 0;
+
     /* Spectrometer capabilities */
     virtual int getNumberOfSpectrometerFeatures(long id, int *errorCode) = 0;
     virtual int getSpectrometerFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;

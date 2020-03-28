@@ -128,13 +128,13 @@ namespace seabreeze {
             RevisionFeatureFamily();
             virtual ~RevisionFeatureFamily();
         };
-        
+
         class OpticalBenchFeatureFamily : public FeatureFamily {
         public:
             OpticalBenchFeatureFamily();
             virtual ~OpticalBenchFeatureFamily();
         };
-        
+
         class SpectrumProcessingFeatureFamily : public FeatureFamily {
         public:
             SpectrumProcessingFeatureFamily();
@@ -146,13 +146,13 @@ namespace seabreeze {
             StrayLightCoeffsFeatureFamily();
             virtual ~StrayLightCoeffsFeatureFamily();
         };
-        
+
         class RawUSBBusAccessFeatureFamily : public FeatureFamily {
         public:
             RawUSBBusAccessFeatureFamily();
             virtual ~RawUSBBusAccessFeatureFamily();
         };
-        
+
         class DataBufferFeatureFamily : public FeatureFamily {
         public:
             DataBufferFeatureFamily();
@@ -183,7 +183,7 @@ namespace seabreeze {
             EthernetConfigurationFeatureFamily();
             virtual ~EthernetConfigurationFeatureFamily();
         };
-        
+
         class MulticastFeatureFamily : public FeatureFamily {
         public:
             MulticastFeatureFamily();
@@ -195,7 +195,7 @@ namespace seabreeze {
             IPv4FeatureFamily();
             virtual ~IPv4FeatureFamily();
         };
-        
+
         class WifiConfigurationFeatureFamily : public FeatureFamily {
         public:
             WifiConfigurationFeatureFamily();
@@ -226,7 +226,12 @@ namespace seabreeze {
             virtual ~I2CMasterFeatureFamily();
         };
 
-        
+        class FirmwareVersionFeatureFamily : public FeatureFamily {
+        public:
+            FirmwareVersionFeatureFamily();
+            virtual ~FirmwareVersionFeatureFamily();
+        };
+
         class FeatureFamilies {
         public:
             const UndefinedFeatureFamily UNDEFINED;
@@ -262,11 +267,11 @@ namespace seabreeze {
             const IPv4FeatureFamily IPV4_ADDRESS;
             const MulticastFeatureFamily IPV4_MULTICAST;
             //const NetworkServicesFeatureFamily NETWORK_SERVICES;
-            //const    DeviceIdentificationFeatureFamily DEVICE_IDENTIFICATION;
+            //const DeviceIdentificationFeatureFamily DEVICE_IDENTIFICATION;
             //const DeviceTestFeatureFamily DEVICE_TEST;
             const GPIOFeatureFamily GENERAL_PURPOSE_INPUT_OUTPUT;
             const I2CMasterFeatureFamily I2C_MASTER;
-
+            const FirmwareVersionFeatureFamily FIRMWARE_VERSION;
 
             FeatureFamilies();
             ~FeatureFamilies();
@@ -276,4 +281,3 @@ namespace seabreeze {
 }
 
 #endif
-

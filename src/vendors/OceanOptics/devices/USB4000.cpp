@@ -48,6 +48,7 @@
 #include "vendors/OceanOptics/features/irradcal/IrradCalFeature.h"
 #include "vendors/OceanOptics/features/raw_bus_access/RawUSBBusAccessFeature.h"
 #include "vendors/OceanOptics/features/temperature/TemperatureFeature.h"
+#include "vendors/OceanOptics/features/fpga_register/FPGAFirmwareVersionFeature.h"
 
 using namespace seabreeze;
 using namespace seabreeze::ooiProtocol;
@@ -79,6 +80,7 @@ USB4000::USB4000() {
     this->features.push_back(new USB4000SpectrometerFeature(saturation));
     this->features.push_back(new SerialNumberEEPROMSlotFeature());
     this->features.push_back(new EEPROMSlotFeature(17));
+    this->features.push_back(new FPGAFirmwareVersionFeature());
 
     vector<ProtocolHelper *> strobeLampHelpers;
     strobeLampHelpers.push_back(new OOIStrobeLampProtocol());

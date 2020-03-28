@@ -450,6 +450,56 @@ unsigned char SeaBreezeAPI_Impl::getSerialNumberMaximumLength(long deviceID, lon
     return adapter->getSerialNumberMaximumLength(featureID, errorCode);
 }
 
+
+/**************************************************************************************/
+//  Firmware Version Features for the SeaBreeze API class
+/**************************************************************************************/
+
+int SeaBreezeAPI_Impl::getNumberOfFirmwareVersionFeatures(long deviceID, int *errorCode) {
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if(NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
+
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getNumberOfFirmwareVersionFeatures();
+}
+
+int SeaBreezeAPI_Impl::getFirmwareVersionFeatures(long deviceID, int *errorCode,
+            long *buffer, unsigned int maxLength) {
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if(NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
+
+    SET_ERROR_CODE(ERROR_SUCCESS);
+    return adapter->getFirmwareVersionFeatures(buffer, maxLength);
+}
+
+int SeaBreezeAPI_Impl::getFirmwareVersion(long deviceID, long featureID, int *errorCode,
+            char *buffer, int bufferLength) {
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if(NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
+
+    return adapter->getFirmwareVersion(featureID, errorCode, buffer, bufferLength);
+}
+
+unsigned char SeaBreezeAPI_Impl::getFirmwareVersionMaximumLength(long deviceID, long featureID, int *errorCode) {
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if(NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+        return 0;
+    }
+
+    return adapter->getFirmwareVersionMaximumLength(featureID, errorCode);
+}
+
+
 /**************************************************************************************/
 //  Spectrometer Features for the SeaBreeze API class
 /**************************************************************************************/
