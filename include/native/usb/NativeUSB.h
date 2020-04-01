@@ -44,7 +44,7 @@ extern "C" {
 #define OPEN_OK                  0
 #define NO_DEVICE_FOUND         -1
 #define NO_DEVICE_MATCH         -2
-#define CLAIM_INTERFACE_FAILED     -3
+#define CLAIM_INTERFACE_FAILED  -3
 #define CLOSE_OK                 0
 #define CLOSE_ERROR             -1
 #define WRITE_FAILED            -1

@@ -1108,7 +1108,7 @@ elseif(UNIX)
 
 
     add_library(SeaBreeze SHARED ${COMMON_SOURCE_FILES} ${PLATFORM_SOURCE_FILES})
-    target_link_libraries(SeaBreeze usb)
+    target_link_libraries(SeaBreeze usb-1.0)
 
     # build test applicaitons against the seabreeze api
     message("Building api test")

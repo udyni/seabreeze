@@ -32,16 +32,17 @@
  *******************************************************/
 
 #include "common/globals.h"
-#include <usb.h>
+#include <libusb-1.0/libusb.h>
 #include <errno.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdio.h>  // for perror()
 #include "native/usb/NativeUSB.h"
 #include "api/seabreezeapi/SeaBreezeAPIConstants.h"
 
 /* Definitions and macros */
 #define MAX_USB_DEVICES             127
-#define BULK_TIMEOUT                1000000000 /* milliseconds */
+#define DEFAULT_TIMEOUT               0 /* milliseconds */
 /* Tell gcc not to warn about a particular
  * variable being unused.  This is useful for function
  * parameters that are required by an interface prototype, but not
@@ -54,19 +55,18 @@
 /* struct definitions */
 typedef struct {
     long deviceID;  /* Unique ID for device.  Assigned by this driver */
-    struct usb_dev_handle *dev;
+    int interface;  /* Interface number, needed to release it on close */
+    libusb_device_handle *dev;
 } __usb_interface_t;
 
 typedef struct {
-    long deviceID;  /* Unique ID for device.  Assigned by this driver. */
+    long deviceID;                /* Unique ID for device.  Assigned by this driver. */
     __usb_interface_t *handle;    /* Pointer to USB interface instance */
-    /* These paths could probably be made dynamic if they occupy too much space */
-    char bus_location[PATH_MAX + 1];       /* effective bus directory */
-    char device_location[PATH_MAX + 1];    /* Location of device relative to bus */
+    libusb_device *device;        /* Device */
     unsigned short vendorID;
     unsigned short productID;
-    unsigned char valid;    /* Whether this struct is valid */
-    unsigned char mark;     /* Used to determine if device is still present */
+    unsigned char valid;          /* Whether this struct is valid */
+    unsigned char mark;           /* Used to determine if device is still present */
 } __device_instance_t;
 
 
@@ -76,18 +76,15 @@ static int __enumerated_device_count = 0;   /* To keep linear searches short */
 static long __last_assigned_deviceID = 0;   /* To keep device IDs unique */
 
 /**
- * Track whether usb_init() has been called.  If this is not called before other
- * calls are made, bad things may happen.
+ * Global USB context (should be initialized before any call is done)
  */
-static int __init_called = 0;
+static libusb_context *__libusb_ctx = NULL;
+static int __libusb_ctx_usage = 0;
 
 /* Function prototypes */
 static __device_instance_t *__lookup_device_instance_by_ID(long deviceID);
-static __device_instance_t *__lookup_device_instance_by_location(const char *bus_location,
-        const char *device_location);
-static __device_instance_t *__add_device_instance(const char *bus_location,
-                                           const char *device_location,
-                                           int vendorID, int productID);
+static __device_instance_t *__lookup_device_instance_by_location(libusb_device* device);
+static __device_instance_t *__add_device_instance(libusb_device *device, int vendorID, int productID);
 static void __purge_unmarked_device_instances(int vendorID, int productID);
 static void __close_and_dealloc_usb_interface(__usb_interface_t *usb);
 static int __probe_devices();
@@ -107,9 +104,7 @@ static __device_instance_t *__lookup_device_instance_by_ID(long deviceID) {
     /* The __enumerated_device_count is used to end the search once it is
      * known that there are no more devices to be found.
      */
-    for(    i = 0, valid = 0;
-            i < MAX_USB_DEVICES && valid < __enumerated_device_count;
-            i++) {
+    for(i = 0, valid = 0; i < MAX_USB_DEVICES && valid < __enumerated_device_count; i++) {
         if(0 != __enumerated_devices[i].valid) {
             if(__enumerated_devices[i].deviceID == deviceID) {
                 return &(__enumerated_devices[i]);
@@ -120,21 +115,16 @@ static __device_instance_t *__lookup_device_instance_by_ID(long deviceID) {
     return NULL;
 }
 
-static __device_instance_t *__lookup_device_instance_by_location(const char *bus_location,
-        const char *device_location) {
+static __device_instance_t *__lookup_device_instance_by_location(libusb_device *device) {
     int i;
     int valid;
     /* The __enumerated_device_count is used to end the search once it is
      * known that there are no more devices to be found.
      */
-    for(    i = 0, valid = 0;
-            i < MAX_USB_DEVICES && valid < __enumerated_device_count;
-            i++) {
+    for(i = 0, valid = 0; i < MAX_USB_DEVICES && valid < __enumerated_device_count; i++) {
         if(0 != __enumerated_devices[i].valid) {
-            if(        0 == strncmp(__enumerated_devices[i].bus_location,
-                                    bus_location, (PATH_MAX + 1))
-                    && 0 == strncmp(__enumerated_devices[i].device_location,
-                                    device_location, (PATH_MAX + 1))) {
+            if(libusb_get_bus_number(__enumerated_devices[i].device) == libusb_get_bus_number(device) &&
+               libusb_get_port_number(__enumerated_devices[i].device) == libusb_get_port_number(device)) {
                 return &(__enumerated_devices[i]);
             }
             valid++;
@@ -143,8 +133,7 @@ static __device_instance_t *__lookup_device_instance_by_location(const char *bus
     return NULL;
 }
 
-static __device_instance_t *__add_device_instance(const char *bus_location,
-        const char *device_location, int vendorID, int productID) {
+static __device_instance_t *__add_device_instance(libusb_device* device, int vendorID, int productID) {
     int i;
 
     /* First need to find an empty slot to store this device descriptor */
@@ -152,8 +141,9 @@ static __device_instance_t *__add_device_instance(const char *bus_location,
         if(0 == __enumerated_devices[i].valid) {
             /* Found an empty slot */
             __enumerated_devices[i].valid = 1;
-            memcpy(__enumerated_devices[i].bus_location, bus_location, PATH_MAX + 1);
-            memcpy(__enumerated_devices[i].device_location, device_location, PATH_MAX + 1);
+            /* Increse reference count on device */
+            libusb_ref_device(device);
+            __enumerated_devices[i].device = device;
             __enumerated_devices[i].deviceID = __last_assigned_deviceID++;
             __enumerated_devices[i].vendorID = vendorID;
             __enumerated_devices[i].productID = productID;
@@ -192,6 +182,8 @@ static void __purge_unmarked_device_instances(int vendorID, int productID) {
                 /* Clean up the device since it seems to have been disconnected */
                 __close_and_dealloc_usb_interface(device->handle);
             }
+            /* Unreference device */
+            libusb_unref_device(device->device);
             /* Wipe the structure completely */
             memset(&__enumerated_devices[i], (int)0, sizeof(__device_instance_t));
         } else {
@@ -214,130 +206,110 @@ static void __close_and_dealloc_usb_interface(__usb_interface_t *usb) {
     }
 
     if(NULL != usb->dev) {
-        // MZ: This call to usb_reset() resolves a reported issue in which Linux apps 
-        // would run correctly once, then require spectrometer to be un/replugged to 
-        // run a second time.
-        usb_reset(usb->dev); 
-
-        usb_close(usb->dev);
+        /* MZ: This call to usb_reset() resolves a reported issue in which Linux apps 
+         * would run correctly once, then require spectrometer to be un/replugged to 
+         * run a second time.
+         */
+        libusb_reset_device(usb->dev);
+        /* Release interface */
+        libusb_release_interface(usb->dev, usb->interface);
+        /* Close device */
+        libusb_close(usb->dev);
     }
 
     free(usb);
 }
 
-// MZ: note: return value ignored!
-// Only reason to call this function is for "side-effects" of
-// calling usb_find_busses() and usb_find_devices()
-// (updates global pointer usb_busses)
-static int  __probe_devices() {
-    /* Local Variables */
-    int bus_count = 0;
-    int device_count = 0;
-
-
-    /* Populate the usb_busses structure (provided by usb.h) */
-    bus_count = usb_find_busses();
-
-    device_count = usb_find_devices();
-
-    if((bus_count > 0) || (device_count > 0)) {
-        /* Device count changed; this could be useful information
-         * for responding to changes in the set of active
-         * devices.
-         */
-        return 1;
-    }
-    return 0;
-}
 
 int
-USBProbeDevices(int vendorID, int productID, unsigned long *output,
-        int max_devices) {
+USBProbeDevices(int vendorID, int productID, unsigned long *output, int max_devices) {
 
     /* Local variables */
-    struct usb_bus *bus = NULL;       /* Temp variable to iterate over buses */
-    struct usb_device *device = NULL; /* Temp variable to iterate over devices */
+    libusb_device **dev_list;
+    struct libusb_device_descriptor desc;
     __device_instance_t *instance;
     int i;
     int matched = 0;
     int valid = 0;
+    int r = 0;
+    int num_dev = 0;
 
-    /* Check if usb_init() has been called since it must be called before
+    /* Check if libusb_init() has been called since it must be called before
      * anything else happens.  This will be checked here, but not in any of
      * the other functions because it only needs to happen once and this function
      * is the entry point into the API.
      */
-    if(0 == __init_called) {
-        usb_init();
-        __init_called = 1;
-    }
-
-    /* Update the tree of known devices.  This does not really care if the state
-     * has changed since the last call (i.e. the return value is ignored) since
-     * the change may not be relevant to the particular VID/PID that this is
-     * looking for this time, and there is a good chance that this function will
-     * be called again in just a moment for another VID/PID.  If this skipped
-     * the update because it detected no change, then probing for one VID/PID
-     * would cause a subsequent one to be skipped incorrectly.
-     */
-    __probe_devices();
-
-    /* A side effect of __probe_devices is to update the tree that is
-     * under the global pointer usb_busses.  Traverse the tree and
-     * update the local cached device table as needed.
-     */
-    for(bus = usb_get_busses(); bus; bus = bus->next) {
-        for(device = bus->devices; device; device = device->next) {
-            if(   (device->descriptor.idVendor == vendorID) &&
-                  (device->descriptor.idProduct == productID)) {
-                /* Got a matching device node.  Determine if this is
-                 * already in the cache.
-                 */
-                instance = __lookup_device_instance_by_location(
-                                bus->dirname, device->filename);
-                if(NULL != instance) {
-                     /* Device is already known, so mark it and keep going */
-                     instance->mark = 1;
-                     continue;
-                }
-
-                /* At this point, we must be dealing with a newly discovered USB
-                 * device that matches the given VID and PID.  It must now be
-                 * cached for use with the open function.  Note that instance was
-                 * checked above so it must be NULL here.
-                 */
-                instance = __add_device_instance(bus->dirname, device->filename,
-                                vendorID, productID);
-                if(NULL == instance) {
-                    /* Could not add the device -- this should not be possible,
-                     * so bail out.
-                     */
-                    return -1;
-                }
-                instance->mark = 1;     /* Preserve this since it was just seen */
-            }
+    if(NULL == __libusb_ctx) {
+        r = libusb_init(&__libusb_ctx);
+        if(r < 0) { // Init failed
+            fprintf(stderr, "libusb_init() failed (Error: %s)", libusb_strerror(r));
+            return -1;
         }
     }
+
+    /* Get device list */
+    num_dev = libusb_get_device_list(__libusb_ctx, &dev_list);
+    if(num_dev < 0) {
+        fprintf(stderr, "libusb_get_device_list() failed (Error: %s)", libusb_strerror(num_dev));
+        return -1;
+    }
+
+    /* Traverse the tree and update the local cached device table as needed. */
+    for(i = 0; i < num_dev; i++) {
+
+        // Clear struct
+        memset(&desc, 0, sizeof(desc));
+
+        // Get device descriptor
+        r = libusb_get_device_descriptor(dev_list[i], &desc);
+        if(r < 0) {
+            /* Error. Skip device */
+            continue;
+        }
+
+        if(desc.idVendor == vendorID && desc.idProduct == productID) {
+            /* Got a matching device node.  Determine if this is
+             * already in the cache.
+             */
+            instance = __lookup_device_instance_by_location(dev_list[i]);
+            if(NULL != instance) {
+                /* Device is already known, so mark it and keep going */
+                instance->mark = 1;
+                continue;
+            }
+
+            /* At this point, we must be dealing with a newly discovered USB
+             * device that matches the given VID and PID.  It must now be
+             * cached for use with the open function.  Note that instance was
+             * checked above so it must be NULL here.
+             */
+            libusb_ref_device(dev_list[i]);
+            instance = __add_device_instance(dev_list[i], vendorID, productID);
+            if(NULL == instance) {
+                /* Could not add the device -- this should not be possible, so bail out. */
+                return -1;
+            }
+            instance->mark = 1;     /* Preserve this since it was just seen */
+        }
+    }
+    /* free the list, unref the devices in it */
+    libusb_free_device_list(dev_list, 1);
 
     /* Purge any devices that are cached but that no longer exist. */
     __purge_unmarked_device_instances(vendorID, productID);
 
     /* Count up how many of this type of device are known */
-    for(    i = 0, matched = 0, valid = 0;
-            i < MAX_USB_DEVICES && valid < __enumerated_device_count;
-            i++) {
+    for(i = 0, matched = 0, valid = 0; i < MAX_USB_DEVICES && valid < __enumerated_device_count; i++) {
         if(0 != __enumerated_devices[i].valid) {
             valid++;
-            if(__enumerated_devices[i].vendorID == vendorID
-                        && __enumerated_devices[i].productID == productID) {
+            if(__enumerated_devices[i].vendorID == vendorID &&
+               __enumerated_devices[i].productID == productID) {
                 matched++;
             }
         }
     }
 
-    for(    i = 0, valid = 0;
-            i < MAX_USB_DEVICES && valid < matched && valid < max_devices;
-            i++) {
+    for(i = 0, valid = 0; i < MAX_USB_DEVICES && valid < matched && valid < max_devices; i++) {
         if(0 != __enumerated_devices[i].valid
                 && __enumerated_devices[i].vendorID == vendorID
                 && __enumerated_devices[i].productID == productID) {
@@ -352,12 +324,13 @@ USBProbeDevices(int vendorID, int productID, unsigned long *output,
 void *
 USBOpen(unsigned long deviceID, int *errorCode) {
     // Local variables
-    struct usb_bus *bus = NULL;       /* Temp variable to iterate over buses */
-    struct usb_device *device = NULL; /* Temp variable to iterate over devices */
-    struct usb_dev_handle *deviceHandle = NULL;
+    struct libusb_device_descriptor desc;
+    struct libusb_config_descriptor *config = NULL;
+    libusb_device_handle *deviceHandle = NULL;
     __usb_interface_t *retval;
     __device_instance_t *instance;
     int interface = 0;
+    int r = 0;
 
     /* Set a default error code in case a premature return is required */
     SET_ERROR_CODE(NO_DEVICE_FOUND);
@@ -370,58 +343,74 @@ USBOpen(unsigned long deviceID, int *errorCode) {
         /* The device ID was not found.  The caller must only provide IDs that
          * have previously been provided by the USBProbeDevices() function.
          */
-        return 0;
+        return NULL;
     }
 
     if(NULL != instance->handle) {
         /* If there is already a device handle then the device has been opened.
          * It is illegal to try to open a device twice without first closing it.
          */
+        return NULL;
+    }
+
+    r = libusb_open(instance->device, &deviceHandle);
+    if(r < 0) {
+        /* Could not open device */
+        fprintf(stderr, "libusb_open() failed (Error: %s)", libusb_strerror(r));
+        return NULL;
+    }
+
+    /* Get device descriptor */
+    r = libusb_get_device_descriptor(instance->device, &desc);
+    if(r < 0) {
+        fprintf(stderr, "libusb_get_device_descriptor() failed (Error: %s)", libusb_strerror(r));
+        return NULL;
+    }
+
+    /* Get configuration descritor */
+    if(desc.bNumConfigurations < 1) {
+        fprintf(stderr, "USB device has no configurations available. Cannot claim interface");
+        return NULL;
+    }
+    if(desc.bNumConfigurations > 1) {
+        fprintf(stderr, "Warning: USB device has more than one configuration available. Claim interface of the first one.");
+    }
+    r = libusb_get_config_descriptor(instance->device, 0, &config);
+    if(r < 0) {
+        fprintf(stderr, "libusb_get_config_descriptor() failed (Error: %s)", libusb_strerror(r));
+        return NULL;
+    }
+    if(config->bNumInterfaces < 1) {
+        fprintf(stderr, "Configuration has no interfaces. Cannot claim.");
+        libusb_free_config_descriptor(config);
+        return NULL;
+    }
+    interface = config->interface[0].altsetting[0].bInterfaceNumber;
+    libusb_free_config_descriptor(config);
+
+    /* Claim interface */
+    r = libusb_claim_interface(deviceHandle, interface);
+    if(r < 0) {
+         /* Could not claim interface */
+        fprintf(stderr, "usb_claim_interface() failed (Error: %s)\nDid you copy os-support/linux/10-oceanoptics.rules to /etc/udev/rules.d?\n", libusb_strerror(r));
+        return NULL;
+    }
+
+    retval = (__usb_interface_t *)calloc(sizeof(__usb_interface_t), 1);
+    if(NULL == retval) {
+        libusb_release_interface(deviceHandle, interface);
+        libusb_close(deviceHandle);
+        /* Could not allocate memory */
+        SET_ERROR_CODE(CLAIM_INTERFACE_FAILED);
         return 0;
     }
+    retval->interface = interface;
+    retval->dev = deviceHandle;
+    retval->deviceID = instance->deviceID;
+    instance->handle = retval;
 
-    for(bus = usb_get_busses(); bus; bus = bus->next) {
-        for(device = bus->devices; device; device = device->next) {
-            if((device->descriptor.idVendor == instance->vendorID)
-                   && (device->descriptor.idProduct == instance->productID)
-                   && (0 == strncmp(bus->dirname, instance->bus_location, PATH_MAX + 1))
-                   && (0 == strncmp(device->filename, instance->device_location, PATH_MAX + 1))) {
-                /* Found the intended device, so try to open it */
-                deviceHandle = usb_open(device);
-                if(NULL == deviceHandle) {
-                    /* Could not open device */
-                    return 0;
-                }
-                interface = device->config->interface->altsetting->bInterfaceNumber;
-                int claim_err = usb_claim_interface(deviceHandle, interface);
-                if(claim_err != 0) {
-                    /* Could not claim interface */
-                    fprintf(stderr, "usb_claim_interface() returned %d - did you copy "
-                                    "os-support/linux/10-oceanoptics.rules to /etc/udev/rules.d?\n", 
-                                    claim_err);
-                    usb_close(deviceHandle);
-                    return 0;
-                }
-
-                retval = (__usb_interface_t *)calloc(sizeof(__usb_interface_t), 1);
-                if(NULL == retval) {
-                    usb_close(deviceHandle);
-                    /* Could not allocate memory */
-                    SET_ERROR_CODE(CLAIM_INTERFACE_FAILED);
-                    return 0;
-                }
-                retval->dev = deviceHandle;
-                retval->deviceID = instance->deviceID;
-                instance->handle = retval;
-
-                SET_ERROR_CODE(OPEN_OK);
-                return (void *)retval;
-            }
-        }
-    }
-
-    /* Failed to match the device */
-    return 0;
+    SET_ERROR_CODE(OPEN_OK);
+    return (void *)retval;
 }
 
 int
@@ -440,10 +429,9 @@ USBWrite(void *deviceHandle, unsigned char endpoint, char *data, int numberOfByt
     /*
      * Perform the write.  This is effectively blocking (the timeout is large)
      */
-    bytesWritten = usb_bulk_write(usb->dev, endpoint, data,
-        numberOfBytes, BULK_TIMEOUT);
-
-    if(bytesWritten < 0 || (0 == bytesWritten && 0 != numberOfBytes)) {
+    retval = libusb_bulk_transfer(usb->dev, endpoint, data, numberOfBytes, &bytesWritten, DEFAULT_TIMEOUT);
+    if(retval < 0 || (0 == bytesWritten && 0 != numberOfBytes)) {
+        /* Transfer error */
         retval = WRITE_FAILED;
     } else {
         retval = bytesWritten;
@@ -467,9 +455,9 @@ USBRead(void *deviceHandle, unsigned char endpoint, char * data, int numberOfByt
     /*
      * Perform the read.  This is effectively blocking (the timeout is large)
      */
-    bytesRead = usb_bulk_read(usb->dev, endpoint, data, numberOfBytes, BULK_TIMEOUT);
+    retval = libusb_bulk_transfer(usb->dev, endpoint, data, numberOfBytes, &bytesRead, DEFAULT_TIMEOUT);
 
-    if(bytesRead < 0 || (0 == bytesRead && 0 != numberOfBytes)) {
+    if(retval < 0 || (0 == bytesRead && 0 != numberOfBytes)) {
         retval = READ_FAILED;
     } else {
         retval = bytesRead;
@@ -508,13 +496,15 @@ void USBClearStall(void *deviceHandle, unsigned char endpoint) {
 
     usb = (__usb_interface_t *)deviceHandle;
 
-    usb_clear_halt(usb->dev, endpoint);
+    libusb_clear_halt(usb->dev, endpoint);
 }
 
 int
 USBGetDeviceDescriptor(void *deviceHandle, struct USBDeviceDescriptor *desc) {
-    struct usb_device_descriptor dd;
+    struct libusb_device_descriptor dd;
     __usb_interface_t *usb;
+    __device_instance_t *device;
+    int r = 0;
 
     if(0 == desc) {
         return -1;
@@ -525,15 +515,18 @@ USBGetDeviceDescriptor(void *deviceHandle, struct USBDeviceDescriptor *desc) {
     }
 
     usb = (__usb_interface_t *)deviceHandle;
+    device = __lookup_device_instance_by_ID(usb->deviceID);
+    if(0 == device) {
+        return -2;
+    }
 
-    dd = usb_device(usb->dev)->descriptor;
+    /* Get device descriptor */
+    r = libusb_get_device_descriptor(device->device, &dd);
+    if(r < 0) {
+        fprintf(stderr, "libusb_get_device_descriptor() failed (Error: %s)", libusb_strerror(r));
+        return -3;
+    }
 
-    /* This does not assume that the USBDeviceDescriptor struct
-     * matches the usb_device_descriptor type, even though they
-     * probably are the same.  This abstraction allows other platform
-     * support (e.g. for Windows) to force changes to the struct
-     * that is returned without breaking anything.
-     */
     desc->bLength = dd.bLength;
     desc->bDescriptorType = dd.bDescriptorType;
     desc->bcdUSB = dd.bcdUSB;
@@ -554,8 +547,12 @@ USBGetDeviceDescriptor(void *deviceHandle, struct USBDeviceDescriptor *desc) {
 
 int
 USBGetInterfaceDescriptor(void *deviceHandle, struct USBInterfaceDescriptor *desc) {
-    struct usb_interface_descriptor *id;
+    struct libusb_device_descriptor dd;
+    struct libusb_config_descriptor *config = NULL;
+    const struct libusb_interface_descriptor *id = NULL;
     __usb_interface_t *usb;
+    __device_instance_t *device;
+    int r = 0;
 
     if(0 == desc) {
         return -1;
@@ -566,9 +563,39 @@ USBGetInterfaceDescriptor(void *deviceHandle, struct USBInterfaceDescriptor *des
     }
 
     usb = (__usb_interface_t *)deviceHandle;
+    device = __lookup_device_instance_by_ID(usb->deviceID);
+    if(0 == device) {
+        return -2;
+    }
+
+    /* Get device descriptor */
+    r = libusb_get_device_descriptor(device->device, &dd);
+    if(r < 0) {
+        fprintf(stderr, "libusb_get_device_descriptor() failed (Error: %s)", libusb_strerror(r));
+        return -3;
+    }
+
+    /* Get configuration descritor */
+    if(dd.bNumConfigurations < 1) {
+        fprintf(stderr, "USB device has no configurations available. Cannot claim interface");
+        return -3;
+    }
+    if(dd.bNumConfigurations > 1) {
+        fprintf(stderr, "Warning: USB device has more than one configuration available. Get descriptor of the first one.");
+    }
+    r = libusb_get_config_descriptor(device->device, 0, &config);
+    if(r < 0) {
+        fprintf(stderr, "libusb_get_config_descriptor() failed (Error: %s)", libusb_strerror(r));
+        return -3;
+    }
+    if(config->bNumInterfaces < 1) {
+        fprintf(stderr, "Configuration has no interfaces. Cannot claim.");
+        libusb_free_config_descriptor(config);
+        return -3;
+    }
+    id = &(config->interface[0].altsetting[0]);
 
     /* FIXME: are there more than one altsetting that should be reachable? */
-    id = usb_device(usb->dev)->config->interface->altsetting;
     desc->bLength = id->bLength;
     desc->bDescriptorType = id->bDescriptorType;
     desc->bInterfaceNumber = id->bInterfaceNumber;
@@ -579,6 +606,8 @@ USBGetInterfaceDescriptor(void *deviceHandle, struct USBInterfaceDescriptor *des
     desc->bInterfaceProtocol = id->bInterfaceProtocol;
     desc->iInterface = id->iInterface;
 
+    libusb_free_config_descriptor(config);
+
     return 0;
 }
 
@@ -586,8 +615,12 @@ USBGetInterfaceDescriptor(void *deviceHandle, struct USBInterfaceDescriptor *des
 int
 USBGetEndpointDescriptor(void *deviceHandle, int endpoint_index,
         struct USBEndpointDescriptor *desc) {
-    struct usb_endpoint_descriptor ed;
+    struct libusb_device_descriptor dd;
+    struct libusb_config_descriptor *config = NULL;
+    const struct libusb_endpoint_descriptor* ed = NULL;
     __usb_interface_t *usb;
+    __device_instance_t *device;
+    int r = 0;
 
     if(0 == desc) {
         return -1;
@@ -598,16 +631,48 @@ USBGetEndpointDescriptor(void *deviceHandle, int endpoint_index,
     }
 
     usb = (__usb_interface_t *)deviceHandle;
+    device = __lookup_device_instance_by_ID(usb->deviceID);
+    if(0 == device) {
+        return -2;
+    }
+
+    /* Get device descriptor */
+    r = libusb_get_device_descriptor(device->device, &dd);
+    if(r < 0) {
+        fprintf(stderr, "libusb_get_device_descriptor() failed (Error: %s)", libusb_strerror(r));
+        return -3;
+    }
+
+    /* Get configuration descritor */
+    if(dd.bNumConfigurations < 1) {
+        fprintf(stderr, "USB device has no configurations available. Cannot claim interface");
+        return -3;
+    }
+    if(dd.bNumConfigurations > 1) {
+        fprintf(stderr, "Warning: USB device has more than one configuration available. Get descriptor of the first one.");
+    }
+    r = libusb_get_config_descriptor(device->device, 0, &config);
+    if(r < 0) {
+        fprintf(stderr, "libusb_get_config_descriptor() failed (Error: %s)", libusb_strerror(r));
+        return -3;
+    }
+    if(config->bNumInterfaces < 1) {
+        fprintf(stderr, "Configuration has no interfaces. Cannot claim.");
+        libusb_free_config_descriptor(config);
+        return -3;
+    }
 
     /* FIXME: Deal with alternate endpoints or interfaces? */
-    ed = usb_device(usb->dev)->config->interface->altsetting->endpoint[endpoint_index];
+    ed = &(config->interface[0].altsetting[0].endpoint[endpoint_index]);
 
-    desc->bLength = ed.bLength;
-    desc->bDescriptorType = ed.bDescriptorType;
-    desc->bEndpointAddress = ed.bEndpointAddress;
-    desc->bmAttributes = ed.bmAttributes;
-    desc->wMaxPacketSize = ed.wMaxPacketSize;
-    desc->bInterval = ed.bInterval;
+    desc->bLength = ed->bLength;
+    desc->bDescriptorType = ed->bDescriptorType;
+    desc->bEndpointAddress = ed->bEndpointAddress;
+    desc->bmAttributes = ed->bmAttributes;
+    desc->wMaxPacketSize = ed->wMaxPacketSize;
+    desc->bInterval = ed->bInterval;
+
+    libusb_free_config_descriptor(config);
 
     return 0;
 }
@@ -628,7 +693,7 @@ USBGetStringDescriptor(void *deviceHandle, unsigned int string_index,
     usb = (__usb_interface_t *)deviceHandle;
 
     /* Obtain the string and return it */
-    length = usb_get_string_simple(usb->dev, string_index, buffer, maxLength);
+    length = libusb_get_string_descriptor_ascii(usb->dev, string_index, buffer, maxLength);
     if(length <= 0) {
         buffer[0] = '\0';
     }

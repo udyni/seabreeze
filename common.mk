@@ -74,11 +74,11 @@ else
     LIBBASENAME = libseabreeze
     LFLAGS_APP += -L/usr/lib \
                   -lstdc++ \
-                  -lusb \
+                  -lusb-1.0 \
                   -lm
     LFLAGS_LIB += -L/usr/lib \
                   -shared \
-                  -lusb
+                  -lusb-1.0
 endif
 
 # enable Logger
