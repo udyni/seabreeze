@@ -686,6 +686,13 @@ int DeviceAdapter::spectrometerGetElectricDarkPixelIndices(
     return feature->getElectricDarkPixelIndices(errorCode, indices, length);
 }
 
+void DeviceAdapter::spectrometerSetUSBTimeout(long featureID, int *errorCode, unsigned int timeout) {
+    SpectrometerFeatureAdapter *feature = getSpectrometerFeatureByID(featureID);
+    if(NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+    }
+    feature->setTimeout(errorCode, timeout);
+}
 
 
 /* Pixel binning feature wrappers */

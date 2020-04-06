@@ -432,8 +432,6 @@ long SpectrometerFeatureAdapter::getMaximumIntegrationTimeMicros(int *errorCode)
     return retval;
 }
 
-
-
 double SpectrometerFeatureAdapter::getMaximumIntensity(int *errorCode) {
     long retval = -1;
 
@@ -445,4 +443,13 @@ double SpectrometerFeatureAdapter::getMaximumIntensity(int *errorCode) {
         return -1;
     }
     return retval;
+}
+
+void SpectrometerFeatureAdapter::setTimeout(int *errorCode, unsigned int timeout) {
+    try {
+        this->feature->setTimeout(*this->bus, timeout);
+        SET_ERROR_CODE(ERROR_SUCCESS);
+    } catch (FeatureException &fe) {
+        SET_ERROR_CODE(ERROR_NOT_IMPLEMENTED);
+    }
 }

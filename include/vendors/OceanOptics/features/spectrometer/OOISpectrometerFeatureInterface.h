@@ -108,6 +108,8 @@ namespace seabreeze {
         virtual unsigned short getNumberOfPixels() const = 0;
         virtual int getMaximumIntensity() const = 0;
 
+        virtual void setTimeout(const Bus &bus, unsigned int timeout) throw (FeatureException) = 0;
+
     };
 
     /* Default implementation for (otherwise) pure virtual destructor */

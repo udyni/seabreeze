@@ -114,6 +114,8 @@ namespace seabreeze {
         virtual unsigned short getNumberOfPixels() const;
         virtual int getMaximumIntensity() const;
 
+        virtual void setTimeout(const Bus &bus, unsigned int timeout) throw (FeatureException);
+
         /* Overriding from Feature */
         virtual FeatureFamily getFeatureFamily();
 

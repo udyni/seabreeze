@@ -93,7 +93,7 @@ Data *Transfer::transfer(TransferHelper *helper) throw (ProtocolException) {
                 /* FIXME: retry, throw exception, something here */
             }
         } catch (BusException &be) {
-            string error("Failed to write to bus.");
+            string error("Failed to read from bus.");
             /* FIXME: previous exception should probably be bundled up into the new exception */
             /* FIXME: there is probably a more descriptive type for this than ProtocolException */
             throw ProtocolException(error);

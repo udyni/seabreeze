@@ -130,6 +130,7 @@ namespace seabreeze {
             int spectrometerGetWavelengths(long spectrometerFeatureID, int *errorCode,double *wavelengths, int length);
             int spectrometerGetElectricDarkPixelCount(long spectrometerFeatureID, int *errorCode);
             int spectrometerGetElectricDarkPixelIndices(long spectrometerFeatureID, int *errorCode, int *indices, int length);
+            void spectrometerSetUSBTimeout(long spectrometerFeatureID, int *errorCode, unsigned int timeout);
 
 
             /* Get one or more pixel binning features */

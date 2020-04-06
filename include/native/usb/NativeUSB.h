@@ -174,6 +174,8 @@ USBClose(void *handle);
 //------------------------------------------------------------------------------
 int
 USBWrite(void *handle, unsigned char endpoint, char * data, int numberOfBytes);
+int
+USBWrite_timeout(void *handle, unsigned char endpoint, char * data, int numberOfBytes, unsigned int timeout);
 
 //------------------------------------------------------------------------------
 // This function reads data from the device attached to the given handle into
@@ -192,6 +194,8 @@ USBWrite(void *handle, unsigned char endpoint, char * data, int numberOfBytes);
 //------------------------------------------------------------------------------
 int
 USBRead(void *handle, unsigned char endpoint, char * data, int numberOfBytes);
+int
+USBRead_timeout(void *handle, unsigned char endpoint, char * data, int numberOfBytes, unsigned int timeout);
 
 //------------------------------------------------------------------------------
 // This function attempts to clear any stall on the given endpoint.

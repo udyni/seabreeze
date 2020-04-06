@@ -39,6 +39,7 @@ USBTransferHelper::USBTransferHelper(USB *usbDescriptor, int sendEndpoint,
     this->usb = usbDescriptor;
     this->sendEndpoint = sendEndpoint;
     this->receiveEndpoint = receiveEndpoint;
+    this->timeout = 0; // NOTE: zero timeout means using the standard USB timeout or no timeout at all (depending on implementation)
 }
 
 USBTransferHelper::USBTransferHelper(USB *usbDescriptor) : TransferHelper() {
@@ -53,7 +54,7 @@ int USBTransferHelper::receive(vector<byte> &buffer, unsigned int length)
         throw (BusTransferException) {
     int retval = 0;
 
-    retval = this->usb->read(this->receiveEndpoint, (void *)&(buffer[0]), length);
+    retval = this->usb->read(this->receiveEndpoint, (void *)&(buffer[0]), length, this->timeout);
 
     if((0 == retval && length > 0) || (retval < 0)) {
         string error("Failed to read any data from USB.");
@@ -67,7 +68,7 @@ int USBTransferHelper::send(const vector<byte> &buffer, unsigned int length) con
         throw (BusTransferException) {
     int retval = 0;
 
-    retval = this->usb->write(this->sendEndpoint, (void *)&(buffer[0]), length);
+    retval = this->usb->write(this->sendEndpoint, (void *)&(buffer[0]), length, this->timeout);
 
     if((0 == retval && length > 0) || (retval < 0)) {
         string error("Failed to write any data to USB.");
@@ -75,4 +76,9 @@ int USBTransferHelper::send(const vector<byte> &buffer, unsigned int length) con
     }
 
     return retval;
+}
+
+
+void USBTransferHelper::setTimeout(unsigned int time) {
+    this->timeout = time;
 }

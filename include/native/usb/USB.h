@@ -45,8 +45,8 @@ namespace seabreeze {
 
         bool open();
         bool close();
-        int write(int endpoint, void *data, unsigned int length_bytes);
-        int read(int endpoint, void *data, unsigned int length_bytes);
+        int write(int endpoint, void *data, unsigned int length_bytes, unsigned int timeout=0);
+        int read(int endpoint, void *data, unsigned int length_bytes, unsigned int timeout=0);
         void clearStall(int endpoint);
 
         static void setVerbose(bool v);

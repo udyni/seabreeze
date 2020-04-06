@@ -157,6 +157,7 @@ public:
     virtual int spectrometerGetWavelengths(long deviceID, long spectrometerFeatureID, int *errorCode, double *wavelengths, int length) = 0;
     virtual int spectrometerGetElectricDarkPixelCount(long deviceID, long spectrometerFeatureID, int *errorCode) = 0;
     virtual int spectrometerGetElectricDarkPixelIndices(long deviceID, long spectrometerFeatureID, int *errorCode, int *indices, int length) = 0;
+    virtual void spectrometerSetUSBTimeout(long deviceID, long spectrometerFeatureID, int *errorCode, unsigned int timeout) = 0;
 
     /* Pixel binning capabilities */
     virtual int getNumberOfPixelBinningFeatures(long id, int *errorCode) = 0;

@@ -55,10 +55,14 @@ namespace seabreeze {
         virtual int send(const std::vector<byte> &buffer, unsigned int length) const
             throw (BusTransferException);
 
+        // Set timeout
+        virtual void setTimeout(unsigned int time);
+
     protected:
         USB *usb;
         int sendEndpoint;
         int receiveEndpoint;
+        unsigned int timeout;
     };
 
 }

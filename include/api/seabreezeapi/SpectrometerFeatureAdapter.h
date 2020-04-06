@@ -71,6 +71,7 @@ namespace seabreeze {
             long getMinimumIntegrationTimeMicros(int *errorCode);
             long getMaximumIntegrationTimeMicros(int *errorCode);
             double getMaximumIntensity(int *errorCode);
+            void setTimeout(int *errorCode, unsigned int timeout);
         };
 
     }

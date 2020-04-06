@@ -32,11 +32,13 @@
 #include "vendors/OceanOptics/features/eeprom_slots/WavelengthEEPROMSlotFeature.h"
 #include "common/exceptions/FeatureProtocolNotFoundException.h"
 #include "common/exceptions/FeatureControlException.h"
+#include "common/buses/usb/USBTransferHelper.h"
 #include "vendors/OceanOptics/protocols/ooi/impls/OOISpectrometerProtocol.h"
+#include "vendors/OceanOptics/protocols/ooi/hints/SpectrumHint.h"
+#include "common/buses/BusFamilies.h"
 #include "api/seabreezeapi/FeatureFamilies.h"
 #include "common/Log.h"
 #include "vendors/OceanOptics/features/spectrometer/OOISpectrometerFeature.h"
-
 #include "vendors/OceanOptics/protocols/obp/exchanges/OBPIntegrationTimeExchange.h"
 #include "vendors/OceanOptics/protocols/obp/exchanges/OBPReadSpectrumWithGainExchange.h"
 #include "vendors/OceanOptics/protocols/obp/exchanges/OBPRequestSpectrumExchange.h"
@@ -422,6 +424,37 @@ int OOISpectrometerFeature::getMaximumIntensity() const {
     return this->maxIntensity;
 }
 
+void OOISpectrometerFeature::setTimeout(const Bus &bus, unsigned int timeout) throw (FeatureException) {
+//     BusFamily bf = bus.getBusFamily();
+//     BusFamilies families;
+//     if(!bf.equals(families.USB))
+//         throw FeatureException("");
+
+    // Create a hints vector
+    vector<ProtocolHint *> hints;
+    hints.push_back(new SpectrumHint());
+
+    // Get transfer helper for spectra (SpectrumHint)
+    TransferHelper* helper;
+    helper = bus.getHelper(hints);
+
+    // Cleanup hints
+    delete hints[0];
+    hints.clear();
+
+    if(NULL == helper) {
+        throw FeatureException("Failed to get spectrum transfer helper");
+    }
+
+    // Dynamic cast to USBTransferHelper to check if it's a USB spectrometer
+    USBTransferHelper* usb_helper = dynamic_cast<USBTransferHelper*>(helper);
+    if(NULL == usb_helper) {
+        throw FeatureException("This is supported only on USB spectrometers");
+    }
+
+    // Set timeout on helper
+    usb_helper->setTimeout(timeout);
+}
 
 FeatureFamily OOISpectrometerFeature::getFeatureFamily() {
     FeatureFamilies families;

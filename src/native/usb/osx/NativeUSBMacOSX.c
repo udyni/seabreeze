@@ -794,6 +794,11 @@ USBClose(void *deviceHandle) {
 }
 
 int
+USBWrite_timeout(void *deviceHandle, unsigned char endpoint, char * data, int numberOfBytes, unsigned int timeout) {
+    return USBWrite(deviceHandle, endpoint, data, numberOfBytes);
+}
+
+int
 USBWrite(void *deviceHandle, unsigned char endpoint, char *data, int numberOfBytes) {
     /* Local variables */
     IOReturn flag;
@@ -863,6 +868,11 @@ int __read_from_endpoint(__usb_interface_t *usb, __usb_endpoint_t *endpoint) {
     endpoint->offset = 0;
     
     return bytesRead;
+}
+
+int
+USBRead_timeout(void *deviceHandle, unsigned char endpoint, char * data, int numberOfBytes, unsigned int timeout) {
+    return USBRead(deviceHandle, endpoint, data, numberOfBytes);
 }
 
 int

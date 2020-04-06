@@ -42,7 +42,7 @@
 
 /* Definitions and macros */
 #define MAX_USB_DEVICES             127
-#define DEFAULT_TIMEOUT               0 /* milliseconds */
+#define DEFAULT_TIMEOUT         1000000 /* milliseconds (c.a 16.5 min) */
 /* Tell gcc not to warn about a particular
  * variable being unused.  This is useful for function
  * parameters that are required by an interface prototype, but not
@@ -414,7 +414,7 @@ USBOpen(unsigned long deviceID, int *errorCode) {
 }
 
 int
-USBWrite(void *deviceHandle, unsigned char endpoint, char *data, int numberOfBytes) {
+USBWrite_timeout(void *deviceHandle, unsigned char endpoint, char *data, int numberOfBytes, unsigned int timeout) {
     /* Local variables */
     int retval;
     int bytesWritten;
@@ -429,7 +429,7 @@ USBWrite(void *deviceHandle, unsigned char endpoint, char *data, int numberOfByt
     /*
      * Perform the write.  This is effectively blocking (the timeout is large)
      */
-    retval = libusb_bulk_transfer(usb->dev, endpoint, data, numberOfBytes, &bytesWritten, DEFAULT_TIMEOUT);
+    retval = libusb_bulk_transfer(usb->dev, endpoint, data, numberOfBytes, &bytesWritten, timeout);
     if(retval < 0 || (0 == bytesWritten && 0 != numberOfBytes)) {
         /* Transfer error */
         retval = WRITE_FAILED;
@@ -440,7 +440,12 @@ USBWrite(void *deviceHandle, unsigned char endpoint, char *data, int numberOfByt
 }
 
 int
-USBRead(void *deviceHandle, unsigned char endpoint, char * data, int numberOfBytes) {
+USBWrite(void *deviceHandle, unsigned char endpoint, char *data, int numberOfBytes) {
+    return USBWrite_timeout(deviceHandle, endpoint, data, numberOfBytes, DEFAULT_TIMEOUT);
+}
+
+int
+USBRead_timeout(void *deviceHandle, unsigned char endpoint, char * data, int numberOfBytes, unsigned int timeout) {
     /* Local variables */
     int retval;
     int bytesRead;
@@ -455,7 +460,7 @@ USBRead(void *deviceHandle, unsigned char endpoint, char * data, int numberOfByt
     /*
      * Perform the read.  This is effectively blocking (the timeout is large)
      */
-    retval = libusb_bulk_transfer(usb->dev, endpoint, data, numberOfBytes, &bytesRead, DEFAULT_TIMEOUT);
+    retval = libusb_bulk_transfer(usb->dev, endpoint, data, numberOfBytes, &bytesRead, timeout);
 
     if(retval < 0 || (0 == bytesRead && 0 != numberOfBytes)) {
         retval = READ_FAILED;
@@ -463,6 +468,11 @@ USBRead(void *deviceHandle, unsigned char endpoint, char * data, int numberOfByt
         retval = bytesRead;
     }
     return retval;
+}
+
+int
+USBRead(void *deviceHandle, unsigned char endpoint, char * data, int numberOfBytes) {
+    return USBRead_timeout(deviceHandle, endpoint, data, numberOfBytes, DEFAULT_TIMEOUT);
 }
 
 int

@@ -100,7 +100,7 @@ bool USB::close() {
     return retval;
 }
 
-int USB::write(int endpoint, void *data, unsigned int length_bytes) {
+int USB::write(int endpoint, void *data, unsigned int length_bytes, unsigned int timeout) {
 
     int flag = 0;
 
@@ -117,7 +117,11 @@ int USB::write(int endpoint, void *data, unsigned int length_bytes) {
         return -1;
     }
 
-    flag = USBWrite(this->descriptor, (unsigned char)endpoint, (char *)data, (int)length_bytes);
+    if(timeout) {
+        flag = USBWrite_timeout(this->descriptor, (unsigned char)endpoint, (char *)data, (int)length_bytes, timeout);
+    } else {
+        flag = USBWrite(this->descriptor, (unsigned char)endpoint, (char *)data, (int)length_bytes);
+    }
 
     if(flag < 0) {
         /* FIXME: throw an exception here */
@@ -135,7 +139,7 @@ int USB::write(int endpoint, void *data, unsigned int length_bytes) {
     return flag;
 }
 
-int USB::read(int endpoint, void *data, unsigned int length_bytes) {
+int USB::read(int endpoint, void *data, unsigned int length_bytes, unsigned int timeout) {
     int flag = 0;
 
     if(true == this->verbose) {
@@ -150,8 +154,11 @@ int USB::read(int endpoint, void *data, unsigned int length_bytes) {
         return -1;
     }
 
-    flag = USBRead(this->descriptor, (unsigned char)endpoint, (char *)data, (int)length_bytes);
-
+    if(timeout) {
+        flag = USBRead_timeout(this->descriptor, (unsigned char)endpoint, (char *)data, (int)length_bytes, timeout);
+    } else {
+        flag = USBRead(this->descriptor, (unsigned char)endpoint, (char *)data, (int)length_bytes);
+    }
     if(flag < 0) {
         /* FIXME: throw an exception here */
         if(true == this->verbose) {

@@ -707,6 +707,15 @@ int SeaBreezeAPI_Impl::spectrometerGetElectricDarkPixelIndices(long deviceID,
                 indices, length);
 }
 
+void SeaBreezeAPI_Impl::spectrometerSetUSBTimeout(long deviceID,
+        long featureID, int *errorCode, unsigned int timeout) {
+    DeviceAdapter *adapter = getDeviceByID(deviceID);
+    if(NULL == adapter) {
+        SET_ERROR_CODE(ERROR_NO_DEVICE);
+    }
+    adapter->spectrometerSetUSBTimeout(featureID, errorCode, timeout);
+}
+
 /**************************************************************************************/
 //  Pixel binning features for the SeaBreeze API class
 /**************************************************************************************/

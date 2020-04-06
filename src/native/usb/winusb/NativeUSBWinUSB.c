@@ -356,6 +356,11 @@ USBClose(void *deviceHandle) {
 }
 
 int
+USBWrite_timeout(void *deviceHandle, unsigned char endpoint, char * data, int numberOfBytes, unsigned int timeout) {
+    return USBWrite(deviceHandle, endpoint, data, numberOfBytes);
+}
+
+int
 USBWrite(void *deviceHandle, unsigned char endpoint, char * data, int numberOfBytes) {
     /* Local variables */
     long transferred = 0;
@@ -371,6 +376,11 @@ USBWrite(void *deviceHandle, unsigned char endpoint, char * data, int numberOfBy
         &transferred, NULL);
 
     return (int)transferred;
+}
+
+int
+USBRead_timeout(void *deviceHandle, unsigned char endpoint, char * data, int numberOfBytes, unsigned int timeout) {
+    return USBRead(deviceHandle, endpoint, data, numberOfBytes);
 }
 
 int

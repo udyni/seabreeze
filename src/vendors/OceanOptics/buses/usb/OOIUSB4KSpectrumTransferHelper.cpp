@@ -74,13 +74,21 @@ int OOIUSB4KSpectrumTransferHelper::receive(vector<byte> &buffer,
 
     /* Read the first 2048 bytes from the secondary high speed endpoint. */
     /* This may throw a BusTransferException. */
-    flag = this->usb->read(this->secondaryHighSpeedEP, &(this->secondaryReadBuffer[0]), SECONDARY_READ_LENGTH);
+    flag = this->usb->read(this->secondaryHighSpeedEP, &(this->secondaryReadBuffer[0]), SECONDARY_READ_LENGTH, this->timeout);
+    if(flag <= 0) {
+        string error("Failed to read any data from USB.");
+        throw BusTransferException(error);
+    }
     if(flag >= 0) {
         bytesRead = flag;
     }
     /* Read the remainder from the primary high speed endpoint. */
     /* This may throw a BusTransferException. */
-    flag = this->usb->read(this->receiveEndpoint, &(primaryReadBuffer[0]), primaryReadLength);
+    flag = this->usb->read(this->receiveEndpoint, &(primaryReadBuffer[0]), primaryReadLength, this->timeout);
+    if(flag <= 0) {
+        string error("Failed to read part of the data from USB.");
+        throw BusTransferException(error);
+    }
     if(flag >= 0) {
         bytesRead += flag;
     }
