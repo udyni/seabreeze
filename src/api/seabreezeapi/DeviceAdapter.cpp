@@ -109,11 +109,12 @@ DeviceAdapter::~DeviceAdapter() {
     __delete_feature_adapters<gpioFeatureAdapter>(gpioFeatures);
     __delete_feature_adapters<I2CMasterFeatureAdapter>(i2cMasterFeatures);
     __delete_feature_adapters<FirmwareVersionFeatureAdapter>(firmwareVersionFeatures);
+    __delete_feature_adapters<FPGARegisterFeatureAdapter>(fpgaRegisterFeatures);
 
     delete this->device;
 }
 
-template <class T, class U> void __create_feature_adapters(Device *device, vector<U *> &adapters, Bus *bus, const FeatureFamily &family) 
+template <class T, class U> void __create_feature_adapters(Device *device, vector<U *> &adapters, Bus *bus, const FeatureFamily &family)
 {
 
     unsigned short i;
@@ -165,7 +166,7 @@ int DeviceAdapter::open(int *errorCode) {
      * set of Feature instances based on what is detected.
      */
     this->device->initialize(*bus);
-    
+
     /* Create raw usb access feature list */
     __create_feature_adapters<RawUSBBusAccessFeatureInterface,
                     RawUSBBusAccessFeatureAdapter>(this->device,
@@ -265,17 +266,17 @@ int DeviceAdapter::open(int *errorCode) {
     __create_feature_adapters<RevisionFeatureInterface,
                     RevisionFeatureAdapter>(this->device,
             revisionFeatures, bus, featureFamilies.REVISION);
-             
+
      /* Create optical bench feature list */
     __create_feature_adapters<OpticalBenchFeatureInterface,
                     OpticalBenchFeatureAdapter>(this->device,
             opticalBenchFeatures, bus, featureFamilies.OPTICAL_BENCH);
-            
+
      /* Create spectrum processing feature list */
     __create_feature_adapters<SpectrumProcessingFeatureInterface,
                     SpectrumProcessingFeatureAdapter>(this->device,
             spectrumProcessingFeatures, bus, featureFamilies.SPECTRUM_PROCESSING);
-                       
+
     /* Create stray light coefficients feature list */
     __create_feature_adapters<StrayLightCoeffsFeatureInterface,
                     StrayLightCoeffsFeatureAdapter>(this->device,
@@ -315,6 +316,11 @@ int DeviceAdapter::open(int *errorCode) {
     __create_feature_adapters<FirmwareVersionFeatureInterface,
                     FirmwareVersionFeatureAdapter>(this->device,
             firmwareVersionFeatures, bus, featureFamilies.FIRMWARE_VERSION);
+
+    /* Create firmware version feature list */
+    __create_feature_adapters<FPGARegisterFeatureInterface,
+                    FPGARegisterFeatureAdapter>(this->device,
+            fpgaRegisterFeatures, bus, featureFamilies.FPGA_REGISTER);
 
     SET_ERROR_CODE(ERROR_SUCCESS);
     return 0;
@@ -361,7 +367,6 @@ int DeviceAdapter::getDeviceType(int *errorCode, char *buffer, unsigned int maxL
     return i;
 }
 
-
 template <class T> int __getFeatureIDs(vector<T *> features, long *buffer, unsigned int max) {
     unsigned int i;
 
@@ -387,7 +392,7 @@ template <class T> T *__getFeatureByID(vector<T *> features, long id) {
 
 /* returns a USB endpoint from the device as specified by the enumerator endpointType */
 /*  if the endpoint type is not supported, a 0 is returned. */
-unsigned char DeviceAdapter::getDeviceEndpoint(int *errorCode, usbEndpointType endpointType) 
+unsigned char DeviceAdapter::getDeviceEndpoint(int *errorCode, usbEndpointType endpointType)
 {
     return this->device->getEndpoint(errorCode, endpointType);
 }
@@ -406,7 +411,6 @@ RawUSBBusAccessFeatureAdapter *DeviceAdapter::getRawUSBBusAccessFeatureByID(long
     return __getFeatureByID<RawUSBBusAccessFeatureAdapter>(
                 rawUSBBusAccessFeatures, featureID);
 }
-
 
 int DeviceAdapter::rawUSBBusAccessRead(long featureID,
         int *errorCode, unsigned char *buffer, unsigned int bufferLength, unsigned char endpoint) {
@@ -465,43 +469,6 @@ unsigned char DeviceAdapter::getSerialNumberMaximumLength(long featureID, int *e
     }
 
     return feature->getSerialNumberMaximumLength(errorCode);
-}
-
-
-/* Firmware version feature wrappers */
-int DeviceAdapter::getNumberOfFirmwareVersionFeatures() {
-    return (int) this->firmwareVersionFeatures.size();
-}
-
-int DeviceAdapter::getFirmwareVersionFeatures(long *buffer, int maxFeatures) {
-    return __getFeatureIDs<FirmwareVersionFeatureAdapter>(
-                firmwareVersionFeatures, buffer, maxFeatures);
-}
-
-FirmwareVersionFeatureAdapter *DeviceAdapter::getFirmwareVersionFeatureByID(long featureID) {
-    return __getFeatureByID<FirmwareVersionFeatureAdapter>(
-                firmwareVersionFeatures, featureID);
-}
-
-int DeviceAdapter::getFirmwareVersion(long featureID, int *errorCode,
-        char *buffer, int bufferLength) {
-    FirmwareVersionFeatureAdapter *feature = getFirmwareVersionFeatureByID(featureID);
-    if(NULL == feature) {
-        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-        return 0;
-    }
-
-    return feature->getFirmwareVersion(errorCode, buffer, bufferLength);
-}
-
-unsigned char DeviceAdapter::getFirmwareVersionMaximumLength(long featureID, int *errorCode) {
-    FirmwareVersionFeatureAdapter *feature = getFirmwareVersionFeatureByID(featureID);
-    if(NULL == feature) {
-        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
-        return 0;
-    }
-
-    return feature->getFirmwareVersionMaximumLength(errorCode);
 }
 
 
@@ -607,7 +574,6 @@ int DeviceAdapter::spectrometerGetFastBufferSpectrum(long featureID,
 
     return feature->getFastBufferSpectrum(errorCode, buffer, bufferLength, numberOfSamplesToRetrieve);
 }
-
 
 void DeviceAdapter::spectrometerFastBufferSpectrumRequest(long featureID, int *errorCode, unsigned int numberOfSamplesToRetrieve)
 {
@@ -765,6 +731,7 @@ unsigned char DeviceAdapter::binningGetMaxPixelBinningFactor(long featureID, int
     return feature->getMaxPixelBinningFactor(errorCode);
 }
 
+
 /* TEC feature wrappers */
 int DeviceAdapter::getNumberOfThermoElectricFeatures() {
     return (int) this->tecFeatures.size();
@@ -810,6 +777,7 @@ void DeviceAdapter::tecSetEnable(long featureID, int *errorCode, bool tecEnable)
 
     return feature->setTECEnable(errorCode, tecEnable);
 }
+
 
 /* Irradiance calibration feature wrappers */
 int DeviceAdapter::getNumberOfIrradCalFeatures() {
@@ -879,27 +847,28 @@ void DeviceAdapter::irradCalibrationWriteCollectionArea(long featureID,
     return feature->writeIrradCollectionArea(errorCode, area);
 }
 
+
 /* Ethernet Configuration feature wrappers */
-int DeviceAdapter::getNumberOfEthernetConfigurationFeatures() 
+int DeviceAdapter::getNumberOfEthernetConfigurationFeatures()
 {
     return (int) this->ethernetConfigurationFeatures.size();
 }
 
-int DeviceAdapter::getEthernetConfigurationFeatures(long *buffer, int maxFeatures) 
+int DeviceAdapter::getEthernetConfigurationFeatures(long *buffer, int maxFeatures)
 {
     return __getFeatureIDs<EthernetConfigurationFeatureAdapter>(ethernetConfigurationFeatures, buffer, maxFeatures);
 }
 
-EthernetConfigurationFeatureAdapter *DeviceAdapter::getEthernetConfigurationFeatureByID(long featureID) 
+EthernetConfigurationFeatureAdapter *DeviceAdapter::getEthernetConfigurationFeatureByID(long featureID)
 {
     return __getFeatureByID<EthernetConfigurationFeatureAdapter>(ethernetConfigurationFeatures, featureID);
 }
 
 
-void DeviceAdapter::ethernetConfiguration_Get_MAC_Address(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char (*macAddress)[6]) 
+void DeviceAdapter::ethernetConfiguration_Get_MAC_Address(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char (*macAddress)[6])
 {
     EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
-    if (NULL == feature) 
+    if (NULL == feature)
     {
         SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
         return;
@@ -919,7 +888,7 @@ void DeviceAdapter::ethernetConfiguration_Set_MAC_Address(long featureID, int *e
     feature->set_MAC_Address(errorCode, interfaceIndex, macAddress);
 }
 
-unsigned char DeviceAdapter::ethernetConfiguration_Get_GbE_Enable_Status(long featureID, int *errorCode, unsigned char interfaceIndex) 
+unsigned char DeviceAdapter::ethernetConfiguration_Get_GbE_Enable_Status(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
     EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
     if (NULL == feature) {
@@ -930,7 +899,7 @@ unsigned char DeviceAdapter::ethernetConfiguration_Get_GbE_Enable_Status(long fe
     return feature->get_GbE_Enable_Status(errorCode, interfaceIndex);
 }
 
-void DeviceAdapter::ethernetConfiguration_Set_GbE_Enable_Status(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState) 
+void DeviceAdapter::ethernetConfiguration_Set_GbE_Enable_Status(long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState)
 {
     EthernetConfigurationFeatureAdapter *feature = getEthernetConfigurationFeatureByID(featureID);
     if (NULL == feature) {
@@ -940,9 +909,6 @@ void DeviceAdapter::ethernetConfiguration_Set_GbE_Enable_Status(long featureID, 
 
     feature->set_GbE_Enable_Status(errorCode, interfaceIndex, enableState);
 }
-
-
-
 
 
 /* gpio feature wrappers */
@@ -1108,8 +1074,6 @@ void DeviceAdapter::gpioExtensionSetValue(long featureID, int *errorCode, unsign
 }
 
 
-
-
 /* Multicast feature wrappers */
 int DeviceAdapter::getNumberOfMulticastFeatures()
 {
@@ -1149,6 +1113,7 @@ void DeviceAdapter::setMulticastGroupAddress(long featureID, int *errorCode, uns
     feature->setGroupAddress(errorCode, interfaceIndex, groupAddress);
 }
 #endif
+
 unsigned char DeviceAdapter::getMulticastEnableState(long featureID, int *errorCode, unsigned char interfaceIndex)
 {
     MulticastFeatureAdapter *feature = getMulticastFeatureByID(featureID);
@@ -1170,13 +1135,6 @@ void DeviceAdapter::setMulticastEnableState(long featureID, int *errorCode, unsi
 
     feature->setEnableState(errorCode, interfaceIndex, enableState);
 }
-
-
-
-
-
-
-
 
 
 /* IPv4 feature wrappers */
@@ -1284,17 +1242,6 @@ void DeviceAdapter::delete_IPv4_Address(long featureID, int *errorCode, unsigned
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 /* Wifi Configuration feature wrappers */
 int DeviceAdapter::getNumberOfWifiConfigurationFeatures()
 {
@@ -1388,6 +1335,7 @@ void DeviceAdapter::wifiConfigurationSetPassPhrase(long featureID, int *errorCod
     feature->setPassPhrase(errorCode, interfaceIndex, passPhrase, passPhraseLength);
 }
 
+
 /* DHCP Server feature wrappers */
 int DeviceAdapter::getNumberOfDHCPServerFeatures()
 {
@@ -1449,9 +1397,6 @@ void DeviceAdapter::dhcpServerSetEnableState(long featureID, int *errorCode, uns
 
     feature->setServerEnableState(errorCode, interfaceIndex, enableState);
 }
-
-
-
 
 
 /* Network Configuration feature wrappers */
@@ -1563,6 +1508,7 @@ int DeviceAdapter::eepromReadSlot(long featureID, int *errorCode, int slotNumber
     return feature->readEEPROMSlot(errorCode, slotNumber, buffer, length);
 }
 
+
 /* Light source feature adapters */
 int DeviceAdapter::getNumberOfLightSourceFeatures() {
     return (int) this->lightSourceFeatures.size();
@@ -1661,6 +1607,7 @@ void DeviceAdapter::lightSourceSetIntensity(long featureID, int *errorCode,
     feature->setLightSourceIntensity(errorCode, lightSourceIndex, intensity);
 }
 
+
 /* Strobe/lamp feature adapters */
 int DeviceAdapter::getNumberOfStrobeLampFeatures() {
     return (int) this->strobeLampFeatures.size();
@@ -1686,6 +1633,7 @@ void DeviceAdapter::lampSetStrobeEnable(long featureID,
 
     feature->setStrobeLampEnable(errorCode, strobeEnable);
 }
+
 
 /* Continuous strobe feature adapters */
 int DeviceAdapter::getNumberOfContinuousStrobeFeatures() {
@@ -1723,6 +1671,7 @@ void DeviceAdapter::continuousStrobeSetEnable(long featureID,
 
     feature->setContinuousStrobeEnable(errorCode, enable);
 }
+
 
 /* Shutter feature wrappers */
 int DeviceAdapter::getNumberOfShutterFeatures() {
@@ -1777,6 +1726,7 @@ int DeviceAdapter::nonlinearityCoeffsGet(long featureID, int *errorCode,
     return feature->readNonlinearityCoeffs(errorCode, buffer, bufferLength);
 }
 
+
 /* Temperature feature wrappers */
 int DeviceAdapter::getNumberOfTemperatureFeatures() {
     return (int) this->temperatureFeatures.size();
@@ -1823,6 +1773,7 @@ int DeviceAdapter::temperatureGetAll(long temperatureFeatureID, int *errorCode,
     return feature->readAllTemperatures(errorCode, buffer, bufferLength);
 }
 
+
 /* Introspection feature wrappers */
 int DeviceAdapter::getNumberOfIntrospectionFeatures() {
     return (int) this->introspectionFeatures.size();
@@ -1848,7 +1799,6 @@ unsigned short DeviceAdapter::introspectionNumberOfPixelsGet(long introspectionF
 
     return feature->getNumberOfPixels(errorCode);
 }
-
 
 int DeviceAdapter::introspectionActivePixelRangesGet(long introspectionFeatureID, int *errorCode, unsigned int *buffer, int bufferLength)
 {
@@ -1918,6 +1868,7 @@ unsigned short int DeviceAdapter::revisionFirmwareGet(long revisionFeatureID, in
 
     return feature->readFirmwareRevision(errorCode);
 }
+
 
 /* Optical Bench feature wrappers */
 int DeviceAdapter::getNumberOfOpticalBenchFeatures() {
@@ -2008,6 +1959,7 @@ int DeviceAdapter::opticalBenchGetGrating(long featureID, int *errorCode,
     return feature->readOpticalBenchGrating(errorCode, buffer, bufferLength);
 }
 
+
 /* Spectrum processing feature wrappers */
 int DeviceAdapter::getNumberOfSpectrumProcessingFeatures() {
     return (int) this->spectrumProcessingFeatures.size();
@@ -2067,6 +2019,7 @@ void DeviceAdapter::spectrumProcessingScansToAverageSet(long featureID, int *err
     feature->writeSpectrumProcessingScansToAverage(errorCode, scansToAverage);
 }
 
+
 /* Stray light coefficients feature wrappers */
 int DeviceAdapter::getNumberOfStrayLightCoeffsFeatures() {
     return (int) this->strayLightFeatures.size();
@@ -2124,7 +2077,7 @@ void DeviceAdapter::dataBufferClear(long featureID, int *errorCode) {
     feature->clearBuffer(errorCode);
 }
 
-void DeviceAdapter::dataBufferRemoveOldestSpectra(long featureID, int *errorCode, unsigned int numberOfSpectra) 
+void DeviceAdapter::dataBufferRemoveOldestSpectra(long featureID, int *errorCode, unsigned int numberOfSpectra)
 {
     DataBufferFeatureAdapter *feature = getDataBufferFeatureByID(featureID);
     if(NULL == feature) {
@@ -2186,6 +2139,7 @@ void DeviceAdapter::dataBufferSetBufferCapacity(long featureID, int *errorCode, 
     feature->setBufferCapacity(errorCode, capacity);
 }
 
+
 /* Fast buffer feature wrappers*/
 
 int DeviceAdapter::getNumberOfFastBufferFeatures() {
@@ -2242,6 +2196,7 @@ void DeviceAdapter::fastBufferSetConsecutiveSampleCount(long featureID, int *err
 
     feature->setConsecutiveSampleCount(errorCode, consecutiveSampleCount);
 }
+
 
 /* Acquisition delay feature wrappers */
 int DeviceAdapter::getNumberOfAcquisitionDelayFeatures() {
@@ -2361,5 +2316,74 @@ unsigned short DeviceAdapter::i2cMasterWriteBus(long featureID, int *errorCode, 
 }
 
 
+/* Firmware version feature wrappers */
+int DeviceAdapter::getNumberOfFirmwareVersionFeatures() {
+    return (int) this->firmwareVersionFeatures.size();
+}
 
+int DeviceAdapter::getFirmwareVersionFeatures(long *buffer, int maxFeatures) {
+    return __getFeatureIDs<FirmwareVersionFeatureAdapter>(
+                firmwareVersionFeatures, buffer, maxFeatures);
+}
+
+FirmwareVersionFeatureAdapter *DeviceAdapter::getFirmwareVersionFeatureByID(long featureID) {
+    return __getFeatureByID<FirmwareVersionFeatureAdapter>(
+                firmwareVersionFeatures, featureID);
+}
+
+int DeviceAdapter::getFirmwareVersion(long featureID, int *errorCode,
+        char *buffer, int bufferLength) {
+    FirmwareVersionFeatureAdapter *feature = getFirmwareVersionFeatureByID(featureID);
+    if(NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
+
+    return feature->getFirmwareVersion(errorCode, buffer, bufferLength);
+}
+
+unsigned char DeviceAdapter::getFirmwareVersionMaximumLength(long featureID, int *errorCode) {
+    FirmwareVersionFeatureAdapter *feature = getFirmwareVersionFeatureByID(featureID);
+    if(NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
+
+    return feature->getFirmwareVersionMaximumLength(errorCode);
+}
+
+
+/* FPGA register feature wrappers */
+int DeviceAdapter::getNumberOfFPGARegisterFeatures() {
+    return (int) this->fpgaRegisterFeatures.size();
+}
+
+int DeviceAdapter::getFPGARegisterFeatures(long *buffer, int maxFeatures) {
+    return __getFeatureIDs<FPGARegisterFeatureAdapter>(
+                fpgaRegisterFeatures, buffer, maxFeatures);
+}
+
+FPGARegisterFeatureAdapter *DeviceAdapter::getFPGARegisterFeatureByID(long featureID) {
+    return __getFeatureByID<FPGARegisterFeatureAdapter>(
+                fpgaRegisterFeatures, featureID);
+}
+
+unsigned int DeviceAdapter::FPGAReadRegister(long featureID, int *errorCode, unsigned char address) {
+    FPGARegisterFeatureAdapter *feature = getFPGARegisterFeatureByID(featureID);
+    if(NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return 0;
+    }
+
+    return feature->readRegister(errorCode, address);
+}
+
+void DeviceAdapter::FPGAWriteRegister(long featureID, int *errorCode, unsigned char address, unsigned int value) {
+    FPGARegisterFeatureAdapter *feature = getFPGARegisterFeatureByID(featureID);
+    if(NULL == feature) {
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);
+        return;
+    }
+    feature->writeRegister(errorCode, address, value);
+}
 

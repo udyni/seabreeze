@@ -114,5 +114,5 @@ unsigned char FPGARegisterFeature::getMajorVersion(const Bus &bus) throw (Featur
 FeatureFamily FPGARegisterFeature::getFeatureFamily() {
     FeatureFamilies families;
 
-    return families.UNDEFINED;  // this is an internal-only feature
+    return families.FPGA_REGISTER;
 }

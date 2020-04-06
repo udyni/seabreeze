@@ -74,6 +74,7 @@
 #define FEATURE_FAMILY_ID_GPIO                      37
 #define FEATURE_FAMILY_ID_I2C_MASTER                38
 #define FEATURE_FAMILY_ID_FIRMWARE_VERSION          39
+#define FEATURE_FAMILY_ID_FPGA_REGISTER             40
 
 using namespace seabreeze;
 using namespace seabreeze::api;
@@ -373,6 +374,14 @@ seabreeze::api::FirmwareVersionFeatureFamily::~FirmwareVersionFeatureFamily() {
 
 }
 
+seabreeze::api::FPGARegisterFeatureFamily::FPGARegisterFeatureFamily()
+    : FeatureFamily("FPGARegister", FEATURE_FAMILY_ID_FPGA_REGISTER) {
+
+}
+
+seabreeze::api::FPGARegisterFeatureFamily::~FPGARegisterFeatureFamily() {
+
+}
 
 vector<FeatureFamily *> seabreeze::api::FeatureFamilies::getAllFeatureFamilies() {
     vector<FeatureFamily *> retval;
@@ -408,6 +417,7 @@ vector<FeatureFamily *> seabreeze::api::FeatureFamilies::getAllFeatureFamilies()
     retval.push_back(new GPIOFeatureFamily());
     retval.push_back(new I2CMasterFeatureFamily());
     retval.push_back(new FirmwareVersionFeatureFamily());
+    retval.push_back(new FPGARegisterFeatureFamily());
 
     return retval;
 }

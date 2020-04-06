@@ -27,6 +27,7 @@ set(COMMON_SOURCE_FILES
         include/api/seabreezeapi/FeatureAdapterTemplate.h
         include/api/seabreezeapi/FeatureFamilies.h
         include/api/seabreezeapi/FirmwareVersionFeatureAdapter.h
+        include/api/seabreezeapi/FPGARegisterFeatureAdapter.h
         include/api/seabreezeapi/gpioFeatureAdapter.h
         include/api/seabreezeapi/I2CMasterFeatureAdapter.h
         include/api/seabreezeapi/IntrospectionFeatureAdapter.h
@@ -536,6 +537,7 @@ set(COMMON_SOURCE_FILES
         src/api/seabreezeapi/FastBufferFeatureAdapter.cpp
         src/api/seabreezeapi/FeatureFamilies.cpp
         src/api/seabreezeapi/FirmwareVersionFeatureAdapter.cpp
+        src/api/seabreezeapi/FPGARegisterFeatureAdapter.cpp
         src/api/seabreezeapi/gpioFeatureAdapter.cpp
         src/api/seabreezeapi/I2CMasterFeatureAdapter.cpp
         src/api/seabreezeapi/IntrospectionFeatureAdapter.cpp

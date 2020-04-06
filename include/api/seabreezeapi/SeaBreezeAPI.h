@@ -71,7 +71,7 @@ public:
      * attempting to find USB devices.
      */
     virtual int probeDevices() = 0;
-    
+
     /**
      * Use the addIPv4DeviceLocation() method to specify that a device may be
      * found on a TCP/IPv4 network on a given port.  Once specified,
@@ -117,7 +117,7 @@ public:
 
     /* Get a string that describes the type of device */
     virtual int getDeviceType(long id, int *errorCode, char *buffer, unsigned int length) = 0;
-    
+
     /* Get the usb endpoint address for a specified type of endpoint */
     virtual unsigned char getDeviceEndpoint(long id, int *error_code, usbEndpointType endpointType) = 0;
 
@@ -126,18 +126,12 @@ public:
     virtual int getRawUSBBusAccessFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
     virtual int rawUSBBusAccessRead(long deviceID, long featureID, int *errorCode, unsigned char *buffer, unsigned int bufferLength, unsigned char endpoint) = 0;
     virtual int rawUSBBusAccessWrite(long deviceID, long featureID, int *errorCode, unsigned char *buffer, unsigned int bufferLength, unsigned char endpoint) = 0;
-    
+
     /* Serial number capabilities */
     virtual int getNumberOfSerialNumberFeatures(long deviceID, int *errorCode) = 0;
     virtual int getSerialNumberFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
     virtual int getSerialNumber(long deviceID, long featureID, int *errorCode, char *buffer, int bufferLength) = 0;
     virtual unsigned char getSerialNumberMaximumLength(long deviceID, long featureID, int *errorCode) = 0;
-
-    /* Firmware version capabilities */
-    virtual int getNumberOfFirmwareVersionFeatures(long deviceID, int *errorCode) = 0;
-    virtual int getFirmwareVersionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
-    virtual int getFirmwareVersion(long deviceID, long featureID, int *errorCode, char *buffer, int bufferLength) = 0;
-    virtual unsigned char getFirmwareVersionMaximumLength(long deviceID, long featureID, int *errorCode) = 0;
 
     /* Spectrometer capabilities */
     virtual int getNumberOfSpectrometerFeatures(long id, int *errorCode) = 0;
@@ -168,7 +162,7 @@ public:
     virtual void binningSetDefaultPixelBinningFactor(long deviceID, long spectrometerFeatureID, int *errorCode) = 0;
     virtual unsigned char binningGetDefaultPixelBinningFactor(long deviceID, long spectrometerFeatureID, int *errorCode) = 0;
     virtual unsigned char binningGetMaxPixelBinningFactor(long deviceID, long spectrometerFeatureID, int *errorCode) = 0;
-        
+
     /* TEC capabilities */
     virtual int getNumberOfThermoElectricFeatures(long deviceID, int *errorCode) = 0;
     virtual int getThermoElectricFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
@@ -192,7 +186,7 @@ public:
     virtual void ethernetConfiguration_Set_MAC_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char macAddress[6]) = 0;
     virtual unsigned char ethernetConfiguration_Get_GbE_Enable_Status(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex) = 0;
     virtual void ethernetConfiguration_Set_GbE_Enable_Status(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char enableState) = 0;
-    
+
     /* Multicast features */
     virtual int getNumberOfMulticastFeatures(long deviceID, int *errorCode) = 0;
     virtual int getMulticastFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
@@ -213,7 +207,7 @@ public:
     virtual void   add_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char IPv4_Address[4], unsigned char netMask) = 0;
     virtual void   delete_IPv4_Address(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char addressIndex) = 0;
 
-    /* DHCP server features */    
+    /* DHCP server features */
     virtual int getNumberOfDHCPServerFeatures(long deviceID, int *errorCode) = 0;
     virtual int getDHCPServerFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
     virtual void dhcpServerGetAddress(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*serverAddress)[4], unsigned char *netMask) = 0;
@@ -319,7 +313,7 @@ public:
     virtual unsigned short int spectrumProcessingScansToAverageGet(long deviceID, long featureID, int *errorCode) = 0;
     virtual void spectrumProcessingBoxcarWidthSet(long deviceID, long featureID, int *errorCode, unsigned char boxcarWidth) = 0;
     virtual void spectrumProcessingScansToAverageSet(long deviceID, long featureID, int *errorCode, unsigned short int scansToAverage) = 0;
- 
+
     /* Revision capabilities */
     virtual int getNumberOfRevisionFeatures(long deviceID, int *errorCode) = 0;
     virtual int getRevisionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
@@ -370,12 +364,24 @@ public:
     virtual unsigned long acquisitionDelayGetDelayMaximumMicroseconds(long deviceID, long featureID, int *errorCode) = 0;
     virtual unsigned long acquisitionDelayGetDelayMinimumMicroseconds(long deviceID, long featureID, int *errorCode) = 0;
 
-    // i2c master features
+    /* i2c master features */
     virtual int getNumberOfI2CMasterFeatures(long deviceID, int *errorCode) = 0;
     virtual int getI2CMasterFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
     virtual unsigned char i2cMasterGetNumberOfBuses(long deviceID, long featureID, int *errorCode) = 0;
     virtual unsigned short i2cMasterReadBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes) = 0;
     virtual unsigned short i2cMasterWriteBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes) = 0;
+
+    /* Firmware version capabilities */
+    virtual int getNumberOfFirmwareVersionFeatures(long deviceID, int *errorCode) = 0;
+    virtual int getFirmwareVersionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
+    virtual int getFirmwareVersion(long deviceID, long featureID, int *errorCode, char *buffer, int bufferLength) = 0;
+    virtual unsigned char getFirmwareVersionMaximumLength(long deviceID, long featureID, int *errorCode) = 0;
+
+    /* FPGA register access capabilities */
+    virtual int getNumberOfFPGARegisterFeatures(long deviceID, int *errorCode) = 0;
+    virtual int getFPGARegisterFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength) = 0;
+    virtual unsigned int FPGAReadRegister(long deviceID, long featureID, int *errorCode, unsigned char address) = 0;
+    virtual void FPGAWriteRegister(long deviceID, long featureID, int *errorCode, unsigned char address, unsigned int value) = 0;
 
 protected:
     SeaBreezeAPI();
@@ -407,7 +413,7 @@ extern "C" {
      * should be called again before any other sbapi_ functions are used.
      */
     DLL_DECL void sbapi_shutdown();
-    
+
     /**
      * This specifies to the driver that a device of the given type might be
      * found on the network at a given address and port.  The driver will add
@@ -606,7 +612,7 @@ extern "C" {
      */
     DLL_DECL unsigned char
     sbapi_get_device_usb_endpoint_primary_in(long id, int *error_code);
-    
+
     /**
      * This function returns the usb endpoint for the type specified.
      * If the type is not supported by the device, a zero is returned.
@@ -778,7 +784,7 @@ extern "C" {
             char *buffer, int buffer_length);
 
     /**
-     * This reads the possible maximum length of the device's serial number 
+     * This reads the possible maximum length of the device's serial number
      *
      * @param deviceID (Input) The index of a device previously opened with
      *      sbapi_open_device().
@@ -792,7 +798,7 @@ extern "C" {
      */
     DLL_DECL unsigned char
     sbapi_get_serial_number_maximum_length(long deviceID, long featureID, int *error_code);
-            
+
     /**
      * This function returns the total number of spectrometer instances available
      * in the indicated device.  Each instance refers to a single optical bench.
@@ -1504,9 +1510,9 @@ extern "C" {
      * @return the number of strobe/lamp features that will be returned
      *      by a call to sbapi_get_strobe_lamp_features().
      */
-     
+
 // There is not code in seabreezeAPI.cpp for this function. Perhaps it was not finished
-     
+
     //DLL_DECL int
     //sbapi_get_number_of_strobe_lamp_features(long deviceID, int *error_code);
 
@@ -1523,9 +1529,9 @@ extern "C" {
      *
      * @return the number of strobe/lamp feature IDs that were copied.
      */
-     
+
 // There is not code in seabreezeAPI.cpp for this function. Perhaps it was not finished.
-    
+
     //DLL_DECL int
     //sbapi_get_strobe_lamp_features(long deviceID, int *error_code, long *features,
     //        int max_features);
@@ -2060,7 +2066,7 @@ extern "C" {
     * @param error_code (Output) A pointer to an integer that can be used for storing error codes.
     * @param interfaceIndex (Input) identifier for the ethernet interface of interest
     *
-    * @return the wifi mode 
+    * @return the wifi mode
     */
     DLL_DECL unsigned char sbapi_wifi_configuration_get_mode(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
 
@@ -2090,8 +2096,8 @@ extern "C" {
     * @return the wifi securityType
     */
     DLL_DECL unsigned char sbapi_wifi_configuration_get_security_type(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex);
-    
-    
+
+
     /**
     *    This function sets the wifi security type
     *
@@ -2104,7 +2110,7 @@ extern "C" {
     *
     */
     DLL_DECL void   sbapi_wifi_configuration_set_security_type(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char securityType);
-    
+
     /**
     * This function retrieves a WiFi SSID
     *
@@ -2121,7 +2127,7 @@ extern "C" {
     // DLL_DECL unsigned char   sbapi_wifi_configuration_get_ssid(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(&ssid)[32]);
 
     DLL_DECL unsigned char   sbapi_wifi_configuration_get_ssid(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, unsigned char(*ssid)[32]);
-    
+
     /**
     * This function sets the wifi ssid
     *
@@ -2136,7 +2142,7 @@ extern "C" {
     *
     */
     DLL_DECL void   sbapi_wifi_configuration_set_ssid(long deviceID, long featureID, int *errorCode, unsigned char interfaceIndex, const unsigned char ssid[32], unsigned char length);
-    
+
 
     /**
     * This function sets the wifi pass phrase
@@ -2202,7 +2208,7 @@ extern "C" {
     * This function sets the dhcp enable status to the spectrometer's internal memory if that feature is supported.
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().
-    * @param featureID (Input) The ID of a particular instance of an IPv4 
+    * @param featureID (Input) The ID of a particular instance of an IPv4
     *        feature.  Valid IDs can be found with the sbapi_get_ipv4_features() function.
     * @param error_code (Output) A pointer to an integer that can be used for storing error codes.
     * @param interfaceIndex (Input) identifier for the ethernet interface of interest
@@ -2272,7 +2278,7 @@ extern "C" {
 
 
     /**
-    * This function adds an IPv4 address to the indexed interface 
+    * This function adds an IPv4 address to the indexed interface
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().
     * @param featureID (Input) The ID of a particular instance of an IPv4 feature.
@@ -2293,7 +2299,7 @@ extern "C" {
     *        Valid IDs can be found with the sbapi_get_ipv4_features() function.
     * @param error_code (Output) A pointer to an integer that can be used for storing error codes.
     * @param interfaceIndex (Input) identifier for the ethernet interface of interest
-    * @param addressIndex (Input) identifier for the IPv4 address to delete 
+    * @param addressIndex (Input) identifier for the IPv4 address to delete
     *
     */
     DLL_DECL void sbapi_ipv4_delete_address(long deviceID, long featureID, int *error_code, unsigned char interfaceIndex, unsigned char addressIndex);
@@ -2303,7 +2309,7 @@ extern "C" {
 
 
     /**
-    * This function returns the total number of dhcp server 
+    * This function returns the total number of dhcp server
     * instances available in the indicated device.
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().
@@ -2352,7 +2358,7 @@ extern "C" {
     * internal memory if that feature is supported.
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().
-    * @param featureID (Input) The ID of a particular instance of an dhcp server 
+    * @param featureID (Input) The ID of a particular instance of an dhcp server
     *        feature.  Valid IDs can be found with the sbapi_get_dhcp_server_features() function.
     * @param error_code (Output) A pointer to an integer that can be used for storing error codes.
     * @param interfaceIndex (Input) identifier for the network interface of interest
@@ -2419,7 +2425,7 @@ extern "C" {
     * This function reads a network interface enable status from the device's internal memory if that feature is supported.
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().
-    * @param featureID (Input) The ID of a particular instance of an network configuration 
+    * @param featureID (Input) The ID of a particular instance of an network configuration
     *        feature.  Valid IDs can be found with the sbapi_get_network_configuration_features() function.
     * @param error_code (Output) A pointer to an integer that can be used for storing
     *      error codes.
@@ -2546,7 +2552,7 @@ extern "C" {
     DLL_DECL unsigned int sbapi_gpio_get_output_enable_vector(long deviceID, long featureID, int *error_code);
 
     /**
-    * This function sets the gpio output enable bits 
+    * This function sets the gpio output enable bits
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().
     * @param featureID (Input) The ID of a particular instance of a gpio
@@ -2591,7 +2597,7 @@ extern "C" {
     DLL_DECL unsigned char sbapi_gpio_extension_get_number_of_pins(long deviceID, long featureID, int *error_code);
 
     /**
-    * This function retrieves the egpio modes available for a particular pin 
+    * This function retrieves the egpio modes available for a particular pin
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().
     * @param featureID (Input) The ID of a particular instance of a gpio
@@ -2852,7 +2858,7 @@ extern "C" {
      * @param error_code (Output) A pointer to an integer that can be used for storing
      *      error codes.
      *
-     * @return the number of temperatures available as an unsigned char 
+     * @return the number of temperatures available as an unsigned char
      */
     DLL_DECL unsigned char sbapi_temperature_count_get(long deviceID, long temperatureFeatureID, int *error_code);
 
@@ -2933,7 +2939,7 @@ extern "C" {
 
 
     /**
-    * This function gets all the active inclusive pixel range indicies 
+    * This function gets all the active inclusive pixel range indicies
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().
     * @param featureID (Input) The ID of a particular instance of an introspection
@@ -3026,7 +3032,7 @@ extern "C" {
      * @param error_code (Output) A pointer to an integer that can be used for storing
      *      error codes.
      *
-     * @return the number of scans to average as an unsigned short integer 
+     * @return the number of scans to average as an unsigned short integer
      */
     DLL_DECL unsigned short int sbapi_spectrum_processing_scans_to_average_get(long deviceID,
          long spectrumProcessingFeatureID, int *error_code);
@@ -3046,7 +3052,7 @@ extern "C" {
      *
      * @return void
      */
-    DLL_DECL void sbapi_spectrum_processing_scans_to_average_set(long deviceID, 
+    DLL_DECL void sbapi_spectrum_processing_scans_to_average_set(long deviceID,
         long spectrumProcessingFeatureID, int *error_code, unsigned short int scansToAverage);
 
     /**
@@ -3080,9 +3086,9 @@ extern "C" {
      *
      * @return void
      */
-    DLL_DECL void sbapi_spectrum_processing_boxcar_width_set(long deviceID, 
+    DLL_DECL void sbapi_spectrum_processing_boxcar_width_set(long deviceID,
             long spectrumProcessingFeatureID, int *error_code, unsigned char boxcarWidth);
-   
+
 
 
 /**
@@ -3226,7 +3232,7 @@ extern "C" {
      */
     DLL_DECL int
     sbapi_optical_bench_get_id(long deviceID, long featureID, int *error_code, char *buffer, int buffer_length);
- 
+
      /**
      * This reads the optical bench Serial Number and fills the
      * provided array (up to the given length) with it.
@@ -3271,7 +3277,7 @@ extern "C" {
      */
     DLL_DECL int
     sbapi_optical_bench_get_coating(long deviceID, long featureID, int *error_code, char *buffer, int buffer_length);
-    
+
      /**
      * This reads the optical bench filter and fills the
      * provided array (up to the given length) with it.
@@ -3293,7 +3299,7 @@ extern "C" {
      */
     DLL_DECL int
     sbapi_optical_bench_get_filter(long deviceID, long featureID, int *error_code, char *buffer, int buffer_length);
-    
+
     /**
      * This reads the optical bench grating and fills the
      * provided array (up to the given length) with it.
@@ -3315,8 +3321,8 @@ extern "C" {
      */
     DLL_DECL int
     sbapi_optical_bench_get_grating(long deviceID, long featureID, int *error_code, char *buffer, int buffer_length);
-    
-                 
+
+
     /**
      * This function returns the total number of stray light coefficient feature
      * instances available in the indicated device.
@@ -3520,7 +3526,7 @@ extern "C" {
 
     /**
     * This function returns the fast buffer enable state for each fast buffer
-    * feature instance for this device.  
+    * feature instance for this device.
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().
     * @param featureID (Input) The index of a specific feature obtained by sbapi_get_fast_buffer_features()
@@ -3543,7 +3549,7 @@ extern "C" {
     DLL_DECL void sbapi_fast_buffer_set_buffering_enable(long deviceID, long featureID, int *error_code, unsigned char isEnabled);
 
     /**
-    * This function returns the number of consecutive samples for each fast buffer 
+    * This function returns the number of consecutive samples for each fast buffer
     * feature instance for this device.
     *
     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().

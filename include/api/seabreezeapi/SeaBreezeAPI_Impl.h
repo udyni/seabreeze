@@ -44,7 +44,7 @@
 class SeaBreezeAPI_Impl : SeaBreezeAPI {
 public:
     virtual ~SeaBreezeAPI_Impl();
-    
+
     virtual int probeDevices();
     virtual int addTCPIPv4DeviceLocation(char *deviceTypeName, char *ipAddr, int port);
     virtual int addRS232DeviceLocation(char *deviceTypeName, char *deviceBusPath,
@@ -56,7 +56,7 @@ public:
     virtual void closeDevice(long id, int *errorCode);
 
     virtual int getDeviceType(long id, int *errorCode, char *buffer, unsigned int length);
-    
+
     virtual unsigned char getDeviceEndpoint(long id, int *error_code, usbEndpointType endpointType);
 
     /* Get raw usb access capabilities */
@@ -64,18 +64,12 @@ public:
     virtual int getRawUSBBusAccessFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
     virtual int rawUSBBusAccessRead(long deviceID, long featureID, int *errorCode, unsigned char *buffer, unsigned int bufferLength, unsigned char endpoint);
     virtual int rawUSBBusAccessWrite(long deviceID, long featureID, int *errorCode, unsigned char *buffer, unsigned int bufferLength, unsigned char endpoint);
-    
+
     /* Serial number capabilities */
     virtual int getNumberOfSerialNumberFeatures(long deviceID, int *errorCode);
     virtual int getSerialNumberFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
     virtual int getSerialNumber(long deviceID, long featureID, int *errorCode, char *buffer, int bufferLength);
     virtual unsigned char getSerialNumberMaximumLength(long deviceID, long featureID, int *errorCode);
-    
-    /* Firmware version capabilities */
-    virtual int getNumberOfFirmwareVersionFeatures(long deviceID, int *errorCode);
-    virtual int getFirmwareVersionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
-    virtual int getFirmwareVersion(long deviceID, long featureID, int *errorCode, char *buffer, int bufferLength);
-    virtual unsigned char getFirmwareVersionMaximumLength(long deviceID, long featureID, int *errorCode);
 
     /* Spectrometer capabilities */
     virtual int getNumberOfSpectrometerFeatures(long id, int *errorCode);
@@ -106,7 +100,7 @@ public:
     virtual void binningSetDefaultPixelBinningFactor(long deviceID, long spectrometerFeatureID, int *errorCode);
     virtual unsigned char binningGetDefaultPixelBinningFactor(long deviceID, long spectrometerFeatureID, int *errorCode);
     virtual unsigned char binningGetMaxPixelBinningFactor(long deviceID, long spectrometerFeatureID, int *errorCode);
-        
+
     /* TEC capabilities */
     virtual int getNumberOfThermoElectricFeatures(long deviceID, int *errorCode);
     virtual int getThermoElectricFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
@@ -274,7 +268,7 @@ public:
         int *errorCode, unsigned char boxcarWidth);
     virtual void spectrumProcessingScansToAverageSet(long deviceID, long featureID,
         int *errorCode, unsigned short int scansToAverage);
- 
+
     /* Revision capabilities */
     virtual int getNumberOfRevisionFeatures(long deviceID, int *errorCode);
     virtual int getRevisionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
@@ -337,6 +331,18 @@ public:
     virtual unsigned short i2cMasterReadBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, unsigned char *readData, unsigned short numberOfBytes);
     virtual unsigned short i2cMasterWriteBus(long deviceID, long featureID, int *errorCode, unsigned char busIndex, unsigned char slaveAddress, const unsigned char *writeData, unsigned short numberOfBytes);
 
+    /* Firmware version capabilities */
+    virtual int getNumberOfFirmwareVersionFeatures(long deviceID, int *errorCode);
+    virtual int getFirmwareVersionFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual int getFirmwareVersion(long deviceID, long featureID, int *errorCode, char *buffer, int bufferLength);
+    virtual unsigned char getFirmwareVersionMaximumLength(long deviceID, long featureID, int *errorCode);
+
+    /* FPGA register access capabilities */
+    virtual int getNumberOfFPGARegisterFeatures(long deviceID, int *errorCode);
+    virtual int getFPGARegisterFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);
+    virtual unsigned int FPGAReadRegister(long deviceID, long featureID, int *errorCode, unsigned char address);
+    virtual void FPGAWriteRegister(long deviceID, long featureID, int *errorCode, unsigned char address, unsigned int value);
+
 private:
     SeaBreezeAPI_Impl();
 
@@ -344,7 +350,7 @@ private:
 
     std::vector<seabreeze::api::DeviceAdapter *> probedDevices;
     std::vector<seabreeze::api::DeviceAdapter *> specifiedDevices;
-    
+
 friend class SeaBreezeAPI;
 
 };

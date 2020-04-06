@@ -232,6 +232,12 @@ namespace seabreeze {
             virtual ~FirmwareVersionFeatureFamily();
         };
 
+        class FPGARegisterFeatureFamily : public FeatureFamily {
+        public:
+            FPGARegisterFeatureFamily();
+            virtual ~FPGARegisterFeatureFamily();
+        };
+
         class FeatureFamilies {
         public:
             const UndefinedFeatureFamily UNDEFINED;
@@ -272,6 +278,7 @@ namespace seabreeze {
             const GPIOFeatureFamily GENERAL_PURPOSE_INPUT_OUTPUT;
             const I2CMasterFeatureFamily I2C_MASTER;
             const FirmwareVersionFeatureFamily FIRMWARE_VERSION;
+            const FPGARegisterFeatureFamily FPGA_REGISTER;
 
             FeatureFamilies();
             ~FeatureFamilies();

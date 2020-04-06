@@ -76,6 +76,7 @@ HR4000::HR4000() {
     this->features.push_back(new SerialNumberEEPROMSlotFeature());
     this->features.push_back(new EEPROMSlotFeature(17));
     this->features.push_back(new FPGAFirmwareVersionFeature());
+    this->features.push_back(new FPGARegisterFeature());
 
     vector<ProtocolHelper *> strobeLampHelpers;
     strobeLampHelpers.push_back(new OOIStrobeLampProtocol());
